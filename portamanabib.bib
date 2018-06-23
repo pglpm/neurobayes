@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2018-06-22T13:54:37+0200
+%% Last-Updated: 2018-06-23T19:02:06+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -388,7 +388,7 @@
 @String{iansssrsm = {Izv.\ Akad.\ Nauk SSSR Ser.\ Mat.}}
 @String{ibmjrd = {IBM J. Res. \amp\ Dev.}}
 @String{ic = {Info.\ Comp.}}
-@String{iclr = {Proc. International Conf.\ Learn. Representations}}
+@String{iclr = {Proc.\ International Conf.\ Learn.\ Representations}}
 @String{icont = {Inform.\ Contr.}}
 @String{icsnl = {ICS (Int.\ Compumag Soc.)\ Newsletter}}
 @String{iec = {Ind.\ Eng.\ Chem.}}
@@ -935,6 +935,7 @@
 @String{snc = {Suppl.\ Nuovo Cimento}}
 @String{snews = {Sci.\ News}}
 @String{snlde = {Stud.\ Nonlinear Dynam.\ Econometrics}}
+@String{socm = {Socio.\ Meth.}}
 @String{sp = {S{\'e}m.\ Poincar{\'e}}}
 @String{spd = {Sov.\ Phys.\ Dokl.}}
 @String{spij= {Signal Process.\ Int.\ J.}}
@@ -10094,6 +10095,17 @@ keywords =     {exchangeability},
 note = 	       {See also \citebi{berk1970b}}
 }
 
+@Article{berketal1991,
+author =       {Richard A. Berk and Blalock, Jr., Hubert M. and William M. Mason and Freedman, David A.},
+title =	       {Toward a Methodology for Mere Mortals. {Are} There Really Any Constructive Alternatives to Causal Modeling? {Freedman} is Right as Far as He Goes, but There is More, and It's Worse. {Statisticians} Could Help. {Rejoinder}},
+journal =      socm,
+year =	       {1991},
+volume =       {21},
+pages =	       {315--358},
+note =	       {See \citebi{freedman1991}},
+keywords =     {probability theory, model comparison}
+}
+
 @Article{berketal1996,
 author =       {Robert H. Berk and A. G. Nogales and J. A. Oyola},
 title =	       {Some Counterexamples Concerning Sufficiency and Invariance},
@@ -10840,6 +10852,15 @@ year =	       {2001},
 volume =       {53},
 number =       {6},
 pages =	       {653--675}
+}
+
+@Book{bertsekasetal1996,
+author =       {Dimitri P. Bertsekas and John N. Tsitsiklis},
+title =	       {Neuro-Dynamic Programming},
+publisher =    {Athena Scientific},
+year =	       {1996},
+address =      {Belmont, USA},
+keywords =     {reinforcement learning}
 }
 
 @Article{berzuinietal2013,
@@ -22533,7 +22554,7 @@ note =	       {\arxiveprint{quant-ph/0502016}}
 
 @Article{clydeetal1999,
 author =       {M. Clyde and David Draper and E. I. George and Jennifer A. Hoeting and David Madigan and Adrian E. Raftery and Chris T. Volinsky},
-title =	       {{[}Bayesian model averaging: a tutorial{:]} {Comments} and rejoinder},
+title =	       {{[}{Bayesian} model averaging: a tutorial{:]} {Comments} and rejoinder},
 journal =      ss,
 year =	       {1999},
 pages =	       {412--417},
@@ -24198,14 +24219,15 @@ note =	       {See \citebi{bernardo1979b}}
 
 @Article{copasetal1995,
 author =       {J. B. Copas and Neville Davies and D. J. Hand and Clifford E. Lunneborg and A. S.C. Ehrenberg and Steven G. Gilmour and David Draper and Peter J. Green and A. C. Davison and Toby Lewis and P. V. Allin and Jamal R. M. Ameen and G. A. Barnard and David Bartholomew and Trevor Bedeman and R. J. Bhansali and Leo Breiman and D. R. Cox and Simon Day and Robert Fildes and Mike Pidd and A. D. Gordon and Howard Grubb and Urban Hjorth and Raymond Hubbard and David Madigan and John M. Marriott and Alan J. Miller and O'Hagan, Anthony and Benedikt M. P{\"o}tscher and W. D. Ray and R. A. Sugden and Chris Chatfield},
-title =	       {Discussion of the paper by {Chatfield} {[}Model uncertainty, data mining and statistical inference{]}},
+title =	       {Discussion of the paper by {Chatfield} {[}{Model} uncertainty, data mining and statistical inference{]}},
 journal =      jrssa,
 year =	       {1995},
 volume =       {158},
 number =       {3},
 pages =	       {444--466},
 keywords =     {Bayesian probability theory, model comparison, cross-validation},
-note =	       {See \citebi{chatfield1995}}
+note =	       {See \citebi{chatfield1995}},
+mynote =       {\enquote{I believe that the greatest unsolved problem in statistics is communicating the subject to others} N. Davies, p.~445. \enquote{Fundamental to some of the arguments raised in the paper is what is meant by a \emph{model}. The conflict regarding the existence of a or the true model, model uncertainty, identification, selection, misspecification, etc.\ can be resolved if a clear definition of a model is stated. Models have different meanings in different fields. Once a young woman was interviewed for a data handling job in Unilever. She was puzzled by one of the interviewers who asked her whether she had done any modelling. It was found later that to her the question meant whether she had posed for photographs!} J. R. M. Ameen, p.~453. \enquote{How is collecting more data different from arbitrarily splitting the existing data? \emph{After} collecting more data, we again have a single, albeit larger, set of data. To regard the part that we received first as that to be used for model building, and the new part as that for model confirmation, is just as arbitrary as splitting the original data into two parts for these purposes. Furthermore, the process makes little sense in either case. What if the `confirmation' sample fails to confirm the model? However one describes it, the new data are being used for further learning about the model, and it is proper to use all the data explicitly for model inference, as a single data set. This is what the standard Bayesian procedure, now called Bayesian model averaging, would do} A. O'Hagan, p.~460}
 }
 
 @Article{copeland1966,
@@ -40498,8 +40520,31 @@ keywords =     {Bayesian probability theory},
 note =	       {See also \citebi{freedman1963}}
 }
 
+@Article{freedman1991,
+author =       {Freedman, David A.},
+title =	       {Statistical Models and Shoe Leather},
+journal =      socm,
+year =	       {1991},
+volume =       {21},
+pages =	       {291--313},
+keywords =     {probability theory, model comparison},
+note =	       {See also \citebi{berketal1991}. \url{http://psychology.okstate.edu/faculty/jgrice/psyc5314/Freedman_1991A.pdf}}
+}
+
+@Article{freedman1995,
+author =       {Freedman, David A.},
+title =	       {Some issues in the foundation of statistics},
+journal =      fs,
+year =	       {1995},
+volume =       {1},
+number =       {1},
+pages =	       {19--39},
+note = 	       {\url{https://www.stat.berkeley.edu/users/freedman/}},
+keywords =     {model comparison, Bayesian probability theory, de Finetti, exchangeability, induction}
+}
+
 @Book{freedmanetal1978_r2007,
-author =       {David Freedman and Robert Pisani and Roger Purves},
+author =       {David A. Freedman and Robert Pisani and Roger Purves},
 title =	       {Statistics},
 publisher =    {Norton},
 year =	       {2007},
@@ -77940,6 +77985,16 @@ note =	       {\url{http://www.mat.univie.ac.at/~michor/listpubl.html}},
 keywords =     {infinite-dimensional differential geometry}
 }
 
+@Article{mickeyetal2014,
+author =       {Kevin W. Mickey and James L. McClelland},
+title =	       {A neural network model of learning mathematical equivalence},
+journal =      pamcss,
+year =	       {2014},
+volume =       {36},
+pages =	       {1012--1017},
+keywords =     {machine learning}
+}
+
 @Book{middleton1960_r1996,
 author =       {David Middleton},
 title =	       {An Introduction to Statistical Communication Theory},
@@ -90555,6 +90610,17 @@ volume =       {73},
 number =       {5},
 pages =	       {433--438},
 keywords =     {four-force}
+}
+
+@Article{priestley1980,
+author =       {M. B. Priestley},
+title =	       {State‐dependent models: a general approach to non‐linear time series analysis},
+journal =      jtsa,
+year =	       {1980},
+volume =       {1},
+number =       {1},
+pages =	       {47--71},
+keywords =     {probability theory}
 }
 
 @Article{priestleyetal1977,

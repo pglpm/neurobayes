@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-23T15:08:26+0200
+%% Last-Updated: 2018-06-23T19:05:14+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -364,7 +364,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 % }
 \newcommand*{\citein}[2][]{\textnormal{\textcite[#1]{#2}}%\addtocategory{extras}{#2}
 }
-\newcommand*{\citebi}[2][]{\textcite[#1]{#2}%\addtocategory{extras}{#2}
+\newcommand*{\citebi}[2][]{\citep[#1]{#2}%\addtocategory{extras}{#2}
 }
 \newcommand*{\subtitleproc}[1]{}
 \newcommand*{\chapb}{ch.}
@@ -749,15 +749,17 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \asudedication{\small ***}
 % \vspace{\bigskipamount}
 
-% \setlength{\epigraphwidth}{.7\columnwidth}
+\setlength{\epigraphwidth}{.63\columnwidth}
 % %\epigraphposition{flushright}
-% \epigraphtextposition{flushright}
+\epigraphtextposition{flushright}
 % %\epigraphsourceposition{flushright}
-% \epigraphfontsize{\footnotesize}
-% \setlength{\epigraphrule}{0pt}
+\epigraphfontsize{\footnotesize}
+\setlength{\epigraphrule}{0pt}
 % %\setlength{\beforeepigraphskip}{0pt}
 % %\setlength{\afterepigraphskip}{0pt}
-% \epigraph{\emph{text}}{source}
+\epigraph{I believe that the greatest unsolved problem in statistics is
+  communicating the subject to others}{N. Davies
+  \citep[p.~445]{copasetal1995}}
 
 \iffalse\noindent\emph{\footnotesize Note: Dear Peer, this manuscript is
   peer-reviewed by \emph{you}. I'm grateful if you let me know of any
