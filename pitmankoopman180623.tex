@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-24T12:03:48+0200
+%% Last-Updated: 2018-06-24T17:33:43+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -350,7 +350,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \DeclareDelimFormat{postnotedelim}{\space}
 \ifarxiv\else\addbibresource{portamanabib.bib}\fi
 \renewcommand{\bibfont}{\footnotesize}
-\appto{\citesetup}{\footnotesize}% smaller font for citations
+%\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
 }
 \newcommand*{\citep}{\parencites}
@@ -771,11 +771,38 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{From qualitative to quantitative statements}
 \label{sec:intro}
 
-We often face the difficulty of quantifying some kind of qualitative
-property or a phenomenon. This quantification is difficult for two reasons:
-the property itself is only vaguely defined in our heads; and even if it is
-somehow clear, there are several different quantitative measures that seem
-to capture it.
+We often have the need of quantifying a qualitative property or phenomenon,
+for example to ascertain whether it does or doesn't occur in some
+situations. This quantification is usually difficult because the property
+itself is only vaguely defined in our minds.
+
+At times we sweep this difficulty under the carpet by choosing a
+quantitative measure that \enquote{feels right} and proceeding with the
+calculations. It's obvious that the quantitative results we obtain this way
+are mostly smoke: despite the deceiving appearance of numbers, our results
+are only qualitative, since our starting point was vague and the
+quantitative measure wasn't unique. Which results would we have obtained if
+we had started from a slightly different starting point or used a slightly
+different quantitative measure?
+
+Other times we choose several quantitative measures that \enquote{feel
+  right}, proceed with the calculations, and then compare the quantitative
+results obtained from all these measures. Results obtained this way are
+more robust -- for example if our measures lead to the conclusion that the
+property is there -- but unfortunately still not unequivocally
+quantitative.
+
+In science there are successful examples of qualitative definitions that
+lead to unique quantitative measures or theories. The most impressive
+example is probably that of the probability calculus: simple intuitive
+desiderata about reasoning in situations of uncertainty, such as those
+examined by P\'olya
+\citey{polya1945_r1971,polya1949,polya1954,polya1954b_r1968}, turn out to
+have a unique mathematical translation: the laws of the
+probability calculus \citep{cox1946,paris1994_r2006}[\chap~2]{jaynes1994_r2003}{snow1998,snow2001,aczel2004b,dupreetal2009,tereninetal2015_r2017}.
+
+
+
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
