@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-25T13:31:31+0200
+%% Last-Updated: 2018-06-25T13:53:29+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -213,7 +213,7 @@ british%
  \DeclareMathSymbol{\varDelta}{\mathalpha}{egreeki}{"01}
  \DeclareMathSymbol{\varEpsilon}{\mathalpha}{egreeki}{"45}
 % \DeclareMathSymbol{\varZeta}{\mathalpha}{egreeki}{"5A}
-% \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
+ \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
 % \DeclareMathSymbol{\varTheta}{\mathalpha}{egreeki}{"02}
  \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
 % \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
@@ -724,6 +724,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yI}{\varIota}
 \newcommand*{\ys}{s}
 \newcommand*{\yk}{\bm{k}}
+\newcommand*{\yH}{\varEta}
+\newcommand*{\yD}{D}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -856,7 +858,7 @@ $\pf(k_{m+n}, \dotsc, k_{m+1} \| k_{m}, \dotsc, k_{1}, \yI)$.
 
 In general the full set of observed data $(k_{1}, \dotsc, k_{m})$ is
 important for this inference. But in particular situations it may
-happen that only specific properties of the data are \emph{relevant} to our
+happen that only specific properties of the data are \emph{sufficient} to our
 inference, the remaining details being \emph{irrelevant}. By
 \enquote{irrelevant} we mean that our inferences aren't changed if we
 forget about those details or if we don't know them in the first place.
@@ -886,8 +888,25 @@ range $\max_i(k_{i})-\min_i(k_{i})$; for example
 The number $m$ is usually implied and left out of the definition.
 
 There may be physical or biological reasons why only some statistics of
-past data is relevant for our inference. This relevance may also be only
-approximate.
+past data are sufficient for our inference. This sufficiency may also be
+only approximate. We can hypothesize that one or another statistics are
+sufficient -- call these hypotheses $\yH_1, \yH_2,\dotsc$ -- and, given
+some data $\yD$, the probability calculus tells us which hypotheses among
+these are more probable:
+\begin{equation}
+  \label{eq:example_mean_suffstat}
+  \p(\yH_i \| \yD, \yI) =
+  \frac{\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)}{
+    \sum_i\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)
+  }.
+\end{equation}
+To calculate these probabilities we need to assign numerical values to the
+probabilities of the data given the hypotheses, $\p(\yD \| \yH_i, \yI)$.
+
+The Koopman-Pitman-Darmois theorem
+\citep{koopman1936,pitman1936,darmois1935}[see also later
+analyses:][]{hipp1974,andersen1970,denny1967,fraser1963,barankinetal1963}\mynote{add
+  comments about these references and about the discrete-variable case}
 
 
 
