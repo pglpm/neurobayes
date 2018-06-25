@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-25T11:51:58+0200
+%% Last-Updated: 2018-06-25T13:31:31+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -704,7 +704,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\sint}{\begingroup\textstyle\int\endgroup}
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
-%\newcommand*{\T}{^\intercal}%transpose
+\newcommand*{\T}{^\intercal}%transpose
 %\newcommand*{\E}{\mathrm{E}}
 %\DeclarePairedDelimiter\expp{(}{)}
 %\newcommand*{\expe}{\E\expp}%round
@@ -723,6 +723,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yO}[2]{\varOmicron^{(#1)}_{#2}}
 \newcommand*{\yI}{\varIota}
 \newcommand*{\ys}{s}
+\newcommand*{\yk}{\bm{k}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -854,24 +855,39 @@ propositions. We will also use the simplified notation
 $\pf(k_{m+n}, \dotsc, k_{m+1} \| k_{m}, \dotsc, k_{1}, \yI)$.
 
 In general the full set of observed data $(k_{1}, \dotsc, k_{m})$ is
-important for this kind of inference. But in particular situations it may
+important for this inference. But in particular situations it may
 happen that only specific properties of the data are \emph{relevant} to our
 inference, the remaining details being \emph{irrelevant}. By
 \enquote{irrelevant} we mean that our inferences aren't changed if we
 forget about those details or if we don't know them in the first place.
-If we represent the relevant properties by a function
-$\ys(k_{1},\dotsc,k_{m})$, called a \emph{sufficient statistic}, the relevance and
-irrelevance are expressed by the equalities
+Let's represent the relevant properties by a map $\ys(k_{1},\dotsc,k_{m})$,
+called a \emph{sufficient statistic}, with values in some space $S$. The
+relevance and irrelevance are expressed by the equalities
 \begin{multline}
   \label{eq:predictive_sufficiency}
   \pf(k_{m+n}, \dotsc, k_{m+1}
   \| k_{m}, \dotsc, k_{1}, \yI)
   =
   \pf[k_{m+n}, \dotsc, k_{m+1}
-  \| \ys(k_{m}, \dotsc, k_{1}), \yI]
+  \| \ys(k_{1}, \dotsc, k_{m}), \yI]
   \\[\jot]
   \text{for all $m$, $n$, and $(k_{i})$.}
 \end{multline}
+
+Typical examples of sufficient statistics are the number of known
+observations $m$ together with their mean $(k_{1} + \dotsb + k_{m})/m$, or
+second moments $(\yk_{1}{\yk_{1}}\T + \dotsb + \yk_{m}{\yk_{m}}\T)/m$, or
+range $\max_i(k_{i})-\min_i(k_{i})$; for example
+\begin{equation}
+  \label{eq:example_mean_suffstat}
+  \ys(k_{1}, \dotsc, k_{m}) \defd
+  \Bigl( m, \tfrac{1}{m}\tsum_i k_{i} \Bigr).
+\end{equation}
+The number $m$ is usually implied and left out of the definition.
+
+There may be physical or biological reasons why only some statistics of
+past data is relevant for our inference. This relevance may also be only
+approximate.
 
 
 
