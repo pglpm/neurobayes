@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-25T23:53:55+0200
+%% Created: 2018-06-25T13:53:29+0200
+%% Last-Updated: 2018-06-25T23:52:08+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -20,13 +20,11 @@ onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
 \newcommand*{\updated}{\today}
-\newcommand*{\firstdraft}{23 June 2018}
+\newcommand*{\firstdraft}{25 June 2018}
 \newcommand*{\firstpublished}{\today}
-\newcommand*{\propertitle}{The Pitman-Koopman theorem\\and informationally
-  relevant quantities\\{\large research notes}}
-\newcommand*{\pdftitle}{The Pitman-Koopman theorem and informationally
-  relevant quantities}
-\newcommand*{\headtitle}{Pitman-Koopman and informational relevance}
+\newcommand*{\propertitle}{Parameter priors for Ising models}
+\newcommand*{\pdftitle}{\propertitle}
+\newcommand*{\headtitle}{Priors for Ising models}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana, Y. Roudi}
 \newcommand*{\headauthor}{\ifpublic Roudi, Porta Mana%
 \else Luca\fi}
@@ -743,9 +741,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent Application of the concept of sufficiency and the
-  Pitman-Koopman theorem to the definition and measurement of
-  \enquote{cooperativity} among neurons
+  \noindent Study of uniform priors in parameter space and in constraint
+  space for Ising models
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -759,15 +756,13 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 \setlength{\epigraphwidth}{.63\columnwidth}
 % %\epigraphposition{flushright}
-\epigraphtextposition{flushleft}
+\epigraphtextposition{flushright}
 % %\epigraphsourceposition{flushright}
 \epigraphfontsize{\footnotesize}
 \setlength{\epigraphrule}{0pt}
 % %\setlength{\beforeepigraphskip}{0pt}
 % %\setlength{\afterepigraphskip}{0pt}
-\epigraph{I believe that the greatest unsolved problem in statistics is
-  communicating the subject to others.}{N. Davies
-  \citep[p.~445]{copasetal1995}}
+\epigraph{\enquote{Flat priors do not exist}}{(anonymous)}
 
 \iffalse\noindent\emph{\footnotesize Note: Dear Peer, this manuscript is
   peer-reviewed by \emph{you}. I'm grateful if you let me know of any
@@ -775,141 +770,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
   may have.}
 \fi
 
-\section{From qualitative to quantitative statements}
+\section{Intro}
 \label{sec:intro}
-
-We often have the need of quantifying a qualitative property or phenomenon,
-for example to ascertain whether it does or doesn't occur in some
-situations. This quantification is usually difficult because the property
-itself is only vaguely defined in our minds.
-
-At times we sweep this difficulty under the carpet by choosing a
-quantitative measure that \enquote{feels right} and proceeding with the
-calculations. It's obvious that the quantitative results we obtain this way
-are mostly smoke: despite the deceiving presence of numbers, our results
-are only qualitative, since our starting point was vague and our
-quantitative measure wasn't unique. Which results would we have obtained if
-we had started from a slightly different qualitative intuition or used a
-slightly different quantitative measure?
-
-Other times we choose several quantitative measures that \enquote{feel
-  right}, proceed with the calculations, and then compare the quantitative
-results obtained from all these measures. Results obtained this way are
-more robust -- for example if all the chosen measures lead to the
-conclusion that the property is there -- but unfortunately still not
-unequivocally quantitative.
-
-In science there are successful examples of qualitative definitions that,
-formulated as a set of desiderata, lead to unique quantitative measures or
-theories. The most impressive example is probably that of the probability
-calculus: simple intuitive desiderata about reasoning in situations of
-uncertainty, such as those examined by P\'olya
-\citey{polya1945_r1971,polya1949,polya1954,polya1954b_r1968}, turn out to
-have a unique mathematical translation: the laws of the probability
-calculus
-\citep{cox1946,paris1994_r2006}[\chap~2]{jaynes1994_r2003}{snow1998,snow2001,dupreetal2009,tereninetal2015_r2017}[see
-also][]{aczel2004b}. Another example is Shannon's entropy
-\citep[\sect~6]{shannon1948} as a measure of uncertainty, although
-Shannon's desiderata explicitly include the use of addition as the
-mathematical representation of \enquote{combination}
-\citep[\cf][\sect~11.3, p.~347]{jaynes1994_r2003}, a requirement which is
-not universally agreed upon. In physics, semi-quantitative invariance
-requirements can often be mathematically translated into group-invariance
-statements leading to fully fledged theories; classical examples being
-Einstein's requirements \citep[\sect~2]{einstein1905c} leading to the
-Lorentz transformations and special relativity, or Noether's theorem
-\citep{noether1918}[anticipated for the Euclidean group
-by][]{cosseratetal1909}.
-
-
-\mynote{to be continued}
-
-\enquote{A bewildering variety of statistical measures has been reported in
-  the literature on spike-train analysis. Unfortunately, there has been
-  little theoretical justification for the use and interpretation of many
-  of these techniques}  \citep[p.~494]{mooreetal1966}
-
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
-%
-
-
-\section{Sufficient statistics and the Koopman-Pitman theorem}
-\label{sec:koopmanpitman}
-
-Suppose we have a sequence, possibly infinite, of observations with
-outcomes in a set $K$. We represent the proposition \enquote{The $i$th
-  observation yields outcome $k$} by $\yO{i}{k}$, with $k\in K$.
-
-A typical inference problem is to forecast the outcomes of the $(m+1)$th up
-to the $(m+n)$th observations given that we know the outcomes of the $1$st
-up to the $m$th observations and given some additional knowledge or
-assumptions denoted by $\yI$. Note that we aren't assuming that these
-$\set{1,\dotsc,m+n}$ observations are in temporal order: our problem could be to
-infer past, unknown observation from present, known ones. Our forecast is
-expressed by the probabilities
-\begin{equation}
-  \label{eq:general_forecast}
-  \p(\yO{m+n}{k_{m+n}}, \dotsc, \yO{m+1}{k_{m+1}}
-  \| \yO{m}{k_{m}}, \dotsc, \yO{1}{k_{1}}, \yI),
-\end{equation}
-where the comma represents the conjunction (\enquote{$\land$}) of the
-propositions. We will also use the simplified notation
-$\pf(k_{m+n}, \dotsc, k_{m+1} \| k_{m}, \dotsc, k_{1}, \yI)$.
-
-In general the full set of observed data $(k_{1}, \dotsc, k_{m})$ is
-important for this inference. But in particular situations it may
-happen that only specific properties of the data are \emph{sufficient} to our
-inference, the remaining details being \emph{irrelevant}. By
-\enquote{irrelevant} we mean that our inferences aren't changed if we
-forget about those details or if we don't know them in the first place.
-Let's represent the relevant properties by a map $\ys(k_{1},\dotsc,k_{m})$,
-called a \emph{sufficient statistic}, with values in some space $S$. The
-relevance and irrelevance are expressed by the equalities
-\begin{multline}
-  \label{eq:predictive_sufficiency}
-  \pf(k_{m+n}, \dotsc, k_{m+1}
-  \| k_{m}, \dotsc, k_{1}, \yI)
-  =
-  \pf[k_{m+n}, \dotsc, k_{m+1}
-  \| \ys(k_{1}, \dotsc, k_{m}), \yI]
-  \\[\jot]
-  \text{for all $m$, $n$, and $(k_{i})$.}
-\end{multline}
-
-Typical examples of sufficient statistics are the number of known
-observations $m$ together with their mean $(k_{1} + \dotsb + k_{m})/m$, or
-second moments $(\yk_{1}{\yk_{1}}\T + \dotsb + \yk_{m}{\yk_{m}}\T)/m$, or
-range $\max_i(k_{i})-\min_i(k_{i})$; for example
-\begin{equation}
-  \label{eq:example_mean_suffstat}
-  \ys(k_{1}, \dotsc, k_{m}) \defd
-  \Bigl( m, \tfrac{1}{m}\tsum_i k_{i} \Bigr).
-\end{equation}
-The number $m$ is usually implied and left out of the definition.
-
-There may be physical or biological reasons why only some statistics of
-past data are sufficient for our inference. This sufficiency may also be
-only approximate. We can hypothesize that one or another statistics are
-sufficient -- call these hypotheses $\yH_1, \yH_2,\dotsc$ -- and, given
-some data $\yD$, the probability calculus tells us which hypotheses among
-these are more probable:
-\begin{equation}
-  \label{eq:example_mean_suffstat}
-  \p(\yH_i \| \yD, \yI) =
-  \frac{\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)}{
-    \sum_i\p(\yD \| \yH_i, \yI)\, \p(\yH_i\|\yI)
-  }.
-\end{equation}
-To calculate these probabilities we need to assign numerical values to the
-probabilities of the data given the hypotheses, $\p(\yD \| \yH_i, \yI)$.
-
-The Koopman-Pitman-Darmois theorem
-\citep{koopman1936,pitman1936,darmois1935}[see also later
-analyses:][]{hipp1974,andersen1970,denny1967,fraser1963,barankinetal1963}\mynote{add
-  comments about these references and about the discrete-variable case}
-
 
 
 
