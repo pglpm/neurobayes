@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-24T20:59:01+0200
+%% Last-Updated: 2018-06-25T11:43:24+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -221,7 +221,7 @@ british%
 % \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
 % \DeclareMathSymbol{\varNu}{\mathalpha}{egreeki}{"4E}
 % \DeclareMathSymbol{\varXi}{\mathalpha}{egreeki}{"04}
-% \DeclareMathSymbol{\varOmicron}{\mathalpha}{egreeki}{"4F}
+ \DeclareMathSymbol{\varOmicron}{\mathalpha}{egreeki}{"4F}
 % \DeclareMathSymbol{\varPi}{\mathalpha}{egreeki}{"05}
 % \DeclareMathSymbol{\varRho}{\mathalpha}{egreeki}{"50}
 % \DeclareMathSymbol{\varSigma}{\mathalpha}{egreeki}{"06}
@@ -720,7 +720,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 %\DeclareMathOperator*{\argsup}{arg\,sup}
-
+\newcommand*{\yO}[2]{\varOmicron^{(#1)}_{#2}}
+\newcommand*{\yI}{\varIota}
+\newcommand*{\ys}{s}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -826,6 +828,54 @@ by][]{cosseratetal1909}.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 %
+
+
+\section{Sufficient statistics and the Koopman-Pitman theorem}
+\label{sec:koopmanpitman}
+
+Suppose we have a sequence, possibly infinite, of observations with
+outcomes in a set $K$. We represent the proposition \enquote{The $i$th
+  observation yields outcome $k$} by $\yO{n}{k}$, with $k\in K$.
+
+A typical inference problem is to forecast the outcomes of the $(m+1)$th up
+to the $(m+n)$th observations given that we know the outcomes of the $1$st
+up to the $m$th observations and given some additional knowledge or
+assumptions denoted by $\yI$. Note that we aren't assuming that these
+$\set{1,\dotsc,m+n}$ observations are in temporal order: our problem could be to
+infer past, unknown observation from present, known ones. Our forecast is
+expressed by the probabilities
+\begin{equation}
+  \label{eq:general_forecast}
+  \p(\yO{m+n}{k_{m+n}}, \dotsc, \yO{m+1}{k_{m+1}}
+  \| \yO{m}{k_{m}}, \dotsc, \yO{1}{k_{1}}, \yI),
+\end{equation}
+where the comma represents the conjunction (\enquote{$\land$}) of the
+propositions.
+
+In general the full set of observed data $(k_{1}, \dotsc, k_{m})$ is
+important for this kind of inference. But in particular situations it may
+happen that only specific properties of the data are \emph{relevant} to our
+inference, the remaining details being \emph{irrelevant}. By
+\enquote{irrelevant} we mean that our inferences aren't changed if we
+forget about those details or if we don't know them in the first place.
+If we represent the relevant properties by a function
+$\ys(k_{1},\dotsc,k_{m})$, called a \emph{sufficient statistic}, the relevance and
+irrelevance are expressed by the equalities
+\begin{multline}
+  \label{eq:predictive_sufficiency}
+  \pf(k_{m+n}, \dotsc, k_{m+1}
+  \| k_{m}, \dotsc, k_{1}, \yI)
+  =
+  \pf[k_{m+n}, \dotsc, k_{m+1}
+  \| \ys(k_{m}, \dotsc, k_{1}), \yI]
+  \\[\jot]
+  \text{for all $m$, $n$, and $(k_{i})$.}
+\end{multline}
+
+
+
+
+
 
 \setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
