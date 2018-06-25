@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-25T11:43:24+0200
+%% Last-Updated: 2018-06-25T11:51:58+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -835,7 +835,7 @@ by][]{cosseratetal1909}.
 
 Suppose we have a sequence, possibly infinite, of observations with
 outcomes in a set $K$. We represent the proposition \enquote{The $i$th
-  observation yields outcome $k$} by $\yO{n}{k}$, with $k\in K$.
+  observation yields outcome $k$} by $\yO{i}{k}$, with $k\in K$.
 
 A typical inference problem is to forecast the outcomes of the $(m+1)$th up
 to the $(m+n)$th observations given that we know the outcomes of the $1$st
@@ -850,7 +850,8 @@ expressed by the probabilities
   \| \yO{m}{k_{m}}, \dotsc, \yO{1}{k_{1}}, \yI),
 \end{equation}
 where the comma represents the conjunction (\enquote{$\land$}) of the
-propositions.
+propositions. We will also use the simplified notation
+$\pf(k_{m+n}, \dotsc, k_{m+1} \| k_{m}, \dotsc, k_{1}, \yI)$.
 
 In general the full set of observed data $(k_{1}, \dotsc, k_{m})$ is
 important for this kind of inference. But in particular situations it may
