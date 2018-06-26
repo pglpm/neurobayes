@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T23:45:36+0200
+%% Last-Updated: 2018-06-27T00:52:26+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -644,7 +644,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 \renewcommand{\le}{\leqslant}%less or equal
 \renewcommand{\ge}{\geqslant}%greater or equal
-%\DeclarePairedDelimiter\clcl{[}{]}
+\DeclarePairedDelimiter\clcl{[}{]}
 \DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
@@ -707,7 +707,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\E}{\mathrm{E}}
 \DeclarePairedDelimiter\expp{(}{)}
 \newcommand*{\expe}{\E\expp}%round
-%\newcommand*{\expeb}{\E\clcl}%square
+\newcommand*{\expeb}{\E\clcl}%square
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
@@ -733,6 +733,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yavv}{\widebar{s}}
 \newcommand*{\ycv}{\widebar{ss}}
 \newcommand*{\ym}{\bm{m}}
+\newcommand*{\V}{\mathrm{V}}
+\newcommand*{\var}{\V\expp}%round
+\newcommand*{\varb}{\V\clcl}%square
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -926,16 +929,77 @@ therefore using formula~\eqref{eq:predictive_KP}, let's ask what's the
 limit probability of observing particular values of the statistics $\yav$,
 $\ycv$ for very large $N$; that is, $\pf(\yav,\ycv \| \yI, \text{large } N)$.
 
-In this section we show that there is a particular coordinate system $\yt$
-of the three-dimensional manifold discussed above for which \emph{the prior
-  parameter density coincides, in the large-$N$ limit, with the probability
-  of the observed statistics}:
+In this section we show that there is a particular coordinate system
+$\yt \defd (m_1, m_2, l)$ of the three-dimensional manifold discussed above
+for which \emph{the prior parameter density coincides, in the large-$N$
+  limit, with the probability of the observed statistics}:
 \begin{equation}
   \label{eq:special_parameter_is_statistics}
-  \pf[(\yav,\ycv)=\bm{x} \| \yI, \text{large $N$}]
+  \pf[(\yavv_1,\yavv_2,\ycv)=\bm{x} \| \yI, \text{large $N$}]
   \approx \pf(\yt=\bm{x} \|\yI).
 \end{equation}
+We give first an intuitive understanding of this result and then a
+mathematical argument (no proof) for it.
 
+
+Consider the parameterized, factorized joint probability
+$\pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )$ of
+\eqn~\eqref{eq:component_combination}. The expectation of the statistics
+$(\yavv_1,\yavv_2,\ycv)$ is given by
+\begin{multline}
+  \label{eq:expect_statistics}
+  \expeb{(\yavv_1,\yavv_2,\ycv) \|\yth,\yI} =
+  \tfrac{1}{N} \sum_{i}
+  \expeb{(\ysso{i}_1,\ysso{i}_2,\ysso{i}_1 \ysso{i}_2) \|\yth,\yI}
+  ={}\\ \expeb{(s_1,s_2,s_1 s_2) \|\yth,\yI}
+\end{multline}
+owing to the properties of the expectation and the factorized form of the
+joint probability conditional on $\yth$. From the properties of the
+variance we also have
+\begin{equation}
+  \label{eq:variance_statistics}
+  \varb{(\yavv_1,\yavv_2,\ycv) \|\yth,\yI}
+  = \frac{1}{N} \varb{(s_1,s_2,s_1 s_2) \|\yth,\yI}.
+\end{equation}
+
+This means that for large $N$ and each triplet $\yth$ we approximately have
+a probability distribution for the statistics very peaked on particular
+values $\yt \defd (m_1,m_2,l)$ determined by the equations
+\begin{equation}
+  \label{eq:change_coords}
+  \begin{gathered}
+    m_1 = \expe{s_1 \|\yth,\yI}
+    \equiv \frac{\de\ln Z(\yth)}{\de \mu_1},
+    \qquad
+  m_2 = \expe{s_2 \|\yth,\yI}
+    \equiv \frac{\de\ln Z(\yth)}{\de \mu_2},\\
+  l = \expe{s_1 s_2\|\yth,\yI}
+    \equiv \frac{\de\ln Z(\yth)}{\de\la}.
+  \end{gathered}
+\end{equation}
+This system of equations actually puts into one-one correspondence
+\citep{meadetal1984} the parameters $\yth \defd(\mu_1, \mu_2, \la)$ and
+$\yt\defd(m_1, m_2,l)$. The former belong to $\RR^3$; the latter to the
+bounded domain
+\begin{equation}
+  \label{eq:domain_newcoords}
+  0\le m_1,m_2 \le 1,
+  \qquad
+  \max(0,1-m_1-m_2) \le l \le \min(m_1,m_2).
+\end{equation}
+Using these new parameters we therefore have, for large $N$,
+\begin{equation}
+  \label{eq:prob_stat_newparams}
+  \pf(\yavv_1,\yavv_2,\ycv \|m_1,m_2,l,\yI)
+  \approx \delt[(\yavv_1,\yavv_2,\ycv)- (m_1, m_2, l)].
+\end{equation}
+Taking the convex combination of this expression in $\yt$ with weights
+$\pf(\yt \|\yI)\,\di\yt$ we obtain
+\eqn~\eqref{eq:special_parameter_is_statistics}.
+
+
+
+\mynote{continue}
 
 
 Denote by $K(\yav,\ycv;N)$ the number of possible sequences of $N$
@@ -946,9 +1010,9 @@ $N=4$, there are 12 possible sequences that have statistics $\yavv_1=2/4$,
 $\yavv_2=1/4$, $\ycv=1/4$: the sequence $(00,00,10,11)$ and its $4!/2$
 distinct permutations; therefore $K(2/4,1/4,1/4; 4)=12$.
 
-Consider the parameterized joint probability
-$\pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )$ of
-\eqn~\eqref{eq:component_combination}, noting that it can be written
+
+
+, noting that it can be written
 \begin{equation}
     \label{eq:component_combination_statistics}
   \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )
@@ -1003,10 +1067,10 @@ implicitly given by the equations \citep{meadetal1984,portamana2017b}
   (m_1,m_2,l) = (\yavv_1,\yavv_2,\ycv),
   \quad \yth=\ythm.
 \end{gather}
-The system equations~\eqref{eq:change_coords} gives a one-one
+The system of equations~\eqref{eq:change_coords} gives a one-one
 correspondence between the parameters $\yt\defd(m_1, m_2,l)$ and
-$\yth \defd(\mu_1, \mu_2, \la)$. The latter belong to $\RR^3$, whereas the
-former belong to the bounded domain
+$\yth \defd(\mu_1, \mu_2, \la)$. The latter belong to $\RR^3$; the former
+to the bounded domain
 \begin{equation}
   \label{eq:domain_newcoords}
   0\le m_1,m_2 \le 1,
