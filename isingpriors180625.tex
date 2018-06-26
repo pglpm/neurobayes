@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T14:22:42+0200
+%% Last-Updated: 2018-06-26T14:57:10+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -718,7 +718,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
 \newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
-%\DeclareMathOperator*{\argsup}{arg\,sup}
+\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\yI}{\varIota}
 \newcommand*{\ys}{\bm{s}}
 \newcommand*{\yH}{\varEta}
@@ -727,6 +727,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ysso}[1]{s^{(#1)}}
 \newcommand*{\la}{\lambda}
 \newcommand*{\yth}{\bm{\theta}}
+\newcommand*{\ythm}{\yth_{\text{m}}}
 \newcommand*{\yt}{\bm{t}}
 \newcommand*{\yav}{\bm{a}}
 \newcommand*{\ycv}{c}
@@ -819,7 +820,7 @@ assume this general form:
   Z(\mu_1,\mu_2,\la) \defd
   1+ \exp(\mu_1) + \exp(\mu_2) + \exp(\mu_1+\mu_2+\la).
 \end{multline}
-For later convenience, denote $\yth \defd (\mu_1, \mu_2, \la)$.
+Let's denote $\yth \defd (\mu_1, \mu_2, \la)\in \RR^3$.
 
 The distribution $g(\ys)$ and the density $\pf(\mu_1,\mu_2,\la \| \yI)$ in
 the formula above are not determined by the theorem: they need to be
@@ -891,13 +892,36 @@ density. We must also perform an integral over $\yth$ to calculate the
 conditional probability for $\ys$. These integrals are difficult when we
 consider populations with many units. When the number $m$ of known
 observations is large, the posterior parameter density is often
-approximated by a Dirac delta centred on the maximum of the argument of the
-exponential, $\mu_1 a_1 + \mu_2 a_2 + \la \ycv$.
-
+approximated by a Dirac delta centred on the maximum of the posterior,
+\begin{equation}
+  \label{eq:max_posterior}
+  \ythm \defd \argsup_{\yth}
+  \{m\,[\mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]+
+  \ln \pf(\yth \|\yI) \}.
+\end{equation}
+The probability for $\ys$ then equals the exponential calculated at
+$\ythm$. If the prior parameter density $\pf(\yth \|\yI)$ is constant or
+very broad, it can be dropped in the calculation of the maximum, as an
+approximation.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
+\section{Other prior parameter densities}
+\label{sec:other_priors}
 
+The literature often assumes a prior parameter density $\pf(\yth \|\yI)$
+that is constant in $\yth$. This is an \enquote{improper}, non-normalizable
+prior; we are really considering a sequence of normalizable priors of
+increasing width -- for example, normal distributions with increasing
+variance -- and the resulting limit if it exists.
+
+As noted before, the parameters $\yth$ are just coordinates in a manifold
+of distributions for $\ys$. A constant density in these coordinates
+corresponds to an non-constant density in other coordinates. But are these
+coordinates \enquote{special} in any way, to consider a constant density in
+them? Are there other coordinates in which it makes more sense to consider
+a constant density? How does such a different choice affect our inference
+about $\ys$?
 
 
 
