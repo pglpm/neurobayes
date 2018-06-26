@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T23:26:03+0200
+%% Last-Updated: 2018-06-26T23:45:36+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -978,25 +978,40 @@ and considering the convex combination we have
 \end{equation}
 
 When $N$ is large, the exponential term with the largest argument dominates
-as $\yth$ varies. The parameter values $\ythm$ of this term therefore satisfy
+as $\yth$ varies. The parameter values $\ythm$ of this term are therefore
 \begin{equation}
   \label{eq:max_posterior}
   \ythm \defd \argsup_{\yth}
-  \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv -\ln Z(\yth),
+ [ \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv -\ln Z(\yth)],
 \end{equation}
 and they can be shown to be unique \citep{meadetal1984}; in fact they are
 implicitly given by the equations \citep{meadetal1984,portamana2017b}
-\begin{equation}
-  \label{eq:max_params}
+\begin{gather}
+  \label{eq:change_coords}
   \begin{gathered}
-    \yavv_1 = \frac{\de\ln Z}{\de \mu_1}(\ythm)
-    \equiv \expe{s_1 \|\ythm,\yI},
+    m_1 = \frac{\de\ln Z(\yth)}{\de \mu_1}
+    \equiv \expe{s_1 \|\yth,\yI},
     \qquad
-  \yavv_2 = \frac{\de\ln Z}{\de \mu_2}(\ythm)
-    \equiv \expe{s_2 \|\ythm,\yI},\\
-  \ycv = \frac{\de\ln Z}{\de\la}(\ythm)
-    \equiv \expe{s_1 s_2\|\ythm,\yI}.
-\end{gathered}
+  m_2 = \frac{\de\ln Z(\yth)}{\de \mu_2}
+    \equiv \expe{s_2 \|\yth,\yI},\\
+  l = \frac{\de\ln Z(\yth)}{\de\la}
+    \equiv \expe{s_1 s_2\|\yth,\yI}.
+  \end{gathered}
+  \\[2\jot]
+  \label{eq:max_params}
+  \text{for}\qquad
+  (m_1,m_2,l) = (\yavv_1,\yavv_2,\ycv),
+  \quad \yth=\ythm.
+\end{gather}
+The system equations~\eqref{eq:change_coords} gives a one-one
+correspondence between the parameters $\yt\defd(m_1, m_2,l)$ and
+$\yth \defd(\mu_1, \mu_2, \la)$. The latter belong to $\RR^3$, whereas the
+former belong to the bounded domain
+\begin{equation}
+  \label{eq:domain_newcoords}
+  0\le m_1,m_2 \le 1,
+  \qquad
+  \max(0,1-m_1-m_2) \le l \le \min(m_1,m_2).
 \end{equation}
 
 
