@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T11:37:34+0200
+%% Last-Updated: 2018-06-26T11:48:19+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -181,11 +181,11 @@ british%
  \DeclareMathSymbol{\epsilon}{\mathalpha}{egreeki}{"0F}
 % \DeclareMathSymbol{\zeta}{\mathalpha}{egreeki}{"10}
 % \DeclareMathSymbol{\eta}{\mathalpha}{egreeki}{"11}
-% \DeclareMathSymbol{\theta}{\mathalpha}{egreeki}{"12}
+ \DeclareMathSymbol{\theta}{\mathalpha}{egreeki}{"12}
 % \DeclareMathSymbol{\iota}{\mathalpha}{egreeki}{"13}
  \DeclareMathSymbol{\kappa}{\mathalpha}{egreeki}{"14}
  \DeclareMathSymbol{\lambda}{\mathalpha}{egreeki}{"15}
-% \DeclareMathSymbol{\mu}{\mathalpha}{egreeki}{"16}
+ \DeclareMathSymbol{\mu}{\mathalpha}{egreeki}{"16}
  \DeclareMathSymbol{\nu}{\mathalpha}{egreeki}{"17}
 % \DeclareMathSymbol{\xi}{\mathalpha}{egreeki}{"18}
 % \DeclareMathSymbol{\omicron}{\mathalpha}{egreeki}{"6F}
@@ -724,6 +724,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yH}{\varEta}
 \newcommand*{\yD}{D}
 \newcommand*{\yso}[1]{\ys^{(#1)}}
+\newcommand*{\la}{\lambda}
+\newcommand*{\yth}{\bm{\theta}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -792,15 +794,24 @@ the new one; that is,
 \end{equation}
 are sufficient statistics; note that the second sum contains the
 first as its diagonal. These assumptions are collectively denoted $\yI$.
-Then the Koopman-Pitman theorem says that our probabilistic forecast must
-assume this form:
-\begin{equation}
+Then the Koopman-Pitman theorem says that our probabilistic forecasts must
+assume this general form:
+\begin{multline}
   \label{eq:predictive_KP}
-  \p\bigl(\ys \| \yso{1}, \dotsc, \yso{m}, \yI\bigr) =
+  \pf(\ys \|\yI ) =
   \int
-  \frac{1}{Z()}
-\end{equation}
-
+  g(s_1,s_2)
+  \frac{  \exp( \mu_1 s_1 + \mu_2 s_2 + \la s_1 s_2) }{Z(\mu_1,\mu_2,\la)}
+  \,
+  \pf(\mu_1,\mu_2,\la \| \yI) \, \di\mu_1\,\di\mu_2\,\di\la,
+  \\[2\jot]
+  \text{with}\quad
+  Z(\mu_1,\mu_2,\la) \defd
+  1+ \exp(\mu_1) + \exp(\mu_2) + \exp(\mu_1+\mu_2+\la),
+\end{multline}
+where neither $g$ nor $\pf(\mu_1,\mu_2,\la \| \yI)$ are determined by the
+theorem: they need to be determined by additional assumptions. For later
+convenience, denote $\yth \defd (\mu_1, \mu_2, \la)$.
 
 
 
