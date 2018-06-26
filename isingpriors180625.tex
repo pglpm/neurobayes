@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-25T23:55:26+0200
+%% Last-Updated: 2018-06-26T11:37:34+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -719,12 +719,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 %\DeclareMathOperator*{\argsup}{arg\,sup}
-\newcommand*{\yO}[2]{\varOmicron^{(#1)}_{#2}}
 \newcommand*{\yI}{\varIota}
-\newcommand*{\ys}{s}
-\newcommand*{\yk}{\bm{k}}
+\newcommand*{\ys}{\bm{s}}
 \newcommand*{\yH}{\varEta}
 \newcommand*{\yD}{D}
+\newcommand*{\yso}[1]{\ys^{(#1)}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -771,8 +770,38 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
   may have.}
 \fi
 
-\section{Intro}
+\section{A two-unit model with sufficient statistics}
 \label{sec:intro}
+
+Consider a population of two binary units $\ys \defd (s_1,s_2)$ with values in
+$\set{0,1}$. One observation of this population can thus give four results:
+$\ys \in \set{00,01,10,11}$.
+
+Assume that we have $m$ observations $(\yso{1}, \dotsc, \yso{m})$ of this
+or other populations prepared in similar conditions, so that knowledge of
+these observations is relevant for our forecast of a new observation $\ys$,
+again in similar conditions. Also assume that only the number, the mean,
+and the second moments of these past observations are relevant to forecast
+the new one; that is,
+\begin{equation}
+  \label{eq:mean_2ndmom}
+  m,\qquad
+  \tfrac{1}{m}\bigl( \yso{1} + \dotsb + \yso{m} \bigr),
+  \qquad
+  \tfrac{1}{m}\bigl( \yso{1}{\yso{1}}\T + \dotsb + \yso{m}{\yso{m}}\T \bigr)
+\end{equation}
+are sufficient statistics; note that the second sum contains the
+first as its diagonal. These assumptions are collectively denoted $\yI$.
+Then the Koopman-Pitman theorem says that our probabilistic forecast must
+assume this form:
+\begin{equation}
+  \label{eq:predictive_KP}
+  \p\bigl(\ys \| \yso{1}, \dotsc, \yso{m}, \yI\bigr) =
+  \int
+  \frac{1}{Z()}
+\end{equation}
+
+
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
