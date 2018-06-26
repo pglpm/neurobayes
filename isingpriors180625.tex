@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T11:48:19+0200
+%% Last-Updated: 2018-06-26T14:22:42+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -716,7 +716,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
 \newcommand*{\puzzle}{\maltese}
 \newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
-%\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
+\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\yI}{\varIota}
@@ -724,8 +724,12 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yH}{\varEta}
 \newcommand*{\yD}{D}
 \newcommand*{\yso}[1]{\ys^{(#1)}}
+\newcommand*{\ysso}[1]{s^{(#1)}}
 \newcommand*{\la}{\lambda}
 \newcommand*{\yth}{\bm{\theta}}
+\newcommand*{\yt}{\bm{t}}
+\newcommand*{\yav}{\bm{a}}
+\newcommand*{\ycv}{c}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -788,9 +792,10 @@ the new one; that is,
 \begin{equation}
   \label{eq:mean_2ndmom}
   m,\qquad
-  \tfrac{1}{m}\bigl( \yso{1} + \dotsb + \yso{m} \bigr),
+  \tfrac{1}{m}\bigl( \yso{1} + \dotsb + \yso{m} \bigr) \defs \yav,
   \qquad
-  \tfrac{1}{m}\bigl( \yso{1}{\yso{1}}\T + \dotsb + \yso{m}{\yso{m}}\T \bigr)
+  \tfrac{1}{m}\bigl( \ysso{1}_1\ysso{1}_2 + \dotsb + \ysso{m}_1 \ysso{m}_2 \bigr)
+  \defs \ycv
 \end{equation}
 are sufficient statistics; note that the second sum contains the
 first as its diagonal. These assumptions are collectively denoted $\yI$.
@@ -798,21 +803,96 @@ Then the Koopman-Pitman theorem says that our probabilistic forecasts must
 assume this general form:
 \begin{multline}
   \label{eq:predictive_KP}
-  \pf(\ys \|\yI ) =
+  \pf(\yso{1}, \dotsc, \yso{n} \|\yI ) ={}\\
   \int
-  g(s_1,s_2)
-  \frac{  \exp( \mu_1 s_1 + \mu_2 s_2 + \la s_1 s_2) }{Z(\mu_1,\mu_2,\la)}
-  \,
+\Biggl[  \prod_{i=1}^{n}
+  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl(
+    \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
+    \bigr) }{Z(\mu_1,\mu_2,\la)}
+  \Biggr]\,
+%  \times{}\\ \shoveright{
   \pf(\mu_1,\mu_2,\la \| \yI) \, \di\mu_1\,\di\mu_2\,\di\la,
-  \\[2\jot]
+%}
+\\[2\jot]
   \text{with}\quad
   Z(\mu_1,\mu_2,\la) \defd
-  1+ \exp(\mu_1) + \exp(\mu_2) + \exp(\mu_1+\mu_2+\la),
+  1+ \exp(\mu_1) + \exp(\mu_2) + \exp(\mu_1+\mu_2+\la).
 \end{multline}
-where neither $g$ nor $\pf(\mu_1,\mu_2,\la \| \yI)$ are determined by the
-theorem: they need to be determined by additional assumptions. For later
-convenience, denote $\yth \defd (\mu_1, \mu_2, \la)$.
+For later convenience, denote $\yth \defd (\mu_1, \mu_2, \la)$.
 
+The distribution $g(\ys)$ and the density $\pf(\mu_1,\mu_2,\la \| \yI)$ in
+the formula above are not determined by the theorem: they need to be
+determined by additional assumptions. The distribution $g$ is often
+determined by symmetry or combinatorial properties of the system.
+% for example, if each unit actually represents the total activity of a population of sub-units.
+In the present study we assume it to be unity: $g(\ys)=1$. The density
+$\pf(\yth \|\yI)$ is called \emph{prior parameter density}.
+
+Geometrically, the formula above says that our probability distribution is
+the convex combination of probability distributions from a
+three-dimensional family parameterized by $\yth$, with weights
+$\pf(\yth \|\yI)\,\di\yth$. The parameters $\yth$ are just coordinates of
+this three-dimensional manifold, and we can choose other coordinates $\yt$,
+the weights then being given by $\pf(\yt \|\yI) \, \di\yt$, with the
+densities for $\yth$ and for $\yt$ related by a Jacobian determinant:
+\begin{equation}
+  \label{eq:jacobian}
+  \pf(\yth \|\yI) = \pf[\yt(\yth) \| \yI]\,
+  \det\biggl( \frac{\de\yt}{\de\yth}\biggr).
+\end{equation}
+
+\medskip
+
+Using Bayes's theorem with the probabilities~\eqref{eq:predictive_KP} we
+find our forecast for a new observation $\ys$ conditional on observations
+$\bigl( \yso{1}, \dotsc,\yso{m} \bigr)$:
+\begin{subequations}    \label{eq:conditional_prediction}
+  \begin{gather}
+    \begin{multlined}[][0.9\linewidth]
+      \pf(\ys \| \yso{1}, \dotsc, \yso{m}, \yI ) ={}\\[\jot]
+      \int
+      \frac{  \exp\bigl(
+        \mu_1 s_1 + \mu_2 s_2 + \la s_1 s_2
+        \bigr) }{Z(\yth)}
+      \,
+      % \times{}\\ \shoveright{
+      \pf(\yth \| \yso{1},\dotsc,\yso{m} \yI) \, \di\yth
+      % }
+    \end{multlined}
+    \\
+    \shortintertext{with}
+    \begin{multlined}[0.95\linewidth]
+    \pf(\yth \| \yso{1},\dotsc,\yso{m} \yI)
+    \propto
+    \Biggl[  \prod_{i=1}^{m}
+    \frac{  \exp\bigl(
+      \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
+      \bigr) }{Z(\yth)}
+    \Biggr]\,
+    \pf(\yth \| \yI) 
+={}\\[\jot]
+     \exp\{m\,[
+      \mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]\}\,
+    \pf(\yth \| \yI).
+    \end{multlined}
+  \end{gather}
+\end{subequations}
+The density $\pf(\yth \| \yso{1},\dotsc,\yso{m} \yI)$ is called
+\emph{posterior parameter density}.
+
+The last expression shows that the $m$ observations affect our forecast
+only through the averages $\yav$ and $\ycv$, \eqn~\eqref{eq:mean_2ndmom},
+as we assumed.
+
+The proportionality relation of the last formula reminds us that we must
+perform an integral over $\yth$ to calculate the posterior parameter
+density. We must also perform an integral over $\yth$ to calculate the
+conditional probability for $\ys$. These integrals are difficult when we
+consider populations with many units. When the number $m$ of known
+observations is large, the posterior parameter density is often
+approximated by a Dirac delta centred on the maximum of the argument of the
+exponential, $\mu_1 a_1 + \mu_2 a_2 + \la \ycv$.
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
