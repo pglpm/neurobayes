@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T21:10:48+0200
+%% Last-Updated: 2018-06-26T21:17:22+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -805,15 +805,15 @@ $\yI$.
 
 There is a series of mathematical results, which we call the
 Koopman-Pitman-Lauritzen theorem, that says that our probabilistic
-forecasts must assume this general form:
+forecasts must assume this general form, for any $N$:
 \begin{multline}
   \label{eq:predictive_KP}
 \begin{aligned}
-    \pf(\yso{1}, \dotsc, \yso{n} \|\yI )
+    \pf(\yso{1}, \dotsc, \yso{N} \|\yI )
   &=\!\!
     \begin{multlined}[t][0.7\linewidth]
 \int
-\Biggl[  \prod_{i=1}^{n}
+\Biggl[  \prod_{i=1}^{N}
   g\bigl(\yso{i}\bigr)\,
   \frac{  \exp\bigl(
     \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
@@ -825,9 +825,9 @@ forecasts must assume this general form:
   &=\!\!
         \begin{multlined}[t][0.7\linewidth]
 \int
-  \bigl[\tprod_{i=1}^{n}g\bigl(\yso{i}\bigr) \bigr]\,
-  \frac{  \exp[n \, (
-    \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv)]}{Z(\mu_1,\mu_2,\la)^n}
+  \bigl[\tprod_{i=1}^{N}g\bigl(\yso{i}\bigr) \bigr]\,
+  \frac{  \exp[N \, (
+    \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv)]}{Z(\mu_1,\mu_2,\la)^N}
   \times{}\\[\jot]
   \pf(\mu_1,\mu_2,\la \| \yI) \, \di\mu_1\,\di\mu_2\,\di\la,
 \end{multlined}
@@ -843,8 +843,9 @@ $\yth \defd (\mu_1, \mu_2, \la)\in \RR^3$.
 The distribution $g(\ys)$ and the density $\pf(\mu_1,\mu_2,\la \| \yI)$ in
 the formula above are not determined by the theorem: they need to be
 determined by additional assumptions. The distribution $g$ is often
-determined by symmetry or combinatorial properties of the system.
-% for example, if each unit actually represents the total activity of a population of sub-units.
+determined by symmetry or combinatorial properties of the problem.
+% for example, if each unit actually represents the total activity of a
+% population of sub-units.
 From now on we assume it to be unity: $g(\ys)=1$. The density
 $\pf(\yth \|\yI)$ is called \emph{prior parameter density}.
 
@@ -852,14 +853,14 @@ Formula~\eqref{eq:predictive_KP} may appear deceivingly specific in its
 dependence on the parameters $\yth$; let's summarize in words the content
 of the theorem:
 \begin{enumerate}[label=(\textit{\alph*})]
-\item our joint probability for the observations $\yso{1}, \dotsc,\yso{n}$
+\item our joint probability for the observations $\yso{1}, \dotsc,\yso{N}$
   is given by a convex combination of joint probabilities;
 \item each joint probability in this convex combination factorizes into
-  $n$ independent probabilities for the $n$ observations;
+  $N$ independent probabilities for the $N$ observations;
 \item\label{item:submanifold}each joint probability in the convex
   combination is identified by a triple of parameters $\yth$; it therefore
   belongs to a three-dimensional submanifold of joint probabilities. Note
-  that the full manifold of joint probabilities is $(2^n-1)$-dimensional;
+  that the full manifold of joint probabilities is $(2^N-1)$-dimensional;
 \item\label{item:weights}the weight assigned to the probability labelled by
   $\yth$ is $\pf(\yth \|\yI)\,\di\yth$.
 \end{enumerate}
@@ -879,9 +880,9 @@ $\yth=\yth(\yt)$. In these new coordinates the mixed joint probabilities
 are
 \begin{equation}
   \label{eq:extreme_probs_newcoords}
-  \frac{\exp\{n \, [
+  \frac{\exp\{N \, [
     \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 + \la(\yt)\, \ycv]\}
-  }{Z[\yth(\yt)]^n},
+  }{Z[\yth(\yt)]^N},
 \end{equation}
 and the weights of the convex combination are given by
 $\pf(\yt \|\yI) \, \di\yt$, the densities for $\yth$ and for $\yt$ being
