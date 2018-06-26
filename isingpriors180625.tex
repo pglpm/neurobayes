@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T14:57:10+0200
+%% Last-Updated: 2018-06-26T16:33:45+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -704,9 +704,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
 \newcommand*{\T}{^\intercal}%transpose
-%\newcommand*{\E}{\mathrm{E}}
-%\DeclarePairedDelimiter\expp{(}{)}
-%\newcommand*{\expe}{\E\expp}%round
+\newcommand*{\E}{\mathrm{E}}
+\DeclarePairedDelimiter\expp{(}{)}
+\newcommand*{\expe}{\E\expp}%round
 %\newcommand*{\expeb}{\E\clcl}%square
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
@@ -731,6 +731,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yt}{\bm{t}}
 \newcommand*{\yav}{\bm{a}}
 \newcommand*{\ycv}{c}
+\newcommand*{\ym}{\bm{m}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -784,7 +785,7 @@ Consider a population of two binary units $\ys \defd (s_1,s_2)$ with values in
 $\set{0,1}$. One observation of this population can thus give four results:
 $\ys \in \set{00,01,10,11}$.
 
-Assume that we have $m$ observations $(\yso{1}, \dotsc, \yso{m})$ of this
+Assume that we have $N$ observations $(\yso{1}, \dotsc, \yso{N})$ of this
 or other populations prepared in similar conditions, so that knowledge of
 these observations is relevant for our forecast of a new observation $\ys$,
 again in similar conditions. Also assume that only the number, the mean,
@@ -792,10 +793,10 @@ and the second moments of these past observations are relevant to forecast
 the new one; that is,
 \begin{equation}
   \label{eq:mean_2ndmom}
-  m,\qquad
-  \tfrac{1}{m}\bigl( \yso{1} + \dotsb + \yso{m} \bigr) \defs \yav,
+  N,\qquad
+  \tfrac{1}{N}\bigl( \yso{1} + \dotsb + \yso{N} \bigr) \defs \yav,
   \qquad
-  \tfrac{1}{m}\bigl( \ysso{1}_1\ysso{1}_2 + \dotsb + \ysso{m}_1 \ysso{m}_2 \bigr)
+  \tfrac{1}{N}\bigl( \ysso{1}_1\ysso{1}_2 + \dotsb + \ysso{N}_1 \ysso{N}_2 \bigr)
   \defs \ycv
 \end{equation}
 are sufficient statistics; note that the second sum contains the
@@ -847,42 +848,42 @@ densities for $\yth$ and for $\yt$ related by a Jacobian determinant:
 
 Using Bayes's theorem with the probabilities~\eqref{eq:predictive_KP} we
 find our forecast for a new observation $\ys$ conditional on observations
-$\bigl( \yso{1}, \dotsc,\yso{m} \bigr)$:
+$\bigl( \yso{1}, \dotsc,\yso{N} \bigr)$:
 \begin{subequations}    \label{eq:conditional_prediction}
   \begin{gather}
     \begin{multlined}[][0.9\linewidth]
-      \pf(\ys \| \yso{1}, \dotsc, \yso{m}, \yI ) ={}\\[\jot]
+      \pf(\ys \| \yso{1}, \dotsc, \yso{N}, \yI ) ={}\\[\jot]
       \int
       \frac{  \exp\bigl(
         \mu_1 s_1 + \mu_2 s_2 + \la s_1 s_2
         \bigr) }{Z(\yth)}
       \,
       % \times{}\\ \shoveright{
-      \pf(\yth \| \yso{1},\dotsc,\yso{m} \yI) \, \di\yth
+      \pf(\yth \| \yso{1},\dotsc,\yso{N} \yI) \, \di\yth
       % }
     \end{multlined}
     \\
     \shortintertext{with}
     \begin{multlined}[0.95\linewidth]
-    \pf(\yth \| \yso{1},\dotsc,\yso{m} \yI)
+    \pf(\yth \| \yso{1},\dotsc,\yso{N} \yI)
     \propto
-    \Biggl[  \prod_{i=1}^{m}
+    \Biggl[  \prod_{i=1}^{N}
     \frac{  \exp\bigl(
       \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
       \bigr) }{Z(\yth)}
     \Biggr]\,
     \pf(\yth \| \yI) 
 ={}\\[\jot]
-     \exp\{m\,[
+     \exp\{N\,[
       \mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]\}\,
     \pf(\yth \| \yI).
     \end{multlined}
   \end{gather}
 \end{subequations}
-The density $\pf(\yth \| \yso{1},\dotsc,\yso{m} \yI)$ is called
+The density $\pf(\yth \| \yso{1},\dotsc,\yso{N} \yI)$ is called
 \emph{posterior parameter density}.
 
-The last expression shows that the $m$ observations affect our forecast
+The last expression shows that the $N$ observations affect our forecast
 only through the averages $\yav$ and $\ycv$, \eqn~\eqref{eq:mean_2ndmom},
 as we assumed.
 
@@ -890,13 +891,13 @@ The proportionality relation of the last formula reminds us that we must
 perform an integral over $\yth$ to calculate the posterior parameter
 density. We must also perform an integral over $\yth$ to calculate the
 conditional probability for $\ys$. These integrals are difficult when we
-consider populations with many units. When the number $m$ of known
+consider populations with many units. When the number $N$ of known
 observations is large, the posterior parameter density is often
 approximated by a Dirac delta centred on the maximum of the posterior,
 \begin{equation}
   \label{eq:max_posterior}
   \ythm \defd \argsup_{\yth}
-  \{m\,[\mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]+
+  \{N\,[\mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]+
   \ln \pf(\yth \|\yI) \}.
 \end{equation}
 The probability for $\ys$ then equals the exponential calculated at
@@ -920,9 +921,75 @@ of distributions for $\ys$. A constant density in these coordinates
 corresponds to an non-constant density in other coordinates. But are these
 coordinates \enquote{special} in any way, to consider a constant density in
 them? Are there other coordinates in which it makes more sense to consider
-a constant density? How does such a different choice affect our inference
-about $\ys$?
+a constant density? How does a different choice affect our inference about
+$\ys$?
 
+To consider other coordinates it is useful to give the predictive
+formula~\eqref{eq:predictive_KP} a particular interpretation.
+
+First of all it must be noted that each choice of parameters $\yth$ gives
+a distribution
+\begin{equation}
+  \label{eq:distr_simple_s}
+  \pf(\ys \|\yth, \yI)
+  =
+  \frac{  \exp\bigl(
+      \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
+      \bigr) }{Z(\yth)}
+\end{equation}
+with different first and second moments
+\begin{equation}
+  \label{eq:moments}
+  \begin{aligned}
+    \expe{\ys \|\yth, \yI} &\defd
+    \sum_{\ys} \ys\, \pf(\ys \|\yth, \yI),
+\\
+    \expe{s_1 s_2 \|\yth, \yI} &\defd
+    \sum_{\ys} s_1 s_2\, \pf(\ys \|\yth, \yI).
+  \end{aligned}
+\end{equation}
+In other words the set $\yth \in \RR^3$ is in one-one correspondence with
+the possible values of the three expectations above. We can therefore
+introduce coordinates $\yt \defd (m_1, m_2, l)$ that identify the
+distributions above via the equations
+\begin{equation}
+  \label{eq:tranf_coord}
+  \begin{split}
+  m_1 &= \expe{s_1 \|\yth, \yI} \equiv
+  \frac{\exp(\mu_1) + \exp(\mu_1 + \mu_2 + \la)}{Z(\mu_1,\mu_2,\la)},\\
+  m_2 &= \expe{s_2 \|\yth, \yI} \equiv
+  \frac{\exp(\mu_2) + \exp(\mu_1 + \mu_2 + \la)}{Z(\mu_1,\mu_2,\la)},\\
+  \qquad
+  l &= \expe{s_1 s_2 \|\yth, \yI} \equiv
+  \frac{\exp(\mu_1 + \mu_2 + \la)}{Z(\mu_1,\mu_2,\la)},
+\end{split}
+\end{equation}
+which are coordinate transformations with the inverse
+\begin{equation}
+  \label{eq:inverse_tranf_coord}
+  \begin{gathered}
+    \mu_1 =\ln\frac{m_1-l}{1+l-m_1-m_2},\qquad
+    \mu_2 =\ln\frac{m_2-l}{1+l-m_1-m_2},\\[\jot]
+\la =\ln\frac{(1+l-m_1-m_2)\,l}{(m_1-l)\,(m_2-l)}.
+\end{gathered}
+\end{equation}
+
+In terms of the coordinates $\yt$ the family of probability distributions
+for $\ys$ has the form
+\begin{multline}
+  \label{eq:prob_family_m}
+  \pf(\ys \| \yt,\yI) =
+  (1+l-m_1-m_2)\times{}\\
+  \biggl(\frac{m_1-l}{1+l-m_1-m_2} \biggr)^{s_1}\,
+  \biggl( \frac{m_2-l}{1+l-m_1-m_2}  \biggr)^{s_2}\,
+  \Biggl[ \frac{(1+l-m_1-m_2)\,l}{(m_1-l)\,(m_2-l)} \Biggr]^{s_1 s_2}
+  \\[\jot]
+  {}\equiv
+  l^{s_1 s_2}\,
+  (m_1-l)^{s_1-s_1 s_2}\,
+  (m_2-l)^{s_2-s_1 s_2}\,
+  (1+l-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
+\end{multline}
 
 
 \setlength{\intextsep}{0.5ex}% with wrapfigure
