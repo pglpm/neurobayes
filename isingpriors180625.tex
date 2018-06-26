@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-26T21:20:03+0200
+%% Last-Updated: 2018-06-26T23:20:06+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -854,16 +854,30 @@ dependence on the parameters $\yth$; let's summarize in words the content
 of the theorem:
 \begin{enumerate}[label=(\textit{\alph*})]
 \item our joint probability for the observations $\yso{1}, \dotsc,\yso{N}$
-  is given by a convex combination of joint probabilities;
-\item each joint probability in this convex combination factorizes into
-  $N$ independent probabilities for the $N$ observations;
+  is given by a convex combination of joint probabilities:
+  \begin{equation}
+    \label{eq:component_combination}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )
+  =
+  \prod_{i=1}^{N}
+%  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl(
+    \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
+    \bigr) }{Z(\yth)};
+  \end{equation}
+
+\item each joint probability in this convex combination factorizes into $N$
+  independent probabilities for the $N$ observations, as is clear from the
+  formula above;
 \item\label{item:submanifold}each joint probability in the convex
-  combination is identified by a triple of parameters $\yth$; it therefore
+  combination is identified by a triplet of parameters $\yth$; it therefore
   belongs to a three-dimensional submanifold of joint probabilities. Note
   that the full manifold of joint probabilities is $(2^N-1)$-dimensional;
 \item\label{item:weights}the weight assigned to the probability labelled by
   $\yth$ is $\pf(\yth \|\yI)\,\di\yth$.
 \end{enumerate}
+
+\medskip
 
 Point~\ref{item:submanifold} shows that the Pitman-Koopman-Lauritzen
 theorem greatly reduces our freedom in specifying the joint probability.
@@ -880,9 +894,16 @@ $\yth=\yth(\yt)$. In these new coordinates the mixed joint probabilities
 are
 \begin{equation}
   \label{eq:extreme_probs_newcoords}
-  \frac{\exp\{N \, [
-    \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 + \la(\yt)\, \ycv]\}
-  }{Z[\yth(\yt)]^N},
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yt, \yI ) =
+    \prod_{i=1}^{N}
+%  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl[
+    \mu_1(\yt)\, \ysso{i}_1 + \mu_2(\yt)\, \ysso{i}_2 +
+    \la(\yt)\, \ysso{i}_1 \ysso{i}_2
+    \bigr] }{Z[\yth(\yt)]};
+  % \frac{\exp\{N \, [
+  %   \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 + \la(\yt)\, \ycv]\}
+  % }{Z[\yth(\yt)]^N},
 \end{equation}
 and the weights of the convex combination are given by
 $\pf(\yt \|\yI) \, \di\yt$, the densities for $\yth$ and for $\yt$ being
@@ -893,8 +914,82 @@ related by a Jacobian determinant:
   \det\biggl( \frac{\de\yt}{\de\yth}\biggr).
 \end{equation}
 
+This coordinate change will be central in the rest of this study.
 
-\bigskip
+\textcolor{white}{If you find this you can claim a postcard from me.}
+
+\section{New coordinates and their motivation}
+\label{sec:new_coords}
+
+Assuming that~\eqref{eq:mean_2ndmom} are sufficient statistics and
+therefore using formula~\eqref{eq:predictive_KP}, let's ask what's the
+limit probability of observing particular values of the statistics $\yav$,
+$\ycv$ for very large $N$: $\pf(\yav,\ycv \| \yI, \text{large } N)$.
+
+Denote $K(\yav,\ycv;N)$ the number of possible sequences of $N$
+observations $(\yso{1}, \dotsc, \yso{N})$ that have statistics
+$(\yav,\ycv)$. Note that $\sum_{\yav,\ycv} K(\yav,\ycv; N) = 4^N$, the
+total number of possible sequences of $N$ observations. For example, if
+$N=4$, there are 12 possible sequences that have statistics $\yavv_1=2/4$,
+$\yavv_2=1/4$, $\ycv=1/4$: the sequence $(00,00,10,11)$ and its $4!/2$
+distinct permutations; therefore $K(2/4,1/4,1/4; 4)=12$.
+
+Consider the parameterized joint probability
+$\pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )$ of
+\eqn~\eqref{eq:component_combination}, noting that it can be written
+\begin{equation}
+    \label{eq:component_combination_statistics}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )
+  =
+%  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp[N\,(
+    \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv)]}{Z(\yth)^N}.
+\end{equation}
+This probability has the same value for all sequences $(\yso{1}, \dotsc,
+\yso{N})$ having the same statistics $(\yav,\ycv)$. Therefore, the
+probability of observing a particular statistics, given $\yth$, is
+\begin{equation}
+  \label{eq:prob_statistics_param}
+  \pf(\yav,\ycv \| \yth,\yI) =
+  K(\yav,\ycv; N) \,
+  \frac{  \exp[N\,(
+    \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv)]}{Z(\yth)^N},
+\end{equation}
+and considering the convex combination we have
+\begin{equation}
+  \label{eq:prob_statistics}
+  \pf(\yav,\ycv \| \yI) =
+  K(\yav,\ycv; N) 
+\int  \frac{  \exp[N\,(
+  \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv)]}{Z(\yth)^N}
+\, \pf(\yth \|\yI) \, \di\yth.
+\end{equation}
+
+When $N$ is large, the exponential term with the largest argument dominates
+as $\yth$ varies. The parameter values $\ythm$ of this term therefore satisfy
+\begin{equation}
+  \label{eq:max_posterior}
+  \ythm \defd \argsup_{\yth}
+  \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv -\ln Z(\yth),
+\end{equation}
+and they can be shown to be unique \citep{meadetal1984}; in fact they are
+implicitly given by the equations \citep{meadetal1984,portamana2017b}
+\begin{equation}
+  \label{eq:max_params}
+  \begin{gathered}
+    \yavv_1 = \frac{\de\ln Z}{\de \mu_1}(\ythm)
+    \equiv \expe{s_1 \|\ythm,\yI},
+    \qquad
+  \yavv_2 = \frac{\de\ln Z}{\de \mu_2}(\ythm)
+    \equiv \expe{s_2 \|\ythm,\yI},\\
+  \ycv = \frac{\de\ln Z}{\de\la}(\ythm)
+    \equiv \expe{s_1 s_2\|\ythm,\yI}.
+\end{gathered}
+\end{equation}
+
+
+\section{Inference from observed data}
+\label{sec:inference_from_data}
 
 Using Bayes's theorem with the probabilities~\eqref{eq:predictive_KP} we
 find our forecast for a new observation $\ys$ conditional on observations
@@ -955,7 +1050,6 @@ $\ythm$. If the prior parameter density $\pf(\yth \|\yI)$ is constant or
 very broad, it can be dropped in the calculation of the maximum, as an
 approximation.
 
-\textcolor{white}{If you find this you can claim a postcard from me.}
 
 \section{Other prior parameter densities}
 \label{sec:other_priors}
