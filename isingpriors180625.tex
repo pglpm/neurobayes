@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-27T11:30:18+0200
+%% Last-Updated: 2018-06-27T12:13:14+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -401,7 +401,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 }
 
 \usepackage{graphicx}
-%\usepackage{wrapfig}
+\usepackage{wrapfig}
 %\usepackage{tikz-cd}
 
 \PassOptionsToPackage{hyphens}{url}\usepackage[hypertexnames=false]{hyperref}
@@ -979,15 +979,24 @@ $\yt \defd (m_1,m_2,l)$ determined by the equations
   \end{gathered}
 \end{equation}
 This system of equations actually puts the parameters
-$\yth \defd(\mu_1, \mu_2, \la)$ and $\yt\defd(m_1, m_2,l)$ into one-one
+$\yth \defd(\mu_1, \mu_2, \la)$
+\setlength{\intextsep}{0.5ex}% with wrapfigure
+\begin{figure}[t!]%{r}{0.4\linewidth} % with wrapfigure
+  \centering\includegraphics[width=0.75\linewidth]{domain.png}\\
+  \caption{}
+  \label{fig:domain}
+\end{figure}% dimer_study.nb
+and $\yt\defd(m_1, m_2,l)$ into one-one
 correspondence \citep{meadetal1984}. The former belong to $\RR^3$; the
 latter to the bounded domain
 \begin{equation}
   \label{eq:domain_newcoords}
   0\le m_1,m_2 \le 1,
   \qquad
-  \max(0,1-m_1-m_2) \le l \le \min(m_1,m_2).
+  \max(0,m_1 + m_2 -1) \le l \le \min(m_1,m_2)
 \end{equation}
+shown in \fig~\ref{fig:domain}.
+
 Using these new parameters, the probability for statistics $(\yav,\ycv)$
 becomes for large $N$
 \begin{equation}
@@ -1170,25 +1179,36 @@ section.
 
 The Jacobian determinants of the transformations $\yth(\yt)$ and $\yt(\yth)$, from
 \eqns~\eqref{eq:inverse_tranf_coord} and~\eqref{eq:change_coords}, are
-\begin{align}
-  \label{eq:jacobian_transf}
-  \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
-  &= \frac{1-l}{(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
-  \\
+\begin{subequations}  \label{eq:jacobian_transf}
+  \begin{align}
+    \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
+    &= \frac{1}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
+    \\
     \det\biggl( \frac{\de\yt}{\de\yth}\biggr)
-  &= \frac{\exp(2\mu_1 + 2\mu_2 + \la)}{Z(\yth)^4}.
-\end{align}
-The last expression is especially worth notice, because it can be uniquely
-written as
-\begin{equation}
-  \label{eq:jacobian_as_probs}
-  \det\biggl( \frac{\de\yt}{\de\yth}\biggr) =
-  \pf(00 \|\yth,\yI)\,
-  \pf(10 \|\yth,\yI)\,
-  \pf(01 \|\yth,\yI)\,
-  \pf(11 \|\yth,\yI)
-  \equiv \prod_{\ys}\pf(\ys \|\yth,\yI),
-\end{equation}
+    &= \frac{\exp(2\mu_1 + 2\mu_2 + \la)}{Z(\yth)^4}.
+  \end{align}
+\end{subequations}
+These expressions are worthy of notice, because they can be uniquely written
+as
+\begin{subequations}    \label{eq:jacobian_as_probs}
+  \begin{align}
+    \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
+    &=\frac{1}{
+      \pf(00 \|\yt,\yI)\,
+      \pf(10 \|\yt,\yI)\,
+      \pf(01 \|\yt,\yI)\,
+      \pf(11 \|\yt,\yI)}
+      \equiv \frac{1}{\prod_{\ys}\pf(\ys \|\yt,\yI)},
+      \\
+      \det\biggl( \frac{\de\yt}{\de\yth}\biggr)
+    &=
+      \pf(00 \|\yth,\yI)\,
+      \pf(10 \|\yth,\yI)\,
+      \pf(01 \|\yth,\yI)\,
+      \pf(11 \|\yth,\yI)
+      \equiv \prod_{\ys}\pf(\ys \|\yth,\yI),
+  \end{align}
+\end{subequations}
 as can be checked from \eqn~\eqref{eq:component_combination} for $N=1$.
 
 A prior density constant in $\yth$ therefore corresponds to the density
@@ -1201,7 +1221,8 @@ A prior density constant in $\yth$ therefore corresponds to the density
   \frac{1}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
 \end{multline}
 obtained from \eqns~\eqref{eq:jacobian_as_probs}
-and~\eqref{eq:prob_outcome_from_statistics}.
+and~\eqref{eq:prob_outcome_from_statistics}. This density gives very high
+probability to the extreme values of all three statistics
 
 
 
@@ -1211,7 +1232,7 @@ and~\eqref{eq:prob_outcome_from_statistics}.
 
 
 
-\setlength{\intextsep}{0.5ex}% with wrapfigure
+%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
 %  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
 %\caption{***}\label{fig:comparison_a5}
