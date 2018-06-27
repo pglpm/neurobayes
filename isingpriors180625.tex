@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-27T16:42:01+0200
+%% Last-Updated: 2018-06-27T20:06:00+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -1189,7 +1189,10 @@ The Jacobian determinants of the transformations $\yth(\yt)$ and $\yt(\yth)$, fr
     &= \frac{1}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
     \\
     \det\biggl( \frac{\de\yt}{\de\yth}\biggr)
-    &= \frac{\exp(2\mu_1 + 2\mu_2 + \la)}{Z(\yth)^4}.
+    &=
+\det\frac{\de^2\ln Z(\yth)}{\de\yth\,\de\yth}
+=
+      \frac{\exp(2\mu_1 + 2\mu_2 + \la)}{Z(\yth)^4}.
   \end{align}
 \end{subequations}
 These expressions are worthy of notice, because they can be uniquely written
@@ -1290,6 +1293,18 @@ observed data are numerous.
 
 
 \mynote{To be continued}
+
+Conjecture:
+\begin{multline}
+  \label{eq:conjecture}
+  \det\biggl[ \frac{\de^2\ln Z(\bm{\theta})}{\de\theta_k\,\de\theta_l} \biggr]
+  = \prod_{\bm{s}\in\set{0,1}^n}
+  \frac{\exp\bigl(\sum_{i=1}^n h_i s_i + \sum_{1\le i < j\le n} J_{ij}s_i s_j\bigr)}{Z(\bm{\theta})}
+  \\[2\jot]
+  \text{with}\quad
+  Z(\bm{\theta}) \defd \sum_{\bm{s}} \exp(\dotso),\quad
+  \bm{\theta}\defd (\theta_k) \defd (h_i, J_{ij})
+\end{multline}
 
 
 
