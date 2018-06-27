@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-27T00:52:26+0200
+%% Last-Updated: 2018-06-27T10:47:43+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -887,14 +887,17 @@ theorem greatly reduces our freedom in specifying the joint probability.
 This is the effect of assuming that the statistics~\eqref{eq:mean_2ndmom}
 are sufficient; it's a very strong assumption.
 
-Points~\ref{item:submanifold} and~\ref{item:weights} show that the
-parameters $\yth$ are just coordinates of a three-dimensional manifold.
-There is nothing special about these coordinates, besides the fact that
-they appear as coefficients of the linear combination of statistics in the
-exponential~\eqref{eq:predictive_KP}. We could choose different coordinates
-$\yt$, with one-one coordinate transformations $\yt=\yt(\yth)$,
-$\yth=\yth(\yt)$. In these new coordinates the mixed joint probabilities
-are
+Points~\ref{item:submanifold} and~\ref{item:weights} show that the theorem
+selects a particular three-dimensional submanifold within each of the
+$(2^N-1)$-dimensional manifolds of probability distributions for $N$
+observations, for all $N$. But the theorem doesn't select any particular
+coordinate system within the submanifold: the parameters $\yth$ are just
+coordinates, and there is nothing special about them, besides
+the fact that they appear as coefficients of the linear combination of
+statistics in the exponential~\eqref{eq:predictive_KP}. We could choose
+different coordinates $\yt$, with one-one coordinate transformations
+$\yt=\yt(\yth)$, $\yth=\yth(\yt)$. In these new coordinates the mixed joint
+probabilities are
 \begin{equation}
   \label{eq:extreme_probs_newcoords}
   \pf(\yso{1}, \dotsc, \yso{N} \|\yt, \yI ) =
@@ -938,33 +941,31 @@ for which \emph{the prior parameter density coincides, in the large-$N$
   \pf[(\yavv_1,\yavv_2,\ycv)=\bm{x} \| \yI, \text{large $N$}]
   \approx \pf(\yt=\bm{x} \|\yI).
 \end{equation}
-We give first an intuitive understanding of this result and then a
-mathematical argument (no proof) for it.
 
-
-Consider the parameterized, factorized joint probability
+To see this, consider the parameterized, factorized joint probability
 $\pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )$ of
 \eqn~\eqref{eq:component_combination}. The expectation of the statistics
 $(\yavv_1,\yavv_2,\ycv)$ is given by
 \begin{multline}
   \label{eq:expect_statistics}
-  \expeb{(\yavv_1,\yavv_2,\ycv) \|\yth,\yI} =
+  \expeb{(\yavv_1,\yavv_2,\ycv) \|\yth,\yI} ={}\\
   \tfrac{1}{N} \sum_{i}
   \expeb{(\ysso{i}_1,\ysso{i}_2,\ysso{i}_1 \ysso{i}_2) \|\yth,\yI}
-  ={}\\ \expeb{(s_1,s_2,s_1 s_2) \|\yth,\yI}
+  = \expeb{(s_1,s_2,s_1 s_2) \|\yth,\yI}
 \end{multline}
-owing to the properties of the expectation and the factorized form of the
-joint probability conditional on $\yth$. From the properties of the
-variance we also have
+where $(s_1,s_2,s_1 s_2)$ refer to any one of the $N$ observations. The two
+equalities come from the properties of the expectation and the factorized
+form of the joint probability conditional on $\yth$. From the properties of
+the variance we also have
 \begin{equation}
   \label{eq:variance_statistics}
   \varb{(\yavv_1,\yavv_2,\ycv) \|\yth,\yI}
   = \frac{1}{N} \varb{(s_1,s_2,s_1 s_2) \|\yth,\yI}.
 \end{equation}
 
-This means that for large $N$ and each triplet $\yth$ we approximately have
-a probability distribution for the statistics very peaked on particular
-values $\yt \defd (m_1,m_2,l)$ determined by the equations
+This means that for a triplet $\yth$, for large $N$ we have a probability
+distribution for the statistics that is very peaked at particular values
+$\yt \defd (m_1,m_2,l)$ determined by the equations
 \begin{equation}
   \label{eq:change_coords}
   \begin{gathered}
@@ -977,17 +978,18 @@ values $\yt \defd (m_1,m_2,l)$ determined by the equations
     \equiv \frac{\de\ln Z(\yth)}{\de\la}.
   \end{gathered}
 \end{equation}
-This system of equations actually puts into one-one correspondence
-\citep{meadetal1984} the parameters $\yth \defd(\mu_1, \mu_2, \la)$ and
-$\yt\defd(m_1, m_2,l)$. The former belong to $\RR^3$; the latter to the
-bounded domain
+This system of equations actually puts the parameters
+$\yth \defd(\mu_1, \mu_2, \la)$ and $\yt\defd(m_1, m_2,l)$ into one-one
+correspondence \citep{meadetal1984}. The former belong to $\RR^3$; the
+latter to the bounded domain
 \begin{equation}
   \label{eq:domain_newcoords}
   0\le m_1,m_2 \le 1,
   \qquad
   \max(0,1-m_1-m_2) \le l \le \min(m_1,m_2).
 \end{equation}
-Using these new parameters we therefore have, for large $N$,
+Using these new parameters, the probability for statistics $(\yav,\ycv)$
+becomes for large $N$
 \begin{equation}
   \label{eq:prob_stat_newparams}
   \pf(\yavv_1,\yavv_2,\ycv \|m_1,m_2,l,\yI)
@@ -996,6 +998,84 @@ Using these new parameters we therefore have, for large $N$,
 Taking the convex combination of this expression in $\yt$ with weights
 $\pf(\yt \|\yI)\,\di\yt$ we obtain
 \eqn~\eqref{eq:special_parameter_is_statistics}.
+
+\medskip
+
+In the coordinates $\yt$, the probabilities~\eqref{eq:predictive_KP} given
+by the theorem can be interpreted in the following way.
+\begin{enumerate}[label=(\textit{\arabic*})]
+\item We first assume to know that the limit statistics in a very large
+  number of observations is $\yt \defd (m_1, m_2, l)$. Given this knowledge
+  we can combinatorially calculate the probability of observing a finite
+  sequence of $N$ observations $(\yso{1}, \dotsc, \yso{N})$, assuming that
+  all sequences having given statistics are equally likely -- this
+  equiprobability corresponds to setting $g(\ys)=1$ in
+  \eqn~\eqref{eq:predictive_KP}. An example of this combinatorial
+  calculation is given below.
+\item We then express about the limit statistics with the density
+  $\pf(\yt \| \yI)\,\di\yt$.
+\item The two uncertainties above are finally combined in the usual way.
+\end{enumerate}
+
+Let's show, in the simplest case, that the probability conditional on
+$\yt$,
+\begin{equation}
+  \label{eq:component_combination}
+  \pf(\ys \|\yt, \yI )
+  =
+  % g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl[
+    \mu_1(\yt)\, s_1 + \mu_2(\yt)\, s_2 + \la(\yt)\, s_1 s_2
+    \bigr] }{Z[\yth(\yt)]}
+\end{equation}
+is indeed given combinatorially assuming equiprobability of all sequences,
+as claimed above. Suppose that we know the limit statistics are
+$(m_1, m_2, l)$. Only the outcome $\ys=11$ gives a non-vanishing
+contribution to the second moment $l$, \eqn~\eqref{eq:mean_2ndmom}. This
+number is therefore equal to the limit relative frequency of $11$. Assuming
+equiprobability we set the probability of this outcome in the next
+observation equal to this frequency $l$. Only the outcomes $10$ and $11$
+give non-vanishing contributions to the mean $m_1$; this number is
+therefore equal to their joint limit relative frequencies. Since the
+frequency of $11$ is given by $l$, the frequency of $10$ must be given by
+$m_1-l$, which is then our probability for this outcome in the next
+observation. Analogous reasoning holds for the outcome $01$. Finally, the
+limit relative frequencies of all four outcomes must sum to $1$; thus the
+limit frequency and probability of outcome $00$ must be
+$1-l-(m_1-1)-(m_2-l)$. Summarizing,
+\begin{multline}
+  \label{eq:prob_outcome_from_statistics}
+  \pf(\ys \| \yt,\yI) =
+  \begin{cases}
+    1+l-m_1-m_2 &\text{for } \ys=00\\
+    m_1-l &\text{for } \ys=10\\
+    m_2-l &\text{for } \ys=01\\
+    l &\text{for } \ys=11
+  \end{cases}
+  \\[\jot]
+  {}\equiv
+    l^{s_1 s_2}\,
+  (m_1-l)^{s_1-s_1 s_2}\,
+  (m_2-l)^{s_2-s_1 s_2}\,
+  (1+l-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
+\end{multline}
+This probability distribution is exactly
+\eqn~\eqref{eq:component_combination}, as can be checked by finding
+$\yth(\yt)$ with the inverse of the coordinate
+transformations~\eqref{eq:change_coords},
+\begin{equation}
+  \label{eq:inverse_tranf_coord}
+  \begin{gathered}
+    \mu_1 =\ln\frac{m_1-l}{1+l-m_1-m_2},\qquad
+    \mu_2 =\ln\frac{m_2-l}{1+l-m_1-m_2},\\[\jot]
+\la =\ln\frac{(1+l-m_1-m_2)\,l}{(m_1-l)\,(m_2-l)},
+\end{gathered}
+\end{equation}
+and substituting it in the right side of
+\eqn~\eqref{eq:component_combination}.
+
+\bigskip
+
 
 
 
