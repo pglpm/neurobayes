@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-27T10:47:43+0200
+%% Last-Updated: 2018-06-27T11:30:18+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -999,26 +999,29 @@ Taking the convex combination of this expression in $\yt$ with weights
 $\pf(\yt \|\yI)\,\di\yt$ we obtain
 \eqn~\eqref{eq:special_parameter_is_statistics}.
 
-\medskip
+\bigskip
 
-In the coordinates $\yt$, the probabilities~\eqref{eq:predictive_KP} given
+In the coordinates $\yt$, the formula~\eqref{eq:predictive_KP} given
 by the theorem can be interpreted in the following way.
 \begin{enumerate}[label=(\textit{\arabic*})]
 \item We first assume to know that the limit statistics in a very large
   number of observations is $\yt \defd (m_1, m_2, l)$. Given this knowledge
   we can combinatorially calculate the probability of observing a finite
-  sequence of $N$ observations $(\yso{1}, \dotsc, \yso{N})$, assuming that
-  all sequences having given statistics are equally likely -- this
-  equiprobability corresponds to setting $g(\ys)=1$ in
+  sequence of $N$ observations, $\pf(\yso{1}, \dotsc, \yso{N} \|\yt,\yI)$,
+  assuming that all sequences having given statistics are equally likely --
+  this equiprobability corresponds to setting $g(\ys)=1$ in
   \eqn~\eqref{eq:predictive_KP}. An example of this combinatorial
   calculation is given below.
-\item We then express about the limit statistics with the density
-  $\pf(\yt \| \yI)\,\di\yt$.
-\item The two uncertainties above are finally combined in the usual way.
+\item We then express our uncertainty about the limit statistics with the
+  probability density $\pf(\yt \| \yI)\,\di\yt$.
+\item The two uncertainties above are finally combined in the usual way
+  using the law of total probability.
 \end{enumerate}
 
+\smallskip
+
 Let's show, in the simplest case, that the probability conditional on
-$\yt$,
+the statistics $\yt$,
 \begin{equation}
   \label{eq:component_combination}
   \pf(\ys \|\yt, \yI )
@@ -1074,12 +1077,176 @@ transformations~\eqref{eq:change_coords},
 and substituting it in the right side of
 \eqn~\eqref{eq:component_combination}.
 
+\section{Scientifically motivated prior parameter densities}
+\label{sec:other_priors}
+
+The interpretation of the Koopman-Pitman-Lauritzen
+formula~\eqref{eq:predictive_KP} explained in the previous section gives us
+more intuitive grounds to choose the prior parameter density
+$\pf(\yt \|\yI)\,\di\yt$: given the interpretation of the observables $\ys$
+in a particular scientific context, which limit statistics $\yt$ would we
+expect to observe?
+
+If $\ys$ represents the binned activity of a neural population in the
+brain, for example, from our research experience we consider more likely to
+find low mean values $\yavv_1=m_1$, $\yavv_2=m_2$ than high ones, close to
+$1$. We may also have some vague expectations about the second moments
+$\ycv=l$. Even vague prior knowledge can be expressed by a probability
+density with particular features, and this leads to better predictions.
+Let's examine this possibility more concretely.
+
 \bigskip
 
 
+Using Bayes's theorem with formula~\eqref{eq:predictive_KP} we find our
+probability for a new outcome $\ys$ conditional on observations
+$\bigl( \yso{1}, \dotsc,\yso{N} \bigr)$:
+\begin{subequations}    \label{eq:conditional_prediction}
+  \begin{gather}
+    \begin{multlined}[][0.9\linewidth]
+      \pf(\ys \| \yso{1}, \dotsc, \yso{N}, \yI ) ={}\\[\jot]
+      \int
+      \frac{  \exp\bigl(
+        \mu_1 s_1 + \mu_2 s_2 + \la s_1 s_2
+        \bigr) }{Z(\yth)}
+      \,
+      % \times{}\\ \shoveright{
+      \pf(\yth \| \yso{1},\dotsc,\yso{N} \yI) \, \di\yth
+      % }
+    \end{multlined}
+    \\
+    \shortintertext{with}
+    \begin{multlined}[0.95\linewidth]
+    \pf(\yth \| \yso{1},\dotsc,\yso{N} \yI)
+    \propto
+    \Biggl[  \prod_{i=1}^{N}
+    \frac{  \exp\bigl(
+      \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
+      \bigr) }{Z(\yth)}
+    \Biggr]\,
+    \pf(\yth \| \yI) 
+\equiv{}\\[\jot]
+     \exp\{N\,[
+      \mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]\}\,
+    \pf(\yth \| \yI).
+    \end{multlined}
+  \end{gather}
+\end{subequations}
+The density $\pf(\yth \| \yso{1},\dotsc,\yso{N} \yI)$ is called
+\emph{posterior parameter density}.
+
+The last expression shows that the $N$ observations affect our forecast
+only through the averages $\yav$ and $\ycv$, \eqn~\eqref{eq:mean_2ndmom},
+as we assumed.
+
+The proportionality relation of the last formula reminds us that we must
+perform an integral over $\yth$ to calculate the posterior parameter
+density. We must also perform an integral over $\yth$ to calculate the
+conditional probability for $\ys$. These integrals are difficult when we
+consider populations with many units. When the number $N$ of known
+observations is large, the posterior parameter density is often
+approximated by a Dirac delta centred on the maximum of the posterior,
+\begin{equation}
+  \label{eq:max_posterior}
+  \ythm \defd \argsup_{\yth}
+  \{N\,[\mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]+
+  \ln \pf(\yth \|\yI) \}.
+\end{equation}
+The probability for $\ys$ then equals the exponential calculated at
+$\ythm$. If the prior parameter density $\pf(\yth \|\yI)$ is constant or
+very broad, it can be dropped in the calculation of the maximum, as an
+approximation.
+
+The literature indeed often assumes a prior parameter density $\pf(\yth \|\yI)$
+that is constant in $\yth$. This is an \enquote{improper}, non-normalizable
+prior, because $\yth \in \RR^3$. So we are properly considering a
+\emph{sequence} of normalizable priors of increasing width -- for example,
+normal distributions with increasing variance -- and the resulting limit if
+it exists.
+
+How reasonable is prior density constant in $\yt$? Let's find the
+equivalent density for the parameters $\yt$ discussed in the previous
+section.
+
+The Jacobian determinants of the transformations $\yth(\yt)$ and $\yt(\yth)$, from
+\eqns~\eqref{eq:inverse_tranf_coord} and~\eqref{eq:change_coords}, are
+\begin{align}
+  \label{eq:jacobian_transf}
+  \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
+  &= \frac{1-l}{(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
+  \\
+    \det\biggl( \frac{\de\yt}{\de\yth}\biggr)
+  &= \frac{\exp(2\mu_1 + 2\mu_2 + \la)}{Z(\yth)^4}.
+\end{align}
+The last expression is especially worth notice, because it can be uniquely
+written as
+\begin{equation}
+  \label{eq:jacobian_as_probs}
+  \det\biggl( \frac{\de\yt}{\de\yth}\biggr) =
+  \pf(00 \|\yth,\yI)\,
+  \pf(10 \|\yth,\yI)\,
+  \pf(01 \|\yth,\yI)\,
+  \pf(11 \|\yth,\yI)
+  \equiv \prod_{\ys}\pf(\ys \|\yth,\yI),
+\end{equation}
+as can be checked from \eqn~\eqref{eq:component_combination} for $N=1$.
+
+A prior density constant in $\yth$ therefore corresponds to the density
+\begin{multline}
+  \label{eq:flat_density_in_statistics_space}
+  \pf(\yt \|\yI) \propto  \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
+  \equiv
+  \frac{1}{\prod_{\ys}\pf(\ys \|\yt,\yI)}
+  \equiv{}\\
+  \frac{1}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
+\end{multline}
+obtained from \eqns~\eqref{eq:jacobian_as_probs}
+and~\eqref{eq:prob_outcome_from_statistics}.
 
 
-\mynote{continue}
+
+
+
+\mynote{To be continued}
+
+
+
+\setlength{\intextsep}{0.5ex}% with wrapfigure
+%\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
+%  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
+%\caption{***}\label{fig:comparison_a5}
+%\end{figure}% exp_family_maxent.nb
+
+
+\iffalse
+\begin{acknowledgements}
+  PGLPM thanks Mari \amp\ Miri for continuous encouragement and affection;
+  Buster Keaton and Saitama for filling life with awe and inspiration; the
+  developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
+  Framework, Python, Inkscape, Sci-Hub for making a free and unfiltered
+  scientific exchange possible.
+%\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
+%\sourceatright{\autanet}
+\end{acknowledgements}
+\fi
+
+%\appendixpage
+%\appendix
+
+%%%%%%%%%%%%%%% BIB %%%%%%%%%%%%%%%
+
+\defbibnote{prenote}{{\footnotesize (\enquote{de $X$} is listed under D,
+    \enquote{van $X$} under V, and so on, regardless of national
+    conventions.)\par}}
+% \defbibnote{postnote}{\par\medskip\noindent{\footnotesize% Note:
+%     \arxivp \mparcp \philscip \biorxivp}}
+
+\printbibliography[prenote=prenote%,postnote=postnote
+]
+
+
+\end{document}
+---------- cut text ----------------
 
 
 Denote by $K(\yav,\ycv;N)$ the number of possible sequences of $N$
@@ -1159,78 +1326,10 @@ to the bounded domain
 \end{equation}
 
 
-\section{Inference from observed data}
-\label{sec:inference_from_data}
-
-Using Bayes's theorem with the probabilities~\eqref{eq:predictive_KP} we
-find our forecast for a new observation $\ys$ conditional on observations
-$\bigl( \yso{1}, \dotsc,\yso{N} \bigr)$:
-\begin{subequations}    \label{eq:conditional_prediction}
-  \begin{gather}
-    \begin{multlined}[][0.9\linewidth]
-      \pf(\ys \| \yso{1}, \dotsc, \yso{N}, \yI ) ={}\\[\jot]
-      \int
-      \frac{  \exp\bigl(
-        \mu_1 s_1 + \mu_2 s_2 + \la s_1 s_2
-        \bigr) }{Z(\yth)}
-      \,
-      % \times{}\\ \shoveright{
-      \pf(\yth \| \yso{1},\dotsc,\yso{N} \yI) \, \di\yth
-      % }
-    \end{multlined}
-    \\
-    \shortintertext{with}
-    \begin{multlined}[0.95\linewidth]
-    \pf(\yth \| \yso{1},\dotsc,\yso{N} \yI)
-    \propto
-    \Biggl[  \prod_{i=1}^{N}
-    \frac{  \exp\bigl(
-      \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
-      \bigr) }{Z(\yth)}
-    \Biggr]\,
-    \pf(\yth \| \yI) 
-={}\\[\jot]
-     \exp\{N\,[
-      \mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]\}\,
-    \pf(\yth \| \yI).
-    \end{multlined}
-  \end{gather}
-\end{subequations}
-The density $\pf(\yth \| \yso{1},\dotsc,\yso{N} \yI)$ is called
-\emph{posterior parameter density}.
-
-The last expression shows that the $N$ observations affect our forecast
-only through the averages $\yav$ and $\ycv$, \eqn~\eqref{eq:mean_2ndmom},
-as we assumed.
-
-The proportionality relation of the last formula reminds us that we must
-perform an integral over $\yth$ to calculate the posterior parameter
-density. We must also perform an integral over $\yth$ to calculate the
-conditional probability for $\ys$. These integrals are difficult when we
-consider populations with many units. When the number $N$ of known
-observations is large, the posterior parameter density is often
-approximated by a Dirac delta centred on the maximum of the posterior,
-\begin{equation}
-  \label{eq:max_posterior}
-  \ythm \defd \argsup_{\yth}
-  \{N\,[\mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]+
-  \ln \pf(\yth \|\yI) \}.
-\end{equation}
-The probability for $\ys$ then equals the exponential calculated at
-$\ythm$. If the prior parameter density $\pf(\yth \|\yI)$ is constant or
-very broad, it can be dropped in the calculation of the maximum, as an
-approximation.
-
 
 \section{Other prior parameter densities}
 \label{sec:other_priors}
 
-The literature often assumes a prior parameter density $\pf(\yth \|\yI)$
-that is constant in $\yth$. This is an \enquote{improper}, non-normalizable
-prior, because $\yth \in \RR^3$. So we are properly considering a
-\emph{sequence} of normalizable priors of increasing width -- for example,
-normal distributions with increasing variance -- and the resulting limit if
-it exists.
 
 As noted before, the parameters $\yth$ are just coordinates in a manifold
 of distributions for $\ys$. A constant density in these coordinates
@@ -1306,44 +1405,6 @@ for $\ys$ has the form
   (m_2-l)^{s_2-s_1 s_2}\,
   (1+l-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
 \end{multline}
-
-
-\setlength{\intextsep}{0.5ex}% with wrapfigure
-%\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
-%  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
-%\caption{***}\label{fig:comparison_a5}
-%\end{figure}% exp_family_maxent.nb
-
-
-\iffalse
-\begin{acknowledgements}
-  PGLPM thanks Mari \amp\ Miri for continuous encouragement and affection;
-  Buster Keaton and Saitama for filling life with awe and inspiration; the
-  developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
-  Framework, Python, Inkscape, Sci-Hub for making a free and unfiltered
-  scientific exchange possible.
-%\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
-%\sourceatright{\autanet}
-\end{acknowledgements}
-\fi
-
-%\appendixpage
-%\appendix
-
-%%%%%%%%%%%%%%% BIB %%%%%%%%%%%%%%%
-
-\defbibnote{prenote}{{\footnotesize (\enquote{de $X$} is listed under D,
-    \enquote{van $X$} under V, and so on, regardless of national
-    conventions.)\par}}
-% \defbibnote{postnote}{\par\medskip\noindent{\footnotesize% Note:
-%     \arxivp \mparcp \philscip \biorxivp}}
-
-\printbibliography[prenote=prenote%,postnote=postnote
-]
-
-
-\end{document}
----------- cut text ----------------
 
 
 %%% Local Variables: 
