@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-27T12:27:59+0200
+%% Last-Updated: 2018-06-27T16:42:01+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -206,7 +206,7 @@ british%
  \let\varkappa\kappa
 % \DeclareMathSymbol{\varphi}{\mathalpha}{egreeki}{"27}
 % %
-% \DeclareMathSymbol{\varAlpha}{\mathalpha}{egreeki}{"41}
+ \DeclareMathSymbol{\varAlpha}{\mathalpha}{egreeki}{"41}
 % \DeclareMathSymbol{\varBeta}{\mathalpha}{egreeki}{"42}
 % \DeclareMathSymbol{\varGamma}{\mathalpha}{egreeki}{"00}
  \DeclareMathSymbol{\varDelta}{\mathalpha}{egreeki}{"01}
@@ -723,6 +723,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ys}{\bm{s}}
 \newcommand*{\yH}{\varEta}
 \newcommand*{\yD}{D}
+\newcommand*{\yA}{\varAlpha}
 \newcommand*{\yso}[1]{\ys^{(#1)}}
 \newcommand*{\ysso}[1]{s^{(#1)}}
 \newcommand*{\la}{\lambda}
@@ -736,6 +737,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\V}{\mathrm{V}}
 \newcommand*{\var}{\V\expp}%round
 \newcommand*{\varb}{\V\clcl}%square
+\newcommand*{\yIth}{\yI_{\yth}}
+\newcommand*{\yIt}{\yI_{\yt}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -980,7 +983,7 @@ $\yt \defd (m_1,m_2,l)$ determined by the equations
 \end{equation}
 This system of equations actually puts the parameters
 $\yth \defd(\mu_1, \mu_2, \la)$
-\setlength{\intextsep}{0.5ex}% with wrapfigure
+%\setlength{\intextsep}{0.5ex}% with wrapfigure
 \begin{figure}[t!]%{r}{0.4\linewidth} % with wrapfigure
   \centering\includegraphics[width=0.75\linewidth]{domain.png}\\
   \caption{}
@@ -1138,7 +1141,8 @@ $\bigl( \yso{1}, \dotsc,\yso{N} \bigr)$:
      \exp\{N\,[
       \mu_1 a_1 + \mu_2 a_2 + \la \ycv -\ln Z(\yth)]\}\,
     \pf(\yth \| \yI).
-    \end{multlined}
+  \end{multlined}
+      \label{eq:posterior_density}
   \end{gather}
 \end{subequations}
 The density $\pf(\yth \| \yso{1},\dotsc,\yso{N} \yI)$ is called
@@ -1211,23 +1215,76 @@ as
 \end{subequations}
 as can be checked from \eqn~\eqref{eq:component_combination} for $N=1$.
 
-A prior density constant in $\yth$ therefore corresponds to the density
+A prior density constant in $\yth$ -- denote this assumption by $\yIth$ --
+therefore corresponds to the density
 \begin{equation}
   \label{eq:flat_density_in_statistics_space}
-  \pf(\yt \|\yI) \propto  \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
+  \pf(\yt \|\yIth)\,\di\yt \propto
+  \det\biggl( \frac{\de\yth}{\de\yt}\biggr)\,\di\yt
   \equiv
 %  \frac{1}{\prod_{\ys}\pf(\ys \|\yt,\yI)}
 %  \equiv{}\\
-  \frac{1}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
+  \frac{\di\yt}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
 \end{equation}
 obtained from \eqns~\eqref{eq:jacobian_as_probs}
-and~\eqref{eq:prob_outcome_from_statistics}.
-
-This density, besides being
+and~\eqref{eq:prob_outcome_from_statistics}. This density, besides being
 improper, gives very high probability to the extreme values of all three
 statistics. It doesn't seem much appropriate in the context of brain
 activity discussed above, for example.
 
+Thus two questions appear: What densities are more appropriate? Do they
+lead to more difficult computations than those used at present?
+
+\bigskip
+
+A simple parameter density that is normalizable and doesn't give too high
+probability to extreme values of the statistics is that constant in the
+$\yt$ coordinates; denote this assumption by $\yIt$:
+\begin{equation}
+  \label{eq:density_constant_statistics}
+  \pf(\yt \| \yIt)\,\di\yt = 6 \di\yt,
+\end{equation}
+the normalization constant calculated from solid geometry looking at the
+pyramid of \fig~\ref{fig:domain}, having volume $1/6$. In terms of $\yth$
+coordinates, using the Jacobian determinant~\eqref{eq:jacobian_as_probs},
+it is
+\begin{equation}
+  \label{eq:density_constant_statistics_first_coords}
+  \pf(\yth \|\yIt)\,\di\yth =
+  6\,\biggl[ \prod_{\ys}\pf(\ys \|\yth,\yIt) \biggr]\,\di\yth
+  \equiv
+6\,  \frac{\exp(2\mu_1 + 2\mu_2 + \la)}{Z(\yth)^4}\,\di\yth.
+\end{equation}
+Its marginal for $(\mu_1,\la)$ is shown in
+\fig~\ref{fig:marginal_flatstat}.
+\begin{figure}[t!]%{r}{0.4\linewidth} % with wrapfigure
+  \centering\includegraphics[width=0.75\linewidth]{marginal_flatstat.png}\\
+  \caption{}
+  \label{fig:marginal_flatstat}
+\end{figure}% dimer_study.nb
+
+Comparing the prior parameter density above with the general
+formula~\eqref{eq:posterior_density} for the posterior density, we see that
+\emph{the prior density $\yIt$  is equivalent to the posterior density
+  $\yIth$ conditional on having observed all four possible outcomes once}:
+\begin{equation}
+  \label{eq:equivalence_prior_postdata}
+  \pf(\yth \|\yIt)\,\di\yth =
+\pf(\yth \| 00,10,01,11,\yIth)\,\di\yth.
+\end{equation}
+We can write this as $\yIt = \yIth \land \yA$, where $\yA$ represents the
+observation of the four outcomes.
+
+This result is computationally important. If we want to make inferences
+conditional on some data $\yD$ using a density constant in $\yt$, we can
+use the same algorithms and approximations used for the density constant in
+$\yth$, but augmenting the data $\yD$ with the \enquote{auxiliary data} $\yA$.
+
+If it can be proven that the formula for the Jacobian
+determinant~\eqref{eq:jacobian_as_probs} holds for any number of units,
+then this method requires to add $2^n$ auxiliary data if we consider $n$
+units. This should have a big influence on our predictions even when the
+observed data are numerous.
 
 
 
