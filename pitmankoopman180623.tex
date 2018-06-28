@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-06-26T00:34:05+0200
+%% Last-Updated: 2018-06-28T15:30:50+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -72,11 +72,12 @@ british%
 % \makeatother
 \usepackage{amsmath}
 \usepackage{mathtools}
+\addtolength{\jot}{\jot} % increase spacing in multiline formulae
 \usepackage{empheq}% automatically calls amsmath and mathtools
 \newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 \setlength{\multlinegap}{0pt}
 %\usepackage{fancybox}
-\usepackage{framed}
+%\usepackage{framed}
 % \usepackage[misc]{ifsym} % for dice
 % \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
 \usepackage{amssymb}
@@ -182,7 +183,7 @@ british%
  \DeclareMathSymbol{\epsilon}{\mathalpha}{egreeki}{"0F}
 % \DeclareMathSymbol{\zeta}{\mathalpha}{egreeki}{"10}
 % \DeclareMathSymbol{\eta}{\mathalpha}{egreeki}{"11}
-% \DeclareMathSymbol{\theta}{\mathalpha}{egreeki}{"12}
+ \DeclareMathSymbol{\theta}{\mathalpha}{egreeki}{"12}
 % \DeclareMathSymbol{\iota}{\mathalpha}{egreeki}{"13}
  \DeclareMathSymbol{\kappa}{\mathalpha}{egreeki}{"14}
  \DeclareMathSymbol{\lambda}{\mathalpha}{egreeki}{"15}
@@ -691,7 +692,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\nbd}{\nobreakdash}%
 %\newcommand*{\bd}{\hspace{0pt}}%
 %\def\hy{-\penalty0\hskip0pt\relax}
-%\newcommand*{\labelbis}[1]{\tag*{(\ref{#1})$_\text{r}$}}
+\newcommand*{\labelbis}[1]{\tag*{(\ref{#1})$_\text{r}$}}
 %\newcommand*{\mathbox}[2][.8]{\parbox[t]{#1\columnwidth}{#2}}
 %\newcommand*{\zerob}[1]{\makebox[0pt][l]{#1}}
 \newcommand*{\tprod}{\mathop{\textstyle\prod}\nolimits}
@@ -722,7 +723,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\yO}[2]{\varOmicron^{(#1)}_{#2}}
 \newcommand*{\yI}{\varIota}
-\newcommand*{\ys}{s}
+\newcommand*{\ys}{\bm{s}}
+\newcommand*{\yt}{\bm{t}}
+\newcommand*{\yth}{\bm{\theta}}
+\newcommand*{\yso}[1]{\ys^{(#1)}}
 \newcommand*{\yk}{\bm{k}}
 \newcommand*{\yH}{\varEta}
 \newcommand*{\yD}{D}
@@ -841,8 +845,9 @@ continuum thermomechanics  \citep{colemanetal1963,coleman1964}[\eg\ \sects~2.2, 
 \label{sec:koopmanpitman}
 
 Suppose we have a sequence, possibly infinite, of observations with
-outcomes in a set $K$. We represent the proposition \enquote{The $i$th
-  observation yields outcome $k$} by $\yO{i}{k}$, with $k\in K$.
+outcomes $\ys$ in a set $S$. The outcomes can be tuples. We represent the
+proposition \enquote{The $i$th observation yields outcome $\ys$} by
+$\yO{i}{\ys}$, with $\ys\in S$.
 
 A typical inference problem is to forecast the outcomes of the $(m+1)$th up
 to the $(m+n)$th observations given that we know the outcomes of the $1$st
@@ -853,41 +858,48 @@ infer past, unknown observation from present, known ones. Our forecast is
 expressed by the probabilities
 \begin{equation}
   \label{eq:general_forecast}
-  \p(\yO{m+n}{k_{m+n}}, \dotsc, \yO{m+1}{k_{m+1}}
-  \| \yO{m}{k_{m}}, \dotsc, \yO{1}{k_{1}}, \yI),
+  \p\Bigl(\yO{m+n}{\yso{m+n}}, \dotsc, \yO{m+1}{\yso{m+1}}
+  \| \yO{m}{\yso{m}}, \dotsc, \yO{1}{\yso{1}}, \yI\Bigr),
 \end{equation}
 where the comma represents the conjunction (\enquote{$\land$}) of the
-propositions. We will also use the simplified notation
-$\pf(k_{m+n}, \dotsc, k_{m+1} \| k_{m}, \dotsc, k_{1}, \yI)$.
+propositions. When unambiguous we use the simplified notation
+\begin{equation}\labelbis{eq:general_forecast}
+\pf\bigl(\yso{m+n}, \dotsc, \yso{m+1} \| \yso{m}, \dotsc, \yso{1}, \yI\bigr).
+\end{equation}
 
-In general the full set of observed data $(k_{1}, \dotsc, k_{m})$ is
-important for this inference. But in particular situations it may
-happen that only specific properties of the data are \emph{sufficient} to our
-inference, the remaining details being \emph{irrelevant}. By
-\enquote{irrelevant} we mean that our inferences aren't changed if we
-forget about those details or if we don't know them in the first place.
-Let's represent the relevant properties by a map $\ys(k_{1},\dotsc,k_{m})$,
-called a \emph{sufficient statistic}, with values in some space $S$. The
-relevance and irrelevance are expressed by the equalities
+In general, the full set of observed data
+$\bigl(\yso{1}, \dotsc, \yso{m}\bigr)$ is important for this inference. But
+in particular situations it may happen that only specific properties of the
+data are \emph{sufficient} to our inference, the remaining details being
+\emph{irrelevant}. By \enquote{irrelevant} we mean that our inferences
+aren't changed if we forget about those details or if we don't know them in
+the first place. Let's represent the relevant properties by a map
+$\yt\bigl(\yso{1},\dotsc,\yso{m}\bigr)$, called a \emph{sufficient
+  statistic}, with values in a space $T$. The relevance and irrelevance
+are expressed by the equalities
 \begin{multline}
   \label{eq:predictive_sufficiency}
-  \pf(k_{m+n}, \dotsc, k_{m+1}
-  \| k_{m}, \dotsc, k_{1}, \yI)
-  =
-  \pf[k_{m+n}, \dotsc, k_{m+1}
-  \| \ys(k_{1}, \dotsc, k_{m}), \yI]
-  \\[\jot]
-  \text{for all $m$, $n$, and $(k_{i})$.}
+  \pf\bigl(\yso{m+n}, \dotsc, \yso{m+1}
+  \| \yso{m}, \dotsc, \yso{1}, \yI\bigr)
+  ={}\\
+  \pf\bigl[\yso{m+n}, \dotsc, \yso{m+1}
+  \| \yt\bigl(\yso{1}, \dotsc, \yso{m}\bigr), \yI\bigr]
+  \\
+  \text{for all $m$, $n$, and $\bigl(\yso{i}\bigr)$.}
 \end{multline}
 
 Typical examples of sufficient statistics are the number of known
-observations $m$ together with their mean $(k_{1} + \dotsb + k_{m})/m$, or
-second moments $(\yk_{1}{\yk_{1}}\T + \dotsb + \yk_{m}{\yk_{m}}\T)/m$, or
-range $\max_i(k_{i})-\min_i(k_{i})$; for example
+observations $m$ together with their mean:
+$\bigl(\yso{1} + \dotsb + \yso{m}\bigr)/m$, or second moments:
+$\bigl(\yso{1}{\yso{1}}\T + \dotsb + \yso{m}{\yso{m}}\T\bigl)/m$, or range:
+$\max_i\bigl(\yso{i}\bigr)-\min_i\bigl(\yso{i}\bigr)$, or combination of
+these. In this study we will focus on first and second moments:
 \begin{equation}
   \label{eq:example_mean_suffstat}
-  \ys(k_{1}, \dotsc, k_{m}) \defd
-  \Bigl( m,\; \tfrac{1}{m}\tsum_i k_{i} \Bigr).
+  \yt(\yso{1}, \dotsc, \yso{m}) \defd
+  \Bigl( m,\; \tfrac{1}{m}\tsum_i \yso{i}, \;
+\tfrac{1}{m}\tsum_i\yso{i}{\yso{i}}\T
+  \Bigr).
 \end{equation}
 The number $m$ is usually implied and left out of the definition.
 
@@ -907,10 +919,116 @@ these are more probable:
 To calculate these probabilities we need to assign numerical values to the
 probabilities of the data given the hypotheses, $\p(\yD \| \yH_i, \yI)$.
 
-The Koopman-Pitman-Darmois theorem
-\citep{koopman1936,pitman1936,darmois1935}[see also later
+There is a series of mathematical results by Neyman, Koopman, Pitman,
+Lauritzen and several others
+\citep{neyman1935,koopman1936,pitman1936,darmois1935,lauritzen1982_r1988,kuechleretal1989}[see
+also later
 analyses:][]{hipp1974,andersen1970,denny1967,fraser1963,barankinetal1963}\mynote{add
-  comments about these references and about the discrete-variable case}
+  refs to Lauritzen and comments about these references and about the
+  discrete-variable case}, which restrict the functional form of the
+probability distributions $\p(\yD \| \yH, \yI)$ when some hypothesis $\yH$
+about sufficient statistics holds. In the case of statistics constructed as
+averages, like~\eqref{eq:example_mean_suffstat}, the distribution must
+assume this form, for every $N$:
+\begin{multline}
+  \label{eq:predictive_KP}
+\begin{aligned}
+    \pf(\yso{1}, \dotsc, \yso{N} \|\yH_i, \yI )
+  &=\int
+\Biggl[  \prod_{k=1}^{N}
+  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl[
+    \yth\T \yt\bigl( \yso{k} \bigr)
+    \bigr] }{Z(\yth)}
+  \Biggr]\,
+  \pf(\di\yth \| \yH_i, \yI) 
+\\
+  &=\int
+  \bigl[\tprod_{k=1}^{N}g\bigl(\yso{k}\bigr) \bigr]\,
+  \frac{  \exp\bigl[
+    N \, \yth\T\sum_{k=1}^{N}\yt\bigl( \yso{k} \bigr)
+    \bigr]}{Z(\yth)^N}\,
+  \pf(\di\yth \| \yI)
+\end{aligned}
+\\
+  \text{with}\quad
+  Z(\yth) \defd \sum_{\ys\in S} g(\ys)\, \exp[\yth\T \yt(\ys)].
+\end{multline}
+The parameters $\yth$ are a tuple with as many elements as the statistics.
+For the statistics~\eqref{eq:example_mean_suffstat}, each parameter ranges
+in $\RR$. The distribution $g(\ys)$ and the density $\pf(\di\yth \| \yI)$
+in the formula above are not determined by the theorem: they need to be
+determined by additional assumptions. The distribution $g$ is often
+determined by symmetry or combinatorial properties of the problem.
+% for example, if each unit actually represents the total activity of a
+% population of sub-units.
+From now on we assume it to be unity: $g(\ys)=1$. The density
+$\pf(\di\yth \|\yI)$ is called \emph{prior parameter density}.
+
+Let's summarize in words the content
+of the theorem:
+\begin{enumerate}[label=(\textit{\alph*})]
+\item our joint probability for the observations $\yso{1}, \dotsc,\yso{N}$
+  is given by a convex combination of joint probabilities:
+  \begin{equation}
+    \label{eq:component_combination}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )
+  =
+  \prod_{i=1}^{N}
+%  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl(
+    \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
+    \bigr) }{Z(\yth)};
+  \end{equation}
+
+\item each joint probability in this convex combination factorizes into $N$
+  independent probabilities for the $N$ observations, as is clear from the
+  formula above;
+\item\label{item:submanifold}each joint probability in the convex
+  combination is identified by a triplet of parameters $\yth$; it therefore
+  belongs to a three-dimensional submanifold of joint probabilities. Note
+  that the full manifold of joint probabilities is $(2^N-1)$-dimensional;
+\item\label{item:weights}the weight assigned to the probability labelled by
+  $\yth$ is $\pf(\yth \|\yI)\,\di\yth$.
+\end{enumerate}
+
+Point~\ref{item:submanifold} shows that the Pitman-Koopman-Lauritzen
+theorem greatly reduces our freedom in specifying the joint probability.
+This is the effect of assuming that the statistics~\eqref{eq:mean_2ndmom}
+are sufficient; it's a very strong assumption.
+
+Points~\ref{item:submanifold} and~\ref{item:weights} show that the theorem
+selects a particular three-dimensional submanifold within each of the
+$(2^N-1)$-dimensional manifolds of probability distributions for $N$
+observations, for all $N$. But the theorem doesn't select any particular
+coordinate system within the submanifold: the parameters $\yth$ are just
+coordinates, and there is nothing special about them, besides
+the fact that they appear as coefficients of the linear combination of
+statistics in the exponential~\eqref{eq:predictive_KP}. We could choose
+different coordinates $\yt$, with one-one coordinate transformations
+$\yt=\yt(\yth)$, $\yth=\yth(\yt)$. In these new coordinates the mixed joint
+probabilities are
+\begin{equation}
+  \label{eq:extreme_probs_newcoords}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yt, \yI ) =
+    \prod_{i=1}^{N}
+%  g\bigl(\yso{i}\bigr)\,
+  \frac{  \exp\bigl[
+    \mu_1(\yt)\, \ysso{i}_1 + \mu_2(\yt)\, \ysso{i}_2 +
+    \la(\yt)\, \ysso{i}_1 \ysso{i}_2
+    \bigr] }{Z[\yth(\yt)]};
+  % \frac{\exp\{N \, [
+  %   \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 + \la(\yt)\, \ycv]\}
+  % }{Z[\yth(\yt)]^N},
+\end{equation}
+and the weights of the convex combination are given by
+$\pf(\yt \|\yI) \, \di\yt$, the densities for $\yth$ and for $\yt$ being
+related by a Jacobian determinant:
+\begin{equation}
+  \label{eq:jacobian}
+  \pf(\yth \|\yI) = \pf[\yt(\yth) \| \yI]\,
+  \det\biggl( \frac{\de\yt}{\de\yth}\biggr).
+\end{equation}
 
 
 

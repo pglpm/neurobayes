@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-27T20:06:00+0200
+%% Last-Updated: 2018-06-28T15:53:52+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -71,6 +71,7 @@ british%
 % \makeatother
 \usepackage{amsmath}
 \usepackage{mathtools}
+\addtolength{\jot}{\jot} % increase spacing in multiline formulae
 \usepackage{empheq}% automatically calls amsmath and mathtools
 \newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 \setlength{\multlinegap}{0pt}
@@ -726,11 +727,12 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yA}{\varAlpha}
 \newcommand*{\yso}[1]{\ys^{(#1)}}
 \newcommand*{\ysso}[1]{s^{(#1)}}
-\newcommand*{\la}{\lambda}
-\newcommand*{\yth}{\bm{\theta}}
+\newcommand*{\la}{\mu_{12}}
+\newcommand*{\yth}{\bm{\mu}}
 \newcommand*{\ythm}{\yth_{\text{m}}}
-\newcommand*{\yt}{\bm{t}}
-\newcommand*{\yav}{\widebar{\bm{s}}}
+\newcommand*{\yt}{\bm{m}}
+\newcommand*{\yl}{m_{12}}
+\newcommand*{\yav}{\widebar{\ys}}
 \newcommand*{\yavv}{\widebar{s}}
 \newcommand*{\ycv}{\widebar{ss}}
 \newcommand*{\ym}{\bm{m}}
@@ -814,116 +816,102 @@ Koopman-Pitman-Lauritzen theorem, that says that our probabilistic
 forecasts must assume this general form, for any $N$:
 \begin{multline}
   \label{eq:predictive_KP}
-\begin{aligned}
     \pf(\yso{1}, \dotsc, \yso{N} \|\yI )
-  &=\!\!
-    \begin{multlined}[t][0.7\linewidth]
-\int
+\\  
+\begin{aligned}
+  &=\int
 \Biggl[  \prod_{i=1}^{N}
   g\bigl(\yso{i}\bigr)\,
   \frac{  \exp\bigl(
-    \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
-    \bigr) }{Z(\mu_1,\mu_2,\la)}
-  \Biggr]\times{}\\[\jot]
-  \pf(\mu_1,\mu_2,\la \| \yI) \, \di\mu_1\,\di\mu_2\,\di\la,
-\end{multlined}
-\\[2\jot]
-  &=\!\!
-        \begin{multlined}[t][0.7\linewidth]
-\int
+    \mu_1\, \ysso{i}_1 + \mu_2\, \ysso{i}_2 + \la\, \ysso{i}_1 \ysso{i}_2
+    \bigr) }{Z(\yth)}
+  \Biggr]\,
+  \pf(\di\yth \| \yI)
+\\
+  &=\int
   \bigl[\tprod_{i=1}^{N}g\bigl(\yso{i}\bigr) \bigr]\,
   \frac{  \exp[N \, (
-    \mu_1 \yavv_1 + \mu_2 \yavv_2 + \la \ycv)]}{Z(\mu_1,\mu_2,\la)^N}
-  \times{}\\[\jot]
-  \pf(\mu_1,\mu_2,\la \| \yI) \, \di\mu_1\,\di\mu_2\,\di\la,
-\end{multlined}
+    \mu_1\, \yavv_1 + \mu_2\, \yavv_2 + \la\, \ycv)]}{Z(\yth)^N}
+\,  \pf(\di\yth \| \yI)
 \end{aligned}
-\\[2\jot]
-  \text{with}\quad
-  Z(\mu_1,\mu_2,\la) \defd
-  1+ \exp(\mu_1) + \exp(\mu_2) + \exp(\mu_1+\mu_2+\la).
+\\
+\text{with}\quad
+\yth\defd (\mu_1,\mu_2,\la) \in \RR^3,\\
+  Z(\yth) \defd
+  g(00)+ g(10)\,\exp(\mu_1) + g(01)\,\exp(\mu_2) + g(11)\,\exp(\mu_1+\mu_2+\la).
 \end{multline}
-Denote the three parameters that appear in this formula by
-$\yth \defd (\mu_1, \mu_2, \la)\in \RR^3$.
 
-The distribution $g(\ys)$ and the density $\pf(\mu_1,\mu_2,\la \| \yI)$ in
+The distribution $g(\ys)$ and the density $\pf(\di\yth \| \yI)$ in
 the formula above are not determined by the theorem: they need to be
 determined by additional assumptions. The distribution $g$ is often
 determined by symmetry or combinatorial properties of the problem.
 % for example, if each unit actually represents the total activity of a
 % population of sub-units.
 From now on we assume it to be unity: $g(\ys)=1$. The density
-$\pf(\yth \|\yI)$ is called \emph{prior parameter density}.
+$\pf(\di\yth \|\yI)$ is called \emph{prior parameter density}.
 
-Formula~\eqref{eq:predictive_KP} may appear deceivingly specific in its
-dependence on the parameters $\yth$; let's summarize in words the content
-of the theorem:
-\begin{enumerate}[label=(\textit{\alph*})]
-\item our joint probability for the observations $\yso{1}, \dotsc,\yso{N}$
-  is given by a convex combination of joint probabilities:
-  \begin{equation}
-    \label{eq:component_combination}
-  \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI )
-  =
-  \prod_{i=1}^{N}
-%  g\bigl(\yso{i}\bigr)\,
-  \frac{  \exp\bigl(
-    \mu_1 \ysso{i}_1 + \mu_2 \ysso{i}_2 + \la \ysso{i}_1 \ysso{i}_2
-    \bigr) }{Z(\yth)};
-  \end{equation}
-
-\item each joint probability in this convex combination factorizes into $N$
-  independent probabilities for the $N$ observations, as is clear from the
-  formula above;
-\item\label{item:submanifold}each joint probability in the convex
-  combination is identified by a triplet of parameters $\yth$; it therefore
-  belongs to a three-dimensional submanifold of joint probabilities. Note
-  that the full manifold of joint probabilities is $(2^N-1)$-dimensional;
-\item\label{item:weights}the weight assigned to the probability labelled by
-  $\yth$ is $\pf(\yth \|\yI)\,\di\yth$.
-\end{enumerate}
-
-\medskip
-
-Point~\ref{item:submanifold} shows that the Pitman-Koopman-Lauritzen
-theorem greatly reduces our freedom in specifying the joint probability.
-This is the effect of assuming that the statistics~\eqref{eq:mean_2ndmom}
-are sufficient; it's a very strong assumption.
-
-Points~\ref{item:submanifold} and~\ref{item:weights} show that the theorem
-selects a particular three-dimensional submanifold within each of the
-$(2^N-1)$-dimensional manifolds of probability distributions for $N$
-observations, for all $N$. But the theorem doesn't select any particular
-coordinate system within the submanifold: the parameters $\yth$ are just
-coordinates, and there is nothing special about them, besides
-the fact that they appear as coefficients of the linear combination of
-statistics in the exponential~\eqref{eq:predictive_KP}. We could choose
-different coordinates $\yt$, with one-one coordinate transformations
-$\yt=\yt(\yth)$, $\yth=\yth(\yt)$. In these new coordinates the mixed joint
-probabilities are
+The formula above says that our joint probability distribution for the $N$
+outcomes is given by a mixture of joint, factorizable distributions from a
+three-parameter family. This family is a submanifold in the space of all
+possible joint distributions, which has dimension $4^N-1$. The parameters
+$\yth$ are coordinates in this submanifold, each triplet identifying a
+particular factorizable distribution
 \begin{equation}
-  \label{eq:extreme_probs_newcoords}
-  \pf(\yso{1}, \dotsc, \yso{N} \|\yt, \yI ) =
-    \prod_{i=1}^{N}
-%  g\bigl(\yso{i}\bigr)\,
-  \frac{  \exp\bigl[
+  \label{eq:extreme_distributions}
+    \pf(\yso{1}, \dotsc, \yso{N} \|\yth, \yI ) =
+  \prod_{i=1}^{N}
+  \frac{  \exp\bigl(
+    \mu_1\, \ysso{i}_1 + \mu_2\, \ysso{i}_2 + \la\, \ysso{i}_1 \ysso{i}_2
+    \bigr) }{Z(\yth)}.
+\end{equation}
+The weights of the mixture are $\pf(\di\yth \|\yI)$.
+
+From the integral of the formula~\eqref{eq:predictive_KP} and the geometric
+interpretation above it is clear that the theorem does not select the
+coordinates $\yth$. We can choose another set of coordinates
+$\yt \defd (m_1,m_2,\yl)$, related to the $\yth$ by a one-one
+transformation $\yt(\yth)$ with inverse $\yth(\yt)$. The three-dimensional
+family is then labelled as
+\begin{equation}
+  \label{eq:extreme_distributions_relabelled}
+    \pf(\yso{1}, \dotsc, \yso{N} \|\yt, \yI ) =
+  \prod_{i=1}^{N}
+  \frac{  \exp\bigl[ 
     \mu_1(\yt)\, \ysso{i}_1 + \mu_2(\yt)\, \ysso{i}_2 +
     \la(\yt)\, \ysso{i}_1 \ysso{i}_2
-    \bigr] }{Z[\yth(\yt)]};
-  % \frac{\exp\{N \, [
-  %   \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 + \la(\yt)\, \ycv]\}
-  % }{Z[\yth(\yt)]^N},
+    \bigr] }{Z[\yth(\yt)]},
 \end{equation}
-and the weights of the convex combination are given by
-$\pf(\yt \|\yI) \, \di\yt$, the densities for $\yth$ and for $\yt$ being
-related by a Jacobian determinant:
+the prior parameter density is
 \begin{equation}
-  \label{eq:jacobian}
-  \pf(\yth \|\yI) = \pf[\yt(\yth) \| \yI]\,
-  \det\biggl( \frac{\de\yt}{\de\yth}\biggr).
+  \label{eq:density_new_coords}
+  \pf(\di\yt \|\yI) =
+  \det\biggl( \frac{\de\yt}{\de\yth}\biggr)\, \pf(\di\yth \| \yI),
 \end{equation}
+and the integral formula becomes, with $g(\ys)=1$,
+\begin{multline}
+  \label{eq:predictive_KP}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yI )
+  \\
+\begin{aligned}
+  &=\int
+\Biggl[  \prod_{i=1}^{N}
+  \frac{  \exp\bigl[ 
+    \mu_1(\yt)\, \ysso{i}_1 + \mu_2(\yt)\, \ysso{i}_2 +
+    \la(\yt)\, \ysso{i}_1 \ysso{i}_2
+    \bigr] }{Z[\yth(\yt)]}
+  \Biggr]\,
+  \pf(\di\yt \| \yI)
+\\
+  &=\int
+  \frac{  \exp\{N \, [
+    \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 +
+    \la(\yt)\, \ycv)]\}}{Z[\yth(\yt)]^N}
+\,  \pf(\di\yt \| \yI),
+\end{aligned}
+\end{multline}
+equivalent to~\eqref{eq:predictive_KP}.
 
-This coordinate change will be central in the rest of this study.
+This coordinate change is central to the rest of this study.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
@@ -936,7 +924,7 @@ limit probability of observing particular values of the statistics $\yav$,
 $\ycv$ for very large $N$; that is, $\pf(\yav,\ycv \| \yI, \text{large } N)$.
 
 In this section we show that there is a particular coordinate system
-$\yt \defd (m_1, m_2, l)$ of the three-dimensional manifold discussed above
+$\yt \defd (m_1, m_2, \yl)$ of the three-dimensional manifold discussed above
 for which \emph{the prior parameter density coincides, in the large-$N$
   limit, with the probability of the observed statistics}:
 \begin{equation}
@@ -968,7 +956,7 @@ the variance we also have
 
 This means that for a triplet $\yth$, for large $N$ we have a probability
 distribution for the statistics that is very peaked at particular values
-$\yt \defd (m_1,m_2,l)$ determined by the equations
+$\yt \defd (m_1,m_2,\yl)$ determined by the equations
 \begin{equation}
   \label{eq:change_coords}
   \begin{gathered}
@@ -977,7 +965,7 @@ $\yt \defd (m_1,m_2,l)$ determined by the equations
     \qquad
   m_2 = \expe{s_2 \|\yth,\yI}
     \equiv \frac{\de\ln Z(\yth)}{\de \mu_2},\\
-  l = \expe{s_1 s_2\|\yth,\yI}
+  \yl = \expe{s_1 s_2\|\yth,\yI}
     \equiv \frac{\de\ln Z(\yth)}{\de\la}.
   \end{gathered}
 \end{equation}
@@ -989,14 +977,14 @@ $\yth \defd(\mu_1, \mu_2, \la)$
   \caption{}
   \label{fig:domain}
 \end{figure}% dimer_study.nb
-and $\yt\defd(m_1, m_2,l)$ into one-one
+and $\yt\defd(m_1, m_2,\yl)$ into one-one
 correspondence \citep{meadetal1984}. The former belong to $\RR^3$; the
 latter to the bounded domain
 \begin{equation}
   \label{eq:domain_newcoords}
   0\le m_1,m_2 \le 1,
   \qquad
-  \max(0,m_1 + m_2 -1) \le l \le \min(m_1,m_2)
+  \max(0,m_1 + m_2 -1) \le \yl \le \min(m_1,m_2)
 \end{equation}
 shown in \fig~\ref{fig:domain}.
 
@@ -1004,8 +992,8 @@ Using these new parameters, the probability for statistics $(\yav,\ycv)$
 becomes for large $N$
 \begin{equation}
   \label{eq:prob_stat_newparams}
-  \pf(\yavv_1,\yavv_2,\ycv \|m_1,m_2,l,\yI)
-  \approx \delt[(\yavv_1,\yavv_2,\ycv)- (m_1, m_2, l)].
+  \pf(\yavv_1,\yavv_2,\ycv \|m_1,m_2,\yl,\yI)
+  \approx \delt[(\yavv_1,\yavv_2,\ycv)- (m_1, m_2, \yl)].
 \end{equation}
 Taking the convex combination of this expression in $\yt$ with weights
 $\pf(\yt \|\yI)\,\di\yt$ we obtain
@@ -1017,7 +1005,7 @@ In the coordinates $\yt$, the formula~\eqref{eq:predictive_KP} given
 by the theorem can be interpreted in the following way.
 \begin{enumerate}[label=(\textit{\arabic*})]
 \item We first assume to know that the limit statistics in a very large
-  number of observations is $\yt \defd (m_1, m_2, l)$. Given this knowledge
+  number of observations is $\yt \defd (m_1, m_2, \yl)$. Given this knowledge
   we can combinatorially calculate the probability of observing a finite
   sequence of $N$ observations, $\pf(\yso{1}, \dotsc, \yso{N} \|\yt,\yI)$,
   assuming that all sequences having given statistics are equally likely --
@@ -1045,34 +1033,34 @@ the statistics $\yt$,
 \end{equation}
 is indeed given combinatorially assuming equiprobability of all sequences,
 as claimed above. Suppose that we know the limit statistics are
-$(m_1, m_2, l)$. Only the outcome $\ys=11$ gives a non-vanishing
-contribution to the second moment $l$, \eqn~\eqref{eq:mean_2ndmom}. This
+$(m_1, m_2, \yl)$. Only the outcome $\ys=11$ gives a non-vanishing
+contribution to the second moment $\yl$, \eqn~\eqref{eq:mean_2ndmom}. This
 number is therefore equal to the limit relative frequency of $11$. Assuming
 equiprobability we set the probability of this outcome in the next
-observation equal to this frequency $l$. Only the outcomes $10$ and $11$
+observation equal to this frequency $\yl$. Only the outcomes $10$ and $11$
 give non-vanishing contributions to the mean $m_1$; this number is
 therefore equal to their joint limit relative frequencies. Since the
-frequency of $11$ is given by $l$, the frequency of $10$ must be given by
-$m_1-l$, which is then our probability for this outcome in the next
+frequency of $11$ is given by $\yl$, the frequency of $10$ must be given by
+$m_1-\yl$, which is then our probability for this outcome in the next
 observation. Analogous reasoning holds for the outcome $01$. Finally, the
 limit relative frequencies of all four outcomes must sum to $1$; thus the
 limit frequency and probability of outcome $00$ must be
-$1-l-(m_1-1)-(m_2-l)$. Summarizing,
+$1-\yl-(m_1-1)-(m_2-\yl)$. Summarizing,
 \begin{multline}
   \label{eq:prob_outcome_from_statistics}
   \pf(\ys \| \yt,\yI) =
   \begin{cases}
-    1+l-m_1-m_2 &\text{for } \ys=00\\
-    m_1-l &\text{for } \ys=10\\
-    m_2-l &\text{for } \ys=01\\
-    l &\text{for } \ys=11
+    1+\yl-m_1-m_2 &\text{for } \ys=00\\
+    m_1-\yl &\text{for } \ys=10\\
+    m_2-\yl &\text{for } \ys=01\\
+    \yl &\text{for } \ys=11
   \end{cases}
   \\[\jot]
   {}\equiv
-    l^{s_1 s_2}\,
-  (m_1-l)^{s_1-s_1 s_2}\,
-  (m_2-l)^{s_2-s_1 s_2}\,
-  (1+l-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
+    \yl^{s_1 s_2}\,
+  (m_1-\yl)^{s_1-s_1 s_2}\,
+  (m_2-\yl)^{s_2-s_1 s_2}\,
+  (1+\yl-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
 \end{multline}
 This probability distribution is exactly
 \eqn~\eqref{eq:component_combination}, as can be checked by finding
@@ -1081,9 +1069,9 @@ transformations~\eqref{eq:change_coords},
 \begin{equation}
   \label{eq:inverse_tranf_coord}
   \begin{gathered}
-    \mu_1 =\ln\frac{m_1-l}{1+l-m_1-m_2},\qquad
-    \mu_2 =\ln\frac{m_2-l}{1+l-m_1-m_2},\\[\jot]
-\la =\ln\frac{(1+l-m_1-m_2)\,l}{(m_1-l)\,(m_2-l)},
+    \mu_1 =\ln\frac{m_1-\yl}{1+\yl-m_1-m_2},\qquad
+    \mu_2 =\ln\frac{m_2-\yl}{1+\yl-m_1-m_2},\\[\jot]
+\la =\ln\frac{(1+\yl-m_1-m_2)\,\yl}{(m_1-\yl)\,(m_2-\yl)},
 \end{gathered}
 \end{equation}
 and substituting it in the right side of
@@ -1103,7 +1091,7 @@ If $\ys$ represents the binned activity of a neural population in the
 brain, for example, from our research experience we consider more likely to
 find low mean values $\yavv_1=m_1$, $\yavv_2=m_2$ than high ones, close to
 $1$. We may also have some vague expectations about the second moments
-$\ycv=l$. Even vague prior knowledge can be expressed by a probability
+$\ycv=\yl$. Even vague prior knowledge can be expressed by a probability
 density with particular features, and this leads to better predictions.
 Let's examine this possibility more concretely.
 
@@ -1186,7 +1174,7 @@ The Jacobian determinants of the transformations $\yth(\yt)$ and $\yt(\yth)$, fr
 \begin{subequations}  \label{eq:jacobian_transf}
   \begin{align}
     \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
-    &= \frac{1}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
+    &= \frac{1}{\yl\,(m_1-\yl)\,(m_2-\yl)\,(1+\yl-m_1-m_2)},
     \\
     \det\biggl( \frac{\de\yt}{\de\yth}\biggr)
     &=
@@ -1227,7 +1215,7 @@ therefore corresponds to the density
   \equiv
 %  \frac{1}{\prod_{\ys}\pf(\ys \|\yt,\yI)}
 %  \equiv{}\\
-  \frac{\di\yt}{l\,(m_1-l)\,(m_2-l)\,(1+l-m_1-m_2)},
+  \frac{\di\yt}{\yl\,(m_1-\yl)\,(m_2-\yl)\,(1+\yl-m_1-m_2)},
 \end{equation}
 obtained from \eqns~\eqref{eq:jacobian_as_probs}
 and~\eqref{eq:prob_outcome_from_statistics}. This density, besides being
@@ -1294,17 +1282,6 @@ observed data are numerous.
 
 \mynote{To be continued}
 
-Conjecture:
-\begin{multline}
-  \label{eq:conjecture}
-  \det\biggl[ \frac{\de^2\ln Z(\bm{\theta})}{\de\theta_k\,\de\theta_l} \biggr]
-  = \prod_{\bm{s}\in\set{0,1}^n}
-  \frac{\exp\bigl(\sum_{i=1}^n h_i s_i + \sum_{1\le i < j\le n} J_{ij}s_i s_j\bigr)}{Z(\bm{\theta})}
-  \\[2\jot]
-  \text{with}\quad
-  Z(\bm{\theta}) \defd \sum_{\bm{s}} \exp(\dotso),\quad
-  \bm{\theta}\defd (\theta_k) \defd (h_i, J_{ij})
-\end{multline}
 
 
 
@@ -1402,24 +1379,24 @@ implicitly given by the equations \citep{meadetal1984,portamana2017b}
     \qquad
   m_2 = \frac{\de\ln Z(\yth)}{\de \mu_2}
     \equiv \expe{s_2 \|\yth,\yI},\\
-  l = \frac{\de\ln Z(\yth)}{\de\la}
+  \yl = \frac{\de\ln Z(\yth)}{\de\la}
     \equiv \expe{s_1 s_2\|\yth,\yI}.
   \end{gathered}
   \\[2\jot]
   \label{eq:max_params}
   \text{for}\qquad
-  (m_1,m_2,l) = (\yavv_1,\yavv_2,\ycv),
+  (m_1,m_2,\yl) = (\yavv_1,\yavv_2,\ycv),
   \quad \yth=\ythm.
 \end{gather}
 The system of equations~\eqref{eq:change_coords} gives a one-one
-correspondence between the parameters $\yt\defd(m_1, m_2,l)$ and
+correspondence between the parameters $\yt\defd(m_1, m_2,\yl)$ and
 $\yth \defd(\mu_1, \mu_2, \la)$. The latter belong to $\RR^3$; the former
 to the bounded domain
 \begin{equation}
   \label{eq:domain_newcoords}
   0\le m_1,m_2 \le 1,
   \qquad
-  \max(0,1-m_1-m_2) \le l \le \min(m_1,m_2).
+  \max(0,1-m_1-m_2) \le \yl \le \min(m_1,m_2).
 \end{equation}
 
 
@@ -1462,7 +1439,7 @@ with different first and second moments
 \end{equation}
 In other words the set $\yth \in \RR^3$ is in one-one correspondence with
 the possible values of the three expectations above. We can therefore
-introduce coordinates $\yt \defd (m_1, m_2, l)$ that identify the
+introduce coordinates $\yt \defd (m_1, m_2, \yl)$ that identify the
 distributions above via the equations
 \begin{equation}
   \label{eq:tranf_coord}
@@ -1472,7 +1449,7 @@ distributions above via the equations
   m_2 &= \expe{s_2 \|\yth, \yI} \equiv
   \frac{\exp(\mu_2) + \exp(\mu_1 + \mu_2 + \la)}{Z(\mu_1,\mu_2,\la)},\\
   \qquad
-  l &= \expe{s_1 s_2 \|\yth, \yI} \equiv
+  \yl &= \expe{s_1 s_2 \|\yth, \yI} \equiv
   \frac{\exp(\mu_1 + \mu_2 + \la)}{Z(\mu_1,\mu_2,\la)},
 \end{split}
 \end{equation}
@@ -1480,9 +1457,9 @@ which are coordinate transformations with the inverse
 \begin{equation}
   \label{eq:inverse_tranf_coord}
   \begin{gathered}
-    \mu_1 =\ln\frac{m_1-l}{1+l-m_1-m_2},\qquad
-    \mu_2 =\ln\frac{m_2-l}{1+l-m_1-m_2},\\[\jot]
-\la =\ln\frac{(1+l-m_1-m_2)\,l}{(m_1-l)\,(m_2-l)}.
+    \mu_1 =\ln\frac{m_1-\yl}{1+\yl-m_1-m_2},\qquad
+    \mu_2 =\ln\frac{m_2-\yl}{1+\yl-m_1-m_2},\\[\jot]
+\la =\ln\frac{(1+\yl-m_1-m_2)\,\yl}{(m_1-\yl)\,(m_2-\yl)}.
 \end{gathered}
 \end{equation}
 
@@ -1491,16 +1468,16 @@ for $\ys$ has the form
 \begin{multline}
   \label{eq:prob_family_m}
   \pf(\ys \| \yt,\yI) =
-  (1+l-m_1-m_2)\times{}\\
-  \biggl(\frac{m_1-l}{1+l-m_1-m_2} \biggr)^{s_1}\,
-  \biggl( \frac{m_2-l}{1+l-m_1-m_2}  \biggr)^{s_2}\,
-  \Biggl[ \frac{(1+l-m_1-m_2)\,l}{(m_1-l)\,(m_2-l)} \Biggr]^{s_1 s_2}
+  (1+\yl-m_1-m_2)\times{}\\
+  \biggl(\frac{m_1-\yl}{1+\yl-m_1-m_2} \biggr)^{s_1}\,
+  \biggl( \frac{m_2-\yl}{1+\yl-m_1-m_2}  \biggr)^{s_2}\,
+  \Biggl[ \frac{(1+\yl-m_1-m_2)\,\yl}{(m_1-\yl)\,(m_2-\yl)} \Biggr]^{s_1 s_2}
   \\[\jot]
   {}\equiv
-  l^{s_1 s_2}\,
-  (m_1-l)^{s_1-s_1 s_2}\,
-  (m_2-l)^{s_2-s_1 s_2}\,
-  (1+l-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
+  \yl^{s_1 s_2}\,
+  (m_1-\yl)^{s_1-s_1 s_2}\,
+  (m_2-\yl)^{s_2-s_1 s_2}\,
+  (1+\yl-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
 \end{multline}
 
 
