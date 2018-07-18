@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-06-28T15:53:52+0200
+%% Last-Updated: 2018-07-18T17:31:06+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -554,10 +554,17 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \firmlists*
 \midsloppy
 
-% handling orphan/widow lines:
-\clubpenalty=10000
-\widowpenalty=10000
-\raggedbottom
+% handling orphan/widow lines, memman.pdf
+% \clubpenalty=10000
+% \widowpenalty=10000
+% \raggedbottom
+% Downes, memman.pdf
+\clubpenalty=9996
+\widowpenalty=9999
+\brokenpenalty=4991
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+\displaywidowpenalty=1602
 
 \selectlanguage{british}\frenchspacing
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -790,30 +797,29 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{A two-unit model with sufficient statistics}
 \label{sec:intro}
 
-Consider a population of two binary units $\ys \defd (s_1,s_2)$ with values in
-$\set{0,1}$. One observation of this population can thus give four results:
-$\ys \in \set{00,01,10,11}$.
+Consider a population consisting in two binary units $\ys \defd (s_1,s_2)$
+with values in $\set{0,1}$. One observation of this population can give
+four results: $\ys \in \set{00,01,10,11}$.
 
-Assume that we have $N$ observations $(\yso{1}, \dotsc, \yso{N})$ of this
-or other populations prepared in similar conditions, so that knowledge of
-these observations is relevant for our forecast of a new observation $\ys$,
-again in similar conditions. Also assume that only the number, the mean,
-and the second moments of these past observations are relevant to forecast
-the new one; that is,
+We have $N$ observations $(\yso{1}, \dotsc, \yso{N})$ of this or other
+populations prepared in similar conditions, so that knowledge of these
+observations is relevant for our forecast of a new observation $\ys$, again
+in similar conditions. We assume that only the number, the mean, and the
+second moments of these past observations are relevant to forecast the new
+one; that is, we have these sufficient statistics:
 \begin{equation}
   \label{eq:mean_2ndmom}
-  N,\qquad
+  N,\quad
   \tfrac{1}{N}\bigl( \yso{1} + \dotsb + \yso{N} \bigr) \defs \yav,
-  \qquad
+  \quad
   \tfrac{1}{N}\bigl( \ysso{1}_1\ysso{1}_2 + \dotsb + \ysso{N}_1 \ysso{N}_2 \bigr)
   \defs \ycv
 \end{equation}
-are sufficient statistics. These assumptions are collectively denoted
-$\yI$.
+These assumptions are collectively denoted $\yI$.
 
-There is a series of mathematical results, which we call the
-Koopman-Pitman-Lauritzen theorem, that says that our probabilistic
-forecasts must assume this general form, for any $N$:
+A series of mathematical results, which we call the
+Koopman-Pitman-Lauritzen theorem, says that our probabilistic forecasts
+must assume this general form, for any $N$:
 \begin{multline}
   \label{eq:predictive_KP}
     \pf(\yso{1}, \dotsc, \yso{N} \|\yI )
@@ -826,13 +832,13 @@ forecasts must assume this general form, for any $N$:
     \mu_1\, \ysso{i}_1 + \mu_2\, \ysso{i}_2 + \la\, \ysso{i}_1 \ysso{i}_2
     \bigr) }{Z(\yth)}
   \Biggr]\,
-  \pf(\di\yth \| \yI)
+  \pf(\yth \| \yI)\,\di\yth 
 \\
   &=\int
   \bigl[\tprod_{i=1}^{N}g\bigl(\yso{i}\bigr) \bigr]\,
   \frac{  \exp[N \, (
     \mu_1\, \yavv_1 + \mu_2\, \yavv_2 + \la\, \ycv)]}{Z(\yth)^N}
-\,  \pf(\di\yth \| \yI)
+\,  \pf(\yth \| \yI)\,\di\yth 
 \end{aligned}
 \\
 \text{with}\quad
@@ -841,14 +847,14 @@ forecasts must assume this general form, for any $N$:
   g(00)+ g(10)\,\exp(\mu_1) + g(01)\,\exp(\mu_2) + g(11)\,\exp(\mu_1+\mu_2+\la).
 \end{multline}
 
-The distribution $g(\ys)$ and the density $\pf(\di\yth \| \yI)$ in
+The distribution $g(\ys)$ and the density $\pf(\yth \| \yI)\,\di\yth $ in
 the formula above are not determined by the theorem: they need to be
 determined by additional assumptions. The distribution $g$ is often
 determined by symmetry or combinatorial properties of the problem.
 % for example, if each unit actually represents the total activity of a
 % population of sub-units.
 From now on we assume it to be unity: $g(\ys)=1$. The density
-$\pf(\di\yth \|\yI)$ is called \emph{prior parameter density}.
+$\pf(\yth \|\yI)\,\di\yth $ is called \emph{prior parameter density}.
 
 The formula above says that our joint probability distribution for the $N$
 outcomes is given by a mixture of joint, factorizable distributions from a
@@ -864,7 +870,7 @@ particular factorizable distribution
     \mu_1\, \ysso{i}_1 + \mu_2\, \ysso{i}_2 + \la\, \ysso{i}_1 \ysso{i}_2
     \bigr) }{Z(\yth)}.
 \end{equation}
-The weights of the mixture are $\pf(\di\yth \|\yI)$.
+The weights of the mixture are $\pf(\yth \|\yI)\,\di\yth $.
 
 From the integral of the formula~\eqref{eq:predictive_KP} and the geometric
 interpretation above it is clear that the theorem does not select the
@@ -884,8 +890,8 @@ family is then labelled as
 the prior parameter density is
 \begin{equation}
   \label{eq:density_new_coords}
-  \pf(\di\yt \|\yI) =
-  \det\biggl( \frac{\de\yt}{\de\yth}\biggr)\, \pf(\di\yth \| \yI),
+  \pf(\yt \|\yI)\,\di\yt  =
+  \det\biggl( \frac{\de\yt}{\de\yth}\biggr)\, \pf(\yth \| \yI)\,\di\yth ,
 \end{equation}
 and the integral formula becomes, with $g(\ys)=1$,
 \begin{multline}
@@ -900,13 +906,13 @@ and the integral formula becomes, with $g(\ys)=1$,
     \la(\yt)\, \ysso{i}_1 \ysso{i}_2
     \bigr] }{Z[\yth(\yt)]}
   \Biggr]\,
-  \pf(\di\yt \| \yI)
+  \pf(\yt \| \yI)\,\di\yt 
 \\
   &=\int
   \frac{  \exp\{N \, [
     \mu_1(\yt)\, \yavv_1 + \mu_2(\yt)\, \yavv_2 +
     \la(\yt)\, \ycv)]\}}{Z[\yth(\yt)]^N}
-\,  \pf(\di\yt \| \yI),
+\,  \pf(\yt \| \yI)\,\di\yt ,
 \end{aligned}
 \end{multline}
 equivalent to~\eqref{eq:predictive_KP}.
@@ -1188,12 +1194,15 @@ as
 \begin{subequations}    \label{eq:jacobian_as_probs}
   \begin{align}
     \det\biggl( \frac{\de\yth}{\de\yt}\biggr)
-    &=\frac{1}{
+    &\!\!
+      \begin{multlined}[t][0.85\linewidth]
+=\frac{1}{
       \pf(00 \|\yt,\yI)\,
       \pf(10 \|\yt,\yI)\,
       \pf(01 \|\yt,\yI)\,
       \pf(11 \|\yt,\yI)}
-      \equiv \frac{1}{\prod_{\ys}\pf(\ys \|\yt,\yI)},
+      \equiv{}\\ \frac{1}{\prod_{\ys}\pf(\ys \|\yt,\yI)},
+    \end{multlined}
       \\
       \det\biggl( \frac{\de\yt}{\de\yth}\biggr)
     &=
@@ -1206,17 +1215,18 @@ as
 \end{subequations}
 as can be checked from \eqn~\eqref{eq:component_combination} for $N=1$.
 
-A prior density constant in $\yth$ -- denote this assumption by $\yIth$ --
-therefore corresponds to the density
-\begin{equation}
+Consider an assumption, denoted $\yIth$, that lead us to assign a constant
+prior parameter density function $\pf(\yth \|\yIth)$. For $\yt$ such an
+assumption corresponds to the density
+\begin{multline}
   \label{eq:flat_density_in_statistics_space}
   \pf(\yt \|\yIth)\,\di\yt \propto
   \det\biggl( \frac{\de\yth}{\de\yt}\biggr)\,\di\yt
-  \equiv
+  \equiv{}\\
 %  \frac{1}{\prod_{\ys}\pf(\ys \|\yt,\yI)}
 %  \equiv{}\\
   \frac{\di\yt}{\yl\,(m_1-\yl)\,(m_2-\yl)\,(1+\yl-m_1-m_2)},
-\end{equation}
+\end{multline}
 obtained from \eqns~\eqref{eq:jacobian_as_probs}
 and~\eqref{eq:prob_outcome_from_statistics}. This density, besides being
 improper, gives very high probability to the extreme values of all three
@@ -1233,7 +1243,7 @@ probability to extreme values of the statistics is that constant in the
 $\yt$ coordinates; denote this assumption by $\yIt$:
 \begin{equation}
   \label{eq:density_constant_statistics}
-  \pf(\yt \| \yIt)\,\di\yt = 6 \di\yt,
+  \pf(\yt \| \yIt)\,\di\yt = 6\, \di\yt,
 \end{equation}
 the normalization constant calculated from solid geometry looking at the
 pyramid of \fig~\ref{fig:domain}, having volume $1/6$. In terms of $\yth$
