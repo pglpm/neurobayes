@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-18T20:30:23+0200
+%% Last-Updated: 2018-07-18T23:59:04+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -1320,6 +1320,44 @@ observed data are numerous.
   all of them.\\\small\mbox{}\hfill Jaynes
   \citey[\sect~17.12]{jaynes1994_r2003}
 \end{quotation}
+
+The outcomes of the measurements we make on the system, modelled as a
+population of binary units, are produced by utterly complex mechanisms.
+They aren't produced by a computer's pseudo-random-number generator. So it
+doesn't make sense to check which prior parameter density converges faster
+to the parameters of some computer algorithm, because algorithm,
+parameters, distribution do not even exist in the real situation.
+
+There's a circularity in using computer-generated outcomes to test which
+statistical model or prior density is \enquote{best}. This test would make
+sense if the computer algorithm mimicked the outcomes of the real
+experiment well. But if we had such an algorithm we wouldn't need any
+statistical model to start with.
+
+The use of computer algorithms has a different purpose. A statistical model
+or a prior density can be difficult to grasp intuitively. It may have
+properties that don't reflect the information or assumptions we had in
+mind; in which case it doesn't correctly represent our beliefs. Testing
+it against controlled computer-generated outcomes may bring forth such
+undesired properties. This is the \enquote{device of imaginary results}
+suggested by Good \parentext{\cite*[\sect~4.3]{good1950}; \cite*{good1967b};
+  \cite[index in][p.~280]{good1983}; \cite[\chap~5]{jaynes1994_r2003}}.
+
+
+
+
+
+% The purpose of our probability calculations is not to find some
+% \enquote{unknown, true} parameter. Two are two possible purposes:
+% \begin{itemize}
+% \item to make our best forecast about other outcomes, given the information
+%   we have;
+% \item to asses the truth of different possible hypotheses, given the outcomes we
+%   observe.
+% \end{itemize}
+% The first corresponds, in formal logic, to deriving a theorem from a set
+% of axioms. The second to choosing among axioms by looking at the theorems
+% they lead to.
 
 
 
