@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-18T17:31:06+0200
+%% Last-Updated: 2018-07-18T20:27:35+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -794,7 +794,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
   may have.}
 \fi
 
-\section{A two-unit model with sufficient statistics}
+\section{Initial assumptions for models with second-order sufficient
+  statistics}
+\label{sec:2_suff_stat}
+
+\subsection{A two-unit model with sufficient statistics}
 \label{sec:intro}
 
 Consider a population consisting in two binary units $\ys \defd (s_1,s_2)$
@@ -921,7 +925,7 @@ This coordinate change is central to the rest of this study.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
-\section{New coordinates and their motivation}
+\subsection{New coordinates and their motivation}
 \label{sec:new_coords}
 
 Assuming that~\eqref{eq:mean_2ndmom} are sufficient statistics and
@@ -1083,7 +1087,7 @@ transformations~\eqref{eq:change_coords},
 and substituting it in the right side of
 \eqn~\eqref{eq:component_combination}.
 
-\section{Scientifically motivated prior parameter densities}
+\subsection{Scientifically motivated prior parameter densities}
 \label{sec:other_priors}
 
 The interpretation of the Koopman-Pitman-Lauritzen
@@ -1287,6 +1291,35 @@ then this method requires to add $2^n$ auxiliary data if we consider $n$
 units. This should have a big influence on our predictions even when the
 observed data are numerous.
 
+\section{[Luca:] Does it make sense to test against computer-generated
+  distributions?}
+\label{sec:makes_no_sense}
+
+\begin{quotation}
+  But we must note with sadness that, in much of the current Bayesian
+  literature, very little of the orthodox baggage has been cast off. For
+  example, it is rather typical to see a Bayesian article start with such
+  phrases as: `Let $X$ be a random variable with density function
+  $p(x|\theta)$, where the value of the parameter $\theta$ is unknown.
+  Suppose this parametric family contains the true distribution of
+  $X$\ldots.' Or, one describes a uniform prior $p(\theta|I)$ by saying:
+  `$\theta$ is supposed uniformly distributed'. The analytical solutions
+  thus obtained will doubtless be a valid Bayesian result; but one is still
+  clinging to the orthodox fiction of `random variables' and `true
+  distributions'. $\theta$ is simply an unknown constant; it is not
+  `distributed' at all. What is `distributed' is our state of knowledge
+  about $\theta$: again there is that persistent mind projection fallacy
+  that contaminates all of probability theory, leading inexperienced
+  readers far astray as to what we are doing. Equally bad, those who commit
+  this fallacy seem unaware that this is restricting the application to a
+  small fraction of the real situations where the solution might be useful.
+  In the vast majority of real applications there are no `random variables'
+  (What defines `randomness'?) and no `true distribution' (What defines it?
+  What test could we apply to decide whether some proposed distribution is
+  or is not the `true' one?); yet probability theory as logic applies to
+  all of them.\\\mbox{}\hfill\emph{Jaynes
+    \citey[\sect~17.12]{jaynes1994_r2003}}
+\end{quotation}
 
 
 
@@ -1411,7 +1444,7 @@ to the bounded domain
 
 
 
-\section{Other prior parameter densities}
+\subsection{Other prior parameter densities}
 \label{sec:other_priors}
 
 
