@@ -40,8 +40,12 @@ spikes <- sapply(1:nn,function(i){readMat(dataf[i])$cellTS %/% binwidth})
 tempmin <- min(c(unlist(spikes)))
 n <- max(c(unlist(spikes)))-tempmin+1
 
-## sparse matrix with activity sequences; one column per neuron
-train <- 1*sparseMatrix(i=(unlist(spikes)-tempmin+1), j=unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})))
+## sparse matrix with activity sequences (logical); one column per neuron
+train <- sparseMatrix(i=(unlist(spikes)-tempmin+1), j=unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})))
+
+## sparse vector with sequence of states
+states <- as(train[,1]+2*train[,2],"sparseVector")
+
 
 
 
