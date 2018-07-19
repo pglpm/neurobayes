@@ -11,7 +11,7 @@
 *.pyc
 *.dvi
 *.out.ps
-*.Rhistory
+.Rhistory
 *~
 _region_.*
 prv_*
