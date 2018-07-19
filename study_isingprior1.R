@@ -24,5 +24,24 @@ barpalette <- colorRampPalette(c(mypurpleblue,'white',myredpurple),space='Lab')
 barpalettepos <- colorRampPalette(c('white','black'),space='Lab')
 dev.off()
 mmtoin <- 0.0393701
+
 workdir <- 'ising-results1/'
 dir.create(workdir)
+
+## data files and bin width
+dataf <- c('data/BEN_T7C1.mat', 'data/BEN_T8C1.mat')
+binwidth <- 0.003
+
+## read the spike times and find corresponding bins
+nn <- length(dataf)
+spikes <- sapply(1:nn,function(i){readMat(dataf[i])$cellTS %/% binwidth})
+
+## set first bin at 1 and find number of bins
+tempmin <- min(c(unlist(spikes)))
+n <- max(c(unlist(spikes)))-tempmin+1
+
+## sparse matrix with activity sequences; one column per neuron
+train <- 1*sparseMatrix(i=(unlist(spikes)-tempmin+1), j=unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})))
+
+
+
