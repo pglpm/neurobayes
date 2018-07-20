@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-20T16:36:18+0200
+%% Last-Updated: 2018-07-20T17:01:07+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -754,6 +754,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ynn}{\nu}
 \newcommand*{\yn}{\bm{\nu}}
 \newcommand*{\simpl}{\varDelta}
+\newcommand*{\yff}{f}
+\newcommand*{\yf}{\bm{\yff}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -1358,33 +1360,58 @@ The parameter transformation~\eqref{eq:params_q} has unit Jacobian, so we have
   \pf(\yt \|\yI)\,\di\yt = \pf(\yq \|\yI)\,\di\yq.
 \end{equation}
 A constant parameter density in $\ym$ is also constant in $\yq$, and is a
-special case of a parameter density function used by Laplace
-\citey{laplace1778_r1781} and motivated by Johnson
-\citey{johnson1924,johnson1932c}, which uses Dirichlet's
-\citey{dirichlet1839} integral
-\cites(see)()[\chap~4]{good1965}{zabell1982,jaynes1986d_r1996,guptaetal2001}:
+special case of the parameter density function
 \begin{equation}
   \label{eq:johnson-dirichlet}
   \begin{gathered}
-  \pf(\yq \| \yI) =
+  \pf(\yq \|\yN,\yn, \yI) =
   \frac{\Gamma(\yN)}{\prod_{i=0}^3 \Gamma(\yN\ynn_i)}\,
   \prod_{i=0}^3{q_i}^{\yN\ynn_i-1},\\
-\text{with}\quad q_0 \defd 1-q_1-q_2-\yql, \qquad \yN>0, \ynn \in \simpl,
+\text{with}\quad \yN>0, \yn \defd (\ynn_i) \in \simpl.
 \end{gathered}
 \end{equation}
-This density is commonly called \enquote{Dirichlet prior}, but we'll call
-it the Johnson density here, since he determined its mathematical form from
-informational desiderata.
-
-The Johnson density is a conjugate prior
-\cites[\chap~9]{degroot1970_r2004}{diaconisetal1979b}: it updates to a
-density of the same mathematical form. It leads to probabilities that can
-be analytically calculated using Dirichlet's formula
+This density was used by Laplace \citey{laplace1778_r1781} and motivated by
+Johnson \citey{johnson1924,johnson1932c}, and its integrals can be
+analytically calculated with Dirichlet's
+\citey{dirichlet1839} formula
 \begin{equation}
   \label{eq:Dirichlet_formula}
   \int_{\simpl} \prod_{i=1}^N {q_{i}}^{x_i-1}\,\di\yq =
   \frac{\prod_i \Gamma(x_i)}{\Gamma\bigl(\sum_i x_i\bigr)}.
 \end{equation}
+This density is commonly called \enquote{Dirichlet prior}
+\cites(see)()[\chap~4]{good1965}{zabell1982,jaynes1986d_r1996,guptaetal2001}
+but we'll call it the Johnson density here, since he determined its
+mathematical form from informational desiderata.
+
+The Johnson density is a conjugate prior
+\cites[\chap~9]{degroot1970_r2004}{diaconisetal1979b}: it updates to a
+density of the same mathematical form. It leads to probabilities with
+close-form formulae. In particular: The posterior density function
+\newlength{\myl}\settowidth{\myl}{\footnotesize in the $N$ observations}
+\begin{equation}
+  \label{eq:posterior_q}
+\begin{gathered}
+  \pf(\yq \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI)
+  = 
+  \frac{\Gamma(\yN')}{\prod_i \Gamma(\yN'\ynn_i')}\,
+  \prod_{i=0}^{3}{q_i}^{\yN'\ynn_i'-1}
+  \\
+  \text{with}\quad \yN' =\yN+N,\quad
+  \yn'=\frac{\yN\yn+N\yf}{\yN+N},\quad
+    \yff_{\ys} \defd\Bigl\{
+    \parbox[c]{\the\myl}{\footnotesize rel. frequency of $\ys$\\ in
+  the $N$ observations}  
+\end{gathered}
+\end{equation}
+The posterior probability distribution for a state:
+\begin{equation}
+  \label{eq:predictive_q_general}
+  \p(\yso{N+1} \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI) =
+  \frac{\yN\ynn_{\yso{N+1}} + N\,\yff_{\yso{N+1}}}{\yN+N}.
+\end{equation}
+
+
 
 
 The constant density $\pf(\yt \| \yIt)\,\di\yt = 6\,\di\yt$ is a special
