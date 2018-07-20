@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-20T17:44:13+0200
+%% Last-Updated: 2018-07-20T18:27:41+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -1374,14 +1374,9 @@ special case of the parameter density function
 \end{equation}
 This density was used by Laplace \citey{laplace1778_r1781} and motivated by
 Johnson \citey{johnson1924,johnson1932c}, and its integrals can be
-analytically calculated with Dirichlet's
-\citey{dirichlet1839} formula
-\begin{equation}
-  \label{eq:Dirichlet_formula}
-  \int_{\simpl} \prod_{i=1}^N {q_{i}}^{x_i-1}\,\di\yq =
-  \frac{\prod_i \Gamma(x_i)}{\Gamma\bigl(\sum_i x_i\bigr)}.
-\end{equation}
-This density is commonly called \enquote{Dirichlet prior}
+analytically calculated with Dirichlet's \citey{dirichlet1839}
+formula~\eqref{eq:Dirichlet_formula}. This density is commonly called
+\enquote{Dirichlet prior}
 \cites(see)()[\chap~4]{good1965}{zabell1982,jaynes1986d_r1996,guptaetal2001}
 but we'll call it \enquote{Johnson density} here, since he determined its
 mathematical form from informational desiderata.
@@ -1389,7 +1384,8 @@ mathematical form from informational desiderata.
 The Johnson density is a conjugate prior
 \cites[\chap~9]{degroot1970_r2004}{diaconisetal1979b}: it updates to a
 density of the same mathematical form. It leads to probabilities with
-closed-form formulae summarized in. In particular, the posterior
+closed-form formulae summarized in
+appendix~\ref{sec:formulae_johnson_density}. In particular, the posterior
 probability distribution for a state is
 \newlength{\myl}\settowidth{\myl}{\footnotesize in the $N$ observations}
 \begin{equation}
@@ -1406,10 +1402,21 @@ probability distribution for a state is
 \end{gathered}
 \end{equation}
 
+\bigskip
 
-
-The constant density $\pf(\yt \| \yIt)\,\di\yt = 6\,\di\yt$ is a special
-case of the Johnson density with $\yN=4$, $\ynn_i=1/4$. 
+The density $\pf(\yt \| \yIt)\,\di\yt = 6\,\di\yt$ is a special case of the
+Johnson density with $\yN=4$, $\ynn_i=1/4$. The improper density
+$\pf(\yth \| \yIth)\,\di\yth \propto \di\yth$, which by
+formula~\eqref{eq:jacobian_as_probs} is like $\pf(\yt \| \yIt)$
+\enquote{minus four observations}, corresponds to the improper Johnson
+density with $\yN\to 0$, $\ynn_i=1/4$. The formula for the posterior
+probabilities~\eqref{eq:predictive_q_general} can be used in both cases.
+From that formula we see that when the number of observations $N$ is such
+that $\yN/(\yN+N) \ll 1$, the posterior distribution is almost completely
+determined by the observed frequencies. For $\yN=4$, after $N=40$
+observations the observed frequencies determine the predictive distribution
+to roughly 90\% precision and the difference of the prior densities $\yIt$
+and $\yIth$ has disappeared.
 
 
 \section{[Luca:] Does it make sense to test against computer-generated
@@ -1513,6 +1520,14 @@ suggested by Good \parentext{\cite*[\sect~4.3]{good1950}; \cite*{good1967b};
 
 \section{Formulae for the Johnson density}
 \label{sec:formulae_johnson_density}
+
+Dirichlet's formula
+\begin{equation}
+  \label{eq:Dirichlet_formula}
+  \int_{\simpl} \prod_{i=1}^N {q_{i}}^{x_i-1}\,\di\yq =
+  \frac{\prod_i \Gamma(x_i)}{\Gamma\bigl(\sum_i x_i\bigr)}
+\end{equation}
+allows to calculate all integrals involving the Johnson density.
 
 The posterior density function
 \begin{equation}
