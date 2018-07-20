@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-20T15:58:19+0200
+%% Last-Updated: 2018-07-20T16:36:18+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -1308,19 +1308,57 @@ formulae~\eqref{eq:prob_outcome_from_statistics}: the limit statistics
 $\yt$ determine the limit relative frequencies of the four states and vice
 versa.
 
-Consider then a new set of parameters $\yq\defd(q_1,q_2,\yql)$ defined as
-\begin{equation}
+Consider then a new parameterization $\yq\defd(q_1,q_2,\yql)$ defined by
+\begin{gather}
   \label{eq:params_q}
-  q_1 = m_1-\yl,\quad q_2=m_2-\yl, \quad \yql = \yl.
+  q_1 = m_1-\yl,\quad q_2=m_2-\yl, \quad \yql = \yl,
+  \\\shortintertext{and denote}
+  q_0 \defd 1-q_1-q_2-\yql.
+\end{gather}
+In terms of these parameters our three-dimensional family of distributions
+is
+\begin{multline}
+  \label{eq:prob_parametr_q}
+  \begin{aligned}
+  \pf(\ys \| \yq,\yI) &=
+  \begin{cases}
+     q_0 &\text{for } \ys=00\\
+    q_1 &\text{for } \ys=10\\
+    q_2 &\text{for } \ys=01\\
+    \yql &\text{for } \ys=11
+  \end{cases}
+  \\
+&\equiv q_{\ys},\quad\text{where $\ys$ is interpreted as a binary number.}  
+  \end{aligned}
+\end{multline}
+The parameters $(q_0,\yq)$ belong to the three-dimensional simplex
+\begin{equation}
+\simpl \defd \set{\bm{x} \in \RR^4 \suchthat 
+  \tsum_{s=1}^4 x_s=1, x_s\ge 0}.
+\label{eq:simplex}
 \end{equation}
+
+The probability distribution for a sequence of states becomes
+\begin{equation}
+  \label{eq:predictive_q}
+  \pf(\yso{1}, \dotsc, \yso{N} \|\yI )
+=\int
+\Biggl[  \prod_{i=1}^{N} q_{\ysso{i}} \Biggr]\,
+  \pf(\yq \| \yI)\,\di\yq. 
+\end{equation}
+
 From \eqn~\eqref{eq:prob_outcome_from_statistics}, the quantities
 $(1-q_1-q_2-\yql, q_1, q_2, \yql)$ can be interpreted as the limit relative
 frequencies of the states $(00,10,01,11)$, and the parameter density
 $\pf(\yq\|\yI)\,\di\yq$ as our uncertainty about these frequencies.
 
-The parameter transformation above has unit Jacobian determinant, so a
-constant parameter density in $\ym$ is also constant in $\yq$. The latter
-is a special case of a parameter density function used by Laplace
+The parameter transformation~\eqref{eq:params_q} has unit Jacobian, so we have
+\begin{equation}
+  \label{eq:equiv_priors_m_q}
+  \pf(\yt \|\yI)\,\di\yt = \pf(\yq \|\yI)\,\di\yq.
+\end{equation}
+A constant parameter density in $\ym$ is also constant in $\yq$, and is a
+special case of a parameter density function used by Laplace
 \citey{laplace1778_r1781} and motivated by Johnson
 \citey{johnson1924,johnson1932c}, which uses Dirichlet's
 \citey{dirichlet1839} integral
@@ -1334,15 +1372,9 @@ is a special case of a parameter density function used by Laplace
 \text{with}\quad q_0 \defd 1-q_1-q_2-\yql, \qquad \yN>0, \ynn \in \simpl,
 \end{gathered}
 \end{equation}
-where $\simpl$ is the three-dimensional simplex
-\begin{equation}
-\simpl \defd \set{\bm{x} \in \RR^4 \suchthat 
-  \tsum_{s=1}^4 x_s=1, x_s\ge 0}
-\label{eq:simplex}
-\end{equation}
-to which also $(q_0,\dotsc,q_3)$ belong. This density is commonly called
-\enquote{Dirichlet prior}, but we'll call it the Johnson density here,
-since he determined its mathematical form from informational desiderata.
+This density is commonly called \enquote{Dirichlet prior}, but we'll call
+it the Johnson density here, since he determined its mathematical form from
+informational desiderata.
 
 The Johnson density is a conjugate prior
 \cites[\chap~9]{degroot1970_r2004}{diaconisetal1979b}: it updates to a
