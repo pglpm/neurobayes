@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-20T13:16:47+0200
+%% Last-Updated: 2018-07-20T15:58:19+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -1297,7 +1297,7 @@ then this method requires to add $2^n$ auxiliary data if we consider $n$
 units. This should have a big influence on our predictions even when the
 observed data are numerous.
 
-\subsection{Explicit formulae for belief update}
+\subsection{Explicit formulae for belief update: connection with Dirichlet priors}
 \label{sec:explicit_dirichlet}
 
 The three-dimensional family of probabilities $\pf(\ys \| \yth, \yI)$ or
@@ -1320,9 +1320,11 @@ $\pf(\yq\|\yI)\,\di\yq$ as our uncertainty about these frequencies.
 
 The parameter transformation above has unit Jacobian determinant, so a
 constant parameter density in $\ym$ is also constant in $\yq$. The latter
-is a special case of the Johnson-Dirichlet parameter density
-\cites{johnson1924,johnson1932c}[\chap~4]{good1965}{zabell1982,jaynes1986d_r1996}[for
-some history:][]{guptaetal2001}:
+is a special case of a parameter density function used by Laplace
+\citey{laplace1778_r1781} and motivated by Johnson
+\citey{johnson1924,johnson1932c}, which uses Dirichlet's
+\citey{dirichlet1839} integral
+\cites(see)()[\chap~4]{good1965}{zabell1982,jaynes1986d_r1996,guptaetal2001}:
 \begin{equation}
   \label{eq:johnson-dirichlet}
   \begin{gathered}
@@ -1338,9 +1340,23 @@ where $\simpl$ is the three-dimensional simplex
   \tsum_{s=1}^4 x_s=1, x_s\ge 0}
 \label{eq:simplex}
 \end{equation}
-to which also $(q_0,\dotsc,q_3)$ belong.
+to which also $(q_0,\dotsc,q_3)$ belong. This density is commonly called
+\enquote{Dirichlet prior}, but we'll call it the Johnson density here,
+since he determined its mathematical form from informational desiderata.
+
+The Johnson density is a conjugate prior
+\cites[\chap~9]{degroot1970_r2004}{diaconisetal1979b}: it updates to a
+density of the same mathematical form. It leads to probabilities that can
+be analytically calculated using Dirichlet's formula
+\begin{equation}
+  \label{eq:Dirichlet_formula}
+  \int_{\simpl} \prod_{i=1}^N {q_{i}}^{x_i-1}\,\di\yq =
+  \frac{\prod_i \Gamma(x_i)}{\Gamma\bigl(\sum_i x_i\bigr)}.
+\end{equation}
 
 
+The constant density $\pf(\yt \| \yIt)\,\di\yt = 6\,\di\yt$ is a special
+case of the Johnson density with $\yN=4$, $\ynn_i=1/4$. 
 
 
 \section{[Luca:] Does it make sense to test against computer-generated
