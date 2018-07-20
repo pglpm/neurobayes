@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-18T23:59:04+0200
+%% Last-Updated: 2018-07-20T13:16:47+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -109,9 +109,9 @@ british%
 % \begin{asparaenum} = \begin{enumerate}[para]
 % \begin{inparaenum} = \begin{enumerate*}
 \setlist[enumerate,2]{label=\alph*.}
-\setlist[enumerate]{leftmargin=\parindent}
-\setlist[itemize]{leftmargin=\parindent}
-\setlist[description]{leftmargin=\parindent}
+\setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent}
+\setlist[itemize]{leftmargin=1.5\parindent}
+\setlist[description]{leftmargin=1.5\parindent}
 
 \usepackage[babel,theoremfont]{newpxtext}
 \usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
@@ -217,7 +217,7 @@ british%
 % \DeclareMathSymbol{\varTheta}{\mathalpha}{egreeki}{"02}
  \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
 % \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
-% \DeclareMathSymbol{\varLambda}{\mathalpha}{egreeki}{"03}
+ \DeclareMathSymbol{\varLambda}{\mathalpha}{egreeki}{"03}
 % \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
 % \DeclareMathSymbol{\varNu}{\mathalpha}{egreeki}{"4E}
 % \DeclareMathSymbol{\varXi}{\mathalpha}{egreeki}{"04}
@@ -234,7 +234,7 @@ british%
 % %
 % \DeclareMathSymbol{\Alpha}{\mathalpha}{egreekr}{"41}
 % \DeclareMathSymbol{\Beta}{\mathalpha}{egreekr}{"42}
-% \DeclareMathSymbol{\Gamma}{\mathalpha}{egreekr}{"00}
+ \DeclareMathSymbol{\Gamma}{\mathalpha}{egreekr}{"00}
 % \DeclareMathSymbol{\Delta}{\mathalpha}{egreekr}{"01}
 % \DeclareMathSymbol{\Epsilon}{\mathalpha}{egreekr}{"45}
 % \DeclareMathSymbol{\Zeta}{\mathalpha}{egreekr}{"5A}
@@ -739,6 +739,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\ythm}{\yth_{\text{m}}}
 \newcommand*{\yt}{\bm{m}}
 \newcommand*{\yl}{m_{12}}
+\newcommand*{\yq}{\bm{q}}
+\newcommand*{\yql}{q_{3}}
 \newcommand*{\yav}{\widebar{\ys}}
 \newcommand*{\yavv}{\widebar{s}}
 \newcommand*{\ycv}{\widebar{ss}}
@@ -748,6 +750,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\varb}{\V\clcl}%square
 \newcommand*{\yIth}{\yI_{\yth}}
 \newcommand*{\yIt}{\yI_{\yt}}
+\newcommand*{\yN}{\varLambda}
+\newcommand*{\ynn}{\nu}
+\newcommand*{\yn}{\bm{\nu}}
+\newcommand*{\simpl}{\varDelta}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -981,12 +987,6 @@ $\yt \defd (m_1,m_2,\yl)$ determined by the equations
 \end{equation}
 This system of equations actually puts the parameters
 $\yth \defd(\mu_1, \mu_2, \la)$
-%\setlength{\intextsep}{0.5ex}% with wrapfigure
-\begin{figure}[t!]%{r}{0.4\linewidth} % with wrapfigure
-  \centering\includegraphics[width=0.75\linewidth]{domain.png}\\
-  \caption{}
-  \label{fig:domain}
-\end{figure}% dimer_study.nb
 and $\yt\defd(m_1, m_2,\yl)$ into one-one
 correspondence \citep{meadetal1984}. The former belong to $\RR^3$; the
 latter to the bounded domain
@@ -997,6 +997,12 @@ latter to the bounded domain
   \max(0,m_1 + m_2 -1) \le \yl \le \min(m_1,m_2)
 \end{equation}
 shown in \fig~\ref{fig:domain}.
+%\setlength{\intextsep}{0.5ex}% with wrapfigure
+\begin{figure}%{r}{0.4\linewidth} % with wrapfigure
+  \centering\includegraphics[width=0.75\linewidth]{domain.png}\\
+  \caption{}
+  \label{fig:domain}
+\end{figure}% dimer_study.nb
 
 Using these new parameters, the probability for statistics $(\yav,\ycv)$
 becomes for large $N$
@@ -1013,7 +1019,7 @@ $\pf(\yt \|\yI)\,\di\yt$ we obtain
 
 In the coordinates $\yt$, the formula~\eqref{eq:predictive_KP} given
 by the theorem can be interpreted in the following way.
-\begin{enumerate}[label=(\textit{\arabic*})]
+\begin{enumerate}%[label=(\textit{\arabic*})]
 \item We first assume to know that the limit statistics in a very large
   number of observations is $\yt \defd (m_1, m_2, \yl)$. Given this knowledge
   we can combinatorially calculate the probability of observing a finite
@@ -1060,7 +1066,7 @@ $1-\yl-(m_1-1)-(m_2-\yl)$. Summarizing,
   \label{eq:prob_outcome_from_statistics}
   \pf(\ys \| \yt,\yI) =
   \begin{cases}
-    1+\yl-m_1-m_2 &\text{for } \ys=00\\
+    1-m_1-m_2+\yl &\text{for } \ys=00\\
     m_1-\yl &\text{for } \ys=10\\
     m_2-\yl &\text{for } \ys=01\\
     \yl &\text{for } \ys=11
@@ -1070,7 +1076,7 @@ $1-\yl-(m_1-1)-(m_2-\yl)$. Summarizing,
     \yl^{s_1 s_2}\,
   (m_1-\yl)^{s_1-s_1 s_2}\,
   (m_2-\yl)^{s_2-s_1 s_2}\,
-  (1+\yl-m_1-m_2)^{1-s_1-s_2+s_1 s_2}.
+  (1-m_1-m_2+\yl)^{1-s_1-s_2+s_1 s_2}.
 \end{multline}
 This probability distribution is exactly
 \eqn~\eqref{eq:component_combination}, as can be checked by finding
@@ -1290,6 +1296,52 @@ determinant~\eqref{eq:jacobian_as_probs} holds for any number of units,
 then this method requires to add $2^n$ auxiliary data if we consider $n$
 units. This should have a big influence on our predictions even when the
 observed data are numerous.
+
+\subsection{Explicit formulae for belief update}
+\label{sec:explicit_dirichlet}
+
+The three-dimensional family of probabilities $\pf(\ys \| \yth, \yI)$ or
+$\pf(\ys \|\yt,\yI)$ covers the full simplex of probability distributions
+for the four states of our units. Our model is actually
+\enquote{non-parametric}. This is clear from
+formulae~\eqref{eq:prob_outcome_from_statistics}: the limit statistics
+$\yt$ determine the limit relative frequencies of the four states and vice
+versa.
+
+Consider then a new set of parameters $\yq\defd(q_1,q_2,\yql)$ defined as
+\begin{equation}
+  \label{eq:params_q}
+  q_1 = m_1-\yl,\quad q_2=m_2-\yl, \quad \yql = \yl.
+\end{equation}
+From \eqn~\eqref{eq:prob_outcome_from_statistics}, the quantities
+$(1-q_1-q_2-\yql, q_1, q_2, \yql)$ can be interpreted as the limit relative
+frequencies of the states $(00,10,01,11)$, and the parameter density
+$\pf(\yq\|\yI)\,\di\yq$ as our uncertainty about these frequencies.
+
+The parameter transformation above has unit Jacobian determinant, so a
+constant parameter density in $\ym$ is also constant in $\yq$. The latter
+is a special case of the Johnson-Dirichlet parameter density
+\cites{johnson1924,johnson1932c}[\chap~4]{good1965}{zabell1982,jaynes1986d_r1996}[for
+some history:][]{guptaetal2001}:
+\begin{equation}
+  \label{eq:johnson-dirichlet}
+  \begin{gathered}
+  \pf(\yq \| \yI) =
+  \frac{\Gamma(\yN)}{\prod_{i=0}^3 \Gamma(\yN\ynn_i)}\,
+  \prod_{i=0}^3{q_i}^{\yN\ynn_i-1},\\
+\text{with}\quad q_0 \defd 1-q_1-q_2-\yql, \qquad \yN>0, \ynn \in \simpl,
+\end{gathered}
+\end{equation}
+where $\simpl$ is the three-dimensional simplex
+\begin{equation}
+\simpl \defd \set{\bm{x} \in \RR^4 \suchthat 
+  \tsum_{s=1}^4 x_s=1, x_s\ge 0}
+\label{eq:simplex}
+\end{equation}
+to which also $(q_0,\dotsc,q_3)$ belong.
+
+
+
 
 \section{[Luca:] Does it make sense to test against computer-generated
   distributions?}
