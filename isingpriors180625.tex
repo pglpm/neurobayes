@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-20T17:01:07+0200
+%% Last-Updated: 2018-07-20T17:44:13+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -27,7 +27,7 @@ british%
 \newcommand*{\pdftitle}{Parameter priors for Ising models}
 \newcommand*{\headtitle}{Priors for Ising models}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana, Y. Roudi}
-\newcommand*{\headauthor}{\ifpublic Roudi, Porta Mana%
+\newcommand*{\headauthor}{\ifpublic Porta Mana, Roudi%
 \else Luca\fi}
 \newcommand*{\reporthead}{}%Open Science Framework \osfeprint{***}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -574,12 +574,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %  {\large A geometric commentary on maximum-entropy proofs}% ***
 }
 \author{% 
-\hspace*{\stretch{1}}\parbox{0.5\linewidth}%
-{\protect\centering Y. Roudi\\%
-\footnotesize\epost{\email{yasser.roudi}{ntnu.no}}}%
-\hspace*{\stretch{1}}\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\hspace*{\stretch{1}}%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L. Porta\,Mana\\%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\hspace*{\stretch{1}}%
+\parbox{0.5\linewidth}%
+{\protect\centering Y. Roudi\\%
+\footnotesize\epost{\email{yasser.roudi}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -1381,36 +1383,28 @@ analytically calculated with Dirichlet's
 \end{equation}
 This density is commonly called \enquote{Dirichlet prior}
 \cites(see)()[\chap~4]{good1965}{zabell1982,jaynes1986d_r1996,guptaetal2001}
-but we'll call it the Johnson density here, since he determined its
+but we'll call it \enquote{Johnson density} here, since he determined its
 mathematical form from informational desiderata.
 
 The Johnson density is a conjugate prior
 \cites[\chap~9]{degroot1970_r2004}{diaconisetal1979b}: it updates to a
 density of the same mathematical form. It leads to probabilities with
-close-form formulae. In particular: The posterior density function
+closed-form formulae summarized in. In particular, the posterior
+probability distribution for a state is
 \newlength{\myl}\settowidth{\myl}{\footnotesize in the $N$ observations}
 \begin{equation}
-  \label{eq:posterior_q}
+  \label{eq:predictive_q_general}
 \begin{gathered}
-  \pf(\yq \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI)
-  = 
-  \frac{\Gamma(\yN')}{\prod_i \Gamma(\yN'\ynn_i')}\,
-  \prod_{i=0}^{3}{q_i}^{\yN'\ynn_i'-1}
-  \\
-  \text{with}\quad \yN' =\yN+N,\quad
-  \yn'=\frac{\yN\yn+N\yf}{\yN+N},\quad
-    \yff_{\ys} \defd\Bigl\{
-    \parbox[c]{\the\myl}{\footnotesize rel. frequency of $\ys$\\ in
-  the $N$ observations}  
+  \p(\yso{N+1} \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI) =
+  \frac{\yN\ynn_{\yso{N+1}} + N\,\yff_{\yso{N+1}}}{\yN+N},
+  \\\text{with }
+  \yff_{\yso{N+1}} \defd \text{\footnotesize rel. frequency of state $\yso{N+1}$ in
+  the $N$ observations}.
+  % \Bigl\{
+  %   \parbox[c]{\the\myl}{\footnotesize rel. frequency of $\ys$\\ in
+  % the $N$ observations}  
 \end{gathered}
 \end{equation}
-The posterior probability distribution for a state:
-\begin{equation}
-  \label{eq:predictive_q_general}
-  \p(\yso{N+1} \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI) =
-  \frac{\yN\ynn_{\yso{N+1}} + N\,\yff_{\yso{N+1}}}{\yN+N}.
-\end{equation}
-
 
 
 
@@ -1512,8 +1506,38 @@ suggested by Good \parentext{\cite*[\sect~4.3]{good1950}; \cite*{good1967b};
 \end{acknowledgements}
 \fi
 
-%\appendixpage
-%\appendix
+% \appendixpage
+\renewcommand*{\appendixpagename}{Appendix}
+\renewcommand*{\appendixname}{Appendix}
+\appendix
+
+\section{Formulae for the Johnson density}
+\label{sec:formulae_johnson_density}
+
+The posterior density function
+\begin{equation}
+  \label{eq:posterior_q}
+\begin{gathered}
+  \pf(\yq \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI)
+  = 
+  \frac{\Gamma(\yN')}{\prod_i \Gamma(\yN'\ynn_i')}\,
+  \prod_{i=0}^{3}{q_i}^{\yN'\ynn_i'-1}
+  \\
+  \text{with}\quad \yN' =\yN+N,\quad
+  \yn'=\frac{\yN\yn+N\yf}{\yN+N},\quad
+    \yff_{\ys} \defd\Bigl\{
+    \parbox[c]{\the\myl}{\footnotesize rel. frequency of $\ys$\\ in
+  the $N$ observations}  
+\end{gathered}
+\end{equation}
+The posterior probability distribution for a state:
+\begin{equation}
+  \label{eq:predictive_q_general}
+  \p(\yso{N+1} \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI) =
+  \frac{\yN\ynn_{\yso{N+1}} + N\,\yff_{\yso{N+1}}}{\yN+N}.
+\end{equation}
+
+
 
 %%%%%%%%%%%%%%% BIB %%%%%%%%%%%%%%%
 
