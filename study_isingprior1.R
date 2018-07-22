@@ -44,8 +44,12 @@ n <- max(c(unlist(spikes)))-tempmin+1
 train <- sparseMatrix(i=(unlist(spikes)-tempmin+1), j=unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})))
 
 ## sparse vector with sequence of states
-states <- as(train[,1]+2*train[,2],"sparseVector")
+states <- as(c(Inf,train[,1]+2*train[,2]),"sparseVector")
 
+freq <- function(s,obs){substates <- states[1:(obs+1)]
+    length(substates[c(substates)==s])}
 
+freqs <- function(obs){sapply(0:3,function(i){freq(i,obs)})}
 
+prob <- function(s,obs,l,f){(l*f+freq(s,obs))/(l+obs)}
 
