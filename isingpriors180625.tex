@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-25T13:53:29+0200
-%% Last-Updated: 2018-07-21T11:39:27+0200
+%% Last-Updated: 2018-07-23T11:16:38+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -1423,10 +1423,15 @@ it is zero for states that haven't yet been observed.
 \subsection{Initial information}
 \label{sec:initial_info}
 
-If we calculate the 
+If we calculate the
+
+
+
+% m:  0.1353242
+% mu: 0.1354969
 
 \begin{figure}%$[t!]%{r}{0.4\linewidth} % with wrapfigure
-  \centering\includegraphics[width=\linewidth]{comp_priors.pdf}\\
+  \centering\includegraphics[width=\linewidth]{diff_surprises.pdf}\\
   \caption{}
   \label{fig:comp_priors}
 \end{figure}% update_2units.nb
@@ -1543,14 +1548,28 @@ Dirichlet's formula
 \end{equation}
 allows to calculate all integrals involving the Johnson density.
 
+The probability for the sequence of outcomes is
+\begin{equation}
+  \label{eq:predictive_sequence}
+  \begin{gathered}
+\pf( \yso{1}, \dotsc, \yso{N}\| \yN, \yn, \yI) =
+  \frac{\Gamma(\yN)}{\Gamma(\yN+N)}
+  \prod_{\ys=0}^{3}\frac{\Gamma(\yN\ynn_{\ys} + m\yff_{\ys})}{\Gamma(\yN\ynn_{\ys})},
+  \\
+\text{with}\quad \yff_{\ys} \defd\Bigl\{
+    \parbox[c]{\the\myl}{\footnotesize rel. frequency of $\ys$\\ in
+  the $N$ observations}
+\end{gathered}
+\end{equation}
+
 The posterior density function
 \begin{equation}
   \label{eq:posterior_q}
 \begin{gathered}
   \pf(\yq \| \yso{1}, \dotsc, \yso{N}, \yN, \yn,\yI)
   = 
-  \frac{\Gamma(\yN')}{\prod_i \Gamma(\yN'\ynn_i')}\,
-  \prod_{i=0}^{3}{q_i}^{\yN'\ynn_i'-1}
+  \frac{\Gamma(\yN')}{\prod_{\ys} \Gamma(\yN'\ynn_{\ys}')}\,
+  \prod_{\ys=0}^{3}{q_{\ys}}^{\yN'\ynn_{\ys}'-1}
   \\
   \text{with}\quad \yN' =\yN+N,\quad
   \yn'=\frac{\yN\yn+N\yf}{\yN+N},\quad

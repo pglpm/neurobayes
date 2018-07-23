@@ -53,3 +53,10 @@ freqs <- function(obs){sapply(0:3,function(i){freq(i,obs)})}
 
 prob <- function(s,obs,l,f){(l*f+freq(s,obs))/(l+obs)}
 
+a <- 0; la <- 1e-12; nu <- rep(1,4)/4
+for(i in 1:n){cat('\r',i)
+    a <- a -log(nu[states[i+1]+1])
+    nu <- (la*nu + (states[i+1]==(0:3)))/(la+1)
+    la <- la + 1}
+a/n
+saveRDS(a/n,"suprise_prior_mu.rds")
