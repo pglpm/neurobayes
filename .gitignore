@@ -13,6 +13,7 @@
 *.out.ps
 .Rhistory
 *~
+_*
 _region_.*
 prv_*
 _data*/
