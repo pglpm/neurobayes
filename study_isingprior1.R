@@ -62,7 +62,7 @@ calcevidence <- function(dataf,par1,par2){
 
 collectevidences <- function(dir,par1,par2,nsamples,savedir='',label='',seed=999){
     set.seed(seed)
-    filelist <- list.files(path=dir,pattern='T.*\.mat')
+    filelist <- list.files(path=dir,pattern='T.*.mat')
     nfiles <- length(filelist)
 
     mat <- matrix(NA,nsamples,2+3)
