@@ -32,10 +32,12 @@ dir.create(workdir)
 dataf <- c('data/BEN_T7C1.mat', 'data/BEN_T8C1.mat')
 binwidth <- 0.003
 
-calcevidence <- function(dataf,par1,par2){
+calcevidence <- function(dir='./',dataf,par1,par2){
+	slabel <- substring(dir,nchar(dir))
+    if(slabel!='/'){dir <- paste0(dir,'/')}
     ## read the spike times and find corresponding bins
     nn <- 2
-    spikes <- sapply(1:nn,function(i){readMat(dataf[i])$cellTS %/% binwidth})
+    spikes <- sapply(1:nn,function(i){readMat(paste0(dir,dataf[i]))$cellTS %/% binwidth})
 
     ## set first bin at 1 and find number of bins
     tempmin <- min(c(unlist(spikes)))
@@ -60,19 +62,27 @@ calcevidence <- function(dataf,par1,par2){
     c(lev1, lev2, lev1-lev2)
 }
 
-collectevidences <- function(dir,par1,par2,nsamples,savedir='',label='',seed=999){
+collectevidences <- function(datadir,par1,par2,nsamples,savedir='./',label='',seed=999){
     set.seed(seed)
-    filelist <- list.files(path=dir,pattern='T.*.mat')
+	slabel <- substring(datadir,nchar(datadir))
+    if(slabel!='/'){datadir <- paste0(datadir,'/')}
+	slabel <- substring(savedir,nchar(savedir))
+    if(slabel!='/'){savedir <- paste0(savedir,'/')}
+
+    filelist <- list.files(path=datadir,pattern='T.*.mat')
     nfiles <- length(filelist)
 
     mat <- matrix(NA,nsamples,2+3)
     for(i in 1:nsamples){
+	cat('\rsample ',i)
         filenumbers <- sample(1:nfiles,2)
         dataf <- filelist[filenumbers]
-        mat[i,] <- c(filenumbers, calcevidence(dataf,par1,par2))
+        mat[i,] <- c(filenumbers, calcevidence(datadir,dataf,par1,par2))
     }
+	cat('\n')
     
-    write.table(mat,paste0(savedir,'evidences_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(mat,paste0(savedir,label,'_evidences.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+	mat
 }
 
 stop('end of script')
