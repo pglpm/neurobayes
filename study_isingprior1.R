@@ -109,4 +109,3 @@ freq <- function(s,obs){substates <- states[1:(obs+1)]
 logevidence <- function(obs,l,f){lgamma(l)-lgamma(l+obs)+
                                   sum(sapply(0:3,function(i){lgamma(l*f+freq(i,obs))-lgamma(l*f)}))}
 
-calcevidence()
