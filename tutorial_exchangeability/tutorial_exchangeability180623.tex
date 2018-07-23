@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-07-02T12:18:34+0200
+%% Last-Updated: 2018-07-23T23:26:51+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -172,7 +172,7 @@ british%
 \def\prod{\DOTSI\prodop\slimits@}
 \def\coprod{\DOTSI\coprodop\slimits@}
 \makeatother
-\ifarxiv\else\input{undefinegreek.tex}\fi% make sure no CMF greek letters sneak in
+\ifarxiv\else\input{../undefinegreek.tex}\fi% make sure no CMF greek letters sneak in
 % Greek letters not usually given in LaTeX. Comment the unneeded ones
 % \DeclareMathSymbol{\varpartial}{\mathalpha}{egreeki}{"40}
  \DeclareMathSymbol{\partialup}{\mathalpha}{egreekr}{"40}
@@ -187,7 +187,7 @@ british%
 % \DeclareMathSymbol{\iota}{\mathalpha}{egreeki}{"13}
  \DeclareMathSymbol{\kappa}{\mathalpha}{egreeki}{"14}
  \DeclareMathSymbol{\lambda}{\mathalpha}{egreeki}{"15}
-% \DeclareMathSymbol{\mu}{\mathalpha}{egreeki}{"16}
+ \DeclareMathSymbol{\mu}{\mathalpha}{egreeki}{"16}
  \DeclareMathSymbol{\nu}{\mathalpha}{egreeki}{"17}
 % \DeclareMathSymbol{\xi}{\mathalpha}{egreeki}{"18}
 % \DeclareMathSymbol{\omicron}{\mathalpha}{egreeki}{"6F}
@@ -349,7 +349,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
 \DeclareDelimFormat{compcitedelim}{\addsemicolon\space}
 \DeclareDelimFormat{postnotedelim}{\space}
-\ifarxiv\else\addbibresource{portamanabib.bib}\fi
+\ifarxiv\else\addbibresource{../portamanabib.bib}\fi
 \renewcommand{\bibfont}{\footnotesize}
 %\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
@@ -526,7 +526,7 @@ urlcolor=mygreen,breaklinks=true,pdftitle={\pdftitle},pdfauthor={\pdfauthor}}
 \posttitle{\bigskip\end{center}}
 
 \makeatletter\newcommand*{\atf}{\includegraphics[%trim=1pt 1pt 0pt 0pt,
-totalheight=\heightof{@}]{atblack.png}}\makeatother
+totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \providecommand{\affiliation}[1]{\textsl{\textsf{\footnotesize #1}}}
 \providecommand{\epost}[1]{\texttt{\footnotesize\textless#1\textgreater}}
 \providecommand{\email}[2]{\href{mailto:#1ZZ@#2 ((remove ZZ))}{#1\protect\atf#2}}
