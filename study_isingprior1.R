@@ -77,6 +77,7 @@ collectevidences <- function(dir,par1,par2,nsamples,savedir='',label='',seed=999
 
 stop('end of script')
 
+
 ## read the spike times and find corresponding bins
 nn <- length(dataf)
 spikes <- sapply(1:nn,function(i){readMat(dataf[i])$cellTS %/% binwidth})
