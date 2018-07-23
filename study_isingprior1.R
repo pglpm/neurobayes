@@ -32,6 +32,43 @@ dir.create(workdir)
 dataf <- c('data/BEN_T7C1.mat', 'data/BEN_T8C1.mat')
 binwidth <- 0.003
 
+savetrains <- function(datadir,pattern='T.*.mat',binwidth=0.003){
+    slabel <- substring(datadir,nchar(datadir))
+    if(slabel!='/'){datadir <- paste0(datadir,'/')}
+
+    dataf <- list.files(path=datadir,pattern=pattern)
+    nn <- length(dataf)
+
+    ## read the spike times and find corresponding bins
+    spikes <- sapply(1:nn,function(i){readMat(paste0(datadir,dataf[i]))$cellTS %/% binwidth})
+
+    ## set first bin at 1 and find number of bins
+    toadd <- 1-min(c(unlist(spikes)))
+    n <- max(c(unlist(spikes)))+toadd
+    i <- unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))}))
+    j <- unlist(sapply(1:nn,function(i){spikes[[i]]+toadd}))
+
+    trainpos <- matrix(c(i,j),ncol=2)
+
+    ## sparse matrix with activity sequences (logical); one column per neuron
+    ## train <- sparseMatrix(
+    ##     i = unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})),
+    ##     j = unlist(sapply(1:nn),function(i){spikes[[i]]+toadd}))
+
+    write.table(trainpos,'alltrains.csv',sep=',',row.names=F,col.names=F,na='Infinity')}
+
+        
+
+
+
+    (unlist(spikes)-tempmin+1), j=unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})))
+
+    ## sparse vector with sequence of states
+    trains <- as(c(Inf,train[,1]+2*train[,2]),"sparseVector")
+
+    
+
+
 calcevidence <- function(dir='./',dataf,par1,par2){
 	slabel <- substring(dir,nchar(dir))
     if(slabel!='/'){dir <- paste0(dir,'/')}
