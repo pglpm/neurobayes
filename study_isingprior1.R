@@ -55,21 +55,10 @@ savetrains <- function(datadir,pattern='T.*.mat',binwidth=0.003){
     ##     i = unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})),
     ##     j = unlist(sapply(1:nn),function(i){spikes[[i]]+toadd}))
 
-    write.table(trainpos,'alltrains.csv',sep=',',row.names=F,col.names=F,na='Infinity')}
-
-        
+    write.table(trainpos,'alltrainscut.csv',sep=',',row.names=F,col.names=F,na='Infinity')}
 
 
-
-    (unlist(spikes)-tempmin+1), j=unlist(sapply(1:nn,function(i){rep(i,length(spikes[[i]]))})))
-
-    ## sparse vector with sequence of states
-    trains <- as(c(Inf,train[,1]+2*train[,2]),"sparseVector")
-
-    
-
-
-calcevidence <- function(dir='./',dataf,par1,par2){
+calcevidence <- function(dir='./',dataf,par1,par2,start=1){
 	slabel <- substring(dir,nchar(dir))
     if(slabel!='/'){dir <- paste0(dir,'/')}
     ## read the spike times and find corresponding bins
@@ -87,7 +76,7 @@ calcevidence <- function(dir='./',dataf,par1,par2){
     states <- as(c(Inf,train[,1]+2*train[,2]),"sparseVector")
 
     ## frequency of state s after obs observations
-    freq <- function(s,obs){substates <- states[1:(obs+1)]
+    freq <- function(s,obs){substates <- states[start:(obs+1)]
         length(substates[c(substates)==s])}
 
     ## log-evidence after obs observations
@@ -99,7 +88,7 @@ calcevidence <- function(dir='./',dataf,par1,par2){
     c(lev1, lev2, lev1-lev2)
 }
 
-collectevidences <- function(datadir,par1,par2,nsamples,savedir='./',label='',seed=999){
+collectevidences <- function(datadir,par1,par2,nsamples,savedir='./',label='',start=1,seed=999){
     set.seed(seed)
 	slabel <- substring(datadir,nchar(datadir))
     if(slabel!='/'){datadir <- paste0(datadir,'/')}
@@ -114,7 +103,7 @@ collectevidences <- function(datadir,par1,par2,nsamples,savedir='./',label='',se
 	cat('\rsample ',i)
         filenumbers <- sample(1:nfiles,2)
         dataf <- filelist[filenumbers]
-        mat[i,] <- c(filenumbers, calcevidence(datadir,dataf,par1,par2))
+        mat[i,] <- c(filenumbers, calcevidence(datadir,dataf,par1,par2,start))
     }
 	cat('\n')
     
