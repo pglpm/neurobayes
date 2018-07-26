@@ -119,5 +119,5 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,
 
 pfreqs <- matrix(c(6,3,1,3,6,1),3,2)/10
 
-totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=5000)
+totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=500)
 
