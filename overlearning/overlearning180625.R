@@ -87,7 +87,7 @@ for(i in 1:2){
 
 averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,2),seed=999){
     set.seed(seed)
-    pb <- txtProgressBar(1,nshuffles,1)
+    pb <- txtProgressBar(1,nshuffles,1,style=3)
 
     data <- generatedata(nsamples,pfreqs,pp)
 
