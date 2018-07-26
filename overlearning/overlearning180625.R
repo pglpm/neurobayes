@@ -49,7 +49,7 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     ## probs for classes
     prob <- matrix(NA,2,ldata)
     evidence <- rep(1,2)
-    logevidences <- matrix(NA,2,ldata)
+    logevidences <- rep(NA,ldata)
     ## frequencies: each row = class, each col = frequencies
     fr <- matrix(0,2,3)
     ## utility scores
@@ -73,7 +73,7 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
 
         evidence[class] <- c(integ[class,],
                              evidence[class]-sum(integ[class,]))[outcome]
-        logevidences[,d] <- sum(log(evidence))
+        logevidences[d] <- sum(log(evidence))
         fr[class,outcome] <- fr[class,outcome]+1
         ##print(integ);print(likelihood[,,d]);print(fr);print(evidence);print('')
     }
