@@ -60,7 +60,7 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
        invisible(capture.output({ integ<- sapply(1:2,function(i){
             sapply(1:2,
-                   function(h){((quadinf(integrand,-Inf, Inf, abstol=0,i=i,h=h)$Q))})}) }))
+                   function(h){((quadinf(integrand,-Inf, Inf, tol=1e-60,i=i,h=h)$Q))})}) }))
         
         likelihood[,,d] <- integ/evidence
         class <- data[1,d]
