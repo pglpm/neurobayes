@@ -56,9 +56,9 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     for(d in 1:ldata){
         integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * (1-pr(t)[1]-pr(t)[2])^fr[h,3] * priorf(t)}
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
-        integ<- sapply(1:2,function(i){
+       invisible(capture.output({ integ<- sapply(1:2,function(i){
             sapply(1:2,
-                   function(h){((integral(integrand,-Inf, Inf, abstol=0,i=i,h=h)))})})
+                   function(h){((integral(integrand,-Inf, Inf, abstol=0,i=i,h=h)))})}) }))
         
         likelihood[,,d] <- integ/evidence
         class <- data[1,d]
@@ -87,6 +87,7 @@ for(i in 1:2){
 
 averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,2),seed=999){
     set.seed(seed)
+    pb <- txtProgressBar(1,nshuffles,1)
 
     data <- generatedata(nsamples,pfreqs,pp)
 
@@ -102,7 +103,9 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,
         alllikelihood[,,,s] <- res[[s]]$likelihoods
         allscores[,s] <- res[[s]]$scores
         allevidence[,s] <- res[[s]]$evidence
+        setTxtProgressBar(pb,s)
     }
+    close(pb)
     avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean)
     avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean)
     avgscore <- apply(allscores,1,mean)
@@ -116,5 +119,5 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,
 
 pfreqs <- matrix(c(3/4,1/8,1/8,1/8,3/4,1/8),3,2)
 
-totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=500)
+totals <- averagefromdata(pfreqs,prior,nsamples=2,nshuffles=2)
 
