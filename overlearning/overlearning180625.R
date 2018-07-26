@@ -3,6 +3,7 @@
 ## libraries and colour-blind palette from http://www.sron.nl/~pault/
 library('RColorBrewer')
 library('png')
+library('pracma')
 #library('plot3D')
 #library('ggplot2')
 #library('cowplot')
