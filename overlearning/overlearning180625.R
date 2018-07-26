@@ -49,6 +49,8 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     evidence <- rep(1,2)
     ## frequencies: each row = class, each col = frequencies
     fr <- matrix(0,2,3)
+    ## utility scores
+    score <- rep(NA,ldata)
    ## print(integ);print(fr);print(evidence);print('')
     for(d in 1:ldata){
         integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * (1-pr(t)[1]-pr(t)[2])^fr[h,3] * priorf(t)}
@@ -60,14 +62,18 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
         likelihood[,,d] <- integ/evidence
         class <- data[1,d]
         outcome <- data[2,d]
+        ## probabilities for the classes
         prob[,d] <- norma(apply(likelihood[,,d],1,allp)[outcome,] * pp)
+
+        ## utility
+        score[d] <- (sign(prob[class,d]-0.5)+1)/2
 
         evidence[class] <- c(integ[class,],
                              evidence[class]-sum(integ[class,]))[outcome]
         fr[class,outcome] <- fr[class,outcome]+1
         ##print(integ);print(likelihood[,,d]);print(fr);print(evidence);print('')
     }
-    list(likelihoods=likelihood,probs=prob,evidence=evidence,finfreq=fr)
+    list(likelihoods=likelihood,probs=prob,scores=score,evidence=evidence,finfreq=fr)
 }
 
 generatedata <- function(nsamples,pfreqs){
@@ -77,8 +83,6 @@ generatedata <- function(nsamples,pfreqs){
 for(i in 1:2){
     data[2,data[1,]==i] <- sample(1:3,le[i],replace=T,prob=pfreqs[,i])}
     data}
-
-stop()
 
 averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,2),seed=999){
     set.seed(seed)
