@@ -86,7 +86,8 @@ for(i in 1:2){
     data[2,data[1,]==i] <- sample(1:3,le[i],replace=T,prob=pfreqs[,i])}
     data}
 
-averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,2),seed=999){
+averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp=rep(1/2,2),seed=999){
+    if(label==''){label=format(Sys.time(),'%y%m%dT%H%M')}
     set.seed(seed)
     pb <- txtProgressBar(1,nshuffles,1,style=3)
 
@@ -103,7 +104,6 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,
 
         alllikelihood[,,,s] <- res[[s]]$likelihoods
         allscores[,s] <- res[[s]]$scores
-        allevidence[,s] <- res[[s]]$evidence
         setTxtProgressBar(pb,s)
     }
     close(pb)
@@ -111,14 +111,17 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,
     avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean)
     avgscore <- apply(allscores,1,mean)
 
-    saveRDS(res,paste0('results_',nsamples,'_',nshuffles,'.rds'))
-    write.table(avglikelihood1,paste0('lh1_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
-    write.table(avglikelihood2,paste0('lh2_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
-    write.table(avgscore,paste0('scores_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    saveRDS(res,paste0('results_',label,'_',nsamples,'_',nshuffles,'.rds'))
+    write.table(avglikelihood1,paste0('lh1_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(avglikelihood2,paste0('lh2_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(avgscore,paste0('scores_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(res[[1]]$evidence,paste0('evidence_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(res[[1]]$finfreq,paste0('finalfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    
     res
 }
 
-pfreqs <- matrix(c(6,3,1,3,6,1),3,2)/10
+pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
 
-totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=500)
+totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=5000,label='opposite')
 
