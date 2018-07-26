@@ -76,7 +76,7 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     list(likelihoods=likelihood,probs=prob,scores=score,evidence=evidence,finfreq=fr)
 }
 
-generatedata <- function(nsamples,pfreqs){
+generatedata <- function(nsamples,pfreqs,pp=rep(1,2)/2){
     data <- matrix(NA,2,nsamples)
     data[1,] <- sample(1:2,nsamples,replace=T,prob=pp)
     le <- sapply(1:2,function(i){sum(data[1,]==i)})
@@ -87,7 +87,7 @@ for(i in 1:2){
 averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,2),seed=999){
     set.seed(seed)
 
-    data <- generatedata(nsamples,pfreqs)
+    data <- generatedata(nsamples,pfreqs,pp)
 
     alllikelihood <- array(NA,c(2,2,nsamples,nshuffles))
     allscores <- matrix(NA,nsamples,nshuffles)
