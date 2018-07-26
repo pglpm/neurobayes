@@ -88,11 +88,32 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,pp=rep(1/2,
     set.seed(seed)
 
     data <- generatedata(nsamples,pfreqs)
+
+    alllikelihood <- array(NA,c(2,2,nsamples,nshuffles))
+    allscores <- matrix(NA,nsamples,nshuffles)
+    allevidence <- matrix(NA,2,nshuffles)
     res <- list()
     
     for(s in 1:nshuffles){
         sdata <- data[,sample(1:nsamples)]
         res[[s]] <- prfromdata(sdata,priorf,pp)
+
+        alllikelihood[,,,s] <- res[[s]]$likelihoods
+        allscores[,s] <- res[[s]]$scores
+        allevidence[,s] <- res[[s]]$evidence
     }
+    avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean)
+    avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean)
+    avgscore <- apply(allscores,1,mean)
+
+    saveRDS(res,paste0('results_',nsamples,'_',nshuffles,'.rds'))
+    write.table(avglikelihood1,paste0('lh1_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(avglikelihood2,paste0('lh2_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(avgscore,paste0('scores_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
     res
 }
+
+pfreqs <- matrix(c(3/4,1/8,1/8,1/8,3/4,1/8),3,2)
+
+totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=100)
+
