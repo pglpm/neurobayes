@@ -49,6 +49,7 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     ## probs for classes
     prob <- matrix(NA,2,ldata)
     evidence <- rep(1,2)
+    logevidences <- matrix(N,2,ldata)
     ## frequencies: each row = class, each col = frequencies
     fr <- matrix(0,2,3)
     ## utility scores
@@ -72,10 +73,11 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
 
         evidence[class] <- c(integ[class,],
                              evidence[class]-sum(integ[class,]))[outcome]
+        logevidences[,d] <- sum(log(evidence))
         fr[class,outcome] <- fr[class,outcome]+1
         ##print(integ);print(likelihood[,,d]);print(fr);print(evidence);print('')
     }
-    list(likelihoods=likelihood,probs=prob,scores=score,evidence=evidence,finfreq=fr)
+    list(likelihoods=likelihood,probs=prob,scores=score,logevidences=logevidences,finfreq=fr)
 }
 
 generatedata <- function(nsamples,pfreqs,pp=rep(1,2)/2){
@@ -95,7 +97,7 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 
     alllikelihood <- array(NA,c(2,2,nsamples,nshuffles))
     allscores <- matrix(NA,nsamples,nshuffles)
-    allevidence <- matrix(NA,2,nshuffles)
+    alllogevidences <- matrix(NA,nsamples,nshuffles)
     res <- list()
     
     for(s in 1:nshuffles){
@@ -104,18 +106,20 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 
         alllikelihood[,,,s] <- res[[s]]$likelihoods
         allscores[,s] <- res[[s]]$scores
+        alllogevidences[,s] <- res[[s]]$logevidences
         setTxtProgressBar(pb,s)
     }
     close(pb)
     avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean)
     avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean)
     avgscore <- apply(allscores,1,mean)
+    avglogevidence <- apply(alllogevidences,1,mean)
 
     saveRDS(res,paste0('results_',label,'_',nsamples,'_',nshuffles,'.rds'))
     write.table(avglikelihood1,paste0('lh1_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
     write.table(avglikelihood2,paste0('lh2_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
     write.table(avgscore,paste0('scores_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
-    write.table(res[[1]]$evidence,paste0('evidence_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
+    write.table(avglogevidence,paste0('logev_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
     write.table(res[[1]]$finfreq,paste0('finalfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Infinity')
     
     res
@@ -123,5 +127,6 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 
 pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
 
+## nshuffles = 100 * 5e3
 totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=5000,label='opposite')
 
