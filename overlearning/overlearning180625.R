@@ -38,7 +38,7 @@ norma <- function(p){p/sum(p)}
 ## two of the three probabilities for the likelihood
 pr <- function(t){c(1/(1+exp(2*t)+exp(t)), 1/(exp(-2*t)+exp(-t)+1), 1/(exp(-t)+1+exp(t)))}
 
-prior <- function(t){dnorm(t,mean=0,sd=10)}
+prior <- function(t){dnorm(t,mean=0,sd=100)}
 
 prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     ldata <- length(data[1,])
@@ -129,5 +129,6 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
 
 ## nshuffles = 100 * 5e3
-totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=5000,label='opposite3')
-
+totals <- averagefromdata(pfreqs,prior,nsamples=500,nshuffles=100,label='std100')
+## 3 -> abs.tol=1e-52
+## std100 -> prior with std 100
