@@ -12,7 +12,7 @@
 *.dvi
 *.out.ps
 .Rhistory
-.Rplots.pdf
+Rplots.pdf
 *~
 _*
 _region_.*
