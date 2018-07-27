@@ -58,10 +58,11 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
    ## print(integ);print(fr);print(evidence);print('')
     for(d in 1:ldata){
         integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * pr(t)[3]^fr[h,3] * priorf(t)/evidence[h]}
+        vintegrand <- Vectorize(integrand, "t")
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
        invisible(capture.output({ integ<- sapply(1:2,function(i){
             sapply(1:2,
-                   function(h){((integral(integrand,-Inf, Inf, no_intervals=800,abstol=0,i=i,h=h)))})}) }))
+                   function(h){((integrate(vintegrand,-Inf, Inf, abs.tol=1e-50,i=i,h=h)$value))})}) }))
         
         likelihood[,,d] <- integ
         class <- data[1,d]
