@@ -62,7 +62,7 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
        invisible(capture.output({ integ<- sapply(1:2,function(i){
             sapply(1:2,
-                   function(h){((integrate(vintegrand,-Inf, Inf, abs.tol=1e-50,i=i,h=h)$value))})}) }))
+                   function(h){((integrate(vintegrand,-Inf, Inf, abs.tol=0,i=i,h=h)$value))})}) }))
         
         likelihood[,,d] <- integ
         class <- data[1,d]
@@ -129,5 +129,5 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
 
 ## nshuffles = 100 * 5e3
-totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=2,label='opposite2')
+totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=5000,label='opposite2b')
 
