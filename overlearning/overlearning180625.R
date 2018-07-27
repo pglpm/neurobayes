@@ -60,7 +60,7 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
        (({ integ<- sapply(1:2,function(i){
             sapply(1:2,
-                   function(h){((integrate(integrand,-Inf, Inf, subdivisions=10000L,rel.tol= 1e-13,abs.tol=0,i=i,h=h)$value))})}) }))
+                   function(h){((integrate(integrand,-Inf, Inf, subdivisions=10000L,abs.tol=0,i=i,h=h)$value))})}) }))
         
         likelihood[,,d] <- integ/evidence
         class <- data[1,d]
