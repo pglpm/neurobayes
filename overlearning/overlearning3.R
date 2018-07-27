@@ -72,8 +72,8 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
         ## utility
         score[d] <- (sign(prob[class,d]-0.5)+1)/2
 
-        evidence[class] <- allp(integ[class,])[outcome]
-        logevidences[d+1] <- log(evidence[class])+logevidences[d]
+        evidence[class] <- allp(integ[class,])[outcome] * evidence[class]
+        logevidences[d+1] <- sum(log(evidence))
         fr[class,outcome] <- fr[class,outcome]+1
         ##print(integ);print(likelihood[,,d]);print(fr);print(evidence);print('')
     }
