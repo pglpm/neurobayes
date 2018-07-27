@@ -58,9 +58,9 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     for(d in 1:ldata){
         integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * pr(t)[3]^fr[h,3] * priorf(t)}
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
-       (({ integ<- sapply(1:2,function(i){
+       invisible(capture.output({ integ<- sapply(1:2,function(i){
             sapply(1:2,
-                   function(h){((integrate(integrand,-Inf, Inf, subdivisions=10000L,rel.tol= 1e-12,abs.tol=0,i=i,h=h)$value))})}) }))
+                   function(h){((integral(integrand,-Inf, Inf, no_intervals=800,abstol=0,i=i,h=h)))})}) }))
         
         likelihood[,,d] <- integ/evidence
         class <- data[1,d]
