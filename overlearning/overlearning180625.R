@@ -36,7 +36,7 @@ allp <- function(p){c(p,1-sum(p))}
 norma <- function(p){p/sum(p)}
 
 ## two of the three probabilities for the likelihood
-pr <- function(t){c(1/(1+exp(2*t)+exp(t)), 1/(exp(-2*t)+exp(-t)+1))}
+pr <- function(t){c(1/(1+exp(2*t)+exp(t)), 1/(exp(-2*t)+exp(-t)+1), 1/(exp(-t)+1+exp(t)))}
 
 prior <- function(t){dnorm(t,mean=0,sd=10)}
 
@@ -56,11 +56,11 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     score <- rep(NA,ldata)
    ## print(integ);print(fr);print(evidence);print('')
     for(d in 1:ldata){
-        integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * (1-pr(t)[1]-pr(t)[2])^fr[h,3] * priorf(t)}
+        integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * pr(t)[3]^fr[h,3] * priorf(t)}
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
        invisible(capture.output({ integ<- sapply(1:2,function(i){
             sapply(1:2,
-                   function(h){((quadinf(integrand,-Inf, Inf, tol=1e-60,i=i,h=h)$Q))})}) }))
+                   function(h){((integral(integrand,-Inf, Inf, abstol=0,i=i,h=h)))})}) }))
         
         likelihood[,,d] <- integ/evidence
         class <- data[1,d]
