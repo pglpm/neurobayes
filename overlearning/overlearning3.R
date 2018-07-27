@@ -49,20 +49,21 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
     ## probs for classes
     prob <- matrix(NA,2,ldata)
     evidence <- rep(1,2)
-    logevidences <- rep(NA,ldata)
+    logevidences <- rep(NA,ldata+1)
+    logevidences[1] <- 0
     ## frequencies: each row = class, each col = frequencies
     fr <- matrix(0,2,3)
     ## utility scores
     score <- rep(NA,ldata)
    ## print(integ);print(fr);print(evidence);print('')
     for(d in 1:ldata){
-        integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * pr(t)[3]^fr[h,3] * priorf(t)}
+        integrand <- function(t,i,h){pr(t)[i] * pr(t)[1]^fr[h,1] * pr(t)[2]^fr[h,2] * pr(t)[3]^fr[h,3] * priorf(t)/evidence[h]}
 ##        integrand <- function(t,i,h){pr(t)[i] * prod(allp(pr(t))^(fr[h,])) * priorf(t)}
        invisible(capture.output({ integ<- sapply(1:2,function(i){
             sapply(1:2,
                    function(h){((integral(integrand,-Inf, Inf, no_intervals=800,abstol=0,i=i,h=h)))})}) }))
         
-        likelihood[,,d] <- integ/evidence
+        likelihood[,,d] <- integ
         class <- data[1,d]
         outcome <- data[2,d]
         ## probabilities for the classes
@@ -71,13 +72,12 @@ prfromdata <- function(data,priorf,pp=rep(1/2,2)){
         ## utility
         score[d] <- (sign(prob[class,d]-0.5)+1)/2
 
-        evidence[class] <- c(integ[class,],
-                             evidence[class]-sum(integ[class,]))[outcome]
-        logevidences[d] <- sum(log(evidence))
+        evidence[class] <- allp(integ[class,])[outcome]
+        logevidences[d+1] <- log(evidence[class])+logevidences[d]
         fr[class,outcome] <- fr[class,outcome]+1
         ##print(integ);print(likelihood[,,d]);print(fr);print(evidence);print('')
     }
-    list(likelihoods=likelihood,probs=prob,scores=score,logevidences=logevidences,finfreq=fr)
+    list(likelihoods=likelihood,probs=prob,scores=score,logevidences=logevidences[-1],finfreq=fr)
 }
 
 generatedata <- function(nsamples,pfreqs,pp=rep(1,2)/2){
@@ -128,5 +128,5 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
 
 ## nshuffles = 100 * 5e3
-totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=5000,label='opposite2')
+totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=2,label='opposite2')
 
