@@ -92,7 +92,7 @@ for(i in 1:2){
 averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp=rep(1/2,2),seed=999){
     if(label==''){label=format(Sys.time(),'%y%m%dT%H%M')}
     set.seed(seed)
-    pb <- txtProgressBar(1,nshuffles,1,style=3)
+#    pb <- txtProgressBar(1,nshuffles,1,style=3)
 
     data <- generatedata(nsamples,pfreqs,pp)
 
@@ -108,9 +108,10 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
         alllikelihood[,,,s] <- res[[s]]$likelihoods
         allscores[,s] <- res[[s]]$scores
         alllogevidences[,s] <- res[[s]]$logevidences
-        setTxtProgressBar(pb,s)
+                                        #setTxtProgressBar(pb,s)
+        cat('\r',s,'/',nshuffles)
     }
-    close(pb)
+#    close(pb)
     avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean)
     avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean)
     avgscore <- apply(allscores,1,mean)
