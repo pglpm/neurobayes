@@ -18,7 +18,7 @@
 # Specify the number of tasks (processes)
 #SBATCH --ntasks 1
 # Our job is multithreaded, so we ask 4 CPUs per process
-#SBATCH --cpus-per-task=5
+#SBATCH --cpus-per-task=20
 # So, in total we will have 4x8 CPUs for us
 ## module load nest/2.10.0
 ##################################################################
@@ -26,4 +26,4 @@
 # we use slurm's environment variables to create unique output files and echo the name of the executing node in that file
 ##module load anaconda
 ##source activate r
-srun Rscript job1.R
+srun Rscript job2.R
