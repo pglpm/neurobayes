@@ -98,7 +98,7 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 
     data <- generatedata(nsamples,pfreqs,pp)
 
-    cl <- makeForkCluster(10)
+    cl <- makeForkCluster(20)
     registerDoParallel(cl)
 
     allres <- foreach(s=1:nshuffles) %dopar% {

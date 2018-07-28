@@ -7,8 +7,8 @@
 ## SBATCH --time 10:00:00
 # Redirect stderr and stdout to the same file:
 # %A will be replaced by the job ID and %a by the array index
-#SBATCH -o outjob1.out
-#SBATCH -e outjob1.out
+#SBATCH -o outjob2.out
+#SBATCH -e outjob2.out
 # Send email notifications
 ## SBATCH --mail-type=ALL
 # We request an exclusive node for every job in the array
