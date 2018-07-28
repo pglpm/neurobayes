@@ -134,8 +134,8 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
     lallres
 }
 
- pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
-totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=50000,label='testpar')
+# pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
+#totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=50000,label='testpar')
 
 ## nshuffles = 100 * 5e3
 ## 3 -> abs.tol=1e-52
