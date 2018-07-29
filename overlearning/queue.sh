@@ -7,8 +7,8 @@
 ## SBATCH --time 10:00:00
 # Redirect stderr and stdout to the same file:
 # %A will be replaced by the job ID and %a by the array index
-#SBATCH -o outjob2.out
-#SBATCH -e outjob2.out
+#SBATCH -o outjobtp.out
+#SBATCH -e outjobtp.out
 # Send email notifications
 ## SBATCH --mail-type=ALL
 # We request an exclusive node for every job in the array
@@ -26,4 +26,4 @@
 # we use slurm's environment variables to create unique output files and echo the name of the executing node in that file
 ##module load anaconda
 ##source activate r
-srun Rscript job2.R
+srun Rscript job3.R
