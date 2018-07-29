@@ -144,25 +144,17 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 ## 3 -> abs.tol=1e-52
 ## std100 -> prior with std 100
 
-recalculate <- function(datafile,nsamples,nshuffles){
+recalculate <- function(label,nsamples,nshuffles){
     message('reading data...')
-    data <- readRDS(datafile)
-    
-    message('starting parallel calculations...')
-    cl <- makeForkCluster(20)
-    registerDoParallel(cl)
-
-    allres <- foreach(s=1:nshuffles) %dopar% {
-        res <- data[[s]]
-        list(res$logevidences,res$probs)
-    }
-    rm(data)
-    stopCluster(cl)
+    lallres <- do.call(rbind,readRDS(paste0('_results_',label,'_',nsamples,'_',nshuffles,'.rds')))
     message('...done')
     
-    lallres <- do.call(rbind,allres)
-    
-    alllogevidences <- unlist(lallres[,1])
+    alllikelihood <- unlist(lallres[,1])
+    dim(alllikelihood) <- c(2,2,nsamples,nshuffles)
+    avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean,na.rm=T)
+    avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean,na.rm=T)
+
+    alllogevidences <- unlist(lallres[,4])
     dim(alllogevidences) <- c(nsamples,nshuffles)
     avglogevidence <- apply(alllogevidences,1,mean,na.rm=T)
 
@@ -170,7 +162,9 @@ recalculate <- function(datafile,nsamples,nshuffles){
     dim(allprobs) <- c(2,nsamples,nshuffles)
     avgprobs <- apply(allprobs,c(1,2),mean,na.rm=T)
 
-    write.table(avglogevidence,paste0('logevna_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avglikelihood1,paste0('testlh1_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    write.table(avglogevidence,paste0('nalogev_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     write.table(avgprobs,paste0('probs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
     message('Finished.')
