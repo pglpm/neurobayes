@@ -156,6 +156,7 @@ recalculate <- function(datafile,nsamples,nshuffles){
         res <- data[[s]]
         list(res$logevidences,res$probs)
     }
+    rm(data)
     stopCluster(cl)
     message('...done')
     
