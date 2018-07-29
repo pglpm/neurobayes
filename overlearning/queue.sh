@@ -1,6 +1,6 @@
 #!/bin/bash
 # Set the name of the job
-#SBATCH --job-name plinkinetti13
+#SBATCH --job-name testparallel
 # Launch an array of 100 jobs
 ## SBATCH --array 1-10
 # Specify a time limit
