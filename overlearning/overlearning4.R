@@ -115,16 +115,16 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
     
     alllikelihood <- unlist(lallres[,1])
     dim(alllikelihood) <- c(2,2,nsamples,nshuffles)
-    avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean)
-    avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean)
+    avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean,na.rm=T)
+    avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean,na.rm=T)
 
     allscores <- unlist(lallres[,2])
     dim(allscores) <- c(nsamples,nshuffles)
-    avgscore <- apply(allscores,1,mean)
+    avgscore <- apply(allscores,1,mean,na.rm=T)
 
     alllogevidences <- unlist(lallres[,3])
     dim(alllogevidences) <- c(nsamples,nshuffles)
-    avglogevidence <- apply(alllogevidences,1,mean)
+    avglogevidence <- apply(alllogevidences,1,mean,na.rm=T)
 
     saveRDS(lallres[,4],paste0('_results_',label,'_',nsamples,'_',nshuffles,'.rds'))
     write.table(avglikelihood1,paste0('lh1_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
@@ -143,3 +143,35 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
 ## nshuffles = 100 * 5e3
 ## 3 -> abs.tol=1e-52
 ## std100 -> prior with std 100
+
+recalculate <- function(datafile,nsamples,nshuffles){
+    message('reading data...')
+    data <- readRDS(datafile)
+    
+    message('starting parallel calculations...')
+    cl <- makeForkCluster(20)
+    registerDoParallel(cl)
+
+    allres <- foreach(s=1:nshuffles) %dopar% {
+        res <- data[[s]]
+        list(res$logevidences,res$probs)
+    }
+    stopCluster(cl)
+    message('...done')
+    
+    lallres <- do.call(rbind,allres)
+    
+    alllogevidences <- unlist(lallres[,1])
+    dim(alllogevidences) <- c(nsamples,nshuffles)
+    avglogevidence <- apply(alllogevidences,1,mean,na.rm=T)
+
+    allprobs <- unlist(lallres[,2])
+    dim(allprobs) <- c(2,nsamples,nshuffles)
+    avgprobs <- apply(allprobs,c(1,2),mean,na.rm=T)
+
+    write.table(avglogevidence,paste0('logevna_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avgprobs,paste0('probs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    message('Finished.')
+    NA
+}
