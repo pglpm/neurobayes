@@ -149,7 +149,7 @@ recalculate <- function(datafile,nsamples,nshuffles){
     data <- readRDS(datafile)
     
     message('starting parallel calculations...')
-    cl <- makeForkCluster(20)
+    cl <- makeForkCluster(10)
     registerDoParallel(cl)
 
     allres <- foreach(s=1:nshuffles) %dopar% {
