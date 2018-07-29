@@ -26,4 +26,4 @@
 # we use slurm's environment variables to create unique output files and echo the name of the executing node in that file
 ##module load anaconda
 ##source activate r
-srun Rscript job3.R
+srun Rscript job3p.R
