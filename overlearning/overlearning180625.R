@@ -102,6 +102,7 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
     res <- list()
     
     for(s in 1:nshuffles){
+        set.seed(seed+s)
         sdata <- data[,sample(1:nsamples)]
         res[[s]] <- prfromdata(sdata,priorf,pp)
 
@@ -127,8 +128,8 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp
     res
 }
 
-## pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
-##totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=100*5e3,label='std100')
+pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
+totals <- averagefromdata(pfreqs,prior,nsamples=100,nshuffles=5,label='matchtestserial')
 
 ## nshuffles = 100 * 5e3
 ## 3 -> abs.tol=1e-52
