@@ -1,4 +1,4 @@
-source('overlearning4.R')
+source('overlearning4s.R')
 
 pfreqs <- matrix(c(1,1,8,4,4,2),3,2)/10
 
