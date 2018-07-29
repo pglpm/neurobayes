@@ -1,0 +1,13 @@
+Loading required package: iterators
+Loading required package: parallel
+reading data...
+starting parallel calculations...
+slurmstepd: Step 275525.0 exceeded memory limit (22114476 > 20480000), being killed
+slurmstepd: *** STEP 275525.0 CANCELLED AT 2018-07-29T22:24:04 ***
+slurmstepd: Exceeded job memory limit
+slurmstepd: Exceeded job memory limit
+srun: Job step aborted: Waiting up to 2 seconds for job step to finish.
+srun: got SIGCONT
+slurmstepd: *** JOB 275525 CANCELLED AT 2018-07-29T22:24:04 ***
+srun: forcing job termination
+srun: error: compute-0-0: task 0: Killed
