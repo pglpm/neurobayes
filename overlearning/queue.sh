@@ -1,24 +1,24 @@
 #!/bin/bash
 # Set the name of the job
-#SBATCH --job-name testserial
+#SBATCH --job-name sd100o
 # Launch an array of 100 jobs
 ## SBATCH --array 1-10
 # Specify a time limit
 ## SBATCH --time 10:00:00
 # Redirect stderr and stdout to the same file:
 # %A will be replaced by the job ID and %a by the array index
-#SBATCH -o outjobts.out
-#SBATCH -e outjobts.out
+#SBATCH -o _outsd100o.out
+#SBATCH -e outsd100o.out
 # Send email notifications
 ## SBATCH --mail-type=ALL
 # We request an exclusive node for every job in the array
 ## SBATCH --exclusive
-# and reserve 10GB of memory
-#SBATCH --mem=10000
+# reserve MB of memory
+#SBATCH --mem=20000
 # Specify the number of tasks (processes)
 #SBATCH --ntasks 1
 # Our job is multithreaded, so we ask 4 CPUs per process
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=21
 # So, in total we will have 4x8 CPUs for us
 ## module load nest/2.10.0
 ##################################################################
@@ -26,4 +26,4 @@
 # we use slurm's environment variables to create unique output files and echo the name of the executing node in that file
 ##module load anaconda
 ##source activate r
-srun Rscript job3s.R
+srun Rscript jobstd100o.R
