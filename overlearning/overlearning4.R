@@ -112,6 +112,10 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nsubsamples=NULL,nshuffle
         set.seed(seed+s)
         sdata <- data[,sample(1:nsamples)[1:nsubsamples]]
         res <- prfromdata(sdata,priorf,pp)
+        if(s==1){
+            write.table(res$finfreq,paste0('finalfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+            write.table(pfreqs,paste0('targetfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+        }
         list(res$likelihoods, res$scores, res$logevidences,res$probs,res$surprises)
     }
     stopCluster(cl)
@@ -145,6 +149,8 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nsubsamples=NULL,nshuffle
     dim(allsurprises) <- c(nsamples,nshuffles)
     avgsurprise <- apply(allsurprises,1,mean,na.rm=T)
     sdsurprise <- apply(allsurprises,1,sd,na.rm=T)
+
+    message('saving data...')
     
     saveRDS(lallres,paste0('_results_',label,'_',nsamples,'_',nshuffles,'.rds'))
 
