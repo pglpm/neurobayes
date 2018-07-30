@@ -96,7 +96,7 @@ for(i in 1:2){
     data[2,data[1,]==i] <- sample(1:3,le[i],replace=T,prob=pfreqs[,i])}
     data}
 
-averagefromdata <- function(pfreqs,priorf,nsamples=100,nsubsamples=NULL,nshuffles=100,label='',pp=rep(1/2,2),seed=999){
+averagefromdata <- function(pfreqs,priorf,nsamples=100,nsubsamples=NULL,nshuffles=100,label='',pp=rep(1/2,2),seed=999,cores=20){
     if(label==''){label=format(Sys.time(),'%y%m%dT%H%M')}
     if(is.null(nsubsamples)){nsubsamples <- nsamples}
     set.seed(seed)
@@ -105,7 +105,7 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nsubsamples=NULL,nshuffle
     data <- generatedata(nsamples,pfreqs,pp)
 
     message('starting parallel calculations...')
-    cl <- makeForkCluster(20)
+    cl <- makeForkCluster(cores)
     registerDoParallel(cl)
 
     allres <- foreach(s=1:nshuffles) %dopar% {
