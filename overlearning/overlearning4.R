@@ -173,8 +173,6 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nsubsamples=NULL,nshuffle
     write.table(avgsurprise,paste0('avgsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     write.table(sdsurprise,paste0('sdsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
-    write.table(lallres[,4][[1]]$finfreq,paste0('finalfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-
     message('Finished.')
     lallres
 }
