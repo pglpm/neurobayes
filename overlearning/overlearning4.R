@@ -234,9 +234,9 @@ averagenewdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp=
     sdsurprise <- apply(allsurprises,1,sd,na.rm=T)
 
     allfreqs <- unlist(lallres[,6])
-    dim(allfreqs) <- c(2,3,nsamples,nshuffles)
-    avgfreqs <- apply(allfreqs,c(1,2,3),mean,na.rm=T)
-    sdfreqs <- apply(allfreqs,c(1,2,3),sd,na.rm=T)
+    dim(allfreqs) <- c(2,3,nshuffles)
+    avgfreqs <- apply(allfreqs,c(1,2),mean,na.rm=T)
+    sdfreqs <- apply(allfreqs,c(1,2),sd,na.rm=T)
 
     message('saving data...')
     
