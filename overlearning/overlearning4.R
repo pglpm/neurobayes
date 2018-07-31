@@ -184,6 +184,90 @@ averagefromdata <- function(pfreqs,priorf,nsamples=100,nsubsamples=NULL,nshuffle
 ## 3 -> abs.tol=1e-52
 ## std100 -> prior with std 100
 
+
+averagenewdata <- function(pfreqs,priorf,nsamples=100,nshuffles=100,label='',pp=rep(1/2,2),seed=999,cores=20){
+    if(label==''){label=format(Sys.time(),'%y%m%dT%H%M')}
+#    pb <- txtProgressBar(1,nshuffles,1,style=3)
+
+    write.table(pfreqs,paste0('targetfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    message('starting parallel calculations...')
+    cl <- makeForkCluster(cores)
+    registerDoParallel(cl)
+
+    allres <- foreach(s=1:nshuffles) %dopar% {
+        set.seed(seed+s)
+        sdata <- generatedata(nsamples,pfreqs,pp)
+        res <- prfromdata(sdata,priorf,pp)
+        list(res$likelihoods, res$scores, res$logevidences, res$probs, res$surprises, res$finfreq)
+    }
+    stopCluster(cl)
+    message('...done')
+    
+    lallres <- do.call(rbind,allres)
+    
+    alllikelihood <- unlist(lallres[,1])
+    dim(alllikelihood) <- c(2,2,nsamples,nshuffles)
+    avglikelihood1 <- apply(alllikelihood[1,,,],c(1,2),mean,na.rm=T)
+    avglikelihood2 <- apply(alllikelihood[2,,,],c(1,2),mean,na.rm=T)
+    sdlikelihood1 <- apply(alllikelihood[1,,,],c(1,2),sd,na.rm=T)
+    sdlikelihood2 <- apply(alllikelihood[2,,,],c(1,2),sd,na.rm=T)
+
+    allscores <- unlist(lallres[,2])
+    dim(allscores) <- c(nsamples,nshuffles)
+    avgscore <- apply(allscores,1,mean,na.rm=T)
+    sdscore <- apply(allscores,1,sd,na.rm=T)
+
+    alllogevidences <- unlist(lallres[,3])
+    dim(alllogevidences) <- c(nsamples,nshuffles)
+    avglogevidence <- apply(alllogevidences,1,mean,na.rm=T)
+    sdlogevidence <- apply(alllogevidences,1,sd,na.rm=T)
+
+    allprobs <- unlist(lallres[,4])
+    dim(allprobs) <- c(2,nsamples,nshuffles)
+    avgprobs <- apply(allprobs,c(1,2),mean,na.rm=T)
+    sdprobs <- apply(allprobs,c(1,2),sd,na.rm=T)
+
+    allsurprises <- unlist(lallres[,5])
+    dim(allsurprises) <- c(nsamples,nshuffles)
+    avgsurprise <- apply(allsurprises,1,mean,na.rm=T)
+    sdsurprise <- apply(allsurprises,1,sd,na.rm=T)
+
+    allfreqs <- unlist(lallres[,6])
+    dim(allfreqs) <- c(2,3,nsamples,nshuffles)
+    avgfreqs <- apply(allfreqs,c(1,2,3),mean,na.rm=T)
+    sdfreqs <- apply(allfreqs,c(1,2,3),sd,na.rm=T)
+
+    message('saving data...')
+    
+    saveRDS(lallres,paste0('_results_',label,'_',nsamples,'_',nshuffles,'.rds'))
+
+    write.table(avglikelihood1,paste0('avglh1_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdlikelihood1,paste0('sdlh1_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    
+    write.table(avglikelihood2,paste0('avglh2_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdlikelihood2,paste0('sdlh2_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    
+    write.table(avgscore,paste0('avgscores_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdscore,paste0('sdscores_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    
+    write.table(avglogevidence,paste0('avglogev_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdlogevidence,paste0('sdlogev_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    write.table(avgprobs,paste0('avgprobs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdprobs,paste0('sdprobs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    write.table(avgsurprise,paste0('avgsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdsurprise,paste0('sdsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    write.table(avgfreqs,paste0('avgfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdfreqs,paste0('sdfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    message('Finished.')
+    lallres
+}
+
 recalculate <- function(label,nsamples,nshuffles){
     message('reading data...')
     lallres <- do.call(rbind,readRDS(paste0('_results_',label,'_',nsamples,'_',nshuffles,'.rds')))
