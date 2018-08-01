@@ -42,6 +42,8 @@ pr1 <- function(t){c(1/(1+exp(2*t)+exp(t)), 1/(exp(-2*t)+exp(-t)+1), 1/(exp(-t)+
 
 pr2 <- function(t){c(1/(1+exp(t))^2, 1/(1+exp(-t))^2, 1/(1+cosh(t)))}
 
+pr3 <- function(t){c(1/(1+5*exp(t)+exp(2*t)), 1/(1+5*exp(-t)+exp(-2*t)), 5/(5+exp(-t)+exp(t)))}
+
 prior2 <- function(t){dnorm(t,mean=0,sd=100)}
 
 prfromdata <- function(data,priorf,pr,pp=rep(1/2,2)){
