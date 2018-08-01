@@ -6,4 +6,4 @@ pfreqs <- matrix(c(
 ),3,2)/11
 
 ## nshuffles = 100 * 5e3
-totals <- averagenewdata(pfreqs=pfreqs,priorf=prior2,pr=pr3,nsamples=100,nshuffles=5000,label='sd100o4near',cores=20)
+totals <- averagenewdata(pfreqs=pfreqs,priorf=prior2,pr=pr3,nsamples=100,nshuffles=500,label='sd100o4near',cores=20)
