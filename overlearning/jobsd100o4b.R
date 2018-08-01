@@ -1,9 +1,11 @@
 source('overlearning4.R')
 
 pfreqs <- matrix(c(
-    c(1/2,1/2)*9/11, 2/11,
-    c(1/2,1/2)*2/11, 9/11
+    c(1/2,1/2)*1/4, 3/4,
+    c(1/2,1/2)*4/5, 1/5
 ),3,2)
 
+prior3 <- function(t){dnorm(t,mean=0,sd=0.1)}
+
 ## nshuffles = 100 * 5e3
-totals <- averagenewdata(pfreqs=pfreqs,priorf=prior2,pr=pr3,nsamples=100,nshuffles=500,label='sd100o4near',cores=20)
+totals <- averagenewdata(pfreqs=pfreqs,priorf=prior3,pr=pr2,nsamples=100,nshuffles=500,label='sd05o5',cores=20)
