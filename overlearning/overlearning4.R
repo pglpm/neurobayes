@@ -247,7 +247,7 @@ averagenewdata <- function(pfreqs,priorf,pr,nsamples=100,nshuffles=100,label='',
     write.table(pfreqs,paste0('targetfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
     message('starting calculations...')
-    if(is.integer(cores) && cores>1){
+    if(cores>1){
         message('in parallel')
         cl <- makeForkCluster(cores)
         registerDoParallel(cl)
