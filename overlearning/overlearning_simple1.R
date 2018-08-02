@@ -161,6 +161,9 @@ averagenewdata <- function(pp,priorf,pr,nsamples,nshuffles=2,label='',seed=999,c
     write.table(avgsurprise,paste0('avgsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     write.table(sdsurprise,paste0('sdsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
+    write.table(allsurprises[1:15,],paste0('allsurprises_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    
     write.table(avghit,paste0('avghit_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     write.table(sdhit,paste0('sdhit_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
