@@ -132,6 +132,9 @@ averagenewdata <- function(pp,priorf,pr,nsamples,nshuffles=2,label='',seed=999,c
     avgsurprise <- apply(allsurprises,1,mean,na.rm=T)
     sdsurprise <- apply(allsurprises,1,sd,na.rm=T)
 
+    avghit <- apply(exp(-allsurprises),1,mean,na.rm=T)
+    sdhit <- apply(exp(-allsurprises),1,sd,na.rm=T)
+
     alllogevidences <- unlist(lallres[,4])
     dim(alllogevidences) <- c(nsamples,nshuffles)
     avglogevidence <- apply(alllogevidences,1,mean,na.rm=T)
@@ -157,6 +160,9 @@ averagenewdata <- function(pp,priorf,pr,nsamples,nshuffles=2,label='',seed=999,c
 
     write.table(avgsurprise,paste0('avgsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     write.table(sdsurprise,paste0('sdsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+
+    write.table(avghit,paste0('avghit_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdhit,paste0('sdhit_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
     write.table(avgfreqs,paste0('avgfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     write.table(sdfreqs,paste0('sdfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
