@@ -1,8 +1,8 @@
 source('overlearning_simple1.R')
 
-pp1 <- c(c(1/2,1/2)*3/4,1/4)
+pp1 <- c(c(1/2,1/2)*4/4, 0/4)
 
-prior1 <- function(t){dnorm(t,mean=0,sd=100)}
+prior1 <- function(t){dnorm(t,mean=0,sd=10)}
 
 
-test <- averagenewdata(pp=pp1,priorf=prior1,pr=pr2,nsamples=100,nshuffles=1000,label='testsimple1',cores=20)
+test <- averagenewdata(pp=pp1,priorf=prior1,pr=pr2,nsamples=100,nshuffles=5000,label='testsimple2',cores=20)
