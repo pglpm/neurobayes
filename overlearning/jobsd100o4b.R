@@ -8,4 +8,4 @@ pfreqs <- matrix(c(
 prior3 <- function(t){dnorm(t,mean=0,sd=0.1)}
 
 ## nshuffles = 100 * 5e3
-totals <- averagenewdata(pfreqs=pfreqs,priorf=prior3,pr=pr2,nsamples=100,nshuffles=500,label='sd05o5',cores=20)
+totals <- averagenewdata(pfreqs=pfreqs,priorf=prior3,pr=pr2,nsamples=100,nshuffles=5000,label='sd05o5',cores=20)
