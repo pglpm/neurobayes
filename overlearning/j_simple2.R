@@ -9,4 +9,4 @@ ext <- 11
 pr0  <- function(t){c(1/(1+ext*exp(t)+exp(2*t)), 1/(1+ext*exp(-t)+exp(-2*t)),
 ext/(ext+exp(-t)+exp(t)))}
 
-test <- averagenewdata(pp=pp0,priorf=prior0,pr=pr0,nsamples=100,nshuffles=5,label='testsimple5npc',cores=20,jobname='j_simple2')
+test <- averagenewdata(pp=pp0,priorf=prior0,pr=pr0,nsamples=100,nshuffles=1e5,label='testsimple5npc',cores=20,jobname='j_simple2')
