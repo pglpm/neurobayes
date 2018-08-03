@@ -92,9 +92,11 @@ prfromdatafull <- function(data,priorf,pr){
 
 generatedata <- function(nsamples,pp){sample(1:3,nsamples,replace=T,prob=pp)}
 
-averagenewdata <- function(pp,priorf,pr,nsamples,nshuffles=2,label='',seed=999,cores=1){
+averagenewdata <- function(pp,priorf,pr,nsamples,nshuffles=2,label='',seed=999,cores=1,jobname=NULL){
     if(label==''){label=format(Sys.time(),'%y%m%dT%H%M')}
 #    pb <- txtProgressBar(1,nshuffles,1,style=3)
+
+    if(is.character(jobname)){file.copy(paste0(jobname,'.R'),paste0('defs_',label,'.R.txt'))}
 
     write.table(pp,paste0('targetfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
