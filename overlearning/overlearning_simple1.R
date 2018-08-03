@@ -94,11 +94,12 @@ generatedata <- function(nsamples,pp){sample(1:3,nsamples,replace=T,prob=pp)}
 
 averagenewdata <- function(pp,priorf,pr,nsamples,nshuffles=2,label='',seed=999,cores=1,jobname=NULL){
     if(label==''){label=format(Sys.time(),'%y%m%dT%H%M')}
-#    pb <- txtProgressBar(1,nshuffles,1,style=3)
+    ## pb <- txtProgressBar(1,nshuffles,1,style=3)
+    label <- paste0(label,'_',nsamples,'_',nshuffles)
 
     if(is.character(jobname)){file.copy(paste0(jobname,'.R'),paste0('defs_',label,'.R.txt'))}
 
-    write.table(pp,paste0('targetfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(pp,paste0('targetfreqs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
     message('starting calculations...')
     if(cores>1){
@@ -149,28 +150,28 @@ averagenewdata <- function(pp,priorf,pr,nsamples,nshuffles=2,label='',seed=999,c
 
     message('saving data...')
     
-    saveRDS(lallres,paste0('_results_',label,'_',nsamples,'_',nshuffles,'.rds'))
+    saveRDS(lallres,paste0('_results_',label,'.rds'))
 
-    write.table(avgscore,paste0('avgscores_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-    write.table(sdscore,paste0('sdscores_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avgscore,paste0('avgscores_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdscore,paste0('sdscores_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     
-    write.table(avglogevidence,paste0('avglogev_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-    write.table(sdlogevidence,paste0('sdlogev_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avglogevidence,paste0('avglogev_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdlogevidence,paste0('sdlogev_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
-    write.table(avgprobs,paste0('avgprobs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-    write.table(sdprobs,paste0('sdprobs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avgprobs,paste0('avgprobs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdprobs,paste0('sdprobs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
-    write.table(avgsurprise,paste0('avgsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-    write.table(sdsurprise,paste0('sdsurprise_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avgsurprise,paste0('avgsurprise_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdsurprise,paste0('sdsurprise_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
-    write.table(allsurprises[1:15,],paste0('allsurprises_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(allsurprises[1:15,],paste0('allsurprises_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
     
-    write.table(avghit,paste0('avghit_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-    write.table(sdhit,paste0('sdhit_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avghit,paste0('avghit_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdhit,paste0('sdhit_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
-    write.table(avgfreqs,paste0('avgfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-    write.table(sdfreqs,paste0('sdfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(avgfreqs,paste0('avgfreqs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    write.table(sdfreqs,paste0('sdfreqs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
     message('Finished.')
     list(avgscore=avgscore,avglogevidence=avglogevidence,avgprobs=avgprobs,avgsurprise=avgsurprise,avgfreqs=avgfreqs)
