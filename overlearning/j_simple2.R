@@ -1,10 +1,12 @@
 source('overlearning_simple1.R')
 
-pp1 <- c(c(1/2,1/2)*4/4, 0/4)
+pp0 <- c(c(1/2,1/2)*2/3, 1/3)
 
-prior4 <- function(t){(dnorm(t,mean=5,sd=0.5)+dnorm(t,mean=-5,sd=0.5))/2}
+prior0 <- function(t){(dnorm(t,mean=5,sd=0.5)+dnorm(t,mean=-5,sd=0.5))/2}
 
-pr5  <- function(t){c(1/(1+6*exp(t)+exp(2*t)), 1/(1+6*exp(-t)+exp(-2*t)),
-6/(6+exp(-t)+exp(t)))}
+ext <- 11
 
-test <- averagenewdata(pp=pp1,priorf=prior4,pr=pr5,nsamples=20,nshuffles=32768*5,label='testsimple4np',cores=20)
+pr0  <- function(t){c(1/(1+ext*exp(t)+exp(2*t)), 1/(1+ext*exp(-t)+exp(-2*t)),
+ext/(ext+exp(-t)+exp(t)))}
+
+test <- averagenewdata(pp=pp0,priorf=prior0,pr=pr0,nsamples=100,nshuffles=5,label='testsimple5npc',cores=20,jobname='j_simple2')
