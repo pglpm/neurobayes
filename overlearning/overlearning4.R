@@ -242,9 +242,11 @@ averagefromdata <- function(pfreqs,priorf,pr,nsamples=100,nsubsamples=NULL,nshuf
 ## std100 -> prior with std 100
 
 
-averagenewdata <- function(pfreqs,priorf,pr,nsamples=100,nshuffles=100,label='',pp=rep(1/2,2),seed=999,cores=1){
+averagenewdata <- function(pfreqs,priorf,pr,nsamples=100,nshuffles=100,label='',pp=rep(1/2,2),seed=999,cores=1,jobname=NULL){
     if(label==''){label=format(Sys.time(),'%y%m%dT%H%M')}
 #    pb <- txtProgressBar(1,nshuffles,1,style=3)
+
+        if(is.character(jobname)){file.copy(paste0(jobname,'.R'),paste0('defs_',label,'.R.txt'))}
 
     write.table(pfreqs,paste0('targetfreqs_',label,'_',nsamples,'_',nshuffles,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
 
