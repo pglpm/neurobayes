@@ -244,7 +244,7 @@ averagenewdata <- function(relfreqs,ndata,nsamples,k0=1,n0=1,probs2save=NULL,sam
     NULL
 }
 
-
+if(FALSE){
 stop('OK: end of script')
 
 
@@ -432,4 +432,5 @@ debugprfromdata <- function(data,priorf,pr,pp=rep(1/2,2)){
         ##print(integ);print(likelihood[,,d]);print(fr);print(evidence);print('')
     }
     list(likelihoods=likelihood,probs=prob,scores=score,surprises=surprise,logevidences=logevidences,finfreq=fr)
+}
 }
