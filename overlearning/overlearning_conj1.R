@@ -196,8 +196,7 @@ averagenewdata <- function(relfreqs,ndata,nsamples,k0=1,n0=1,probs2save=NULL,sam
     stdsurprises <- apply(-log(alloutcomeprobs),1,sd,na.rm=T)
     write.table(stdsurprises,paste0('stdsurprises_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     rm(stdsurprises)
-    write.table(alloutcomeprobs[probs2save,samples2save],paste0('probsequence_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
-
+    write.table(alloutcomeprobs[probs2save,samples2save],paste0('sequenceprobs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     rm(alloutcomeprobs)
 
     alloutcomemlprobs <- unlist(allresults[,4])
@@ -208,6 +207,13 @@ averagenewdata <- function(relfreqs,ndata,nsamples,k0=1,n0=1,probs2save=NULL,sam
     stdoutcomemlprobs <- apply(alloutcomemlprobs,1,sd,na.rm=T)
     write.table(stdoutcomemlprobs,paste0('stdoutcomemlprobs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     rm(stdoutcomemlprobs)
+    avgmlsurprises <- apply(-log(alloutcomemlprobs),1,mean,na.rm=T)
+    write.table(avgmlsurprises,paste0('avgmlsurprises_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    rm(avgmlsurprises)
+    stdmlsurprises <- apply(-log(alloutcomemlprobs),1,sd,na.rm=T)
+    write.table(stdmlsurprises,paste0('stdmlsurprises_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
+    rm(stdmlsurprises)
+    write.table(alloutcomemlprobs[probs2save,samples2save],paste0('sequencemlprobs_',label,'.csv'),sep=',',row.names=F,col.names=F,na='Null')
     rm(alloutcomemlprobs)
     
     allscores <- unlist(allresults[,5])
