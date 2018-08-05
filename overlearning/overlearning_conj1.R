@@ -136,7 +136,7 @@ averagenewdata <- function(relfreqs,ndata,nsamples,k0=1,n0=1,probs2save=NULL,sam
     label <- paste0(label,'_',ndata,'_',nsamples)
 
     if(is.null(probs2save)){probs2save <- 1:min(15,ndata)}
-    if(is.null(samples2save)){samples2save <- nsamples}
+    if(is.null(samples2save)){samples2save <- 1:nsamples}
 
     if(is.character(jobname)){file.copy(paste0(jobname,'.R'),paste0('defs_',label,'.R.txt'))}
 
