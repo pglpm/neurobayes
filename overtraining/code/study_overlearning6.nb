@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    353516,       7264]
+NotebookDataLength[    353523,       7264]
 NotebookOptionsPosition[    343252,       7090]
-NotebookOutlinePosition[    343590,       7105]
-CellTagsIndexPosition[    343547,       7102]
+NotebookOutlinePosition[    343597,       7105]
+CellTagsIndexPosition[    343554,       7102]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -7088,8 +7088,8 @@ Cell[BoxData["\<\"overlearning2.pdf\"\>"], "Output",
 15695b77c4b9"]
 }, Open  ]]
 },
-WindowSize->{640, Automatic},
-WindowMargins->{{584, 48}, {0, 0}},
+WindowSize->{640, 755},
+WindowMargins->{{Automatic, 9}, {Automatic, 0}},
 FrontEndVersion->"11.2 for Microsoft Windows (32-bit) (September 10, 2017)",
 StyleDefinitions->"Default.nb"
 ]
@@ -7174,7 +7174,7 @@ Cell[166648, 3360, 849, 20, 52, "Output",ExpressionUUID->"ca4f96dc-c696-450c-813
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[167534, 3385, 479, 16, 31, "Input",ExpressionUUID->"b33824c8-4477-40b5-8630-bdaf68f0ef1b"],
-Cell[168016, 3403, 822, 20, 66, "Output",ExpressionUUID->"c51afdf3-bda1-4f0c-858b-67f95ad11e84"]
+Cell[168016, 3403, 822, 20, 52, "Output",ExpressionUUID->"c51afdf3-bda1-4f0c-858b-67f95ad11e84"]
 }, Open  ]],
 Cell[168853, 3426, 323, 8, 28, "Input",ExpressionUUID->"81ddf160-85fe-4560-859c-7efe5237f1f0"],
 Cell[CellGroupData[{
@@ -7196,7 +7196,7 @@ Cell[174424, 3594, 323, 8, 38, "Output",ExpressionUUID->"7893a132-57e6-46c9-8e17
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[174784, 3607, 284, 6, 31, "Input",ExpressionUUID->"dc88689a-6b1e-4b22-b728-9048685e633e"],
-Cell[175071, 3615, 306, 9, 46, "Output",ExpressionUUID->"f2532bd0-6794-427a-b05d-4e3cb768eeb4"]
+Cell[175071, 3615, 306, 9, 32, "Output",ExpressionUUID->"f2532bd0-6794-427a-b05d-4e3cb768eeb4"]
 }, Open  ]],
 Cell[175392, 3627, 617, 18, 50, "Input",ExpressionUUID->"886b771c-5658-4bd6-a4c7-49215356577f"],
 Cell[176012, 3647, 243, 6, 28, "Input",ExpressionUUID->"c26b41c1-ecab-48a5-b736-69f47208a03a"],

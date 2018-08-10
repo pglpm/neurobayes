@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2018-08-04T11:35:14+0200
+%% Last-Updated: 2018-08-10T14:16:01+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -429,6 +429,7 @@
 @String{ijaemm = {Int.\ J. Appl.\ Electromagnetics in Materials}}
 @String{ijar = {Int.\ J. Approximate Reasoning}}
 @String{ijc = {Int.\ J. Contr.}}
+@String{ijcai = {Int.\ Joint Conf.\ Artif.\ Intell.\ (IJCAI)}}
 @String{ijcfd = {Int.\ J. Comput.\ Fluid Dynam.}}
 @String{ijcms = {Int.\ J.  Contemp.\ Math.\ Sciences}}
 @String{ijcnn = {Int.\ Joint Conf.\ Neural Networks}}
@@ -462,6 +463,7 @@
 @String{imajna = {IMA J. Num.\ Anal.}}
 @String{ip = {Inverse Probl.}}
 @String{ipm = {Inform.\ Process.\ Manag.}}
+@String{iretct = {IRE Trans.\ Circ.\ Theory}}
 @String{iretit = {IRE Trans.\ Inform.\ Theory}}
 @String{is = {Inf.\ Sci.}}
 @String{isis = {Isis}}
@@ -728,6 +730,7 @@
 @String{npb = {Nucl.\ Phys.\ B}}
 @String{npbps = {Nucl.\ Phys.\ B Proc.\ Suppl.}}
 @String{npjsp = {NPJ Schizophr.}}
+@String{npl = {Neural Process.\ Lett.}}
 @String{nrl = {Nav.\ Res.\ Logist.}}
 @String{ns = {New Scientist}}
 @String{nw = {Naturwissenschaften}}
@@ -8456,6 +8459,17 @@ pages =	       {69--74},
 keywords =     {quantum field theory}
 }
 
+@Article{baumetal1989,
+author =       {Eric B. Baum and David Haussler},
+title =	       {What Size Net Gives Valid Generalization?},
+journal =      ncomp,
+year =	       {1989},
+volume =       {1},
+number =       {1},
+pages =	       {151--160},
+keywords =     {probability theory, deep networks, overtraining}
+}
+
 @Book{baumgarteetal2010,
 author =       {Thomas W. Baumgarte and Stuart L. Shapiro},
 title =	       {Numerical Relativity: Solving Einstein's Equations on the Computer},
@@ -9910,6 +9924,17 @@ number =       {1},
 pages =	       {1--18},
 keywords =     {evidence, Bayesian probability theory, improper priors, model comparison},
 note =	       {\url{https://www2.stat.duke.edu/~berger/papers/medianibf.html}}
+}
+
+@Book{bergeretal1999,
+editor =       {U. Berger and H. Schwichtenberg},
+title =	       {Computational Logic},
+publisher =    {Springer},
+year =	       {1999},
+volume =       {165},
+series =       {NATO ASI series F: computer and systems sciences},
+address =      {Berlin},
+keywords =     {proof theory, history of logic}
 }
 
 @Article{bergeretal2008,
@@ -11480,6 +11505,14 @@ year =	       {1986},
 volume =       {58},
 number =       {4},
 pages =	       {801--976}
+}
+
+@Book{binderetal2009,
+editor =       {Marc D. Binder and Nobutaka Hirokawa and Uwe Windhorst},
+title =	       {Encyclopedia of Neuroscience},
+publisher =    {Springer},
+year =	       {2009},
+address =      {Berlin}
 }
 
 @Book{binghametal2010,
@@ -21294,6 +21327,18 @@ year =	       {2008},
 volume =       {970},
 pages =	       {39--90},
 keywords =     {phase transitions, statistical mechanics, non-extensivity}
+}
+
+@Article{cheeseman1985,
+author =       {Peter Cheeseman},
+title =	       {In Defense of Probability},
+journal =      ijcai,
+year =	       {1985},
+volume =       {9},
+number =       {2},
+pages =	       {1002--1009},
+keywords =     {probability theory, artificial intelligence, inference, fuzzy logic, non-monotonic logic, Schafer-Dempster theory},
+note = 	       {\url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.13.2787&type=pdf}}
 }
 
 @Book{chen1974,
@@ -38728,7 +38773,7 @@ edition =      {reprint},
 keywords =     {energy, meaning of physical explanations},
 origdate =     {1985},
 note =	       {\enquote{as told to Ralph Leighton}, ed.\ by Edward Hutchings. First publ.\ 1985},
-mynote =       {\begin{quote}I don't know what's the matter with people: they don't learn by understanding; they learn by some other way -- by rote, or something. Their knowledge is so fragile!\end{quote} p.~23}
+mynote =       {\enquote{I don't know what's the matter with people: they don't learn by understanding; they learn by some other way -- by rote, or something. Their knowledge is so fragile!} p.~23}
 }
 
 @Book{feynman1985_r1990,
@@ -44325,17 +44370,12 @@ keywords =     {history of logic, history of mathematics}
 @InCollection{girard1999,
 author =       {Jean-Yves Girard},
 title =	       {On the meaning of logical rules {I}: syntax vs.\ semantics},
-booktitle =    {Computational Logic},
+booktitle =    {\citein{bergeretal1999}},
 pages =	       {215--272},
-publisher =    {Springer},
 year =	       {1999},
-editor =       {U. Berger and H. Schwichtenberg},
-volume =       {165},
-series =       {Computer and systems sciences},
-address =      {Berlin},
 note =	       {\url{http://iml.univ-mrs.fr/~girard/Articles.html}. See also \citebi{girard2000b}},
 keywords =     {history of logic},
-mynote =       {\begin{quote}we can conclude from the semantics that the syntax under modelization is bullshit\end{quote}, \sect~2.1. \begin{quote}Foreshadowed by the notion of \textlguillemets\emph{\langfrench{v{\'e}rit{\'e} de La Palisse}}\textrguillemets, whose prototype is \textlguillemets\emph{\langfrench{Un quart d'heure avant sa mort il {\'e}tait encore en vie}}\textrguillemets.\end{quote} footnote 9, \sect~2.3. \begin{quote}if everything useful were important, then we would spend our life speaking of \emph{soap} and other hygienic artefacts.\end{quote} \sect~2.3}
+mynote =       {\enquote{we can conclude from the semantics that the syntax under modelization is bullshit\end{quote}, \sect~2.1. \begin{quote}Foreshadowed by the notion of \textlguillemets\emph{\langfrench{v{\'e}rit{\'e} de La Palisse}}\textrguillemets, whose prototype is \textlguillemets\emph{\langfrench{Un quart d'heure avant sa mort il {\'e}tait encore en vie}}\textrguillemets.\end{quote} footnote 9, \sect~2.3. \begin{quote}if everything useful were important, then we would spend our life speaking of \emph{soap} and other hygienic artefacts.} \sect~2.3}
 }
 
 @InCollection{girard2000,
@@ -45171,6 +45211,16 @@ volume =       {15},
 number =       {3},
 pages =	       {220--232},
 keywords =     {probability theory, logic}
+}
+
+@Article{golomb1959,
+author =       {Solomon W. Golomb},
+title =	       {On the Classification of {Boolean} Functions},
+journal =      iretct,
+year =	       {1959},
+volume =       {6},
+number =       {5},
+pages =	       {176--186}
 }
 
 @Article{golse2011,
@@ -50468,6 +50518,17 @@ pages =	       {313--332},
 keywords =     {path integral, probability theory}
 }
 
+@Article{handetal2001,
+author =       {David J. Hand and Keming Yu},
+title =	       {Idiot's {Bayes} -- Not So Stupid After All?},
+journal =      isr,
+year =	       {2001},
+volume =       {69},
+number =       {3},
+pages =	       {385--398},
+keywords =     {machine learning, neural networks, probability theory}
+}
+
 @Misc{haneletal2011,
 author =       {Rudolf Hanel and Stefan Thurner},
 title =	       {When do generalized entropies apply? {How} phase space volume determines entropy},
@@ -51010,6 +51071,16 @@ journal =      prb,
 year =	       {1999},
 volume =       {60},
 pages =	       {3453}
+}
+
+@Article{harrison1964,
+author =       {Michael A. Harrison},
+title =	       {On the Classification of {Boolean} Functions by the General Linear and Affine Groups},
+journal =      jsiam,
+year =	       {1964},
+volume =       {12},
+number =       {2},
+pages =	       {285--299}
 }
 
 @Article{harrison1998,
@@ -54065,6 +54136,14 @@ volume =       {303},
 number =       {5786},
 pages =	       {504--507},
 keywords =     {hidden neurons, restricted Boltzmann machines, maximum-entropy}
+}
+
+@Misc{hintonetal2012,
+author =       {Geoffrey Hinton and Nitish Srivastava and Alex Krizhevsky and Ilya Sutskever and Ruslan Salakhutdinov},
+title =	       {Improving neural networks by preventing co-adaptation of feature detectors},
+year =	       {2012},
+note =	       {\arxiveprint{1207.0580}},
+keywords =     {Bayesian probability theory, dropout, deep learning, maximum-likelihood, exchangeability}
 }
 
 @Article{hioeetal1981,
@@ -73552,7 +73631,7 @@ note =	       {\url{http://www.inference.phy.cam.ac.uk/mackay/PhD.html}}
 
 @Article{mackay1992b,
 author =       {David J. C. MacKay},
-title =	       {A Practical Bayesian Framework for Backpropagation Networks},
+title =	       {A Practical {Bayesian} Framework for Backpropagation Networks},
 journal =      ncomp,
 year =	       {1992},
 volume =       {4},
@@ -82860,6 +82939,17 @@ pages =	       {128--150},
 keywords =     {probability theory, priors}
 }
 
+@Article{ngetal2001,
+author =       {Andrew Y. Ng and Michael I. Jordan},
+title =	       {On Discriminative vs. Generative Classifiers: A comparison of logistic regression and naive {Bayes}},
+journal =      nips,
+year =	       {2001},
+volume =       {14},
+pages =	       {841--848},
+keywords =     {machine learning, neural networks, probability theory},
+note = 	       {See also \citebi{xueetal2008}}
+}
+
 @Article{nguyenetal2012,
 author =       {H. Chau Nguyen and Johannes Berg},
 title =	       {Mean-Field Theory for the Inverse {Ising} Problem at Low Temperatures},
@@ -89312,6 +89402,17 @@ pages =	       {259--380},
 keywords =     {thermodynamics, statistical mechanics}
 }
 
+@Book{poincare1890_r2017,
+author =       {Henri Poincar{\'e}},
+title =	       {The Three-Body Problem and the Equations of Dynamics: Poincar{\'e}'s Foundational Work on Dynamical Systems Theory},
+publisher =    {Springer},
+year =	       {2017},
+series =       {Astrophysics and space science library},
+address =      {Cham},
+note =	       {Transl.\ by Bruce D. Popp. First publ.\ in French 1890},
+origdate =     {1890}
+}
+
 @Book{poincare1892_r1908,
 author =       {Henri Poincar{\'e}},
 title =	       {\langfrench{Thermodynamique}},
@@ -89322,6 +89423,18 @@ series =       {\langfrench{Cours de physique math{\'e}matique}},
 address =      {Paris},
 edition =      {second, rev.\ and corr.\ ed.},
 note =	       {Ed.\ by Jules Blondin; \url{http://gallica.bnf.fr/notice?N=FRBNF38933327}. First publ.\ 1892}
+}
+
+@Book{poincare1892_r2010,
+author =       {Henri Poincar{\'e}},
+title =	       {Papers on Topology: \emph{Analysis Situs} and Its Five Supplements},
+publisher =    {American Mathematical Society},
+year =	       {2010},
+volume =       {37},
+series =       {History of mathematics},
+address =      {Providence, USA},
+note =	       {Transl.\ by John Stillwell. First publ.\ in French 1892--1899. \url{https://www.maths.ed.ac.uk/~v1ranick/papers/poincare2009.pdf}},
+origdate =     {1892}
 }
 
 @Article{poincare1893,
@@ -89344,16 +89457,16 @@ pages =	       {26--34},
 keywords =     {the mathematical continuum}
 }
 
-@Book{poincare1896_r1987,
+@Book{poincare1896_r1912,
 author =       {Henri Poincar{\'e}},
 title =	       {\langfrench{Calcul des probabilit{\'e}s}},
-publisher =    {Gabay},
+publisher =    {Gauthier-Villars},
 origdate =     {1896},
-year =	       {1987},
+year =	       {1912},
 series =       {\langfrench{Les grands classiques Gauthier-Villars}},
 address =      {Paris},
 edition =      {second, rev.\ and augmented ed.},
-note =	       {\url{http://gallica.bnf.fr/document?O=N029064}. First publ.\ 1896}
+note =	       {Ed.\ by A. Quiquet. First publ.\ 1896. \url{http://henripoincarepapers.univ-lorraine.fr/}, \url{https://archive.org/details/poincare1896_r1912-Calcul_des_probabilites}}
 }
 
 @Article{poincare1899,
@@ -89518,6 +89631,16 @@ series =       {\langfrench{Biblioth{\`e}que des Annales des postes, t{\'e}l{\'e
 address =      {Paris},
 note =	       {\langfrench{suppl{\'e}ment aux Annales des postes, t{\'e}l{\'e}graphes et t{\'e}l{\'e}phones}; \url{http://gallica2.bnf.fr/ark:/12148/bpt6k54897523}},
 keywords =     {the dynamics of the electron}
+}
+
+@Book{poincare1913_r1958,
+author =       {Henri Poincar{\'e}},
+title =	       {The Value of Science},
+publisher =    {Dover},
+year =	       {1958},
+address =      {New York},
+note =	       {Authorized transl.\ with an introduction by G. B. Halsted. First publ.\ 1913},
+origdate =     {1913}
 }
 
 @Book{poincare1913_t1946,
@@ -90241,10 +90364,18 @@ keywords =     {probability theory},
 note =	       {\osfeprint{vsq5n}, \arxiveprint{1707.00624}}
 }
 
-@Misc{portamana2017c,
+@Misc{portamana2018,
 author =       {Porta Mana, Piero Giovanni Luca},
 title =	       {Model comparison and {Bayes} factors: what is a model?},
-year =	       {2017},
+year =	       {2018},
+keywords =     {evidence, Bayes factor, probability theory},
+note =	       {In preparation}
+}
+
+@Misc{portamana2018b,
+author =       {Porta Mana, Piero Giovanni Luca},
+title =	       {A geometric understanding of overtraining (and of its difference from overfitting)},
+year =	       {2018},
 keywords =     {evidence, Bayes factor, probability theory},
 note =	       {In preparation}
 }
@@ -96801,6 +96932,17 @@ year =	       {2002},
 volume =       {347},
 number =       {1--3},
 pages =	       {159--187}
+}
+
+@Book{russelletal2010,
+author =       {Stuart J. Russell and Peter Norvig},
+title =	       {Artificial Intelligence: A Modern Approach},
+publisher =    {Prentice Hall},
+year =	       {2010},
+address =      {Upper Saddle River, USA},
+edition =      {3},
+note =	       {Contributing writers: E. Davis D. D. Edwards, D. Forsyth, N. J. Hay, J. M. Malik, V. Mittal, M. Sahami, S. Thrun},
+keywords =     {probability theory}
 }
 
 @Misc{ryazanovetal2004,
@@ -104238,6 +104380,16 @@ title =	       {Doing it with Mirrors: Classical analogues for Black Hole radiat
 year =	       {1998},
 note =	       {\arxiveprint{gr-qc/9812087}},
 keywords =     {general relativity, quantum field theory}
+}
+
+@Article{srivastavaetal2014,
+author =       {Nitish Srivastava and Geoffrey Hinton and Alex Krizhevsky and Ilya Sutskever and Ruslan Salakhutdinov},
+title =	       {Dropout: A Simple Way to Prevent Neural Networks from Overfitting},
+journal =      jmlr,
+year =	       {2014},
+volume =       {15},
+pages =	       {1929--1958},
+keywords =     {Bayesian probability theory, deep learning, maximum-likelihood, exchangeability}
 }
 
 @Article{staalmarck1991,
@@ -118398,6 +118550,17 @@ volume =       {176},
 number =       {3--4},
 pages =	       {135--151},
 keywords =     {continuum mechanics, state}
+}
+
+@Article{xueetal2008,
+author =       {Jing-Hao Xue and D. Michael Titterington},
+title =	       {Comment on ``{On} Discriminative vs. Generative Classifiers: A Comparison of Logistic Regression and Naive {Bayes}''},
+journal =      npl,
+year =	       {2008},
+volume =       {28},
+pages =	       {169--187},
+note =	       {See \citebi{ngetal2001}},
+keywords =     {machine learning, neural networks, probability theory}
 }
 
 @Article{xueetal2010,

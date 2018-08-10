@@ -41,7 +41,7 @@ states <- 0:2
 
 ## normalization function of conjugate prior
 ## this is slower
-ibeta <- function(a,b){integrate(function(t){t^(a-1)*(1-t)^(b-1)},0,-1)$value}
+ibeta <- function(a,b){-integrate(function(t){t^(a-1)*(1-t)^(b-1)},-1,0)$value}
 qq2 <- function(k,n){(-1)^k*(ibeta(k, 1 - 2*n) + ibeta(-k + 2*n, 1 - 2*n))}
 
 ## this is faster
@@ -50,6 +50,144 @@ qq <- function(k,n){
     (-1)^(k+1)*(integrate(binte,-1,0,a=k,b=1-2*n)$value
     +integrate(binte,-1,0,a=2*n-k,b=1-2*n)$value)
 }
+
+qq5 <- function(k,n){
+(-1)^(2*n-k)*ibeta(2*n-k,1-2*n)+gamma(k)*hyperg_2F1_renorm(k,2*n,k+1,-1)
+}
+
+Gauss2F1 <- function(a,b,c,x){
+    if(x>=0 & x<1){
+        hyperg_2F1(a,b,c,x)
+    }else{
+            hyperg_2F1(c-a,b,c,1-1/(1-x))/(1-x)^b
+        }
+}
+
+bs.gmp <- function(u, v, m = 7, value = "exact") {
+    n <- 2^m
+    indexes <- 1:n
+    delta <- alpha <- as.bigz(u(indexes))
+    beta <- as.bigz(v(indexes))
+    j <- 1
+    l <- n
+    while (j < n) {
+        l <- l/2
+        odd <- 2 * c(1:l)
+        even <- odd - 1
+        alpha <- beta[odd] * alpha[even] + delta[even] * alpha[odd]
+        j <- 2 * j
+        beta <- beta[odd] * beta[even]
+        delta <- delta[even] * delta[odd]
+    }
+    Sn <- alpha/beta + 1
+    eval.Sn <- format(as.numeric(Sn), digits = 22)
+    out <- switch(value, eval = eval.Sn, exact = Sn, both = list(Sn = Sn, eval.Sn = eval.Sn))
+    return(out)
+}
+
+hypergeo_bs <- function(a1, a2, b1, b2, c1, c2, p, q, m) {
+    u <- function(i) c2 * (a1 + (i - 1) * a2) * (b1 + (i - 1) * b2) * p
+    v <- function(i) a2 * b2 * i * (c1 + (i - 1) * c2) * q
+    bs.gmp(u, v, m)
+}
+
+n.decimals <- function(x, tol = .Machine$double.eps) {
+    sapply(x, function(x) {
+        i <- 0
+        while (abs(x - round(x, i)) > tol) {
+            i <- i + 1
+        }
+        return(i)
+    })
+}
+irred.frac <- function(x, rnd = n.decimals(x)) {
+    b <- 10^rnd
+    a <- as.bigz(b * round(x, rnd))
+    num <- a/gcd.bigz(a, b)
+    den <- b/gcd.bigz(a, b)
+    list(num = num, den = den)
+}
+
+Hypergeometric2F1 <- function(a, b, c, z, m = 7, rnd.params = max(n.decimals(c(a, 
+    b, c))), rnd.z = n.decimals(z), check.cv = FALSE) {
+    frac.a <- irred.frac(a, rnd.params)
+    frac.b <- irred.frac(b, rnd.params)
+    frac.c <- irred.frac(c, rnd.params)
+    a1 <- frac.a$num
+    a2 <- frac.a$den
+    b1 <- frac.b$num
+    b2 <- frac.b$den
+    c1 <- frac.c$num
+    c2 <- frac.c$den
+    frac.z <- irred.frac(z, rnd.z)
+    p <- frac.z$num
+    q <- frac.z$den
+    out <- hypergeo_bs(a1, a2, b1, b2, c1, c2, p, q, m)
+    if (check.cv) {
+        x <- hypergeo_bs(a1, a2, b1, b2, c1, c2, p, q, m + 1)
+        cv <- x == out
+        out <- list(result = out, convergence = cv)
+        if (!cv) {
+            out$convergence <- paste(out$convergence, " - m=", m, " need to be increased", 
+                sep = "")
+        }
+    }
+    return(out)
+    return(a)
+}
+
+
+Gauss2F1b <- function(a,b,c,x){
+    if(x>=0 & x<1){
+        hyperg_2F1(a,b,c,x)
+    }else{
+            hyperg_2F1(a,c-b,c,1-1/(1-x))/(1-x)^a
+        }
+}
+
+qqz <- function(k,n){
+    x <- 2*n-k
+    Hypergeometric2F1(k,2*n,k+1,-1)/k + Hypergeometric2F1(2*n,x,x+1,-1)/x
+}
+
+qqo <- function(k,n){
+    x <- 2*n-k
+    hyperg_2F1(k,2*n,k+1,-1)/k + hyperg_2F1(2*n,x,x+1,-1)/x
+}
+
+
+qq0 <- function(k,n){
+    x <- 2*n-k
+    Gauss2F1(k,2*n,k+1,-1)/k + Gauss2F1(2*n,x,x+1,-1)/x
+}
+
+qqb <- function(k,n){
+    x <- 2*n-k
+    hyperg_2F1(1,2*n,k+1,0.5)/(k*2^(2*n)) + hyperg_2F1(1-k,x,x+1,0.5)/(x*2^x)
+}
+
+qqb2 <- function(k,n){
+    x <- 2*n-k
+    hyperg_2F1(1,2*n,k+1,0.5)/(k*2^(2*n)) + (0.5^k)*hyperg_2F1(2*n,1,x+1,0.5)/(x*2^x)
+}
+
+qqc <- function(k,n){
+    x <- 2*n-k
+    hyperg_2F1(1,2*n,k+1,0.5)/(k*2^(2*n)) + hyperg_2F1(2*n,x,x+1,-1)/x
+}
+
+Gauss2F1c <- function(a,b,c,x){
+    if(x>=0 & x<1){
+        hyperg_2F1(a,b,c,x)
+    }else if(a<20){
+        hyperg_2F1(c-a,b,c,1-1/(1-x))/(1-x)^b
+    }else{
+        hyperg_2F1(a,c-b,c,1-1/(1-x))/(1-x)^a
+    }
+}
+
+
+
 
 
 ## likelihood, with a prior distribution g of (1,1,2)
