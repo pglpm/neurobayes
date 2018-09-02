@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-07-24T14:19:28+0200
+%% Last-Updated: 2018-09-02T22:36:28+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -22,11 +22,10 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{23 June 2018}
 \newcommand*{\firstpublished}{\today}
-\newcommand*{\propertitle}{The Pitman-Koopman theorem\\and informationally
-  relevant quantities\\{\large research notes}}
-\newcommand*{\pdftitle}{The Pitman-Koopman theorem and informationally
-  relevant quantities}
-\newcommand*{\headtitle}{Pitman-Koopman and informational relevance}
+\newcommand*{\propertitle}{A geometric tutorial on exchangeability\\and
+  related topics}
+\newcommand*{\pdftitle}{A geometric tutorial on exchangeability and related topics}
+\newcommand*{\headtitle}{Geometry of exchangeability}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{\ifpublic Porta Mana%
 \else Luca\fi}
@@ -103,7 +102,6 @@ british%
 \newtheoremstyle{innote}{\parsep}{\parsep}{\footnotesize}{}{}{}{0pt}{}
 \theoremstyle{innote}
 \newtheorem*{innote}{}
-
 
 \usepackage[shortlabels,inline]{enumitem}
 \SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
@@ -773,10 +771,23 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \epigraphfontsize{\footnotesize}
 \setlength{\epigraphrule}{0pt}
 % %\setlength{\beforeepigraphskip}{0pt}
-% %\setlength{\afterepigraphskip}{0pt}
-\epigraph{I believe that the greatest unsolved problem in statistics is
-  communicating the subject to others.}{N. Davies
-  \citep[p.~445]{copasetal1995}}
+\setlength{\afterepigraphskip}{0pt} \epigraph{% Most books on scientific
+  % method contain at least a chapter on probability theory.
+  Most books on
+  modern physics assume a knowledge of probability theory and claim to
+  derive probability distributions. A casual observer might be led into
+  supposing that the authors would be reasonably up to date in the subject.
+  In fact, however, they seldom show any knowledge of it that is less than
+  fifty years old%\textelp{}. % It is still widely believed that probability
+  % is an easy subject, and this is far from being the case.
+}{\textsc{H.
+    Jeffreys} \citey[p.~275]{jeffreys1955}}
+%\setlength{\epigraphwidth}{.63\columnwidth}
+\vspace{-1em}
+\epigraph{I believe that the
+  greatest unsolved problem in statistics is communicating the subject to
+  others.}{\textsc{N. Davies} \citep[in][p.~445]{copasetal1995}}
+
 
 \iffalse\noindent\emph{\footnotesize Note: Dear Peer, this manuscript is
   peer-reviewed by \emph{you}. I'm grateful if you let me know of any
@@ -784,34 +795,76 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
   may have.}
 \fi
 
-\section{From qualitative to quantitative statements}
+\section{Introduction}
 \label{sec:intro}
 
+\emph{Exchangeable models} are a family of statistical models that appear
+over and over in all sciences. Many scientists probably use them routinely
+without knowing the technical name \enquote{exchangeable model}, used
+mainly in the statistics literature -- and possibly also without knowing of
+some important properties of these statistical models. This ignorance is
+mainly caused by a language barrier: most literature that discusses
+exchangeable models uses a very specialized technical language strongly
+connected with topology, measure theory, differential geometry, and other
+subjects that are usually only superficially touched in the teaching of
+other sciences.
+
+Such subjects are of course necessary for a precise foundation of
+exchangeable models and other statistical notions. So I don't think that
+scientists are justified in shying away from them. But I don't think that
+statisticians are justified in adopting an over-technical jargon either,
+wherever a simpler one can suffice. They often seem to willingly insulate
+themselves within linguistic walls, instead of building bridges that could
+make their beautiful work more accessible to other sciences. Most technical
+concepts underlying statistics have, in fact, a very intuitive and even
+visual meaning at bottom.
+%
+\textcolor{white}{If you find this you can claim a postcard from me.}
+
+The present note tries to build a bridge, explaining the essentials of
+exchangeable models and some related topics in an intuitive and geometric
+way, hoping to make the main concepts more accessible to scientists in
+other disciplines. I'm not a statistician or a specialized scientist, so my
+attempt will likely leave all parties unsatisfied. I hope it will at least
+give a hunch that a bridge is worthwhile constructing.
+
+The other topics discussed in this note include:
+\begin{itemize}
+\item the choice of so-called \enquote{parameter priors}
+\item so-called \enquote{non-parametric models}
+\item model selection
+\item sufficiency and its relation to some toy physical models, like Ising
+  models
+\item partial exchangeability and its relation to machine learning and
+  neural networks
+\item the phenomenon of \enquote{overtraining}
+\end{itemize}
 
 
-\textbf{draft plan of the memoir}
+The mathematics I'll use is very simple: functional analysis and
+combinatorics. The geometry will rely on convex spaces. These spaces appear
+in all of statistics. Their basics are very intuitive, and their
+visualization often allows us to guess mathematical properties or solutions
+to problems that are harder to guess algebraically. For this reason this
+note starts with a summary about them.
 
-\begin{enumerate}
-\item intro, motivation
-\item exchangeability, geometric meaning, learning vs extremal assumptions
-\item sufficiency, overlearning
-\end{enumerate}
+\medskip
+
+There's a deep reason why exchangeable models appear in all sciences: they
+are connected with \emph{reproducibility}, which is a pillar of the
+scientific method.
+
+
 
 
 
 \mynote{to be continued}
 
-\enquote{A bewildering variety of statistical measures has been reported in
-  the literature on spike-train analysis. Unfortunately, there has been
-  little theoretical justification for the use and interpretation of many
-  of these techniques}  \citep[p.~494]{mooreetal1966}
 
 
 
-\textcolor{white}{If you find this you can claim a postcard from me.}
-%
 
-
+\iffalse
 \section{Sufficient statistics and the Koopman-Pitman theorem}
 \label{sec:koopmanpitman}
 
@@ -1000,13 +1053,13 @@ related by a Jacobian determinant:
   \pf(\yth \|\yI) = \pf[\yt(\yth) \| \yI]\,
   \det\biggl( \frac{\de\yt}{\de\yth}\biggr).
 \end{equation}
+\fi
 
 
 
 
 
-
-\setlength{\intextsep}{0.5ex}% with wrapfigure
+%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
 %  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
 %\caption{***}\label{fig:comparison_a5}
