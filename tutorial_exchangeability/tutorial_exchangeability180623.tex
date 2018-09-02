@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-06-23T13:54:28+0200
-%% Last-Updated: 2018-09-02T22:36:28+0200
+%% Last-Updated: 2018-09-02T23:37:10+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -832,7 +832,7 @@ The other topics discussed in this note include:
 \begin{itemize}
 \item the choice of so-called \enquote{parameter priors}
 \item so-called \enquote{non-parametric models}
-\item model selection
+\item model comparison
 \item sufficiency and its relation to some toy physical models, like Ising
   models
 \item partial exchangeability and its relation to machine learning and
@@ -848,11 +848,21 @@ visualization often allows us to guess mathematical properties or solutions
 to problems that are harder to guess algebraically. For this reason this
 note starts with a summary about them.
 
-\medskip
+\section{Exchangeability}
+\label{sec:exchangeability}
 
 There's a deep reason why exchangeable models appear in all sciences: they
-are connected with \emph{reproducibility}, which is a pillar of the
-scientific method.
+are connected with \emph{reproducibility}, and therefore also with
+\emph{induction}.
+
+Reproducibility and circularity.
+
+Exchangeability expresses the way we do induction (doesn't justify it).
+
+Example with pattern: we discard exchangeability (dead hypothesis
+resurrection) -- just as we do with reproducibility.
+
+
 
 
 
