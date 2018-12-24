@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2018-08-10T15:27:55+0200
+%% Last-Updated: 2018-12-22T14:04:06+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -22,9 +22,9 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{9 August 2018}
 \newcommand*{\firstpublished}{\today}
-\newcommand*{\propertitle}{Neural networks and probability}
+\newcommand*{\propertitle}{Neural networks, probability, decision theory}
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Neural nets and probability}
+\newcommand*{\headtitle}{Neural nets, probability, decision theory}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{\ifpublic Porta Mana%
 \else Luca\fi}
@@ -591,8 +591,8 @@ P.G.L. Porta\,Mana%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }}
 
-%\date{Draft of \today\ (first drafted \firstdraft)}
-\date{\firstpublished; updated \updated}
+\date{Draft of \today\ (first drafted \firstdraft)}
+%\date{\firstpublished; updated \updated}
 
 %@@@@@@@@@@ new macros @@@@@@@@@@
 % Common ones - uncomment as needed
@@ -784,27 +784,35 @@ P.G.L. Porta\,Mana%
 % %\setlength{\afterepigraphskip}{0pt}
 % \epigraph{\emph{text}}{source}
 
-\iffalse
-\noindent\emph{\footnotesize Note: Dear Peer, this manuscript is
-  peer-reviewed by \emph{you}. I'm grateful if you let me know of any
-  faults in its premisses, logic, evidence, and of any other criticisms you
-  may have.}
+\ifpublic
+\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this manuscript is
+  being peer-reviewed by \emph{you}.}
 \fi
 
+\section{Introduction}
+\label{sec:intro}
+
+The purpose of a neural network and some other machine-learning methods is
+to choose an output $y$ given an input $x$ and data relating the possible
+inputs and outputs. The way this choice is made and the way it is
+influenced by already-observed data make intuitive sense. As stated, the
+task above involves uncertainty and decision; it can therefore also be
+approached methodically using the plausibility calculus -- the
+\enquote{gold standard} as Srivastava, Hinton, \etal\
+\citey{srivastavaetal2014} called it -- and the principles of decision
+theory. It is interesting to see how the intuitive neural-net approach and
+the methodical one relate to each other.
+
+This relation was first studied by Tishby, Levin, Solla
+\citep{tishbyetal1989,levinetal1990} and then brilliantly explored by
+MacKay \citey{mackay1992,mackay1992b} and others
+\citey{neal1996,barberetal1998}.
+
 \section{***}
-\label{sec:***}
 
-The purpose of a neural network is to choose an output given an input and
-data relating the possible inputs and outputs. As stated, this is a problem
-of inference \amp\ decision, and should properly be faced using the
-probability calculus -- the \enquote{gold standard} as Srivastava, Hinton,
-\etal\ \citey{srivastavaetal2014} called it -- and decision theory.
 
-Neural nets can indeed be interpreted as a very efficient application of
-specific probability models. The connection between the two was shown in
-the 1990s by Tishby, Levin, Solla \citep{tishbyetal1989,levinetal1990},
-Mackay \citey{mackay1992,mackay1992b,mackay1992c,mackay1992d},
-and Neal \citey{neal1996}.
+
+
 
 The study and grasp of the connection between neural nets and probability
 is beneficial to both. For neural nets, this connection \emph{might} not

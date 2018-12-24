@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2018-12-17T14:25:35+0100
+%% Last-Updated: 2018-12-23T12:13:41+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -17771,6 +17771,17 @@ year =	       {1988},
 pages =	       {27--49},
 keywords =     {statistical mechanics, thermodynamics},
 mynote =       {unfortunately advocates propensities}
+}
+
+@Article{buntineetal1991,
+author =       {Wray L. Buntine and Andreas S. Weigend},
+title =	       {Bayesian Back-Propagation},
+journal =      cs,
+year =	       {1991},
+volume =       {55},
+number =       {6},
+pages =	       {603--643},
+keywords =     {neural nets, machine learning}
 }
 
 @Article{buraketal2009,
@@ -70533,7 +70544,7 @@ note =	       {\url{https://www.msu.edu/~levinet/NHST1.pdf}}
 }
 
 @Article{levinetal1990,
-author =       {E. Levin and N. Tishby and S. A. Solla},
+author =       {E. Levin and Naftali Tishby and S. A. Solla},
 title =	       {A statistical approach to learning and generalization in layered neural networks},
 journal =      pieee,
 year =	       {1990},
@@ -78129,6 +78140,20 @@ note =	       {\url{http://www.stat.uchicago.edu/~pmcc/pubs/exchangeability.pdf}
 keywords =     {time series}
 }
 
+@Book{mccullaghetal1984_r1989,
+author =       {Peter McCullagh and John Ashworth Nelder},
+title =	       {Generalized Linear Models},
+publisher =    {Chapman \amp\ Hall/CRC},
+year =	       {1989},
+volume =       {37},
+series =       {Monographs on statistics and applied probability},
+address =      {London},
+edition =      {2},
+note =	       {First publ.\ 1984},
+keywords =     {exponential family, exchangeability},
+origdate =     {1984}
+}
+
 @Article{mccullochetal1991,
 author =       {Robert McCulloch and Peter E. Rossi},
 title =	       {A {Bayesian} approach to testing the arbitrage pricing theory},
@@ -83021,7 +83046,8 @@ volume =       {118},
 series =       {Lecture notes in statistics},
 address =      {New York},
 note =	       {\url{https://www.cs.toronto.edu/~radford/bnn.book.html}},
-keywords =     {deep learning, probability theory}
+keywords =     {deep learning, probability theory},
+mynote =       {has some confused ideas, believes in physical probabilities, and confuses the Bayesian Occam razor as saying that models should be simple (in some absolute sense)}
 }
 
 @Article{nebel2004,
@@ -91299,14 +91325,14 @@ author =       {Porta Mana, Piero Giovanni Luca},
 title =	       {Force, inertia, metric in {Newtonian} relativity and general relativity},
 year =	       {2016},
 keywords =     {Newtonian mechanics, affine forms, twisted forms},
-note =	       {In preparation; draft available at \url{https://portamana.org/linko.php?w=portamana2016.pdf} (please treat confidentially)}
+note =	       {In preparation; draft available at \osfeprint{rvcxs}}
 }
 
 @Misc{portamana2016b,
 author =       {Porta Mana, Piero Giovanni Luca},
 title =	       {Eppur ruota: disappearance of rotational momentum upon coarsening to geophysical scales},
 year =	       {2016},
-note =	       {In preparation; draft available at \url{https://portamana.org/linko.php?w=portamana2016b.pdf} (please treat confidentially)}
+note =	       {In preparation; draft available at \osfeprint{8pwc7}}
 }
 
 @Misc{portamana2017,
@@ -91335,10 +91361,26 @@ note =	       {In preparation}
 
 @Misc{portamana2018b,
 author =       {Porta Mana, Piero Giovanni Luca},
-title =	       {A geometric understanding of overtraining (and of its difference from overfitting)},
+title =	       {A geometric understanding of overtraining in machine learning and statistics},
 year =	       {2018},
 keywords =     {evidence, Bayes factor, probability theory},
-note =	       {In preparation}
+note =	       {In preparation. Draft available at \url{https://github.com/pglpm/neurobayes/blob/master/overtraining/luca180806-overtraining.pdf}}
+}
+
+@Misc{portamana2018c,
+author =       {Porta Mana, Piero Giovanni Luca},
+title =	       {Unlearning and {Seyab's} theorem: a dialogue about updating probability},
+year =	       {2018},
+keywords =     {probability theory},
+note =	       {\osfeprint{wptc4}, \arxiveprint{1802.00807}}
+}
+
+@Misc{portamana2018d,
+author =       {Porta Mana, Piero Giovanni Luca},
+title =	       {Quantum theory within the probability calculus: a there-you-go theorem and partially exchangeable models},
+year =	       {2018},
+keywords =     {probability theory},
+note =	       {\osfeprint{m38x6}, \arxiveprint{1803.02263}}
 }
 
 @Misc{portamanaetal2004_r2005,
@@ -91438,6 +91480,13 @@ author =       {Porta Mana, Piero Giovanni Luca and Vahid Rostami and Emiliano T
 title =	       {Maximum-entropy and representative samples of neuronal activity: a dilemma},
 year =	       {2018},
 note =	       {\osfeprint{uz29n}, \biorxiveprint{329193}, \arxiveprint{1805.09084}}
+}
+
+@Misc{portamanaetal2018c,
+author =       {Porta Mana, Piero Giovanni Luca and Daniela Bragantini and Ismail C{\"u}neyt G{\"u}zey and Yasser Roudi},
+title =	       {A reappreciation of {Bayesian} methods in genetics},
+year =	       {2018},
+note =	       {In preparation. Draft available at \url{https://github.com/pglpm/genobayes/blob/master/genobayes2.pdf}}
 }
 
 @Book{portetal1995,
@@ -109982,13 +110031,13 @@ keywords =     {classical mechanics, celestial mechanics}
 }
 
 @Article{tishbyetal1989,
-author =       {N. Tishby and E. Levin and S. A. Solla},
+author =       {Naftali Tishby and E. Levin and S. A. Solla},
 title =	       {Consistent inference of probabilities in layered networks: predictions and generalizations},
 journal =      ijcnn,
 year =	       {1989},
 volume =       {1989},
 pages =	       {II-403--II-409},
-keywords =     {deep learning, Bayesian probability theory}
+keywords =     {deep learning, neural nets, Bayesian probability theory}
 }
 
 @Book{tissot1613,
