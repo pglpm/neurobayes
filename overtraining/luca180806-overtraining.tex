@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-28T13:36:52+0100
+%% Last-Updated: 2018-12-28T14:08:35+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -833,20 +833,28 @@ the candidates:
 $\pf(\ptext{data} \| \ptext{candidate}, \ptext{initial info})$, also called
 the \emph{evidence} for the candidate.
 
-The evidence and generalization error often lead to the same choice of
+The evidence and the generalization test often lead to the same choice of
 candidate, and the evidence has several advantages compared to the
-generalization error. Yet it may happen that a model with poor evidence
-yields a good generalization test. The reason is that evidence and
-generalization test are not equivalent \citep[for a thorough discussion of
-their differences see][esp. \sect~6.6]{mackay1992}[esp.
-\sect~4.1]{mackay1992b}. In particular, a candidate with good
-generalization test can have poor evidence because the whole set of
-candidates suits poorly the particular data and inference problem under
-study.
+generalization test. Yet, they aren't equivalent \citep[for a thorough
+discussion of their differences see][esp. \sect~6.6]{mackay1992}[esp.
+\sect~4.1]{mackay1992b}. In particular it may happen that a candidate with
+poor evidence yields a good generalization test. This often indicates that
+the whole set of candidates poorly fits the particular data and inference
+problem under study. So, even from the point of view of the probability
+calculus, the generalization test can be very useful.
 
 \bigskip
 
+The generalization test is not derived by an application of the probability
+calculus, unlike the evidence. Its idea is nevertheless intuitive and
+sound.
 
+In this note we show that the generalization test can in fact be derived
+from the rules of probability. The derivation also shows why this test can
+indicate that the whole sets of candidates is poorly suited to the data.
+
+\section{Geometric prelimitaries}
+\label{sec:geom_prelim}
 
 
 
