@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-08-10T15:26:29+0200
+%% Last-Updated: 2018-12-28T10:14:22+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -12,7 +12,7 @@
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
 \newif\ifpublic
-\publicfalse % true = for publication, false = personal notes
+\publictrue% true = for publication, false = personal notes
 \newcommand*{\memfontfamily}{zplx}
 \newcommand*{\memfontpack}{newpxtext}
 \documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
@@ -22,12 +22,13 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{6 August 2018}
 \newcommand*{\firstpublished}{\today}
-\newcommand*{\propertitle}{Study on overtraining}
-\newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Overtraining}
-\newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
-\newcommand*{\headauthor}{\ifpublic Porta Mana%
-\else Luca\fi}
+\newcommand*{\propertitle}{Generalization error and overtraining\\{\Large a
+  geometric and Bayesian understanding}}
+\newcommand*{\pdftitle}{Generalization error and overtraining: a geometric and Bayesian understanding}
+\newcommand*{\headtitle}{Bayesian generalization error and overtraining}
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana, I. A. Davidovich}
+\newcommand*{\headauthor}{\ifpublic Porta Mana \amp\ Davidovich%
+\else Luca \amp\ Andr\'es\fi}
 \newcommand*{\reporthead}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -358,7 +359,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \DeclareDelimFormat{postnotedelim}{\space}
 \ifarxiv\else\addbibresource{../portamanabib.bib}\fi
 \renewcommand{\bibfont}{\footnotesize}
-\appto{\citesetup}{\footnotesize}% smaller font for citations
+%\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
 }
 \newcommand*{\citep}{\parencites}
@@ -495,7 +496,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \scshape\headauthor}}{}{{\footnotesize\sffamily%
 \headtitle}}
 \makeoddfoot{manaart}{}{\thepage}{}
-\newcommand*\autanet{\includegraphics[height=\heightof{M}]{autanet.pdf}}
+\newcommand*\autanet{\includegraphics[height=\heightof{M}]{../autanet.pdf}}
 \definecolor{mygray}{gray}{0.333}
 \iftypodisclaim%
 \ifafour\newcommand\addprintnote{\begin{picture}(0,0)%
@@ -525,7 +526,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\Large\sffamily%
+\pretitle{\begin{center}\LARGE\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -576,18 +577,22 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Paper's details %%%%
 \title{\propertitle}
-\author{\ifpublic% 
-%\hspace*{\stretch{1}}\protect\makebox[0pt][c]%
-%{\firstname{***}\ \surname{***}}%
-%\hspace*{\stretch{1}}\protect\makebox[0pt][c]%
-P.G.L. Porta\,Mana%
-%\hspace*{\stretch{1}}%
-% \\[2\jot]%
-\else Luca\fi
-\\
-{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
+\author{%
+\iftrue%
+\hspace*{\stretch{1}}%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
+{\protect\centering Andr\'es\\%
+\footnotesize\epost{\email{ivan.a.davidovich}{ntnu.no}}}%
+\hspace*{\stretch{1}}%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
+{\protect\centering Luca\\%
+\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\hspace*{\stretch{1}}%
+\else%
+Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
-}}
+}\fi%
+}
 
 \date{Draft of \today\ (first drafted \firstdraft)}
 %\date{\firstpublished; updated \updated}
@@ -760,7 +765,9 @@ P.G.L. Porta\,Mana%
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
+  \noindent The use of generalization error for testing and the phenomenon
+  of overtraining are explained geometrically and given a Bayesian
+  interpretation.
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -782,12 +789,37 @@ P.G.L. Porta\,Mana%
 % %\setlength{\afterepigraphskip}{0pt}
 % \epigraph{\emph{text}}{source}
 
-\iffalse
-\noindent\emph{\footnotesize Note: Dear Peer, this manuscript is
-  peer-reviewed by \emph{you}. I'm grateful if you let me know of any
-  faults in its premisses, logic, evidence, and of any other criticisms you
-  may have.}
+\iftrue
+\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this manuscript is
+  being peer-reviewed by you. Thank you.}
 \fi
+
+\section{Generalization error and overtraining}
+\label{sec:generror_overtr}
+
+In neural-network learning and more generally in machine learning it's
+customary to test different candidate neural nets against a \emph{test}
+data set separate from the \emph{training} data set used to find the
+network parameters. Let's call this \emph{generalization test}. The
+candidate neural nets differ in their architecture -- number of nodes,
+weights, non-linear functions -- or in the error function and weight
+regularizer used to train them.
+
+The generalization test can also be used during the learning phase: it is
+sometimes observed that the test error reaches a minimum before the
+learning phase is complete. This phenomenon is called \emph{overtraining}.
+In this case the learning process is stopped when the generalization error
+reaches a minimum.
+
+MacKay \citey{mackay1992,mackay1992b} gave a Bayesian interpretation of ***
+\citep{tishbyetal1989,levinetal1990}\citey{gull1989}
+
+
+
+\clearpage
+\hrule
+
+*** Old draft ***
 
 \section{Synopsis}
 \label{sec:synopsis}
