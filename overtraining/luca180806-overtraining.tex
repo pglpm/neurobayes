@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-28T10:14:22+0100
+%% Last-Updated: 2018-12-28T11:44:15+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -740,6 +740,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
 %\smash{
 \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
+\newcommand*{\ptext}[1]{\text{\small #1}}
 
 \newcommand*{\yI}{\varIota}
 \newcommand*{\yf}{\bm{f}}
@@ -794,25 +795,47 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
   being peer-reviewed by you. Thank you.}
 \fi
 
-\section{Generalization error and overtraining}
+\section{Generalization tests and overtraining}
 \label{sec:generror_overtr}
 
-In neural-network learning and more generally in machine learning it's
-customary to test different candidate neural nets against a \emph{test}
-data set separate from the \emph{training} data set used to find the
-network parameters. Let's call this \emph{generalization test}. The
+In neural-network learning, and more generally in machine learning, it's
+customary to choose among candidate neural nets by testing them against a
+\emph{generalization} data set separate from the \emph{training} data set
+used to find the network parameters. Let's call this a \emph{generalization
+  test}; it may assume different forms, including cross-validation. The
 candidate neural nets differ in their architecture -- number of nodes,
 weights, non-linear functions -- or in the error function and weight
 regularizer used to train them.
 
 The generalization test can also be used during the learning phase: it is
-sometimes observed that the test error reaches a minimum before the
-learning phase is complete. This phenomenon is called \emph{overtraining}.
-In this case the learning process is stopped when the generalization error
-reaches a minimum.
+sometimes observed that the generalization error reaches a minimum before
+the learning phase -- that is, the minimization of the training error -- is
+complete. This phenomenon is called \emph{overtraining}. In this case the
+learning phase is stopped when the generalization error reaches a minimum.
 
-MacKay \citey{mackay1992,mackay1992b} gave a Bayesian interpretation of ***
-\citep{tishbyetal1989,levinetal1990}\citey{gull1989}
+MacKay \parentext{\cite*{mackay1992,mackay1992b}; see also
+  \cite[\sects~1.2--3, 3.3--4, 5.7]{bishop2006}}, combining the analyses of
+Tishby, Levin, Solla \citep{tishbyetal1989,levinetal1990} and Gull
+\citey{gull1989}, gives an insightful Bayesian interpretation of machine and
+neural-nets learning. From a Bayesian point of view it makes sense to
+choose among candidates by comparing their plausibilities conditional on
+the training data set:
+$\pf(\ptext{candidate} \| \ptext{data}, \ptext{initial info})$. If we
+initially judge the candidates to be equally plausible, their
+plausibilities conditional on the data are proportional to the plausibility
+of the data conditional on the candidates, that is, to the likelihoods of
+the candidates:
+$\pf(\ptext{data} \| \ptext{candidate}, \ptext{initial info})$, also called
+the \emph{evidence} for the candidate.
+
+The evidence and generalization error often lead to the same choice of
+candidate; the evidence has several advantages compared to the
+generalization error. Yet, the two are not equivalent for a variety of
+reasons
+\citep[\sect~6.6]{mackay1992}[\sect~4.1]{mackay1992b}[\sect~3.4]{bishop2006};
+it may happen that a model with poor evidence yields a good generalization
+test.
+
 
 
 
