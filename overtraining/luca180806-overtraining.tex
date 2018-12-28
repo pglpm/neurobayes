@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-28T11:44:15+0100
+%% Last-Updated: 2018-12-28T13:36:52+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -795,7 +795,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
   being peer-reviewed by you. Thank you.}
 \fi
 
-\section{Generalization tests and overtraining}
+\section{Generalization tests, overtraining, probability calculus}
 \label{sec:generror_overtr}
 
 In neural-network learning, and more generally in machine learning, it's
@@ -814,12 +814,17 @@ complete. This phenomenon is called \emph{overtraining}. In this case the
 learning phase is stopped when the generalization error reaches a minimum.
 
 MacKay \parentext{\cite*{mackay1992,mackay1992b}; see also
-  \cite[\sects~1.2--3, 3.3--4, 5.7]{bishop2006}}, combining the analyses of
-Tishby, Levin, Solla \citep{tishbyetal1989,levinetal1990} and Gull
-\citey{gull1989}, gives an insightful Bayesian interpretation of machine and
-neural-nets learning. From a Bayesian point of view it makes sense to
-choose among candidates by comparing their plausibilities conditional on
-the training data set:
+  \cite[]{bishop2006}}, combining the analyses of Tishby, Levin, Solla
+\citep{tishbyetal1989,levinetal1990} and Gull \citey{gull1989}, gives an
+insightful interpretation of machine and neural-nets learning from the
+point of view of the probability calculus. For a discussion of the
+statements in the next two paragraphs, see MacKay
+\citey{mackay1992,mackay1992b} and Bishop \citey[esp. \sects~1.2--3,
+3.3--4, 5.7]{bishop2006}.
+
+From the point of view of the probability calculus it makes sense to choose
+among candidates by comparing their plausibilities conditional on the
+training data set:
 $\pf(\ptext{candidate} \| \ptext{data}, \ptext{initial info})$. If we
 initially judge the candidates to be equally plausible, their
 plausibilities conditional on the data are proportional to the plausibility
@@ -829,12 +834,22 @@ $\pf(\ptext{data} \| \ptext{candidate}, \ptext{initial info})$, also called
 the \emph{evidence} for the candidate.
 
 The evidence and generalization error often lead to the same choice of
-candidate; the evidence has several advantages compared to the
-generalization error. Yet, the two are not equivalent for a variety of
-reasons
-\citep[\sect~6.6]{mackay1992}[\sect~4.1]{mackay1992b}[\sect~3.4]{bishop2006};
-it may happen that a model with poor evidence yields a good generalization
-test.
+candidate, and the evidence has several advantages compared to the
+generalization error. Yet it may happen that a model with poor evidence
+yields a good generalization test. The reason is that evidence and
+generalization test are not equivalent \citep[for a thorough discussion of
+their differences see][esp. \sect~6.6]{mackay1992}[esp.
+\sect~4.1]{mackay1992b}. In particular, a candidate with good
+generalization test can have poor evidence because the whole set of
+candidates suits poorly the particular data and inference problem under
+study.
+
+\bigskip
+
+
+
+
+
 
 
 
