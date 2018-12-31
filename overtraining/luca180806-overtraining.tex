@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-31T09:30:13+0100
+%% Last-Updated: 2018-12-31T10:36:43+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -745,9 +745,14 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yI}{\varIota}
+\newcommand*{\yIl}{\yI_{\textrm{l}}}
+\newcommand*{\yIe}{\yI_{\textrm{e}}}
 \newcommand*{\yD}{D}
 \newcommand*{\yt}{\bm{t}}
+\newcommand*{\yx}{\bm{x}}
 \newcommand*{\yf}{\bm{f}}
+\newcommand*{\yw}{w}
+\newcommand*{\yws}{W}
 \newcommand*{\xo}[1]{x^{(#1)}}
 \newcommand*{\yo}[1]{y^{(#1)}}
 \newcommand*{\yT}{T'}
@@ -873,6 +878,58 @@ Lauritzen
 is closely connected with the notion of sufficient statistics and
 exponential families of distributions [refs***].
 
+With a learning model $\yIl$, knowledge about output and input data
+$(x_1, x_2, \dotsc) \defs \yx$, $(t_1, t_2, \dotsc) \defs \yt$ modifies
+our \dob\ about a new output datum $x$ conditional on a new input datum $t$:
+\begin{equation}
+  \label{eq:learning_model}
+  \pf(x \| t,\, \yx, \yt, \, \yIl) \ne
+  \pf(x \| t,\, \yIl),
+\end{equation}
+and will generally be different for different sets of input and output
+data. We can equivalently say that our \dob\ about a set of data doesn't
+factor into a product of their individual \dobs:
+\begin{multline}
+  \label{eq:learning_model_dependent}
+  \pf(x_1, x_2, x_3, \dotsc \| t_1, t_2, t_3, \dotsc,\, \yIl)\\
+  \!\begin{aligned}[b]
+  &=\pf(x_1 \| x_2, x_3, \dotsc,\,  t_1, t_2, t_3, \dotsc,\, \yIl) \times
+  \pf(x_2 \| x_3, \dotsc,\,  t_2, t_3, \dotsc,\, \yIl) \times
+    \dotsb
+    \\
+  &\ne \pf(x_1 \| t_1,\, \yIl) \times
+  \pf(x_2 \| t_2,\, \yIl) \times \dotsb.
+  \end{aligned}
+\end{multline}
+With an extremal model $\yIe$, knowledge about other data doesn't affect our \dob:
+\begin{equation}
+  \label{eq:extremal_model}
+  \pf(x \| t,\, \yx, \yt, \, \yIe) =
+  \pf(x \| t,\, \yIe).
+\end{equation}
+Equivalently, our \dob\ about a set of data factorizes into the product of
+the marginals:
+\begin{equation}
+  \label{eq:extremal_model_independent}
+  \pf(x_1, x_2, x_3, \dotsc \| t_1, t_2, t_3, \dotsc,\, \yIe)
+  = \pf(x_1 \| t_1,\, \yIe) \times
+  \pf(x_2 \| t_2,\, \yIe) \times \dotsb.
+\end{equation}
+
+Why is the latter kind of model called \enquote{extremal}? Learning models
+are typically given in the following integral form
+\begin{equation}
+  \label{eq:integral_representation_learning_model}
+  \begin{gathered}
+  \pf(\yx \| \yt,\, \yIl) =
+  \int_{\yws} \di\yw\, \pf(\yw \| \yIl)\;
+  \pf(\yx \| \yt,\, \yw, \yIl)
+  \\
+  \text{with}\qquad
+  \pf(\yx \| \yt,\, \yw, \yIl) =
+\prod_i  \pf(x_i \| t_i,\, \yw, \yIl).
+\end{gathered}
+\end{equation}
 
 
 \mynote{to be modified}
