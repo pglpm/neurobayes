@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-31T13:18:53+0100
+%% Last-Updated: 2018-12-31T17:06:03+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -872,18 +872,23 @@ beliefs about the data.
 \section{Learning models and extreme models}
 \label{sec:learning_extreme}
 
-Central to our Bayesian understanding of the generalization test is the
-difference between a \emph{learning} plausibility model and a non-learning
-plausibility model, also called \emph{extremal} or independent, and the
-relationship between the two. This relationship, extensively studied by
-Lauritzen
+By \enquote{plausibility model} we mean any kind of information or
+assumptions $\yI$ that allow us to assign definite plausibility densities
+$\pf(\yx \| \yt,\, \yI)$ for all sets of input and output data
+$(\yt, \yx)$, $\yt\defd (t_1, t_2, \dotsc)$,
+$\yx \defd (x_1, x_2, \dotsc)$, of \emph{all} finite lengths.
+
+Central to our Bayesian understanding of the generalization test are the
+difference and the relationship between a \emph{learning} plausibility
+model and a non-learning plausibility model, also called \emph{extremal} or
+independent. Their relationship, extensively studied by Lauritzen
 \citey{lauritzen1974,lauritzen1974_r1974,lauritzen1982_r1988,lauritzen1984},
 is closely connected with the notion of sufficient statistics and
 exponential families of distributions [refs***].
 
 With a learning model $\yIl$, knowledge about output and input data
-$(x_1, x_2, \dotsc) \defs \yx$, $(t_1, t_2, \dotsc) \defs \yt$ modifies
-our \dob\ about a new output datum $x$ conditional on a new input datum $t$:
+$(\yt, \yx)$ modifies our \dob\ about a new output datum $x$ conditional on
+a new input datum $t$:
 \begin{equation}
   \label{eq:learning_model}
   \pf(x \| t,\, \yx, \yt, \, \yIl) \ne
@@ -904,7 +909,8 @@ factor into a product of their individual \dobs:
   \pf(x_2 \| t_2,\, \yIl) \times \dotsb.
   \end{aligned}
 \end{multline}
-With an extremal model $\yIe$, knowledge about other data doesn't affect our \dob:
+With an extremal model $\yIe$, knowledge about other data doesn't affect
+our \dob:
 \begin{equation}
   \label{eq:extremal_model}
   \pf(x \| t,\, \yx, \yt, \, \yIe) =
@@ -919,7 +925,7 @@ the marginals:
   \pf(x_2 \| t_2,\, \yIe) \times \dotsb.
 \end{equation}
 
-Why is the latter kind of model called \enquote{extremal}?
+Why are non-learning models called \enquote{extremal}?
 
 Learning models are typically given in the following integral form
 \begin{subequations}
@@ -937,28 +943,32 @@ Learning models are typically given in the following integral form
   \end{gather}
 \end{subequations}
 which is a \emph{convex combination} of densities
-$\pf(\yx \| \yt,\, \yw, \yI)$ labelled by a parameter $\yw \in \yws$, the
-weights of the combination being $\pf(\yw \| \yI)$. Each labelled density
-$\pf(\yx \| \yt,\, \yw, \yI)$ is an extremal model $(\yw,\yI)$, as clear
-from the comparison of
+$\pf(\yx \| \yt,\, \yw, \yI)$ that are labelled by a parameter
+$\yw \in \yws$, the weights of the combination being $\pf(\yw \| \yI)$.
+Each labelled density $\pf(\yx \| \yt,\, \yw, \yI)$ represents a
+\emph{non}-learning model, as is clear from comparing
 formulae~\eqref{eq:integral_representation_factorization} and
 \eqref{eq:extremal_model_independent}. In other words, a learning model is
-given as a convex combination of extremal models. Most important, this
-convex combination is \emph{unique}: if we change the family of extremal
-models or the weight density $\pf(\yw \| \yI)$ the resulting learning model
-will assign different plausibilities to some data sets $(\yt,\yx)$. This
-means that a learning model uniquely selects a family of extremal,
-non-learning models and a weight density.
+a convex combination of a family of non-learning models.
 
-By keeping the family of extremal models
+The integral above can always be trivially extended to larger family of
+non-learning models with $\yw \in \yws \cup \yws'$ just by setting
+$\pf(\yw \| \yI) = 0$ for $\yw \in \yws'$. The resulting convex combination
+will still be the same. Vice versa we can also consider the smallest family
+$\yw \in \yws' \subset \yws$ for which $\pf(\yw \| \yI)>0$. An important
+result is this: a learning model determines a \emph{unique} minimal family
+of non-learning models and a unique strictly positive weight density. A
+non-learning model, on the other hand, doesn't determine any family of
+non-learning models.
+
+By keeping the minimal family of non-learning models
 $\set{(\yw, \yI) \suchthat \yw \in \yws}$ fixed and considering all
-possible weight densities we generate a space of plausibility models. By
-construction this is a \emph{convex set}, and its extremal points (a point
-being a plausibility model) are non-learning models of the
-form~\eqref{eq:integral_representation_factorization}. This is why they are
-called \enquote{extremal}. The extremal model labelled by $\ywp$
-corresponds to a singular convex combination with a delta weight density
-$\delt(\yw-\ywp)$. [***refs for convex spaces]
+strictly positive weight densities we generate a space of learning models.
+By construction this is a \emph{convex set} having as extremal points the
+family of non-learning models -- they correspond to singular delta weight
+densities$\delt(\yw-\ywp)$. This is why they are called \enquote{extremal}.
+Note that this convex set can be finite-dimensional even if the family of
+extremal models is not finite. [***refs for convex spaces]
 
 When we update a learning model with training data $(\ytn, \yxn)$, the
 weight density in the convex
@@ -974,8 +984,8 @@ combination~\eqref{eq:integral_representation_learning_model} is updated:
 \prod_i  \pf(x_i' \| t_i',\, \yw, \yI)
   },
 \end{equation}
-yielding a new point in the convex set; but the extremal points are
-unchanged. As the training data accumulate, the weight density become very
+yielding a new point in the convex set; the extremal points are unchanged.
+As the training data accumulate, the weight density typically become very
 peaked on some value $\ywp$, becoming a delta:
 \begin{equation}
   \label{eq:update_weights_delta}
@@ -983,7 +993,14 @@ peaked on some value $\ywp$, becoming a delta:
 \delt(\yw-\ywp).
 \end{equation}
 So upon training our learning model approaches the set of extremal models.
+(The qualification \enquote{typically} is important, because some peculiar
+training data sets may not lead to convergence [***ref]. In such cases,
+however, we usually discard our model for more complex, non-exchangeable
+ones.)
 
+
+\section{Geometric understanding of overtraining}
+\label{sec:geom_understanding_overtr}
 
 
 
@@ -992,35 +1009,29 @@ So upon training our learning model approaches the set of extremal models.
 \section{Bayesian interpretation of the generalization test}
 \label{sec:bayes_gentest}
 
-Consider sets of input data $\yt\defd(t_1, t_2, \dotsc)$ and corresponding output
-data $(x_1, x_2, \dotsc)$. % In the following the input data are often
-% omitted from the conditional of the plausibilities for brevity.
+Consider some input data $(t_1, t_2, \dotsc) \defs \yt$ and corresponding
+output data $(x_1, x_2, \dotsc) \defs \yx$, and consider a learning model
+$\yI$, where $\yI$ possibly includes previous training data.
+% In the following the input data are often omitted from the conditional of
+% the plausibilities for brevity.
 
-The evidence is our \dob\ about the output data, given the input data and
-our initial information and assumptions $\yI$:
+The evidence is our \dob\ $\pf(\yx \| \yt,\, \yI)$ about the output data,
+given the input data and $\yI$. Since we're considering a learning model,
+the evidence satisfies formula~\eqref{eq:learning_model_dependent}: it
+cannot be written as a product of our marginal \dobs.
+
+Now suppose that $(\yt, \yx)$ are used for a generalization test. The
+generalization error is usually taken to be proportional to the logarithm
+of the reciprocal of the product
 \begin{equation}
-  \label{eq:evidence_def}
-  \pf(x_1, x_2, \dotsc \| t_1, t_2, \dotsc,\, \yI).
+  \label{eq:generror_def}
+  \prod_i   \pf(x_i \| t_i,\, \yI).
 \end{equation}
-It's important to note that our joint \dob\ about the outputs is not the
-product of our marginal \dobs:
-\begin{multline}
-  \label{eq:evidence_not_product}
-  \pf(x_1, x_2, x_3 \dotsc \| \yt,\, \yI)\\
-  \!\begin{aligned}[b]
-      &=\pf(x_1 \| x_2, x_3, \dotsc,\, \yt,\, \yI) \times
-        \pf(x_2 \| x_3, \dotsc,\, \yt,\, \yI) \times 
-        \pf(x_3 \| \dotsc,\, \yt,\, \yI) \times \dotsb
-  \\
-  &\ne
-    \pf(x_1 \| \yt,\, \yI) \times
-    \pf(x_2 \| \yt,\, \yI) \times
-    \pf(x_3\| \yt,\, \yI) \times \dotsb
-\end{aligned}
-\end{multline}
-
-
-
+This product is clearly not equal the joint plausibility of the
+generalization data $\yx$, because the latter does not factorize into the
+product of the marginals. Rather, it looks like we are suddenly considering
+the joint plausibility of the generalization data under a new,
+\emph{extremal} model.
 
 
 
