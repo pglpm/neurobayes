@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-31T10:36:43+0100
+%% Last-Updated: 2018-12-31T13:18:53+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -750,9 +750,12 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \newcommand*{\yD}{D}
 \newcommand*{\yt}{\bm{t}}
 \newcommand*{\yx}{\bm{x}}
+\newcommand*{\ytn}{\yt'}
+\newcommand*{\yxn}{\yx'}
 \newcommand*{\yf}{\bm{f}}
 \newcommand*{\yw}{w}
 \newcommand*{\yws}{W}
+\newcommand*{\ywp}{\yw^{*}}
 \newcommand*{\xo}[1]{x^{(#1)}}
 \newcommand*{\yo}[1]{y^{(#1)}}
 \newcommand*{\yT}{T'}
@@ -916,20 +919,119 @@ the marginals:
   \pf(x_2 \| t_2,\, \yIe) \times \dotsb.
 \end{equation}
 
-Why is the latter kind of model called \enquote{extremal}? Learning models
-are typically given in the following integral form
+Why is the latter kind of model called \enquote{extremal}?
+
+Learning models are typically given in the following integral form
+\begin{subequations}
+    \label{eq:integral_representation_learning_model}
+  \begin{gather}
+    \pf(\yx \| \yt,\, \yI) =
+    \int_{\yws} \di\yw\; \pf(\yw \| \yI)\;
+    \pf(\yx \| \yt,\, \yw, \yI)
+    \qquad\text{for all $(\yt,\yx)$}
+    \\
+    \shortintertext{with}
+    \label{eq:integral_representation_factorization}
+    \pf(\yx \| \yt,\, \yw, \yI) =
+    \prod_i  \pf(x_i \| t_i,\, \yw, \yI),
+  \end{gather}
+\end{subequations}
+which is a \emph{convex combination} of densities
+$\pf(\yx \| \yt,\, \yw, \yI)$ labelled by a parameter $\yw \in \yws$, the
+weights of the combination being $\pf(\yw \| \yI)$. Each labelled density
+$\pf(\yx \| \yt,\, \yw, \yI)$ is an extremal model $(\yw,\yI)$, as clear
+from the comparison of
+formulae~\eqref{eq:integral_representation_factorization} and
+\eqref{eq:extremal_model_independent}. In other words, a learning model is
+given as a convex combination of extremal models. Most important, this
+convex combination is \emph{unique}: if we change the family of extremal
+models or the weight density $\pf(\yw \| \yI)$ the resulting learning model
+will assign different plausibilities to some data sets $(\yt,\yx)$. This
+means that a learning model uniquely selects a family of extremal,
+non-learning models and a weight density.
+
+By keeping the family of extremal models
+$\set{(\yw, \yI) \suchthat \yw \in \yws}$ fixed and considering all
+possible weight densities we generate a space of plausibility models. By
+construction this is a \emph{convex set}, and its extremal points (a point
+being a plausibility model) are non-learning models of the
+form~\eqref{eq:integral_representation_factorization}. This is why they are
+called \enquote{extremal}. The extremal model labelled by $\ywp$
+corresponds to a singular convex combination with a delta weight density
+$\delt(\yw-\ywp)$. [***refs for convex spaces]
+
+When we update a learning model with training data $(\ytn, \yxn)$, the
+weight density in the convex
+combination~\eqref{eq:integral_representation_learning_model} is updated:
 \begin{equation}
-  \label{eq:integral_representation_learning_model}
-  \begin{gathered}
-  \pf(\yx \| \yt,\, \yIl) =
-  \int_{\yws} \di\yw\, \pf(\yw \| \yIl)\;
-  \pf(\yx \| \yt,\, \yw, \yIl)
-  \\
-  \text{with}\qquad
-  \pf(\yx \| \yt,\, \yw, \yIl) =
-\prod_i  \pf(x_i \| t_i,\, \yw, \yIl).
-\end{gathered}
+  \label{eq:update_weights}
+  \pf(\yw \| \yxn, \ytn,\, \yI) =
+  \frac{
+    \pf(\yw \| \yI)\;
+    \prod_i  \pf(x_i' \| t_i',\, \yw, \yI)
+  }{
+   \int_{\yws}\di\yw\;   \pf(\yw \| \yI)\;
+\prod_i  \pf(x_i' \| t_i',\, \yw, \yI)
+  },
 \end{equation}
+yielding a new point in the convex set; but the extremal points are
+unchanged. As the training data accumulate, the weight density become very
+peaked on some value $\ywp$, becoming a delta:
+\begin{equation}
+  \label{eq:update_weights_delta}
+  \pf(\yw \| \yxn, \ytn,\, \yI) \xrightarrow{\text{data $(\ytn, \yxn)$ accumulate}}
+\delt(\yw-\ywp).
+\end{equation}
+So upon training our learning model approaches the set of extremal models.
+
+
+
+
+
+
+\section{Bayesian interpretation of the generalization test}
+\label{sec:bayes_gentest}
+
+Consider sets of input data $\yt\defd(t_1, t_2, \dotsc)$ and corresponding output
+data $(x_1, x_2, \dotsc)$. % In the following the input data are often
+% omitted from the conditional of the plausibilities for brevity.
+
+The evidence is our \dob\ about the output data, given the input data and
+our initial information and assumptions $\yI$:
+\begin{equation}
+  \label{eq:evidence_def}
+  \pf(x_1, x_2, \dotsc \| t_1, t_2, \dotsc,\, \yI).
+\end{equation}
+It's important to note that our joint \dob\ about the outputs is not the
+product of our marginal \dobs:
+\begin{multline}
+  \label{eq:evidence_not_product}
+  \pf(x_1, x_2, x_3 \dotsc \| \yt,\, \yI)\\
+  \!\begin{aligned}[b]
+      &=\pf(x_1 \| x_2, x_3, \dotsc,\, \yt,\, \yI) \times
+        \pf(x_2 \| x_3, \dotsc,\, \yt,\, \yI) \times 
+        \pf(x_3 \| \dotsc,\, \yt,\, \yI) \times \dotsb
+  \\
+  &\ne
+    \pf(x_1 \| \yt,\, \yI) \times
+    \pf(x_2 \| \yt,\, \yI) \times
+    \pf(x_3\| \yt,\, \yI) \times \dotsb
+\end{aligned}
+\end{multline}
+
+
+
+
+
+
+\clearpage
+\hrule
+
+*** Old draft ***
+
+
+
+
 
 
 \mynote{to be modified}
@@ -983,55 +1085,6 @@ density $\pf(\set{\yf_t} \| \yI)$ is updated to
 $\pf(\set{\yf_t} \| \yD, \yI)$, which yields different predictions. This is
 an example of a \emph{learning} model. As the number of training data
 increases the density concentrates on a point of the lower-dimensional subset.
-
-
-Generally, we specify this density 
-
-
-
-
-
-
-
-\section{Bayesian interpretation of the generalization test}
-\label{sec:bayes_gentest}
-
-Consider sets of input data $\yt\defd(t_1, t_2, \dotsc)$ and corresponding output
-data $(x_1, x_2, \dotsc)$. % In the following the input data are often
-% omitted from the conditional of the plausibilities for brevity.
-
-The evidence is our \dob\ about the output data, given the input data and
-our initial information and assumptions $\yI$:
-\begin{equation}
-  \label{eq:evidence_def}
-  \pf(x_1, x_2, \dotsc \| t_1, t_2, \dotsc,\, \yI).
-\end{equation}
-It's important to note that our joint \dob\ about the outputs is not the
-product of our marginal \dobs:
-\begin{multline}
-  \label{eq:evidence_not_product}
-  \pf(x_1, x_2, x_3 \dotsc \| \yt,\, \yI)\\
-  \!\begin{aligned}[b]
-      &=\pf(x_1 \| x_2, x_3, \dotsc,\, \yt,\, \yI) \times
-        \pf(x_2 \| x_3, \dotsc,\, \yt,\, \yI) \times 
-        \pf(x_3 \| \dotsc,\, \yt,\, \yI) \times \dotsb
-  \\
-  &\ne
-    \pf(x_1 \| \yt,\, \yI) \times
-    \pf(x_2 \| \yt,\, \yI) \times
-    \pf(x_3\| \yt,\, \yI) \times \dotsb
-\end{aligned}
-\end{multline}
-
-
-
-
-
-
-\clearpage
-\hrule
-
-*** Old draft ***
 
 \section{Synopsis}
 \label{sec:synopsis}
