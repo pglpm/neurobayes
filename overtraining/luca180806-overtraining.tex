@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-31T01:37:23+0100
+%% Last-Updated: 2018-12-31T09:30:13+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -729,10 +729,10 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
 
-%\definecolor{notecolour}{RGB}{68,170,153}
+\definecolor{notecolour}{RGB}{68,170,153}
 %\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
-%\newcommand*{\puzzle}{\maltese}
-%\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+\newcommand*{\puzzle}{\maltese}
+\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
 %\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 %\DeclareMathOperator*{\argsup}{arg\,sup}
@@ -866,13 +866,16 @@ beliefs about the data.
 
 Central to our Bayesian understanding of the generalization test is the
 difference between a \emph{learning} plausibility model and a non-learning
-or \emph{extreme} plausibility model, and the relationship between the two.
-This relationship, extensively studied by Lauritzen
+plausibility model, also called \emph{extremal} or independent, and the
+relationship between the two. This relationship, extensively studied by
+Lauritzen
 \citey{lauritzen1974,lauritzen1974_r1974,lauritzen1982_r1988,lauritzen1984},
 is closely connected with the notion of sufficient statistics and
-exponential families of distributions [refs***]. We discuss this difference
-within the set of \emph{partially exchangeable models} [ref***].
+exponential families of distributions [refs***].
 
+
+
+\mynote{to be modified}
 Consider sets of input quantities $\yt\defd(t_1, t_2, \dotsc)$ and
 corresponding output quantities $(x_1, x_2, \dotsc)$.
 % In the following the input data are often omitted from the conditional of
@@ -902,6 +905,7 @@ the one about $x_1=2,x_2=1,x_3=3,x_4=4$, where the values of $x_1$ and
 $x_2$ have been exchanged, because these correspond to different input
 values: $t_1 \ne t_2$.
 
+
 A partially exchangeable model is completely determined if we specify our
 \dob\ about the relative frequencies of $x$ values for each distinct input
 value $t$, in an indefinitely long sequence. [continue explanation***] This
@@ -910,15 +914,18 @@ space equivalent to a product of simplices, one for each different value
 that $t$ can assume. When this density is positive over the whole space the
 model is called \emph{non-parametric}. This space acquires a huge
 dimensionality as the numbers of possible $t$ and $x$ values increase. For
-this reason we often specify \emph{singular} densities defined over a
-lower-dimensional subset of this space. The corresponding model is called
-\emph{parametric}, because we introduce parameters as coordinates on the
-lower-dimensional subset.
+this reason we often specify singular densities, which are positive only
+over a lower-dimensional subset of this space. The corresponding model is
+called \emph{parametric}, because we introduce parameters as coordinates on
+the lower-dimensional subset.
 
-When the model is updated with new data $\yD$, the corresponding density
-$\pf(\set{\yf_t} \| \yI)$ is updated to $\pf(\set{\yf_t} \| \yD, \yI)$,
-which yields different predictions. This is an example of a \emph{learning}
-model.
+
+
+When the model is updated or trained with data $\yD$, the corresponding
+density $\pf(\set{\yf_t} \| \yI)$ is updated to
+$\pf(\set{\yf_t} \| \yD, \yI)$, which yields different predictions. This is
+an example of a \emph{learning} model. As the number of training data
+increases the density concentrates on a point of the lower-dimensional subset.
 
 
 Generally, we specify this density 
