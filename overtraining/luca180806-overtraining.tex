@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-29T00:58:34+0100
+%% Last-Updated: 2018-12-31T01:37:23+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -741,8 +741,12 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 %\smash{
 \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
 \newcommand*{\ptext}[1]{\text{\small #1}}
-
+%@@@@ Custom macros for this file @@@@
+\newcommand*{\dob}{degree of belief}
+\newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yI}{\varIota}
+\newcommand*{\yD}{D}
+\newcommand*{\yt}{\bm{t}}
 \newcommand*{\yf}{\bm{f}}
 \newcommand*{\xo}[1]{x^{(#1)}}
 \newcommand*{\yo}[1]{y^{(#1)}}
@@ -796,7 +800,7 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \fi
 
 \section{Generalization tests, overtraining, probability calculus}
-\label{sec:generror_overtr}
+\label{sec:gentest_overtr}
 
 In neural-network learning, and more generally in machine learning, it's
 customary to choose among candidate neural nets by testing them against a
@@ -817,8 +821,8 @@ MacKay \parentext{\cite*{mackay1992,mackay1992b}; see also
   \cite[]{bishop2006}}, combining the analyses of Tishby, Levin, Solla
 \citep{tishbyetal1989,levinetal1990} and Gull \citey{gull1989}, gives an
 insightful interpretation of machine and neural-nets learning from the
-point of view of the probability calculus. For a discussion of the
-statements in the next two paragraphs, see MacKay
+point of view of the probability calculus. For a more thorough discussion
+of the statements in the next two paragraphs, see MacKay
 \citey{mackay1992,mackay1992b} and Bishop \citey[esp. \sects~1.2--3,
 3.3--4, 5.7]{bishop2006}.
 
@@ -857,6 +861,103 @@ beliefs about the data.
 \section{Geometric preliminaries}
 \label{sec:geom_prelim}
 
+\section{Learning models and extreme models}
+\label{sec:learning_extreme}
+
+Central to our Bayesian understanding of the generalization test is the
+difference between a \emph{learning} plausibility model and a non-learning
+or \emph{extreme} plausibility model, and the relationship between the two.
+This relationship, extensively studied by Lauritzen
+\citey{lauritzen1974,lauritzen1974_r1974,lauritzen1982_r1988,lauritzen1984},
+is closely connected with the notion of sufficient statistics and
+exponential families of distributions [refs***]. We discuss this difference
+within the set of \emph{partially exchangeable models} [ref***].
+
+Consider sets of input quantities $\yt\defd(t_1, t_2, \dotsc)$ and
+corresponding output quantities $(x_1, x_2, \dotsc)$.
+% In the following the input data are often omitted from the conditional of
+% the plausibilities for brevity.
+A partially exchangeable plausibility model is a \dob\ about the output
+data, conditional on the input data, that is invariant under every relabelling of
+those output data that have the same input values. For example, 
+\begin{multline}
+  \label{eq:example_partial_exch}
+  \pf(x_1=1,x_2=2,x_3=3,x_4=4, \dotsc \|
+  t_1=5,t_2=6,t_3=5,t_4=6, \dotsc \, \yI)
+  ={}\\
+  \pf(x_1=3,x_2=2,x_3=1,x_4=4, \dotsc \|
+  t_1=5,t_2=6,t_3=5,t_4=6,\dotsc \, \yI)
+  ={}\\
+  \pf(x_1=3,x_2=4,x_3=1,x_4=2, \dotsc \|
+  t_1=5,t_2=6,t_3=5,t_4=6,\dotsc \, \yI),
+\end{multline}
+that is, we have the same \dob\ about $x_1=1,x_2=2,x_3=3,x_4=4$ and about
+$x_1=3,x_2=2,x_3=1,x_4=4$, where the values of $x_1$ and $x_3$ have been
+exchanged, because these correspond to input data having the same value,
+$t_1=t_3=5$. This \dob\ also equals the one about
+$x_1=3,x_2=4,x_3=1,x_4=2$, where the values of $x_2$ and $x_4$ have also
+been exchanged, because these correspond to input data having the same
+value, $t_2=t_4=6$. And so on. However, this \dob\ can be different from
+the one about $x_1=2,x_2=1,x_3=3,x_4=4$, where the values of $x_1$ and
+$x_2$ have been exchanged, because these correspond to different input
+values: $t_1 \ne t_2$.
+
+A partially exchangeable model is completely determined if we specify our
+\dob\ about the relative frequencies of $x$ values for each distinct input
+value $t$, in an indefinitely long sequence. [continue explanation***] This
+\dob\ is therefore represented by a density $\pf(\set{\yf_t} \| \yI)$ on a
+space equivalent to a product of simplices, one for each different value
+that $t$ can assume. When this density is positive over the whole space the
+model is called \emph{non-parametric}. This space acquires a huge
+dimensionality as the numbers of possible $t$ and $x$ values increase. For
+this reason we often specify \emph{singular} densities defined over a
+lower-dimensional subset of this space. The corresponding model is called
+\emph{parametric}, because we introduce parameters as coordinates on the
+lower-dimensional subset.
+
+When the model is updated with new data $\yD$, the corresponding density
+$\pf(\set{\yf_t} \| \yI)$ is updated to $\pf(\set{\yf_t} \| \yD, \yI)$,
+which yields different predictions. This is an example of a \emph{learning}
+model.
+
+
+Generally, we specify this density 
+
+
+
+
+
+
+
+\section{Bayesian interpretation of the generalization test}
+\label{sec:bayes_gentest}
+
+Consider sets of input data $\yt\defd(t_1, t_2, \dotsc)$ and corresponding output
+data $(x_1, x_2, \dotsc)$. % In the following the input data are often
+% omitted from the conditional of the plausibilities for brevity.
+
+The evidence is our \dob\ about the output data, given the input data and
+our initial information and assumptions $\yI$:
+\begin{equation}
+  \label{eq:evidence_def}
+  \pf(x_1, x_2, \dotsc \| t_1, t_2, \dotsc,\, \yI).
+\end{equation}
+It's important to note that our joint \dob\ about the outputs is not the
+product of our marginal \dobs:
+\begin{multline}
+  \label{eq:evidence_not_product}
+  \pf(x_1, x_2, x_3 \dotsc \| \yt,\, \yI)\\
+  \!\begin{aligned}[b]
+      &=\pf(x_1 \| x_2, x_3, \dotsc,\, \yt,\, \yI) \times
+        \pf(x_2 \| x_3, \dotsc,\, \yt,\, \yI) \times 
+        \pf(x_3 \| \dotsc,\, \yt,\, \yI) \times \dotsb
+  \\
+  &\ne
+    \pf(x_1 \| \yt,\, \yI) \times
+    \pf(x_2 \| \yt,\, \yI) \times
+    \pf(x_3\| \yt,\, \yI) \times \dotsb
+\end{aligned}
+\end{multline}
 
 
 
