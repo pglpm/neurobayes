@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2018-12-31T17:06:03+0100
+%% Last-Updated: 2018-12-31T18:36:48+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -869,14 +869,14 @@ beliefs about the data.
 \section{Geometric preliminaries}
 \label{sec:geom_prelim}
 
-\section{Learning models and extreme models}
-\label{sec:learning_extreme}
+\section{Learning models and extremal models}
+\label{sec:learning_extremal}
 
 By \enquote{plausibility model} we mean any kind of information or
 assumptions $\yI$ that allow us to assign definite plausibility densities
 $\pf(\yx \| \yt,\, \yI)$ for all sets of input and output data
 $(\yt, \yx)$, $\yt\defd (t_1, t_2, \dotsc)$,
-$\yx \defd (x_1, x_2, \dotsc)$, of \emph{all} finite lengths.
+$\yx \defd (x_1, x_2, \dotsc)$, of all finite lengths.
 
 Central to our Bayesian understanding of the generalization test are the
 difference and the relationship between a \emph{learning} plausibility
@@ -905,8 +905,8 @@ factor into a product of their individual \dobs:
   \pf(x_2 \| x_3, \dotsc,\,  t_2, t_3, \dotsc,\, \yIl) \times
     \dotsb
     \\
-  &\ne \pf(x_1 \| t_1,\, \yIl) \times
-  \pf(x_2 \| t_2,\, \yIl) \times \dotsb.
+      &\ne %\pf(x_1 \| t_1,\, \yIl) \times \pf(x_2 \| t_2,\, \yIl) \times \dotsb.
+     \prod_i   \pf(x_i \| t_i,\, \yIl).
   \end{aligned}
 \end{multline}
 With an extremal model $\yIe$, knowledge about other data doesn't affect
@@ -921,9 +921,14 @@ the marginals:
 \begin{equation}
   \label{eq:extremal_model_independent}
   \pf(x_1, x_2, x_3, \dotsc \| t_1, t_2, t_3, \dotsc,\, \yIe)
-  = \pf(x_1 \| t_1,\, \yIe) \times
-  \pf(x_2 \| t_2,\, \yIe) \times \dotsb.
+  = %\pf(x_1 \| t_1,\, \yIe) \times \pf(x_2 \| t_2,\, \yIe) \times \dotsb.
+  \prod_i   \pf(x_i \| t_i,\, \yIe).
 \end{equation}
+From the last equation it is clear that an extremal model is completely
+determined by the single-datum distributions $\pf(x \| t, \yIe)$, for each
+value of $t$.
+
+\bigskip
 
 Why are non-learning models called \enquote{extremal}?
 
@@ -966,7 +971,7 @@ $\set{(\yw, \yI) \suchthat \yw \in \yws}$ fixed and considering all
 strictly positive weight densities we generate a space of learning models.
 By construction this is a \emph{convex set} having as extremal points the
 family of non-learning models -- they correspond to singular delta weight
-densities$\delt(\yw-\ywp)$. This is why they are called \enquote{extremal}.
+densities $\delt(\yw-\ywp)$. This is why they are called \enquote{extremal}.
 Note that this convex set can be finite-dimensional even if the family of
 extremal models is not finite. [***refs for convex spaces]
 
@@ -997,6 +1002,11 @@ So upon training our learning model approaches the set of extremal models.
 training data sets may not lead to convergence [***ref]. In such cases,
 however, we usually discard our model for more complex, non-exchangeable
 ones.)
+
+\bigskip
+
+
+
 
 
 \section{Geometric understanding of overtraining}
