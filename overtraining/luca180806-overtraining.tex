@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-01T16:18:44+0100
+%% Last-Updated: 2019-01-01T23:59:06+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -827,47 +827,40 @@ The generalization test can also be used during the learning phase: it is
 sometimes observed that the generalization error reaches a minimum before
 the learning phase -- that is, the minimization of the training error over
 a training data set -- is complete. This phenomenon is called
-\emph{overtraining}, and has been explained
+\emph{overtraining}
 \cite{sjoebergetal1995,bishop1995b}[\sect~9.2.4]{bishop1995}[\sect~5.5.2]{bishop2006}[\sect~7.8]{goodfellowetal2016}.
 In this case the learning phase is usually stopped when the generalization
 error reaches a minimum.
 
-\bigskip
+MacKay \parentext{\cite*{mackay1992,mackay1992b}; see also
+  \cite[]{bishop2006}}, combining the analyses of Tishby, Levin, Solla
+\citep{tishbyetal1989,levinetal1990} and Gull \citey{gull1989}, gives an
+insightful interpretation of machine and neural-nets learning from the
+point of view of the probability calculus. For a more thorough discussion
+of the statements in the next two paragraphs, see MacKay
+\citey{mackay1992,mackay1992b} and Bishop \citey[esp. \sects~1.2--3,
+3.3--4, 5.7]{bishop2006}.
 
-We show that a phenomenon similar to overtraining, but having a different
-origin, may also happen for \emph{exchangeable} plausibility models. Also
-in this case it appears through use of a generalization test.
+From the point of view of the probability calculus it makes sense to choose
+among candidates by comparing their plausibilities conditional on the
+training data set:
+$\pf(\ptext{candidate} \| \ptext{data}, \ptext{initial info})$. If we
+initially judge the candidates to be equally plausible, their
+plausibilities conditional on the data are proportional to the plausibility
+of the data conditional on the candidates, that is, to the likelihoods of
+the candidates:
+$\pf(\ptext{data} \| \ptext{candidate}, \ptext{initial info})$, also called
+the \emph{evidence} for the candidate.
 
-
-% MacKay \parentext{\cite*{mackay1992,mackay1992b}; see also
-%   \cite[]{bishop2006}}, combining the analyses of Tishby, Levin, Solla
-% \citep{tishbyetal1989,levinetal1990} and Gull \citey{gull1989}, gives an
-% insightful interpretation of machine and neural-nets learning from the
-% point of view of the probability calculus. For a more thorough discussion
-% of the statements in the next two paragraphs, see MacKay
-% \citey{mackay1992,mackay1992b} and Bishop \citey[esp. \sects~1.2--3,
-% 3.3--4, 5.7]{bishop2006}.
-
-% From the point of view of the probability calculus it makes sense to choose
-% among candidates by comparing their plausibilities conditional on the
-% training data set:
-% $\pf(\ptext{candidate} \| \ptext{data}, \ptext{initial info})$. If we
-% initially judge the candidates to be equally plausible, their
-% plausibilities conditional on the data are proportional to the plausibility
-% of the data conditional on the candidates, that is, to the likelihoods of
-% the candidates:
-% $\pf(\ptext{data} \| \ptext{candidate}, \ptext{initial info})$, also called
-% the \emph{evidence} for the candidate.
-
-% The evidence and the generalization test often lead to the same choice of
-% candidate, and the evidence has several advantages compared to the
-% generalization test. Yet, they aren't equivalent \citep[for a thorough
-% discussion of their differences see][esp. \sect~6.6]{mackay1992}[esp.
-% \sect~4.1]{mackay1992b}. In particular it may happen that a candidate with
-% poor evidence yields a good generalization test. This often indicates that
-% the whole set of candidates represents our belief about the particular data
-% poorly. So, even from the point of view of the probability calculus, the
-% generalization test can be very useful.
+The evidence and the generalization test often lead to the same choice of
+candidate, and the evidence has several advantages compared to the
+generalization test. Yet, they aren't equivalent \citep[for a thorough
+discussion of their differences see][esp. \sect~6.6]{mackay1992}[esp.
+\sect~4.1]{mackay1992b}. In particular it may happen that a candidate with
+poor evidence yields a good generalization test. This often indicates that
+the whole set of candidates represents our belief about the particular data
+poorly. So, even from the point of view of the probability calculus, the
+generalization test can be very useful.
 
 \bigskip
 
@@ -875,10 +868,8 @@ The generalization test is not derived by an application of the probability
 calculus, however, unlike the evidence. Its idea is nevertheless intuitive and
 sound.
 
-In this note we show that the generalization test can in fact be derived
-from the rules of probability. The derivation also shows why this test can
-indicate that the whole sets of candidates is a poor representation of our
-beliefs about the data.
+In this note we show that the generalization error is just another kind of
+evidence, though used with a different class of models.
 
 \section{Geometric preliminaries}
 \label{sec:geom_prelim}
