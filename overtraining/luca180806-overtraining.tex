@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-01T23:59:06+0100
+%% Last-Updated: 2019-01-03T01:36:53+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -810,6 +810,35 @@ Luca\\{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
 \noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this manuscript is
   being peer-reviewed by you. Thank you.}
 \fi
+
+\paragraph{Preliminary comments}
+
+From Goodfellow \etal \citey{goodfellowetal2016}: \enquote{If learned on
+  the training set, \textins{hyperparameters that control model capacity}
+  would always choose the maximum possible model capacity, resulting in
+  overfitting \textelp{}. For example, we can always fit the training set
+  better with a higher-degree polynomial and a weight decay setting of
+  $\lambda = 0$ than we could with a lower-degree polynomial and a positive
+  weight decay setting}; for this reason a validation set is used.
+
+Some assumptions seem to be hidden in this assertion. If we were to use as
+training data \emph{all} data that the machine will ever encounter, then a
+polynomial of high enough degree would fit perfectly, and its high degree
+wouldn't be a problem. This may be a silly example but it shows that
+there's something unsaid in the reasoning quoted above.
+
+The problem with overfitting is that some parameters aren't fully
+determined by the training set \citep[see \enquote{well-determined
+  parameters} in][\sect~4.4]{mackay1992}. Their choice is determined by
+unpredictable factors rather than by the data. And therefore it is highly
+unlikely that they will fit new data. In a fully Bayesian approach no
+particular hyperparameter values are chosen, they are all integrated over
+and lead to very uncertain forecasts for new data. A intermediate capacity
+is selected in this case by Bayes's theorem -- the \enquote{Ockham-razor
+  effect} -- but for reasons somewhat different from fitting \citep[see
+Fig.~3.13 in][\sect~3.4]{bishop2006}.
+
+
 
 \section{Generalization tests, overtraining, probability calculus}
 \label{sec:gentest_overtr}
