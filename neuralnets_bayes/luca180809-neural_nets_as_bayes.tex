@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T15:42:35+0100
+%% Last-Updated: 2019-01-18T15:52:44+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -212,7 +212,7 @@ british%
  \DeclareMathSymbol{\varDelta}{\mathalpha}{egreeki}{"01}
  \DeclareMathSymbol{\varEpsilon}{\mathalpha}{egreeki}{"45}
 % \DeclareMathSymbol{\varZeta}{\mathalpha}{egreeki}{"5A}
-% \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
+ \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
 % \DeclareMathSymbol{\varTheta}{\mathalpha}{egreeki}{"02}
  \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
 % \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
@@ -754,6 +754,7 @@ P.G.L. Porta\,Mana%
 \newcommand*{\yN}{\varMu}
 \newcommand*{\yD}{D}
 \newcommand*{\yM}{\varMu}
+\newcommand*{\yE}{E}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -879,7 +880,7 @@ interpretations of machine-learning procedures.
 \label{sec:synopsis_interpretations}
 
 I think it's important to first make a distinction between two tasks:
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label=(\Alph*)]
 \item\label{item:net_task}the general task that the neural network is meant
   to solve, once ready for use,
 \item\label{item:train_task}the task of training the neural network.
@@ -925,7 +926,17 @@ distributions and gain functions; see the remarks in the previous section.
 
 \smallskip
 
-Task~\ref{item:train_task} can be seen from two points of view.
+Task~\ref{item:train_task} can be seen from two points of view:
+\begin{enumerate}[wide,label=(\arabic*)]
+\item If we see task~\ref{item:net_task} as summarized by a function
+  $f\colon t\mapsto y$, then the task of the software engineer is to choose
+  such a function from a set $\set{f}$ of possible ones. To make this
+  choice she needs a gain function $\yg(f \| \yp, \yE)$ and the set of
+  plausibility distributions $\pf(\yp \| t,\yD, \yE)$, chosen according to
+  some model $\yE$. But what are the propositions $\set{\yp}$ about? that
+  is, what is the engineer uncertain about? And what is the gain about?
+\end{enumerate}
+
 
 
 
