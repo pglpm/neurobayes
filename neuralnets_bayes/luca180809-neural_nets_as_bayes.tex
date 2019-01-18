@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T16:48:12+0100
+%% Last-Updated: 2019-01-18T16:55:03+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -955,7 +955,16 @@ Task~\ref{item:train_task} can be seen from two points of view:
     \label{eq:engineer_gain}
     \sum_{x,t} \yg[f(t) \|x]\;\yp(x,t \| \yE),
   \end{equation}
-  so the engineer should choose an $f$ which maximizes this expectation.
+  so the engineer should choose an $f$ which maximizes this expectation. If
+  the engineer knows that there's a deterministic dependence between $t$
+  and $x$, say $r\colon t \mapsto x$, but she's uncertain as to this
+  function, then the expectation above may be rewritten
+  \begin{equation}
+    \label{eq:engineer_gain_deterministic}
+    \sum_{r,t} \yg[f(t) \| r(t)]\;\yp(r \| \yE)\;\yp(t \| \yE),
+  \end{equation}
+  assuming that her knowledge of $t$ is irrelevant for her uncertainty
+  about $r$.
 \end{enumerate}
 
 \mynote{To be continued}
