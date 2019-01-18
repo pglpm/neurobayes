@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T17:02:39+0100
+%% Last-Updated: 2019-01-18T17:12:16+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -873,8 +873,9 @@ the density are often presented as the objects of uncertainty; but our
 ultimate uncertainty is about the value of $x$ in a new observation. The
 parameters are secondary.
 
-Both ambiguities above will also be important in our discussion of Bayesian
-interpretations of machine-learning procedures.
+Both ambiguities above \citep[see][\sect~2 for some examples]{kassetal1995}
+will also be important in our discussion of Bayesian interpretations of
+machine-learning procedures.
 
 
 \section{Synopsis of interpretations}
@@ -939,12 +940,13 @@ Task~\ref{item:train_task} can be seen from two points of view:
   is, what is the engineer uncertain about? And what is the gain about?
 
   The engineer is uncertain about the pairs $(t,x)$ that the neural network
-  will encounter during its actual use. We may distinguish two cases of
-  such uncertainty: either there is a deterministic relation between the
-  two quantities; that is, the engineer knows that only one $x$ corresponds
-  to each $t$, although she doesn't know which. Or there isn't a
-  deterministic relation, and the engineer is uncertain about which values
-  of $x$ will appear for multiple occurrences of the same $t$.
+  will encounter during its actual use \citep[see][\sect~22.3 for an
+  enlightening discussion about this]{jaynes1994_r2003}. We may distinguish
+  two cases of such uncertainty: either there is a deterministic relation
+  between the two quantities; that is, the engineer knows that only one $x$
+  corresponds to each $t$, although she doesn't know which. Or there isn't
+  a deterministic relation, and the engineer is uncertain about which
+  values of $x$ will appear for multiple occurrences of the same $t$.
 
   As for the gain in choosing $f$, my intuition is that it is the average
   gain that the end user of the neural net will obtain during its use. If
