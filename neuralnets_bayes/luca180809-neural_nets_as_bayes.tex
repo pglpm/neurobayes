@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T16:55:03+0100
+%% Last-Updated: 2019-01-18T17:02:39+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -25,8 +25,8 @@ british%
 \newcommand*{\propertitle}{Neural networks, probability, decision theory}
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{Neural nets, probability, decision theory}
-\newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
-\newcommand*{\headauthor}{\ifpublic Porta Mana%
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana, I. A. Davidovich}
+\newcommand*{\headauthor}{\ifpublic Davidovich, Porta Mana%
 \else Luca\fi}
 \newcommand*{\reporthead}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -578,18 +578,19 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \title{\propertitle%\\
 %  {\large A geometric commentary on maximum-entropy proofs}% ***
 }
-\author{\ifpublic% 
-%\hspace*{\stretch{1}}\protect\makebox[0pt][c]%
-%{\firstname{***}\ \surname{***}}%
-%\hspace*{\stretch{1}}\protect\makebox[0pt][c]%
-P.G.L. Porta\,Mana%
-%\hspace*{\stretch{1}}%
-% \\[2\jot]%
-\else Luca\fi
-\\
-{\footnotesize\epost{\email{piero.mana}{ntnu.no}}%
+\author{%
+\hspace*{\stretch{1}}%
+%% uncomment if additional authors present
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
+{\protect\centering I. A. Davidovich\\%
+\footnotesize\epost{\email{ivan.davidovich}{ntnu.no}}}%
+\hspace*{\stretch{1}}%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
+{\protect\centering\ifpublic P.G.L.  Porta Mana\\\else Luca  \fi%
+\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
-}}
+}
 
 \date{Draft of \today\ (first drafted \firstdraft)}
 %\date{\firstpublished; updated \updated}
@@ -1273,7 +1274,7 @@ This leads to a slightly more general view than Tishby \etal's
 %\end{figure}% exp_family_maxent.nb
 
 
-\ifpublic
+\iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
   to Buster Keaton and Saitama for filling life with awe and inspiration.
