@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T15:52:44+0100
+%% Last-Updated: 2019-01-18T16:48:12+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -806,8 +806,8 @@ Let's call, somewhat improperly, \emph{inference}, \emph{prediction}, or
 \emph{forecast} the process of assigning numerical values to our \dobs\
 $\pf(\yp \|t, \yD, \yM)$ about a set of propositions $\set{\yp}$ given an
 (in some problems optional) input $t$, data $\yD$ and a model $\yM$. The
-propositions often concern the happening of events or the values of
-physical quantities. The model is the set of numerical \dobs\ that are
+propositions often concern the happening of events or the values of some
+physical quantity $x$. The model is the set of numerical \dobs\ that are
 sufficient to arrive at $\pf(\yp \|t, \yD, \yM)$ using the plausibility
 calculus.
 
@@ -911,12 +911,13 @@ In task~\ref{item:net_task} the neural net must choose a specific output
 $y$, given an input $t$. Such choice is an action; thus $y$ is a label for
 an action, more than for a quantity. In optical-character recognition, for
 example, $t$ is an array of pixel intensities of an image of text; the
-uncertain proposition $\yp$ is about the typographic character that was
+uncertain proposition $\yp$ is about the typographic character $x$ that was
 intended by the original writer of the text; and $y$ is the choice of a
-specific character, say as a unicode number. This is an example of the
+specific character, say as a unicode number. There may of course be an
+isomorphism between $\set{y}$ and $\set{x}$. This is an example of the
 distinction between action and quantity mentioned in the previous section.
-In this decision problem no additional data $\yD$ are used: the conditonal
-plausibilities $\pf(\yp \| t,\yM)$ are given and fixed. The model $\yM$ may
+In this decision problem no additional data $\yD$ are used: the conditional
+plausibilities $\pf(x \| t,\yM)$ are given and fixed. The model $\yM$ may
 of course have been constructed or chosen using data, but these do not
 enter the present task. For the neural-network user, this decision task
 reduces to a specific function $f\colon t \mapsto y$, or possibly
@@ -935,7 +936,29 @@ Task~\ref{item:train_task} can be seen from two points of view:
   plausibility distributions $\pf(\yp \| t,\yD, \yE)$, chosen according to
   some model $\yE$. But what are the propositions $\set{\yp}$ about? that
   is, what is the engineer uncertain about? And what is the gain about?
+
+  The engineer is uncertain about the pairs $(t,x)$ that the neural network
+  will encounter during its actual use. We may distinguish two cases of
+  such uncertainty: either there is a deterministic relation between the
+  two quantities; that is, the engineer knows that only one $x$ corresponds
+  to each $t$, although she doesn't know which. Or there isn't a
+  deterministic relation, and the engineer is uncertain about which values
+  of $x$ will appear for multiple occurrences of the same $t$.
+
+  As for the gain in choosing $f$, my intuition is that it is the average
+  gain that the end user of the neural net will obtain during its use. If
+  $\yg(y \|x)$ is the gain function for the end user, and
+  $\pf(x,t \| \yE)$ is the engineer's \dob\ about the $(t,x)$ pairs the end
+  user will encounter, the expected gain of choosing a function $f\colon t
+  \mapsto y$ is
+  \begin{equation}
+    \label{eq:engineer_gain}
+    \sum_{x,t} \yg[f(t) \|x]\;\yp(x,t \| \yE),
+  \end{equation}
+  so the engineer should choose an $f$ which maximizes this expectation.
 \end{enumerate}
+
+\mynote{To be continued}
 
 
 
