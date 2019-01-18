@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T13:02:15+0100
+%% Last-Updated: 2019-01-18T13:31:28+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -823,28 +823,16 @@ one of the actions that maximize the expected gain:
 This decision problem can be rephrased in term of the maximum, rather than
 the expectation, with respect to $\yp$
 (\enquote{$\argmax_{\ya}\max_{\yp}$}), just by using a different gain
-function.
+function. Decision problems always involve inference problems, but not vice
+versa.
 
-Note the different nature of actions and propositions. Often the decision
-problem is metonymically represented by the choice of an event or quantity,
-but the intended actions are different: we say \enquote{choose $\yp$} but
-we mean \enquote{behave as if $\yp$ were true}. For example, the uncertain
-events $\set{\yp}$ are
-$\set{\text{\enquote{rainy}}, \text{\enquote{sunny}}}$ and we may represent
-the actions $\set{\ya}$ by the same terms, but what we mean is actually
-$\set{\text{\enquote{take the umbrella}}, \text{\enquote{don't take the
-      umbrella}}}$. It's important to be aware of this difference. Often
-the literature presents problems that look like inferences but are actually
-decisions. The \enquote{choice of a parameter} is an example of this
-ambiguity. This point will be important for our Bayesian interpretations of
-machine-learning procedures. In relation to this, it's remarkable that
-often a lot of effort is spent in the literature on the numerical choice
+A lot of effort is often spent in the literature on the numerical choice
 and determination of \dobs, but little is spent on the choice of the gain
 function. From formula~\eqref{eq:expected_gain} it's clear that the
 solution of the decision problem depends equally on both.
 
-Two models $\yM'$, $\yM''$ can lead to different inferences and yet lead to
-the same decisions if
+Two models $\yM'$, $\yM''$ can lead to different inferences and yet be
+identical for decision purposes if
 \begin{equation}
   \label{eq:equivalent_decision_models}
   \sum_{\yp} \yg(\ya \| \yp, \yM')\; \pf(\yp \| \yD, \yM')
@@ -855,8 +843,34 @@ the same decisions if
 For example, when $\pf(\yp \| \yD, \yM') = \pf(\yp \| \yD, \yM'')\;h(\yp)$
 and $\yg(\ya \| \yp, \yM') = \yg(\ya \| \yp, \yM'')/h(\yp)$. It's therefore
 impossible to ascertain the \dobs\ determined by a model if we're only
-given the decisions ensuing from it. This point will also be important in
-the rest of these notes.
+given the decisions ensuing from it. This point will be important for our
+Bayesian interpretations of machine-learning procedures.
+
+Note the different nature of actions and propositions. Often the decision
+problem is metonymically represented by the choice of an event or of the
+value of a quantity, but the intended actions are different: we say
+\enquote{choose $\yp$} but we mean \enquote{behave as if $\yp$ were true}.
+For example: the uncertain events $\set{\yp}$ are
+$\set{\text{\enquote{rainy}}, \text{\enquote{sunny}}}$ and we may represent
+the actions $\set{\ya}$ by the same terms, but what we mean is actually
+$\set{\text{\enquote{take the umbrella}}, \text{\enquote{don't take the
+      umbrella}}}$. Often
+the literature presents problems that look like inferences but are actually
+decisions. The \enquote{choice of a parameter} is an example of this
+ambiguity.
+
+Another ambiguity appears in the literature in the discussion of inference
+problems. A model parameter is often presented as the object of our
+inference, but our ultimate inference actually regards some more concrete
+event. For example: we model our \dob\ about observations of a physical or
+biologic quantity $x$ with a normal density, and the mean and variance of
+the density are often presented as the objects of uncertainty; but our
+ultimate uncertainty is about the value of $x$ in a new observation. The
+parameters are secondary.
+
+Both ambiguities above will also be important in our discussion of Bayesian
+interpretations of machine-learning procedures.
+
 
 \section{Synopsis of interpretations}
 \label{sec:synopsis_interpretations}
