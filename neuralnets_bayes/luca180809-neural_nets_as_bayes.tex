@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2018-12-22T14:04:06+0100
+%% Last-Updated: 2019-01-18T13:02:15+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -217,7 +217,7 @@ british%
  \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
 % \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
 % \DeclareMathSymbol{\varLambda}{\mathalpha}{egreeki}{"03}
-% \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
+ \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
 % \DeclareMathSymbol{\varNu}{\mathalpha}{egreeki}{"4E}
 % \DeclareMathSymbol{\varXi}{\mathalpha}{egreeki}{"04}
 % \DeclareMathSymbol{\varOmicron}{\mathalpha}{egreeki}{"4F}
@@ -733,11 +733,17 @@ P.G.L. Porta\,Mana%
 %\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 %\DeclareMathOperator*{\argsup}{arg\,sup}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
 %\smash{
 \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
 
+\newcommand*{\dob}{degree of belief}
+\newcommand*{\dobs}{degrees of belief}
+\newcommand*{\yp}{p}
+\newcommand*{\ya}{a}
+\newcommand*{\yg}{G}
 \newcommand*{\yI}{\varIota}
 \newcommand*{\yf}{\bm{f}}
 \newcommand*{\xo}[1]{x^{(#1)}}
@@ -745,6 +751,8 @@ P.G.L. Porta\,Mana%
 \newcommand*{\yT}{T'}
 \newcommand*{\yq}{\bm{q}}
 \newcommand*{\yH}{D}
+\newcommand*{\yD}{D}
+\newcommand*{\yM}{\varMu}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -754,7 +762,6 @@ P.G.L. Porta\,Mana%
 
 %%% Title and abstract %%%
 \maketitle
-\ifpublic
 \abstractrunin
 \abslabeldelim{}
 \renewcommand*{\abstractname}{}
@@ -762,13 +769,16 @@ P.G.L. Porta\,Mana%
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
+  \noindent Notes on Bayesian and decision-theoretic interpretations of
+  neural networks
+\ifpublic\\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
+  manuscript is being peer-reviewed by you. Thank you.}\fi
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
 % {\footnotesize MSC: ***}%
 %\qquad{\footnotesize Keywords: ***}
-\end{abstract}\fi
+\end{abstract}
 
 \selectlanguage{british}\frenchspacing
 % \asudedication{\small ***}
@@ -784,13 +794,90 @@ P.G.L. Porta\,Mana%
 % %\setlength{\afterepigraphskip}{0pt}
 % \epigraph{\emph{text}}{source}
 
-\ifpublic
-\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this manuscript is
-  being peer-reviewed by \emph{you}.}
-\fi
-
-\section{Introduction}
+\section{Inference and decision}
 \label{sec:intro}
+
+First a summary about inference and decision, with some remarks of import
+for the rest of these notes.
+
+Let's call, somewhat improperly, \emph{inference}, \emph{prediction}, or
+\emph{forecast} the process of assigning numerical values to our \dobs\
+$\pf(\yp \| \yD, \yM)$ about a set of propositions $\set{\yp}$ given data
+$\yD$ and a model $\yM$. The propositions often concern the happening of
+events or the values of physical quantities. The model is the set of
+numerical \dobs\ that are sufficient to arrive at $\pf(\yp \| \yD, \yM)$
+using the plausibility calculus.
+
+By \emph{decision} or \emph{choice} we call the process of choosing an
+action among a set $\set{\ya}$. We must specify a gain function or matrix
+$\yg(\ya \| \yp, \yM)$ that tells our gain in performing action $\ya$ when
+the proposition $\yp$ holds. The gain function is part of our model.
+According to decision theory
+\citep{raiffaetal1961_r2000}[\chap~13]{jaynes1994_r2003} we should choose
+one of the actions that maximize the expected gain:
+\begin{equation}
+  \label{eq:expected_gain}
+  \text{choose}\quad
+  \argmax_{\ya} \sum_{\yp} \yg(\ya \| \yp, \yM)\; \pf(\yp \| \yD, \yM).
+\end{equation}
+This decision problem can be rephrased in term of the maximum, rather than
+the expectation, with respect to $\yp$
+(\enquote{$\argmax_{\ya}\max_{\yp}$}), just by using a different gain
+function.
+
+Note the different nature of actions and propositions. Often the decision
+problem is metonymically represented by the choice of an event or quantity,
+but the intended actions are different: we say \enquote{choose $\yp$} but
+we mean \enquote{behave as if $\yp$ were true}. For example, the uncertain
+events $\set{\yp}$ are
+$\set{\text{\enquote{rainy}}, \text{\enquote{sunny}}}$ and we may represent
+the actions $\set{\ya}$ by the same terms, but what we mean is actually
+$\set{\text{\enquote{take the umbrella}}, \text{\enquote{don't take the
+      umbrella}}}$. It's important to be aware of this difference. Often
+the literature presents problems that look like inferences but are actually
+decisions. The \enquote{choice of a parameter} is an example of this
+ambiguity. This point will be important for our Bayesian interpretations of
+machine-learning procedures. In relation to this, it's remarkable that
+often a lot of effort is spent in the literature on the numerical choice
+and determination of \dobs, but little is spent on the choice of the gain
+function. From formula~\eqref{eq:expected_gain} it's clear that the
+solution of the decision problem depends equally on both.
+
+Two models $\yM'$, $\yM''$ can lead to different inferences and yet lead to
+the same decisions if
+\begin{equation}
+  \label{eq:equivalent_decision_models}
+  \sum_{\yp} \yg(\ya \| \yp, \yM')\; \pf(\yp \| \yD, \yM')
+  =
+  \sum_{\yp} \yg(\ya \| \yp, \yM'')\; \pf(\yp \| \yD, \yM'')
+  \quad\text{for all $\ya$, $\yD$}.
+\end{equation}
+For example, when $\pf(\yp \| \yD, \yM') = \pf(\yp \| \yD, \yM'')\;h(\yp)$
+and $\yg(\ya \| \yp, \yM') = \yg(\ya \| \yp, \yM'')/h(\yp)$. It's therefore
+impossible to ascertain the \dobs\ determined by a model if we're only
+given the decisions ensuing from it. This point will also be important in
+the rest of these notes.
+
+\section{Synopsis of interpretations}
+\label{sec:synopsis_interpretations}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\hrule
+old text
+\hrule
 
 The purpose of a neural network and some other machine-learning methods is
 to choose an output $y$ given an input $x$ and data relating the possible

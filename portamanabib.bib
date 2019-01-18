@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2019-01-01T20:04:32+0100
+%% Last-Updated: 2019-01-17T16:07:01+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -493,6 +493,7 @@
 @String{jair = {J. Artif.\ Intell.\ Res.}}
 @String{jal = {J. Appl.\ Logic}}
 @String{jam = {J. Appl.\ Mech.}}
+@String{jama = {J. Am.\ Med.\ Assoc.}}
 @String{jamet = {J. Appl.\ Meteorol.}}
 @String{jamm = {J. Appl.\ Math.\ Mech.}}
 @String{jamsa = {J. Austral.\ Math.\ Soc.\ A}}
@@ -1495,7 +1496,7 @@ pages =	       {349--352}
 author =       {Ryan Prescott Adams and David J. C. MacKay},
 title =	       {Bayesian Online Changepoint Detection},
 year =	       {2007},
-note =	       {\url{http://hips.seas.harvard.edu/content/bayesian-online-changepoint-detection}},
+note =	       {\arxiveprint{0710.3742}},
 keywords =     {cognitive science, Plinko}
 }
 
@@ -9290,6 +9291,18 @@ month =	       aug,
 note =	       {See also \citebi{bell1990}}
 }
 
+@Book{bell1998_r2008,
+author =       {John L. Bell},
+title =	       {A Primer of Infinitesimal Analysis},
+publisher =    {Cambridge University Press},
+year =	       {2008},
+address =      {Cambridge},
+edition =      {2},
+note =	       {First publ.\ 1998},
+keywords =     {non-standard analysis},
+origdate =     {1998}
+}
+
 @Article{bellan2004,
 author =       {Paul M. Bellan},
 title =	       {A microscopic, mechanical derivation of the adiabatic gas relation},
@@ -10044,13 +10057,14 @@ keywords =     {coherent states}
 author =       {James O. Berger},
 title =	       {Statistical Decision Theory and Bayesian Analysis},
 publisher =    {Springer},
-origdate =     {1980},
 year =	       {1985},
 series =       {Springer series in statistics},
 address =      {New York},
 edition =      {2},
 note =	       {First publ.\ 1980},
-keywords =     {probability theory}
+keywords =     {probability theory},
+mynote =       {\begin{quotation}there are deep philosophical issues concerning the origin of models. Take, for instance, the very simple experiment of spinning a coin $n$ times and observing the sequence of heads and tails. It is standard to model this by assuming: (i) that the outcomes of the spins are ``independent''; and (ii) that the probability of each outcome being a head is some common value $\theta$. \textelp{}\par Consider, however, the two assumptions that went into the above construction. It is difficult, and perhaps impossible, to give precise and operationally realizable definitions of independence and of $\theta$ that are not subjective. For instance, the frequentist definition of $\theta$ involves some limiting average in a long series of ``independent'' spins of the coin. Besides the confounding with independence, the definition really involves an imaginary thought experiment, since (in reality) the coin would obviously be changing (minutely) from spin to spin. Likewise, one cannot really define independence without reference to imaginary situations.\end{quotation}, \sect~3.5.7, pp.~104--105},
+origdate =     {1980}
 }
 
 @Article{berger1990,
@@ -10084,6 +10098,30 @@ publisher =    {Springer},
 year =	       {2003},
 address =      {Berlin},
 keywords =     {curvature}
+}
+
+@Article{bergeretal1987,
+author =       {James O. Berger and Thomas Sellke},
+title =	       {Testing a Point Null Hypothesis: The Irreconcilability of {$P$} Values and Evidence},
+journal =      jasa,
+year =	       {1987},
+volume =       {82},
+number =       {397},
+pages =	       {112--122},
+note =	       {\url{https://people.eecs.berkeley.edu/~jordan/courses/260-spring09/readings/berger-sellke.pdf}},
+keywords =     {p-values}
+}
+
+@Article{bergeretal1987b,
+author =       {James O. Berger and Mohan Delampady},
+title =	       {Testing Precise Hypotheses},
+journal =      ss,
+year =	       {1987},
+volume =       {2},
+number =       {3},
+pages =	       {317--335},
+note =	       {\url{https://www2.stat.duke.edu/~berger/papers/p-values.pdf}},
+keywords =     {p-values, null hypothesis}
 }
 
 @Article{bergeretal1988,
@@ -15443,7 +15481,7 @@ year =	       {1988},
 volume =       {48},
 series =       {Lecture notes in statistics},
 address =      {Berlin},
-note =	       {\url{http://bayes.wustl.edu/glb/bib.html}}
+note =	       {\url{https://bayes.wustl.edu/glb/bib.html}}
 }
 
 @Article{bretthorst1990,
@@ -22821,6 +22859,15 @@ publisher =    {Institute of Physics},
 year =	       {2005},
 address =      {Bristol and Philadelphia},
 keywords =     {general relativity}
+}
+
+@Book{claeskensetal2008,
+author =       {Gerda Claeskens and Nils Lid Hjort},
+title =	       {Model Selection and Model Averaging},
+publisher =    {Cambridge University Press},
+year =	       {2008},
+series =       {Cambridge series in statistical and probabilistic mathematics},
+address =      {Cambridge}
 }
 
 @Misc{claessonetal2005,
@@ -30742,6 +30789,17 @@ number =       {1},
 pages =	       {136--169},
 keywords =     {exponential family},
 note =	       {\url{http://statweb.stanford.edu/~cgates/PERSI/papers/gibbscouplmo-2.pdf}, \url{http://www.stat.berkeley.edu/~aldous/206-RWG/RWGpapers/diaconis_gibbs.pdf}}
+}
+
+@Article{diamondetal1983,
+author =       {George A. Diamond and James S. Forrester},
+title =	       {Clinical Trials and Statistical Verdicts: Probable Grounds for Appeal},
+journal =      annim,
+year =	       {1983},
+volume =       {98},
+number =       {3},
+pages =	       {385--394},
+keywords =     {criticism of p-values and confidence intervals}
 }
 
 @Misc{diazetal2004,
@@ -53119,6 +53177,17 @@ pages =	       {337--346},
 note =	       {Transl.\ of \citebi{helmholtz1868} by Frederick Guthrie}
 }
 
+@InCollection{helmholtz1887_r1977,
+author =       {von Helmholtz, Hermann Ludwig Ferdinand},
+title =	       {Numbering and measuring from an epistemological viewpoint},
+booktitle =    {\citein{helmholtz1977}},
+year =	       {1977},
+chapter =      {\chapb~III},
+note =	       {First publ.\ in German 1887},
+origdate =     {1887},
+keywords =     {critique on truth in arithmetic}
+}
+
 @Book{helmholtz1962,
 author =       {von Helmholtz, Hermann Ludwig Ferdinand},
 title =	       {Popular Scientific Lectures},
@@ -59052,7 +59121,7 @@ note =	       {\url{http://bayes.wustl.edu/etj/node1.html}; repr.\ in \citebi{ja
 
 @Article{jaynes1968b,
 author =       {Jaynes, Edwin Thompson},
-title =	       {[Book review:] {Principles of Statistical Mechanics -- The Information Theory Approach} ({A. Katz}, 1967)},
+title =	       {{[Book} review:{]} {Principles of Statistical Mechanics -- The Information Theory Approach} ({A. Katz}, 1967)},
 journal =      ieeetit,
 year =	       {1968},
 volume =       {IT-14},
@@ -59217,7 +59286,7 @@ keywords =     {Combinatorial justification of maximum-entropy}
 
 @Article{jaynes1982c,
 author =       {Jaynes, Edwin Thompson},
-title =	       {[{Book} review:] `{Methods} of Statistical Physics' by {A. I. Akhiezer} and {S. V. Peletminskii}},
+title =	       {{[Book} review:{]} `{Methods} of Statistical Physics' by {A. I. Akhiezer} and {S. V. Peletminskii}},
 journal =      pt,
 year =	       {1982},
 volume =       {35},
@@ -59728,15 +59797,6 @@ number =       {2--3},
 pages =	       {225--237},
 note =	       {See \citebi{definetti1931}},
 keywords =     {de Finetti's theorem, exchangeability, Bayesian probability theory}
-}
-
-@Booklet{jeffrey2002,
-title =	       {{Subjective Probability: The Real Thing}},
-author =       {Richard Jeffrey},
-howpublished = {\url{http://www.princeton.edu/~bayesway/}},
-year =	       {2002},
-mynote =       {unfortunately this book makes a mess of many things},
-keywords =     {Bayesian probability theory, Bayes' theorem}
 }
 
 @Book{jeffrey2002_r2004,
@@ -62317,6 +62377,16 @@ year =	       {1985},
 volume =       {23},
 series =       {Synthese language library},
 address =      {Dordrecht}
+}
+
+@Booklet{keisler1976_r2018,
+title =	       {{Elementary Calculus: An Infinitesimal Approach}},
+author =       {H. Jerome Keisler},
+howpublished = {\url{http://www.math.wisc.edu/~keisler/calc.html}},
+year =	       {2018},
+note =	       {First publ.\ 1976},
+keywords =     {non-standard analysis, hyperreals},
+origdate =     {1976}
 }
 
 @Article{kell1969,
@@ -80878,6 +80948,17 @@ pages =        {389, 394--395},
 keywords =     {pseudoinverse}
 }
 
+@Article{moore1983,
+author =       {Gregory H. Moore},
+title =	       {Lebesgue's Measure Problem and {Zermelo's} Axiom of Choice: The Mathematical Effects of a Philosophical Dispute},
+journal =      anyas,
+year =	       {1983},
+volume =       {412},
+number =       {1},
+pages =	       {129--154},
+keywords =     {measure theory}
+}
+
 @Article{moore1997,
 author =       {David S. Moore},
 title =	       {Bayes for Beginners? {Some} Reasons to Hesitate},
@@ -87816,6 +87897,17 @@ note =	       {See \citebi{haldane1948}},
 keywords =     {probability theory, Haldane prior}
 }
 
+@Article{pearsonetal2008,
+author =       {Thomas A. Pearson and Teri A. Manolio},
+title =	       {How to Interpret a Genome-wide Association Study},
+journal =      jama,
+year =	       {2008},
+volume =       {299},
+number =       {11},
+pages =	       {1335--1344},
+keywords =     {snp}
+}
+
 @Article{peccei1974,
 author =       {R. D. Peccei},
 title =	       {Crossing symmetry and coherent states},
@@ -94732,7 +94824,8 @@ title =	       {Probability Theory},
 publisher =    {North-Holland},
 year =	       {1970},
 series =       {North-Holland series in applied mathematics and mechanics},
-address =      {Amsterdam}
+address =      {Amsterdam},
+mynote =       {@@notinart}
 }
 
 @Article{rescher1985,
@@ -100611,6 +100704,16 @@ series =       {Princeton series in physics},
 address =      {Princeton}
 }
 
+@Book{schwederetal2016,
+author =       {Tore Schweder and Nils Lid Hjort},
+title =	       {Confidence, Likelihood, Probability: Statistical Inference with Confidence Distributions},
+publisher =    {Cambridge University Press},
+year =	       {2016},
+series =       {Cambridge series in statistical and probabilistic mathematics},
+address =      {Cambridge},
+mynote =       {much shallow thinking hidden under technical jargon}
+}
+
 @Article{schwegler1965,
 author =       {H. Schwegler},
 title =	       {\langgerman{{Verallgemeinerte physikalische Entropien auf informationstheoretischer Grundlage}}},
@@ -103470,7 +103573,7 @@ year =	       {1990},
 volume =       {4},
 number =       {19},
 pages =	       {180--207},
-note = {\url{http://www.fas.org/sgp/othergov/doe/lanl/pubs/number19.htm}},
+note =	       {\url{http://www.fas.org/sgp/othergov/doe/lanl/pubs/number19.htm}},
 keywords =     {Bayesian probability theory, maximum entropy}
 }
 
@@ -103479,10 +103582,10 @@ author =       {D. S. Sivia},
 title =	       {Data Analysis: A Bayesian Tutorial},
 publisher =    {Oxford University Press},
 year =	       {2006},
-edition =      {2},
 address =      {Oxford},
-origdate =     {1996},
-note =	       {Written with J. Skilling. First publ.\ 1996}
+edition =      {2},
+note =	       {Written with J. Skilling. First publ.\ 1996},
+origdate =     {1996}
 }
 
 @Article{siviaetal1992,
@@ -105417,7 +105520,7 @@ keywords =     {evidence, Bayesian probability theory, improper priors}
 
 @Article{spiegelhalteretal1995,
 author =       {David J. Spiegelhalter and A. P. Grieve and D. V. Lindley and D. V. Lindley and J. B. Copas and Andrew J. G. Cairns and Chris Chatfield and George Box and David Cox and John W. Tukey and Adrian E. Raftery and Murray Aitkin and G. A. Barnard and Peter Donnelly and A. S. C. Ehrenberg and Alan E. Gelfand and Bani K. Mallick and Andrew Gelman and Xiao-Li Meng and C. A. Glasbey and G. J. Gibson and Richard Glendinning and Urban Hjorth and Robert E. Kass and Larry Wasserman and Michael Lavine and David Madigan and Benedikt M. P{\"o}tscher and John W. Pratt and de Vos, Aart F. and B. J. Worton and Arnold Zellner and David Draper},
-title =	       {Discussion of the paper by {Draper}},
+title =	       {Discussion of the paper by {Draper} {[Assessment} and Propagation of Model Uncertainty{]}},
 journal =      jrssb,
 year =	       {1995},
 volume =       {57},
@@ -111200,6 +111303,17 @@ pages =	       {434--448},
 keywords =     {electromagnetism, continuum thermomechanics}
 }
 
+@Article{trafimow2014,
+author =       {David Trafimow},
+title =	       {Editorial},
+journal =      basp,
+year =	       {2014},
+volume =       {36},
+number =       {1},
+pages =	       {1--2},
+keywords =     {ban on $p$-values, Bayesian probability theory, frequentist theory}
+}
+
 @Article{trafimowetal2015,
 author =       {David Trafimow and Michael Marks},
 title =	       {Editorial},
@@ -111358,7 +111472,8 @@ title =	       {Thermostatics and Thermodynamics: An Introduction to Energy, Inf
 publisher =    {Van~Nostrand},
 year =	       {1961},
 series =       {University series in basic engineering},
-address =      {Princeton}
+address =      {Princeton},
+mynote =       {@@notinart}
 }
 
 @Article{tribus1968,
@@ -115441,7 +115556,7 @@ title =	       {Bayesian Probability Theory: Applications in the Physical Scienc
 publisher =    {Cambridge University Press},
 year =	       {2014},
 address =      {Cambridge},
-note =       {This book has parts literally stolen (word by word) from a work of Skilling and Gull. Also, it is badly organized, \eg\ symbols are introduced without explanation}
+note =	       {This book has parts literally stolen (word by word) from a work of Skilling and Gull. Also, it is badly organized, \eg\ symbols are introduced without explanation}
 }
 
 @InCollection{vondermalsburg1986,
@@ -117918,23 +118033,23 @@ keywords =     {classical mechanics}
 author =       {Edmund T. Whittaker},
 title =	       {A History of the Theories of Aether and Electricity: From the Age of Descartes to the Close of the Nineteenth Century},
 publisher =    {Longmans, Green, and Co.},
-origdate =     {1910},
 year =	       {1951},
 address =      {London},
 edition =      {1},
 note =	       {\url{http://www.archive.org/details/historyoftheorie00whitrich}},
-mynote =       {second ed.\ 1951--1953 \citebi{whittaker1910_r1951,whittaker1953}}
+mynote =       {second ed.\ 1951--1953 \citebi{whittaker1910_r1951,whittaker1953}},
+origdate =     {1910}
 }
 
 @Book{whittaker1910_r1951,
 author =       {Edmund T. Whittaker},
 title =	       {A History of the Theories of Aether and Electricity. Vol.~1: The Classical Theories},
 publisher =    {Thomas Nelson and Sons},
-origdate =     {1910},
 year =	       {1951},
 address =      {London},
 edition =      {rev.\ and enlarged ed.},
-note =	       {First publ.\ 1910}
+note =	       {First publ.\ 1910},
+origdate =     {1910}
 }
 
 @Article{whittaker1921,
@@ -117967,7 +118082,6 @@ title =	       {A History of the Theories of Aether and Electricity. Vol.~2: The
 publisher =    {Thomas Nelson and Sons},
 year =	       {1953},
 address =      {London},
-note =	       {First publ.\ 1910}
 }
 
 @Book{whittakeretal1902_r1996,
@@ -120110,6 +120224,15 @@ year =	       {1994},
 volume =       {22},
 number =       {3},
 pages =	       {1195--1211}
+}
+
+@Misc{yangetal1996_r1998,
+author =       {Ruoyong Yang and James O. Berger},
+title =	       {A Catalog of Noninformative Priors},
+year =	       {1998},
+note =	       {\url{http://www.stats.org.uk/priors/noninformative/YangBerger1998.pdf}. See also \url{http://www2.stat.duke.edu/~berger/papers/catalog.html}. First publ.\ 1996},
+keywords =     {Jeffreys prior, improper prior},
+origdate =     {1996}
 }
 
 @Book{yano1955,
