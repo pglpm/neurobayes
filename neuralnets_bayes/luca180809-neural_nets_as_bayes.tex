@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T13:31:28+0100
+%% Last-Updated: 2019-01-18T15:39:20+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -751,6 +751,7 @@ P.G.L. Porta\,Mana%
 \newcommand*{\yT}{T'}
 \newcommand*{\yq}{\bm{q}}
 \newcommand*{\yH}{D}
+\newcommand*{\yN}{\varMu}
 \newcommand*{\yD}{D}
 \newcommand*{\yM}{\varMu}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
@@ -802,11 +803,12 @@ for the rest of these notes.
 
 Let's call, somewhat improperly, \emph{inference}, \emph{prediction}, or
 \emph{forecast} the process of assigning numerical values to our \dobs\
-$\pf(\yp \| \yD, \yM)$ about a set of propositions $\set{\yp}$ given data
-$\yD$ and a model $\yM$. The propositions often concern the happening of
-events or the values of physical quantities. The model is the set of
-numerical \dobs\ that are sufficient to arrive at $\pf(\yp \| \yD, \yM)$
-using the plausibility calculus.
+$\pf(\yp \|t, \yD, \yM)$ about a set of propositions $\set{\yp}$ given an
+(in some problems optional) input $t$, data $\yD$ and a model $\yM$. The
+propositions often concern the happening of events or the values of
+physical quantities. The model is the set of numerical \dobs\ that are
+sufficient to arrive at $\pf(\yp \|t, \yD, \yM)$ using the plausibility
+calculus.
 
 By \emph{decision} or \emph{choice} we call the process of choosing an
 action among a set $\set{\ya}$. We must specify a gain function or matrix
@@ -818,7 +820,7 @@ one of the actions that maximize the expected gain:
 \begin{equation}
   \label{eq:expected_gain}
   \text{choose}\quad
-  \argmax_{\ya} \sum_{\yp} \yg(\ya \| \yp, \yM)\; \pf(\yp \| \yD, \yM).
+  \argmax_{\ya} \sum_{\yp} \yg(\ya \| \yp, \yM)\; \pf(\yp \| t, \yD, \yM).
 \end{equation}
 This decision problem can be rephrased in term of the maximum, rather than
 the expectation, with respect to $\yp$
@@ -826,22 +828,24 @@ the expectation, with respect to $\yp$
 function. Decision problems always involve inference problems, but not vice
 versa.
 
-A lot of effort is often spent in the literature on the numerical choice
-and determination of \dobs, but little is spent on the choice of the gain
-function. From formula~\eqref{eq:expected_gain} it's clear that the
-solution of the decision problem depends equally on both.
+In the statistics literature a lot of effort is often spent on the
+numerical choice and determination of \dobs, but little is spent on the
+choice of the gain function. Yet it's clear from
+formula~\eqref{eq:expected_gain} that the solution of the decision problem
+depends equally on both.
 
 Two models $\yM'$, $\yM''$ can lead to different inferences and yet be
 identical for decision purposes if
-\begin{equation}
+\begin{multline}
   \label{eq:equivalent_decision_models}
-  \sum_{\yp} \yg(\ya \| \yp, \yM')\; \pf(\yp \| \yD, \yM')
+  \sum_{\yp} \yg(\ya \| \yp, \yM')\; \pf(\yp \|t, \yD, \yM')
   =
-  \sum_{\yp} \yg(\ya \| \yp, \yM'')\; \pf(\yp \| \yD, \yM'')
-  \quad\text{for all $\ya$, $\yD$}.
-\end{equation}
-For example, when $\pf(\yp \| \yD, \yM') = \pf(\yp \| \yD, \yM'')\;h(\yp)$
-and $\yg(\ya \| \yp, \yM') = \yg(\ya \| \yp, \yM'')/h(\yp)$. It's therefore
+  \sum_{\yp} \yg(\ya \| \yp, \yM'')\; \pf(\yp \|t, \yD, \yM'')
+\\[-\jot]\text{for all $\ya$, $\yD$}.
+\end{multline}
+For example, when
+$\pf(\yp \|t, \yD, \yM') = \pf(\yp \|t, \yD, \yM'')\times h(\yp)$ and
+$\yg(\ya \| \yp, \yM') = \yg(\ya \| \yp, \yM'')/h(\yp)$. It's therefore
 impossible to ascertain the \dobs\ determined by a model if we're only
 given the decisions ensuing from it. This point will be important for our
 Bayesian interpretations of machine-learning procedures.
@@ -854,10 +858,9 @@ For example: the uncertain events $\set{\yp}$ are
 $\set{\text{\enquote{rainy}}, \text{\enquote{sunny}}}$ and we may represent
 the actions $\set{\ya}$ by the same terms, but what we mean is actually
 $\set{\text{\enquote{take the umbrella}}, \text{\enquote{don't take the
-      umbrella}}}$. Often
-the literature presents problems that look like inferences but are actually
-decisions. The \enquote{choice of a parameter} is an example of this
-ambiguity.
+      umbrella}}}$. Often the literature presents problems that look like
+inferences but are actually decisions. The \enquote{choice of a parameter}
+is an example of this ambiguity.
 
 Another ambiguity appears in the literature in the discussion of inference
 problems. A model parameter is often presented as the object of our
@@ -875,16 +878,54 @@ interpretations of machine-learning procedures.
 \section{Synopsis of interpretations}
 \label{sec:synopsis_interpretations}
 
+I think it's important to first make a distinction between two tasks:
+\begin{enumerate}[label=(\alph*)]
+\item\label{item:net_task}the general task that the neural network is meant
+  to solve, once ready for use,
+\item\label{item:train_task}the task of training the neural network.
+\end{enumerate}
+My impression is that the heuristics used in neural-net training address
+both tasks. In fact, task~\ref{item:train_task} somehow involves
+task~\ref{item:net_task}. This double, nested nature of neural-network
+training is probably what makes it difficult to understand from a Bayesian
+and decision-theoretical point of view.
 
+The next question is whether each task above is an inference problem or a
+decision problem. I think both tasks are decision problems.
+For~\ref{item:net_task}, even in those cases where the network is designed
+to report some measure of confidence, its main goal is to give a definite
+output out of a set of possible ones. Think of examples like
+optical-character recognition. For~\ref{item:train_task}, the software
+engineer must in the end deliver a network, appropriately prepared, ready
+to be used in an automated way. One complication in this question is
+whether the ready-for-use neural network is meant to continue learning from
+data given to it or not. It seems to me this isn't the case (think again of
+optical-character recognition).
 
+Let's now examine the two decision tasks above in more detail.
 
+\smallskip
 
+In task~\ref{item:net_task} the neural net must choose a specific output
+$y$, given an input $t$. Such choice is an action; thus $y$ is a label for
+an action, more than for a quantity. In optical-character recognition, for
+example, $t$ is an array of pixel intensities of an image of text; the
+uncertain proposition $\yp$ is about the typographic character that was
+intended by the original writer of the text; and $y$ is the choice of a
+specific character, say as a unicode number. This is an example of the
+distinction between action and quantity mentioned in the previous section.
+In this decision problem no additional data $\yD$ are used: the conditonal
+plausibilities $\pf(\yp \| t,\yM)$ are given and fixed. The model $\yM$ may
+of course have been constructed or chosen using data, but these do not
+enter the present task. For the neural-network user, this decision task
+reduces to a specific function $t \mapsto y$, or possibly $t \mapsto (y,c)$
+where $c$ is a measure of confidence. This function can be obtained by many
+different pairs of plausibility distributions and gain functions; see the
+remarks in the previous section.
 
+\smallskip
 
-
-
-
-
+Task~\ref{item:train_task} can be seen from two points of view.
 
 
 
