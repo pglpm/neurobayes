@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T17:12:16+0100
+%% Last-Updated: 2019-01-18T22:05:49+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -937,14 +937,14 @@ Task~\ref{item:train_task} can be seen from two points of view:
   choice she needs a gain function $\yg(f \| \yp, \yE)$ and the set of
   plausibility distributions $\pf(\yp \| t,\yD, \yE)$, chosen according to
   some model $\yE$. But what are the propositions $\set{\yp}$ about? that
-  is, what is the engineer uncertain about? And what is the gain about?
+  is, what is the engineer uncertain about? Aind what is the gain about?
 
-  The engineer is uncertain about the pairs $(t,x)$ that the neural network
+  The engineer is uncertain about which pairs $(t,x)$ the neural network
   will encounter during its actual use \citep[see][\sect~22.3 for an
   enlightening discussion about this]{jaynes1994_r2003}. We may distinguish
   two cases of such uncertainty: either there is a deterministic relation
-  between the two quantities; that is, the engineer knows that only one $x$
-  corresponds to each $t$, although she doesn't know which. Or there isn't
+  between the two quantities, that is, the engineer knows that only one $x$
+  corresponds to each $t$, although she doesn't know which; or there isn't
   a deterministic relation, and the engineer is uncertain about which
   values of $x$ will appear for multiple occurrences of the same $t$.
 
@@ -968,6 +968,32 @@ Task~\ref{item:train_task} can be seen from two points of view:
   \end{equation}
   assuming that her knowledge of $t$ is irrelevant for her uncertainty
   about $r$.
+
+  Data $\yD$ are useful to the engineer for arriving at better-informed
+  \dob s about $\pf(x,t \| \yD, \yE)$. So, considering the
+  expectation~\eqref{eq:engineer_gain}, the software engineer must 
+  \begin{equation}
+    \label{eq:choice_engineer}
+    \text{choose}\quad
+\argmax_{f}\sum_{x,t} \yg[f(t) \|x]\;\yp(x,t \| \yD, \yE).
+  \end{equation}
+
+  The heuristic procedures typical neural-net learning could be doing the
+  following:
+  \begin{itemize}
+  \item calculating the posterior $\pf(x,t \| \yD, \yE)$,
+  \item searching for the $f$ that maximizes the expectation above,
+  \item both.
+  \end{itemize}
+
+  An important feature of the point of view currently under discussion is
+  that there the space of functions $\set{f}$ can be distinct from the
+  space of plausibility models $\pf(x,t \| \yD, \yE)$ or the space of
+  functions $\set{r}$. This is in contrast with the Bayesian interpretation
+  most often discussed in the literature
+  \citep{tishbyetal1989,levinetal1990,mackay1992,mackay1992b,neal1996,barberetal1998}[esp.
+  \sects~1.2--3, 3.3--4, 5.7]{bishop2006}, which assumes a neural network
+  to be a particular plausibility model.
 \end{enumerate}
 
 \mynote{To be continued}
