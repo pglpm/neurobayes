@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-18T22:05:49+0100
+%% Last-Updated: 2019-01-20T13:09:27+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -667,13 +667,14 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\set{\{}{\}}
 %\DeclareMathOperator{\pr}{P}%probability
+%\newcommand*{\tf}{\mathrm{T}}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-%\newcommand*{\tf}{\mathrm{T}}%probability
-\renewcommand*{\|}{\mathpunct{|}}
-%\newcommand*{\lcond}{\mathpunct{|\ }}%conditional sign (in probabilities)
-\newcommand*{\bigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
-%\newcommand*{\lbigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
+\newcommand*{\E}{\mathrm{E}}
+\renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
+\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
 \newcommand*{\sect}{\S}% Sect.~
@@ -719,10 +720,6 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\newcommand*{\sland}{\mathop{\textstyle\bigwedge}}
 %\newcommand*{\slor}{\mathop{\textstyle\bigvee}}
 %\newcommand*{\T}{^\intercal}%transpose
-%\newcommand*{\E}{\mathrm{E}}
-%\DeclarePairedDelimiter\expp{(}{)}
-%\newcommand*{\expe}{\E\expp}%round
-%\newcommand*{\expeb}{\E\clcl}%square
 %%\newcommand*{\QEM}%{\textnormal{$\Box$}}%{\ding{167}}
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
@@ -843,7 +840,7 @@ identical for decision purposes if
   \sum_{\yp} \yg(\ya \| \yp, \yM')\; \pf(\yp \|t, \yD, \yM')
   =
   \sum_{\yp} \yg(\ya \| \yp, \yM'')\; \pf(\yp \|t, \yD, \yM'')
-\\[-\jot]\text{for all $\ya$, $\yD$}.
+\\[-2\jot]\text{for all $\ya$, $\yD$}.
 \end{multline}
 For example, when
 $\pf(\yp \|t, \yD, \yM') = \pf(\yp \|t, \yD, \yM'')\times h(\yp)$ and
@@ -956,7 +953,7 @@ Task~\ref{item:train_task} can be seen from two points of view:
   \mapsto y$ is
   \begin{equation}
     \label{eq:engineer_gain}
-    \sum_{x,t} \yg[f(t) \|x]\;\yp(x,t \| \yE),
+    \sum_{x,t} \yg[f(t) \|x]\;\pf(x,t \| \yE),
   \end{equation}
   so the engineer should choose an $f$ which maximizes this expectation. If
   the engineer knows that there's a deterministic dependence between $t$
@@ -964,7 +961,7 @@ Task~\ref{item:train_task} can be seen from two points of view:
   function, then the expectation above may be rewritten
   \begin{equation}
     \label{eq:engineer_gain_deterministic}
-    \sum_{r,t} \yg[f(t) \| r(t)]\;\yp(r \| \yE)\;\yp(t \| \yE),
+    \sum_{r,t} \yg[f(t) \| r(t)]\;\pf(r \| \yE)\;\pf(t \| \yE),
   \end{equation}
   assuming that her knowledge of $t$ is irrelevant for her uncertainty
   about $r$.
@@ -975,7 +972,7 @@ Task~\ref{item:train_task} can be seen from two points of view:
   \begin{equation}
     \label{eq:choice_engineer}
     \text{choose}\quad
-\argmax_{f}\sum_{x,t} \yg[f(t) \|x]\;\yp(x,t \| \yD, \yE).
+\argmax_{f}\sum_{x,t} \yg[f(t) \|x]\;\pf(x,t \| \yD, \yE).
   \end{equation}
 
   The heuristic procedures typical neural-net learning could be doing the
