@@ -16543,7 +16543,7 @@ Cell[BoxData[""], "Input",
 8f6936c37d04"]
 },
 WindowSize->{640, 755},
-WindowMargins->{{Automatic, 120}, {Automatic, 0}},
+WindowMargins->{{130, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.2 for Microsoft Windows (32-bit) (September 10, 2017)",
 StyleDefinitions->"Default.nb"
 ]

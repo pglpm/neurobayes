@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
-%% Created: 2018-08-07T20:36:31+0200
-%% Last-Updated: 2019-01-22T10:15:14+0100
+%% Created: 2015-05-01T20:53:34+0200
+%% Last-Updated: 2019-01-25T19:14:06+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -11,8 +11,6 @@
 \afourfalse % true = A4, false = A5
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
-\newif\ifpublic
-\publictrue % true = for publication, false = personal notes
 \newcommand*{\memfontfamily}{zplx}
 \newcommand*{\memfontpack}{newpxtext}
 \documentclass[\ifafour a4paper,12pt,\else a5paper,10pt,\fi%extrafontsizes,%
@@ -20,14 +18,13 @@ onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
 \newcommand*{\updated}{\today}
-\newcommand*{\firstdraft}{9 August 2018}
-\newcommand*{\firstpublished}{\today}
-\newcommand*{\propertitle}{Neural networks, probability, decision theory}
+\newcommand*{\firstdraft}{25 January 2019}
+\newcommand*{\firstpublished}{***}
+\newcommand*{\propertitle}{Given sample, infer population}
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Neural nets, probability, decision theory}
-\newcommand*{\pdfauthor}{P.G.L.  Porta Mana, I. A. Davidovich}
-\newcommand*{\headauthor}{\ifpublic Davidovich, Porta Mana%
-\else Luca\fi}
+\newcommand*{\headtitle}{\propertitle}
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
+\newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,15 +101,20 @@ british%
 
 
 \usepackage[shortlabels,inline]{enumitem}
-\SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,parsep=0pt,itemsep=\topsep}
+\SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
 % \begin{asparaenum} = \begin{enumerate}[para]
 % \begin{inparaenum} = \begin{enumerate*}
-%\setlist[enumerate,2]{label=\alph*.}
-%\setlist[enumerate]{leftmargin=0.5\parindent,labelindent=0pt,itemindent=0.5\parindent,labelsep=!,align=left}
-%\setlist[itemize]{leftmargin=0.5\parindent,labelindent=0pt,itemindent=0.5\parindent,labelsep=!,align=left}
-%\setlist[description]{leftmargin=0.5\parindent,labelindent=0pt,labelsep=!,align=left}
+\setlist[enumerate,2]{label=\alph*.}
+\setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent}
+\setlist[itemize]{leftmargin=1.5\parindent}
+\setlist[description]{leftmargin=1.5\parindent}
+% old alternative:
+% \setlist[enumerate,2]{label=\alph*.}
+% \setlist[enumerate]{leftmargin=\parindent}
+% \setlist[itemize]{leftmargin=\parindent}
+% \setlist[description]{leftmargin=\parindent}
 
-\usepackage[babel,theoremfont]{newpxtext}
+\usepackage[babel,theoremfont,largesc]{newpxtext}
 \usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
 ]{newpxmath}
 \useosf\linespread{1.083}
@@ -178,15 +180,15 @@ british%
 % \DeclareMathSymbol{\beta}{\mathalpha}{egreeki}{"0C}
 % \DeclareMathSymbol{\gamma}{\mathalpha}{egreeki}{"0D}
 % \DeclareMathSymbol{\delta}{\mathalpha}{egreeki}{"0E}
- \DeclareMathSymbol{\epsilon}{\mathalpha}{egreeki}{"0F}
+% \DeclareMathSymbol{\epsilon}{\mathalpha}{egreeki}{"0F}
 % \DeclareMathSymbol{\zeta}{\mathalpha}{egreeki}{"10}
 % \DeclareMathSymbol{\eta}{\mathalpha}{egreeki}{"11}
 % \DeclareMathSymbol{\theta}{\mathalpha}{egreeki}{"12}
 % \DeclareMathSymbol{\iota}{\mathalpha}{egreeki}{"13}
- \DeclareMathSymbol{\kappa}{\mathalpha}{egreeki}{"14}
- \DeclareMathSymbol{\lambda}{\mathalpha}{egreeki}{"15}
+% \DeclareMathSymbol{\kappa}{\mathalpha}{egreeki}{"14}
+% \DeclareMathSymbol{\lambda}{\mathalpha}{egreeki}{"15}
 % \DeclareMathSymbol{\mu}{\mathalpha}{egreeki}{"16}
- \DeclareMathSymbol{\nu}{\mathalpha}{egreeki}{"17}
+% \DeclareMathSymbol{\nu}{\mathalpha}{egreeki}{"17}
 % \DeclareMathSymbol{\xi}{\mathalpha}{egreeki}{"18}
 % \DeclareMathSymbol{\omicron}{\mathalpha}{egreeki}{"6F}
 % \DeclareMathSymbol{\pi}{\mathalpha}{egreeki}{"19}
@@ -209,15 +211,15 @@ british%
 % \DeclareMathSymbol{\varAlpha}{\mathalpha}{egreeki}{"41}
 % \DeclareMathSymbol{\varBeta}{\mathalpha}{egreeki}{"42}
 % \DeclareMathSymbol{\varGamma}{\mathalpha}{egreeki}{"00}
- \DeclareMathSymbol{\varDelta}{\mathalpha}{egreeki}{"01}
- \DeclareMathSymbol{\varEpsilon}{\mathalpha}{egreeki}{"45}
+% \DeclareMathSymbol{\varDelta}{\mathalpha}{egreeki}{"01}
+% \DeclareMathSymbol{\varEpsilon}{\mathalpha}{egreeki}{"45}
 % \DeclareMathSymbol{\varZeta}{\mathalpha}{egreeki}{"5A}
- \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
+% \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
 % \DeclareMathSymbol{\varTheta}{\mathalpha}{egreeki}{"02}
  \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
 % \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
 % \DeclareMathSymbol{\varLambda}{\mathalpha}{egreeki}{"03}
- \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
+% \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
 % \DeclareMathSymbol{\varNu}{\mathalpha}{egreeki}{"4E}
 % \DeclareMathSymbol{\varXi}{\mathalpha}{egreeki}{"04}
 % \DeclareMathSymbol{\varOmicron}{\mathalpha}{egreeki}{"4F}
@@ -410,8 +412,8 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 }
 
 \usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage{tikz-cd}
+%\usepackage{wrapfig}
+%\usepackage{tikz-cd}
 
 \PassOptionsToPackage{hyphens}{url}\usepackage[hypertexnames=false]{hyperref}
 \usepackage[depth=4]{bookmark}
@@ -495,7 +497,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \scshape\headauthor}}{}{{\footnotesize\sffamily%
 \headtitle}}
 \makeoddfoot{manaart}{}{\thepage}{}
-\newcommand*\autanet{\includegraphics[height=\heightof{M}]{../autanet.pdf}}
+\newcommand*\autanet{\includegraphics[height=\heightof{M}]{autanet.pdf}}
 \definecolor{mygray}{gray}{0.333}
 \iftypodisclaim%
 \ifafour\newcommand\addprintnote{\begin{picture}(0,0)%
@@ -581,12 +583,12 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \author{%
 \hspace*{\stretch{1}}%
 %% uncomment if additional authors present
+% \parbox{0.5\linewidth}%\makebox[0pt][c]%
+% {\protect\centering ***\\%
+% \footnotesize\epost{\email{***}{***}}}%
+% \hspace*{\stretch{1}}%
 \parbox{0.5\linewidth}%\makebox[0pt][c]%
-{\protect\centering I. A. Davidovich\\%
-\footnotesize\epost{\email{ivan.davidovich}{ntnu.no}}}%
-\hspace*{\stretch{1}}%
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
-{\protect\centering\ifpublic P.G.L.  Porta Mana\\\else Luca  \fi%
+{\protect\centering Luca %
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
@@ -609,8 +611,8 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\providecommand{\degree}{\textdegree}% degree
 %\newcommand*{\celsius}{\textcelsius}% degree Celsius
 %\newcommand*{\micro}{\textmu}% degree Celsius
-%\newcommand*{\I}{\mathrm{i}}%imaginary unit
-%\newcommand*{\e}{\mathrm{e}}%Neper
+\newcommand*{\I}{\mathrm{i}}%imaginary unit
+\newcommand*{\e}{\mathrm{e}}%Neper
 \newcommand*{\di}{\mathrm{d}}%differential
 %\newcommand*{\Di}{\mathrm{D}}%capital differential
 %\newcommand*{\planckc}{\hslash}
@@ -619,7 +621,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\newcommand*{\ZZ}{\bm{\mathrm{Z}}}
 %\newcommand*{\QQ}{\bm{\mathrm{Q}}}
 \newcommand*{\RR}{\bm{\mathrm{R}}}
-\newcommand*{\CC}{\bm{\mathrm{C}}}
+%\newcommand*{\CC}{\bm{\mathrm{C}}}
 %\newcommand*{\nabl}{\bm{\nabla}}%nabla
 %\DeclareMathOperator{\lb}{lb}%base 2 log
 %\DeclareMathOperator{\tr}{tr}%trace
@@ -630,7 +632,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\DeclareMathOperator{\ent}{ent}%integer less or equal to
 %\DeclareMathOperator{\Ord}{O}%same order as
 %\DeclareMathOperator{\ord}{o}%lower order than
-%\newcommand*{\incr}{\triangle}%finite increment
+\newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
@@ -641,12 +643,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
 \newcommand*{\mimplies}{\Rightarrow}%implies
 %\newcommand*{\liff}{\mathbin{\Leftrightarrow}}%if and only if
-%\newcommand*{\cond}{\mathpunct{|}}%conditional sign (in probabilities)
-%\newcommand*{\lcond}{\mathpunct{|\ }}%conditional sign (in probabilities)
-%\newcommand*{\bigcond}{\mathpunct{\big|}}%conditional sign (in probabilities)
-%\newcommand*{\lbigcond}{\mathpunct{\big|\ }}%conditional sign (in probabilities)
 \newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
-%\newcommand*{\bigst}{\mathpunct{\big|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
 %\newcommand*{\inn}{\cdot}%inner product
@@ -657,24 +654,23 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \renewcommand*{\asymp}{\simeq}%equivalent to 
 %\newcommand*{\corr}{\mathrel{\hat{=}}}%corresponds to
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
-\renewcommand{\le}{\leqslant}%less or equal
-\renewcommand{\ge}{\geqslant}%greater or equal
+\renewcommand*{\le}{\leqslant}%less or equal
+\renewcommand*{\ge}{\geqslant}%greater or equal
 %\DeclarePairedDelimiter\clcl{[}{]}
-\DeclarePairedDelimiter\clop{[}{[}
+%\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
-%\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\set{\{}{\}}
 %\DeclareMathOperator{\pr}{P}%probability
-%\newcommand*{\tf}{\mathrm{T}}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-\newcommand*{\E}{\mathrm{E}}
+%\newcommand*{\E}{\mathrm{E}}
 \renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
-\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
-\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
-\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+%\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
 %\renewcommand{\*}{\land}
 \newcommand*{\sect}{\S}% Sect.~
@@ -689,7 +685,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \newcommand*{\fig}{fig.}%
 \newcommand*{\figs}{figs}%
 \newcommand*{\vs}{{vs}}
-\newcommand*{\etc}{{etc.}}
+%\newcommand*{\etc}{{etc.}}
 %\newcommand*{\ie}{{i.e.}}
 %\newcommand*{\ca}{{c.}}
 %\newcommand*{\eg}{{e.g.}}
@@ -724,35 +720,24 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
 
-\colorlet{notecolour}{mygreen}
+%\definecolor{notecolour}{RGB}{68,170,153}
 %\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
-\newcommand*{\puzzle}{\maltese}
-\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
-%\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
+%\newcommand*{\puzzle}{\maltese}
+%\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+\newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
+% \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
+% %\smash{
+% \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
+% \newcommand*{\ptext}[1]{\text{\small #1}}
+%@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
-\DeclareMathOperator*{\argmax}{arg\,max}
-
-\newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
-%\smash{
-\begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
-
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-\newcommand*{\yp}{p}
-\newcommand*{\ya}{a}
-\newcommand*{\yg}{G}
 \newcommand*{\yI}{\varIota}
-\newcommand*{\yf}{\bm{f}}
-\newcommand*{\xo}[1]{x^{(#1)}}
-\newcommand*{\yo}[1]{y^{(#1)}}
-\newcommand*{\yT}{T'}
-\newcommand*{\yq}{\bm{q}}
-\newcommand*{\yH}{D}
-\newcommand*{\yN}{\varMu}
-\newcommand*{\yD}{D}
-\newcommand*{\yM}{\varMu}
-\newcommand*{\yE}{E}
+\newcommand*{\ys}{\bm{s}}
+\newcommand*{\yS}{\bm{S}}
+\newcommand*{\ydt}{\incr t}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -769,10 +754,10 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent Notes on Bayesian and decision-theoretic interpretations of
-  neural networks
-\ifpublic\\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
-  manuscript is being peer-reviewed by you. Thank you.}\fi
+  \noindent An analysis of the problem of inferring the state of a
+  population of neurons from that of a sample.
+\\\noindent\emph{\footnotesize Note: Dear Reader
+    \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
 % \noindent
 % {\footnotesize PACS: ***}\qquad%
@@ -794,505 +779,86 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 % %\setlength{\afterepigraphskip}{0pt}
 % \epigraph{\emph{text}}{source}
 
-\section{Inference and decision}
-\label{sec:intro}
 
-First a summary about inference and decision, with some remarks of import
-for the rest of these notes.
 
-Let's call, somewhat improperly, \emph{inference}, \emph{prediction}, or
-\emph{forecast} the process of assigning numerical values to our \dobs\
-$\pf(\yp \|t, \yD, \yM)$ about a set of propositions $\set{\yp}$ given an
-(in some problems optional) input $t$, data $\yD$ and a model $\yM$. The
-propositions often concern the happening of events or the values of some
-physical quantity $x$. The model is the set of numerical \dobs\ that are
-sufficient to arrive at $\pf(\yp \|t, \yD, \yM)$ using the plausibility
-calculus.
+\section{The Question}
+\label{sec:question}
 
-By \emph{decision} or \emph{choice} we call the process of choosing an
-action among a set $\set{\ya}$. We must specify a gain function or matrix
-$\yg(\ya \| \yp, \yM)$ that tells our gain in performing action $\ya$ when
-the proposition $\yp$ holds. The gain function is part of our model.
-According to decision theory
-\citep{raiffaetal1961_r2000}[\chap~13]{jaynes1994_r2003} we should choose
-one of the actions that maximize the expected gain:
+
+The problem we want to consider is the inference about the state of a
+population of neurons from the observation of the state of a sample of that
+population. By inference we mean the numerical evaluation of our \dob\
+about the population's state. We consider the state at one instant of time.
+The state will be taken to be the binarized activity from a time-binned
+sequence; but our discussion shall apply to more general definitions of
+\enquote{state}. Denote by $N$ the size of the population, by $n$ that of
+the sample, by $S_i$ the activity of the $i$th neuron in the population, by
+$\yS \defd (S_1, \dotsc, S_N)$ the joint activity -- the state -- and by
+$s_j$, $\ys \defd (s_1, \dotsc, s_n)$ the corresponding activities and
+state of the sample.
+
+Let's make some additional remarks to better understand what our inference
+is about.
+
+First, our inference is not about the dynamics of the population. In the
+problem of inferring the dynamics, we assume that the state $\yS(t)$ at
+time $t$ is determined through a dynamical law by the state $\yS(t-\ydt)$
+at time $t-\ydt$ together with some external quantities $Q(t-\ydt)$:
 \begin{equation}
-  \label{eq:expected_gain}
-  \text{choose}\quad
-  \argmax_{\ya} \sum_{\yp} \yg(\ya \| \yp, \yM)\; \pf(\yp \| t, \yD, \yM).
+  \label{eq:determ_dynamics}
+  \yS(t) = F[\yS(t-\ydt), Q(t-\ydt)],
 \end{equation}
-This decision problem can be rephrased in term of the maximum, rather than
-the expectation, with respect to $\yp$
-(\enquote{$\argmax_{\ya}\max_{\yp}$}), just by using a different gain
-function. Decision problems always involve inference problems, but not vice
-versa.
-
-In the statistics literature a lot of effort is often spent on the
-numerical choice and determination of \dobs, but little is spent on the
-choice of the gain function. Yet it's clear from
-formula~\eqref{eq:expected_gain} that the solution of the decision problem
-depends equally on both.
-
-Two models $\yM'$, $\yM''$ can lead to different inferences and yet be
-identical for decision purposes if
-\begin{multline}
-  \label{eq:equivalent_decision_models}
-  \sum_{\yp} \yg(\ya \| \yp, \yM')\; \pf(\yp \|t, \yD, \yM')
-  =
-  \sum_{\yp} \yg(\ya \| \yp, \yM'')\; \pf(\yp \|t, \yD, \yM'')
-\\[-2\jot]\text{for all $\ya$, $\yD$}.
-\end{multline}
-For example, when
-$\pf(\yp \|t, \yD, \yM') = \pf(\yp \|t, \yD, \yM'')\times h(\yp)$ and
-$\yg(\ya \| \yp, \yM') = \yg(\ya \| \yp, \yM'')/h(\yp)$. It's therefore
-impossible to ascertain the \dobs\ determined by a model if we're only
-given the decisions ensuing from it. This point will be important for our
-Bayesian interpretations of machine-learning procedures.
-
-Note the different nature of actions and propositions. Often the decision
-problem is metonymically represented by the choice of an event or of the
-value of a quantity, but the intended actions are different: we say
-\enquote{choose $\yp$} but we mean \enquote{behave as if $\yp$ were true}.
-For example: the uncertain events $\set{\yp}$ are
-$\set{\text{\enquote{rainy}}, \text{\enquote{sunny}}}$ and we may represent
-the actions $\set{\ya}$ by the same terms, but what we mean is actually
-$\set{\text{\enquote{take the umbrella}}, \text{\enquote{don't take the
-      umbrella}}}$. Often the literature presents problems that look like
-inferences but are actually decisions. The \enquote{choice of a parameter}
-is an example of this ambiguity.
-
-Another ambiguity appears in the literature in the discussion of inference
-problems. A model parameter is often presented as the object of our
-inference, but our ultimate inference actually regards some more concrete
-event. For example: we model our \dob\ about observations of a physical or
-biologic quantity $x$ with a normal density, and the mean and variance of
-the density are often presented as the objects of uncertainty; but our
-ultimate uncertainty is about the value of $x$ in a new observation. The
-parameters are secondary.
-
-Both ambiguities above \citep[see][\sect~2 for some examples]{kassetal1995}
-will also be important in our discussion of Bayesian interpretations of
-machine-learning procedures.
-
-
-\section{Synopsis of interpretations}
-\label{sec:synopsis_interpretations}
-
-I think it's important to first make a distinction between two tasks:
-\begin{enumerate}[label=(\Alph*)]
-\item\label{item:net_task}the general task that the neural network is meant
-  to solve, once ready for use,
-\item\label{item:train_task}the task of training the neural network.
-\end{enumerate}
-My impression is that the heuristics used in neural-net training address
-both tasks. In fact, task~\ref{item:train_task} somehow involves
-task~\ref{item:net_task}. This double, nested nature of neural-network
-training is probably what makes it difficult to understand from a Bayesian
-and decision-theoretical point of view.
-
-The next question is whether each task above is an inference problem or a
-decision problem. I think both tasks are decision problems.
-For~\ref{item:net_task}, even in those cases where the network is designed
-to report some measure of confidence, its main goal is to give a definite
-output out of a set of possible ones. Think of examples like
-optical-character recognition. For~\ref{item:train_task}, the software
-engineer must in the end deliver a network, appropriately prepared, ready
-to be used in an automated way. One complication in this question is
-whether the ready-for-use neural network is meant to continue learning from
-data given to it or not. It seems to me this isn't the case (think again of
-optical-character recognition).
-
-Let's now examine the two decision tasks above in more detail.
-
-\smallskip
-
-In task~\ref{item:net_task} the neural net must choose a specific output
-$y$, given an input $t$. Such choice is an action; thus $y$ is a label for
-an action, more than for a quantity. In optical-character recognition, for
-example, $t$ is an array of pixel intensities of an image of text; the
-uncertain proposition $\yp$ is about the typographic character $x$ that was
-intended by the original writer of the text; and $y$ is the choice of a
-specific character, say as a unicode number. There may of course be an
-isomorphism between $\set{y}$ and $\set{x}$. This is an example of the
-distinction between action and quantity mentioned in the previous section.
-In this decision problem no additional data $\yD$ are used: the conditional
-plausibilities $\pf(x \| t,\yM)$ are given and fixed. The model $\yM$ may
-of course have been constructed or chosen using data, but these do not
-enter the present task. For the neural-network user, this decision task
-reduces to a specific function $f\colon t \mapsto y$, or possibly
-$f\colon t \mapsto (y,c)$ where $c$ is a measure of confidence. This
-function can be obtained by many different pairs of plausibility
-distributions and gain functions; see the remarks in the previous section.
-
-\smallskip
-
-Task~\ref{item:train_task} can be seen from two points of view:
-\begin{enumerate}[wide,label=(\arabic*)]
-\item If we see task~\ref{item:net_task} as summarized by a function
-  $f\colon t\mapsto y$, then the task of the software engineer is to choose
-  such a function from a set $\set{f}$ of possible ones. To make this
-  choice she needs a gain function $\yg(f \| \yp, \yE)$ and the set of
-  plausibility distributions $\pf(\yp \| t,\yD, \yE)$, chosen according to
-  some model $\yE$. But what are the propositions $\set{\yp}$ about? that
-  is, what is the engineer uncertain about? Aind what is the gain about?
-
-  The engineer is uncertain about which pairs $(t,x)$ the neural network
-  will encounter during its actual use \citep[see][\sect~22.3 for an
-  enlightening discussion about this]{jaynes1994_r2003}. We may distinguish
-  two cases of such uncertainty: either there is a deterministic relation
-  between the two quantities, that is, the engineer knows that only one $x$
-  corresponds to each $t$, although she doesn't know which; or there isn't
-  a deterministic relation, and the engineer is uncertain about which
-  values of $x$ will appear for multiple occurrences of the same $t$.
-
-  As for the gain in choosing $f$, my intuition is that it is the average
-  gain that the end user of the neural net will obtain during its use. If
-  $\yg(y \|x)$ is the gain function for the end user, and
-  $\pf(x,t \| \yE)$ is the engineer's \dob\ about the $(t,x)$ pairs the end
-  user will encounter, the expected gain of choosing a function $f\colon t
-  \mapsto y$ is
-  \begin{equation}
-    \label{eq:engineer_gain}
-    \sum_{x,t} \yg[f(t) \|x]\;\pf(x,t \| \yE),
-  \end{equation}
-  so the engineer should choose an $f$ which maximizes this expectation. If
-  the engineer knows that there's a deterministic dependence between $t$
-  and $x$, say $r\colon t \mapsto x$, but she's uncertain as to this
-  function, then the expectation above may be rewritten
-  \begin{equation}
-    \label{eq:engineer_gain_deterministic}
-    \sum_{r,t} \yg[f(t) \| r(t)]\;\pf(r \| \yE)\;\pf(t \| \yE),
-  \end{equation}
-  assuming that her knowledge of $t$ is irrelevant for her uncertainty
-  about $r$.
-
-  Data $\yD$ are useful to the engineer for arriving at better-informed
-  \dob s about $(t,x)$. So, considering the
-  expectation~\eqref{eq:engineer_gain}, the software engineer must
-  \begin{equation}
-    \label{eq:choice_engineer}
-    \text{choose}\quad
-\argmax_{f}\sum_{x,t} \yg[f(t) \|x]\;\pf(x,t \| \yD, \yE).
-  \end{equation}
-
-  The heuristic procedures typical neural-net learning could be doing the
-  following:
-  \begin{itemize}
-  \item calculating the posterior $\pf(x,t \| \yD, \yE)$,
-  \item searching for the $f$ that maximizes the expectation above,
-  \item both.
-  \end{itemize}
-
-  An important feature of the point of view currently under discussion is
-  that  the space of functions $\set{f}$ can be distinct from the
-  space of plausibility models $\pf(x,t \| \yD, \yE)$ or the space of
-  functions $\set{r}$. This is in contrast with the Bayesian interpretation
-  most often discussed in the literature
-  \citep{tishbyetal1989,levinetal1990,mackay1992,mackay1992b,neal1996,barberetal1998}[esp.
-  \sects~1.2--3, 3.3--4, 5.7]{bishop2006}, which assumes a neural network
-  to be a particular plausibility model.
-\end{enumerate}
-
-\mynote{To be continued}
-
-
-
-
-\clearpage
-\hrule
-old text
-\hrule
-
-The purpose of a neural network and some other machine-learning methods is
-to choose an output $y$ given an input $x$ and data relating the possible
-inputs and outputs. The way this choice is made and the way it is
-influenced by already-observed data make intuitive sense. As stated, the
-task above involves uncertainty and decision; it can therefore also be
-approached methodically using the plausibility calculus -- the
-\enquote{gold standard} as Srivastava, Hinton, \etal\
-\citey{srivastavaetal2014} called it -- and the principles of decision
-theory. It is interesting to see how the intuitive neural-net approach and
-the methodical one relate to each other.
-
-This relation was first studied by Tishby, Levin, Solla
-\citep{tishbyetal1989,levinetal1990} and then brilliantly explored by
-MacKay \citey{mackay1992,mackay1992b} and others
-\citey{neal1996,barberetal1998}.
-
-\section{***}
-
-
-
-
-
-The study and grasp of the connection between neural nets and probability
-is beneficial to both. For neural nets, this connection \emph{might} not
-lead to any practical improvements -- because of scalability \etc*** -- but
-it's very useful for understanding open problems, like the quantification
-of confidence of neural-network outputs [refs***], overtraining, or the
-choice of architectural constants. For example, the successful idea of
-using \enquote{dropout} was also motivated
-\citep{hintonetal2012,srivastavaetal2014} by the \enquote{mixing} of
-predictions typical of probability. For probability, this connection
-suggests new, efficient parametric families and approximation methods.
-
-\medskip
-
-In this note I want to explain the connection between neural nets and some
-probability models. What's new in this note, compared with the 1990s
-studies cited above?
-\begin{itemize}
-\item I want to try to show this connection in a \emph{geometric, visual}
-  way.
-\item I extend those studies in two directions:
-  \begin{enumerate}[label=\arabic*.]
-  \item including the decision-theoretic character of the problem. This
-    leads to a different probabilistic interpretation of the error function
-    of neural nets;
-  \item basing the connection on so-called \enquote{partially exchangeable
-      models}, to be discussed later. They give us a better understanding
-    of overtraining, and are also connected with generative models
-    [refs***].
-  \end{enumerate}
-\item\emph{Repetita iuvant}: knowledge of those studies seems to be
-  forgotten or much diluted today.
-\end{itemize}
-
-\medskip
-
-This is what I do not purport to do:
-\begin{itemize}[label=${}-{}$]
-\item proving that the connection between neural nets and probability
-  discussed here is unique. Even if it isn't unique, it's still insightful and
-  useful;
-\item suggest that neural nets should be used \enquote{more in accordance}
-  with the probability calculus. The connection already shows that they are
-  approximate probability calculations; their speed and power come from
-  their approximate nature;
-\item\ [add here whatever else you'd like my intentions not to be.]
-\end{itemize}
-
-
-
-\section{Introduction to partially exchangeable models}
-
-
-
-Consider a classification problem: given input
-$x \in \set{1,\dotsc, M}$, we want to predict output
-$y \in \set{1,\dotsc,N}$. Let's consider both discrete.
-
-Two cases must be distinguished: whether every input has several possible
-outputs, or just one. The second case is a special instance of the first,
-and could be simply treated as the prediction of a \enquote{function}
-$x\mapsto y$. But both cases are instances of inference with a
-\emph{partially exchangeable} model.
-
-
-Our assumptions are summarized in the proposition $\yI$. We assume that the
-probability of $y$, for each kind of input $x$, is exchangeable. Thus the
-probability for several pairs
+but we are uncertain about the mathematical form of the dynamical law $F$
+and the values of the external quantities $Q(t-\ydt)$. For this reason we
+can express our \dob\ about $\yS(t)$ given only our knowledge about
+$\yS(t-\ydt)$ and other initial assumptions $\yI$:
 \begin{equation}
-  \label{eq:prob_several_pairs}
-  \pf(\yo{T},\dotsc, \yo{1} \|\xo{T}, \dotsc, \xo{1}, \yI)
+  \label{eq:prob_dynamic}
+  \pf[\yS(t) \| \yS(t-\ydt), \yI],
 \end{equation}
-must have a partially exchangeable form [refs]: for every kind of input
-$x$ we consider the $N$ relative frequencies
-$\yf_x \defd (f_{1\|x},\dotsc, f_{N\|x})$ of the $N$ possible outputs. The
-probability above is given by this integral:
-\begin{multline}
-  \label{eq:prob_several_pairs_exch}
-  \pf(\yo{T},\dotsc, \yo{1} \|\xo{T}, \dotsc, \xo{1}, \yI)
-  ={}\\
-  \idotsint
-  \biggl[ \prod_{x=1}^M \prod_t^{\xo{t}=x} f_{\yo{t}\|x} \biggr]
-  \;
-  \pf(\yf_1,\dotsc,\yf_M \| \yI)
-  \;\di\yf_1 \dotsm \di\yf_M.
-\end{multline}
-
-The complicated look of this formula doesn't do justice to its simple and
-intuitive interpretation:
-
-Choose a kind of input $x$. We're judging that the probability for a very
-large sequence of outputs generated with this input doesn't depend on their
-order. Suppose we knew the relative frequencies of each kind of output in
-this sequence, $(f_{1\|x},\dotsc,f_{N\|x}) \defs \yf_x$, and knew nothing
-else. Then out of symmetry reasons we should give a probability $f_{y\|x}$
-of observing outcome $y$ at the next observation. This is just a
-\enquote{drawing without replacement} problem. At the subsequent
-observations with the same input we give again the same probabilities to
-each $y$, because the sequence is so large that we approximate
-\enquote{drawing without replacement} with \enquote{drawing with
-  replacement}. The probability for a sequence of outputs
-$\yo{1},\dotsc,\yo{T}$ from the same input $x$ is then
+and, given a sequence of states, our \dob\ about the dynamical law:
 \begin{equation}
-  \pf(\yo{T}, \dotsc,\yo{1}\|\text{\footnotesize same input $x$},\yf_x, \yI) =
-  f_{\yo{T}\|x}\times\dotsm\times f_{\yo{1}\|x}.
-  \label{eq:input_m_indep_output}
+  \label{eq:prob_dynamical_law}
+  \pf[F \| \yS(t_1), \yS(t_2), \dotsc, \yI].
 \end{equation}
-Within a larger sequence of outputs from all possible inputs, the outputs
-$\yo(t)$ coming from input $x$ are those for which $\xo(t)=x$. Thus we can
-write the formula above more generally as
-\begin{equation}
- \prod_t^{\xo{t}=x} f_{\yo{t}\|x}
-  \label{eq:input_m_indep_output_label_x}
-\end{equation}
-The above reasoning applies for each kind of input $x$. Thus the
-probability for a sequence of outputs coming from different inputs is the
-product of the probabilities above for all different $x$:
-\begin{equation}
-  \pf(\text{\footnotesize all outputs} \|\text{\footnotesize inputs}, \yf_1,\dotsc,\yf_M, \yI) =
-\prod_{x=1}^M \prod_t^{\xo{t}=x} f_{\yo{t}\|x}.
-  \label{eq:input_m_indep_output_all_x}
-\end{equation}
+Our present problem doesn't concern this inference of the dynamics, but is
+very relevant to it, because to infer the dynamics we must infer the
+population states $\yS(t_k)$ first, from the observation of a population sample.
 
 
-Now what if we don't know the relative frequencies $\yf_x$, for any input?
-Then we assign a probability distribution over their possible values% ,
-% $\pf(\yf_1,\dotsc,\yf_M \| \yI)\,\di\yf_1\dotsm\di\yf_M$,
-and use the law of total probability:
-\begin{multline}
-  \label{eq:freqs_total_prob}
-  \pf(\text{\footnotesize all outputs} \|\text{\footnotesize inputs}, \yI) ={}\\
-  \idotsint \pf(\text{\footnotesize all outputs} \|\text{\footnotesize inputs},
-  \yf_1,\dotsc,\yf_M, \yI)
-  \; \pf(\yf_1,\dotsc,\yf_M \| \yI)\,\di\yf_1,\dotsc,\di\yf_M.
-\end{multline}
-Substituting the explicit expression~\eqref{eq:input_m_indep_output_all_x}
-in this formula we obtain formula~\eqref{eq:freqs_total_prob}. In summary,
-\begin{equation}
-  \label{eq:prob_several_pairs_exch_explanation}
-  \textcolor{mygreen}{\idotsint}
-  \biggl[ \textcolor{mypurpleblue}{\explanation{$\displaystyle\prod_{x=1}^M$}{3em}{\clap{\parbox{10em}{\centering\footnotesize product over all inputs}}}} \textcolor{myred}{\explanation{$\smash{\displaystyle\prod_t^{\xo{t}=x} f_{\yo{t}\|x}}$}{0.67em}{\clap{\quad\parbox[t]{8em}{\centering\footnotesize probability for outputs\\from same input}}}} \biggr]
-  \;
-  \textcolor{mygreen}{\explanation{$\pf(\yf_1,\dotsc,\yf_M \| \yI)
-    \,\di\yf_1 \dotsm \di\yf_M$}{3em}{\clap{\parbox{12em}{\centering\footnotesize uncertainty over all frequencies}}}}.
-\end{equation}
-
-
-The possible frequencies give one input,
-$\yf_x \equiv (f_{1\|x}, \dotsc, f_{N\|x})$, belong to the
-$(N-1)$-dimensional simplex
-\begin{equation}
-  \label{eq:simplex_N}
-  \varDelta \defd \set[\big]{(f_1, \dotsc,f_N) \suchthat f_i \ge 0, \tsum_i f_i =1},
-\end{equation}
-and the collection of possible frequencies $(\yf_1,\dotsc, \yf_M)$ belongs
-to the $M$-fold Cartesian product $\varDelta^M$. From now on we denote
-$\yf \defd (\yf_1,\dotsc,\yf_M)$.
-
-\bigskip
-
-The probability for a new sequence of $\yT$ outputs given their inputs and
-given that we've learned a previous sequence of $T$ input-output pairs is
-determined by Bayes's theorem:
-\begin{equation}
-  \label{eq:prob_new_several_pairs}
-  \begin{gathered}
-  \pf(\yo{\yT},\dotsc, \yo{T+1} \|\xo{\yT}, \dotsc, \xo{T+1},\;
-  \yo{T},\xo{T},\dotsc, \yo{1},\xo{1},\; \yI) ={}\\
-  \frac{\displaystyle
-    \int
-  \biggl[ \prod_{x=1}^M\, \prod_{t=T+1,\dotsc,\yT}^{\xo{t}=x} f_{\yo{t}\|x} \biggr]
-  \;  \pf(\yf \| \yI)  \;\di\yf
-}{\displaystyle
-\int
-  \biggl[ \prod_{x=1}^M\, \prod_{t=1,\dotsc,T}^{\xo{t}=x} f_{\yo{t}\|x} \biggr]
-  \;  \pf(\yf \| \yI)  \;\di\yf
-}.
-\end{gathered}
-\end{equation}
-This formula is equivalent to~\eqref{eq:prob_several_pairs_exch} with and
-updated distribution for the frequencies:
-\begin{equation}
-  \label{eq:update_pr_freqs}
-  \begin{gathered}
-  \pf(\yf \| \yo{T},\xo{T},\dotsc, \yo{1},\xo{1},\; \yI) \;\di\yf={}\\
-  \frac{
-  \bigl[ \prod_{x=1}^M\, \prod_{t=1,\dotsc,T}^{\xo{t}=x} f_{\yo{t}\|x} \bigr]
-  \;  \pf(\yf \| \yI) 
-}{
-  \int  \bigl[ \prod_{x=1}^M\, \prod_{t=1,\dotsc,T}^{\xo{t}=x} f_{\yo{t}\|x} \bigr]
-  \;  \pf(\yf \| \yI) \;\di\yf
-  } \;\di\yf.
-\end{gathered}
-\end{equation}
-
-The form of this updated distribution has important consequences for our
-learning process.
-
-If the number of learned data is enough large compared with the numbers
-$M$, $N$ of possible inputs and outputs and with the magnitude of the
-initial distribution for the frequencies, and if the latter is strictly
-positive, then the updated distribution becomes very peaked on the
-collection of relative frequencies $(\yq_1,\dotsc,\yq_M)$ of the learned
-outputs for all input values. This can be seen from the asymptotic
-expression in terms of the relative entropy (Kullback-Leibler divergence)
-$\yH$,
-  \begin{equation}
-    \label{eq:asympt_pf_KL}
-    \pf(\yf \| \yo{T},\xo{T},\dotsc, \yo{1},\xo{1},\; \yI)
-    \propto
-  \exp\bigl[ -\tsum_x T_x\yH(\yq_x \| \yf_x)  \bigr]\;
-    \pf(\yf \| \yI),
-  \end{equation}
-where $T_x$ is the number of observations with input $x$, with $\sum_x T_x=T$.
-
-If the number of learned data is small compared with the dimensions of the
-input and output spaces, then the initial distribution for the frequencies
-$\pf(\yf \| \yI)\,\di\yf$ greatly influence our
-inference~\eqref{eq:prob_new_several_pairs}. This distribution determines
-two important ***
-
-
-
-\section{Utility functions and probabilities}
-\label{sec:utilities_probs}
-
-Utility of behaving as if proposition $B \in X$ is true given that proposition
-$A \in X$ is true: $c(B \|A)$. Probability for $A$ given $D,\yI$: $\p(A \|
-D, \yI)$. Optimal decision is $B$ that maximizes
-\begin{equation}
-  \label{eq:optimal_decision}
-  \sum_A c(B \| A)\, \p(A \|D,\yI).
-\end{equation}
-
-Now consider different probabilities for all $A$ given the same data $D$:
-$\p(A\|D, \yI')$. The decision $B$ will still be the same if we use a new
-utility
-\begin{equation}
-  \label{eq:new_utility}
-  c'(B \| A) \defd c(B \|A)\,\frac{\p(A \|D,\yI)}{\p(A \|D,\yI')}.
-\end{equation}
-So the same choice can be made with a different probability, if the utility
-is appropriately changed, provided $p(A \|D,\yI')>0$ for all $A$.
-
-This leads to a slightly more general view than Tishby \etal's
-\citey{tishbyetal1989,levinetal1990} and Mackay's \citey{mackay1992,mackay1992b}
-
-
-
-\mynote{Point out that the joint parameter density allows us to make
-  inferences 1. from data about one output to data about the same output;
-  2. from data about one output to data about a different output --
-  \emph{this} is generalization}
-
-\mynote{Point out that generalization (from one output to another) is
-  \emph{fully} determined by the form of the joint parameter prior}
-
-
-
-
-
-
-\newpage
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
-%
 
-\setlength{\intextsep}{0.5ex}% with wrapfigure
+
+
+% \[
+%   \begin{tikzcd}
+%       M_{n,n}(\CC) \arrow{r}{R'_{**}(\Hat{U})} & M_{n,n}(\CC)
+%     \\
+%     L(\mathcal{H}) \arrow{r}{\Hat{U}} \arrow[swap]{d}{R_*}\arrow[swap]{u}{R'_*} & L(\mathcal{H}) \arrow{d}{R_*}\arrow{u}{R'_*} \\
+%       M_{n,n}(\CC) \arrow{r}{R_{**}(\Hat{U})} & M_{n,n}(\CC)
+%   \end{tikzcd}
+% \]
+
+% \[
+%   \begin{tikzcd}
+%       \CC^n \arrow{r}{R'_*(A)} & \CC^n
+%     \\
+%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R}\arrow[swap]{u}{R'} & \mathcal{H} \arrow{d}{R}\arrow{u}{R'} \\
+%       \CC^n \arrow{r}{R_*(A)} & \CC^n
+%   \end{tikzcd}
+% \]
+
+
+% \[
+%   \begin{tikzcd}
+%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R} & \mathcal{H} \arrow{d}{R} \\
+%       \CC^n \arrow{r}{R_*(A)} & \CC^n
+%   \end{tikzcd}
+% \]
+
+%%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
 %  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
 %\caption{***}\label{fig:comparison_a5}
@@ -1311,10 +877,13 @@ This leads to a slightly more general view than Tishby \etal's
 \end{acknowledgements}
 \fi
 
-\renewcommand*{\appendixpagename}{Appendix}
-\renewcommand*{\appendixname}{Appendix}
-%\appendixpage
-%\appendix
+
+\newpage
+% %\renewcommand*{\appendixpagename}{Appendix}
+% %\renewcommand*{\appendixname}{Appendix}
+% %\appendixpage
+% \appendix
+
 
 %%%%%%%%%%%%%%% BIB %%%%%%%%%%%%%%%
 
