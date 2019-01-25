@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-25T19:14:06+0100
+%% Last-Updated: 2019-01-26T00:57:39+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -172,10 +172,10 @@ british%
 \def\prod{\DOTSI\prodop\slimits@}
 \def\coprod{\DOTSI\coprodop\slimits@}
 \makeatother
-\ifarxiv\else\input{../undefinegreek.tex}\fi% make sure no CMF greek letters sneak in
+\ifarxiv\else\input{../definegreek.tex}\fi% make sure no CMF greek letters sneak in
 % Greek letters not usually given in LaTeX. Comment the unneeded ones
 % \DeclareMathSymbol{\varpartial}{\mathalpha}{egreeki}{"40}
- \DeclareMathSymbol{\partialup}{\mathalpha}{egreekr}{"40}
+% \DeclareMathSymbol{\partialup}{\mathalpha}{egreekr}{"40}
 % \DeclareMathSymbol{\alpha}{\mathalpha}{egreeki}{"0B}
 % \DeclareMathSymbol{\beta}{\mathalpha}{egreeki}{"0C}
 % \DeclareMathSymbol{\gamma}{\mathalpha}{egreeki}{"0D}
@@ -205,7 +205,7 @@ british%
 % \DeclareMathSymbol{\varpi}{\mathalpha}{egreeki}{"24}
 % \let\varrho\rho 
 % \let\varsigma\sigma
- \let\varkappa\kappa
+% \let\varkappa\kappa
 % \DeclareMathSymbol{\varphi}{\mathalpha}{egreeki}{"27}
 % %
 % \DeclareMathSymbol{\varAlpha}{\mathalpha}{egreeki}{"41}
@@ -216,7 +216,7 @@ british%
 % \DeclareMathSymbol{\varZeta}{\mathalpha}{egreeki}{"5A}
 % \DeclareMathSymbol{\varEta}{\mathalpha}{egreeki}{"48}
 % \DeclareMathSymbol{\varTheta}{\mathalpha}{egreeki}{"02}
- \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
+% \DeclareMathSymbol{\varIota}{\mathalpha}{egreeki}{"49}
 % \DeclareMathSymbol{\varKappa}{\mathalpha}{egreeki}{"4B}
 % \DeclareMathSymbol{\varLambda}{\mathalpha}{egreeki}{"03}
 % \DeclareMathSymbol{\varMu}{\mathalpha}{egreeki}{"4D}
@@ -261,7 +261,7 @@ british%
 % \DeclareMathSymbol{\alphaup}{\mathalpha}{egreekr}{"0B}
 % \DeclareMathSymbol{\betaup}{\mathalpha}{egreekr}{"0C}
 % \DeclareMathSymbol{\gammaup}{\mathalpha}{egreekr}{"0D}
- \DeclareMathSymbol{\deltaup}{\mathalpha}{egreekr}{"0E}
+% \DeclareMathSymbol{\deltaup}{\mathalpha}{egreekr}{"0E}
 % \DeclareMathSymbol{\epsilonup}{\mathalpha}{egreekr}{"0F}
 % \DeclareMathSymbol{\zetaup}{\mathalpha}{egreekr}{"10}
 % \DeclareMathSymbol{\etaup}{\mathalpha}{egreekr}{"11}
@@ -273,7 +273,7 @@ british%
 % \DeclareMathSymbol{\nuup}{\mathalpha}{egreekr}{"17}
 % \DeclareMathSymbol{\xiup}{\mathalpha}{egreekr}{"18}
 % \DeclareMathSymbol{\omicronup}{\mathalpha}{egreekr}{"6F}
-  \DeclareMathSymbol{\piup}{\mathalpha}{egreekr}{"19}
+%  \DeclareMathSymbol{\piup}{\mathalpha}{egreekr}{"19}
 % \DeclareMathSymbol{\rhoup}{\mathalpha}{egreekr}{"1A}
 % \DeclareMathSymbol{\sigmaup}{\mathalpha}{egreekr}{"1B}
 % \DeclareMathSymbol{\tauup}{\mathalpha}{egreekr}{"1C}
@@ -738,6 +738,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \newcommand*{\ys}{\bm{s}}
 \newcommand*{\yS}{\bm{S}}
 \newcommand*{\ydt}{\incr t}
+\newcommand*{\yt}{\tau}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -802,28 +803,29 @@ is about.
 
 First, our inference is not about the dynamics of the population. In the
 problem of inferring the dynamics, we assume that the state $\yS(t)$ at
-time $t$ is determined through a dynamical law by the state $\yS(t-\ydt)$
-at time $t-\ydt$ together with some external quantities $Q(t-\ydt)$:
+time $t$ is determined through a dynamical law by the states
+$\set{\yS(\yt)}_{\yt<t}$ at some previous times together with some external
+quantities $Q(t)$:
 \begin{equation}
   \label{eq:determ_dynamics}
-  \yS(t) = F[\yS(t-\ydt), Q(t-\ydt)],
+  \yS(t) = F[\set{\yS(\yt)}_{\yt<t}, Q(t)],
 \end{equation}
 but we are uncertain about the mathematical form of the dynamical law $F$
-and the values of the external quantities $Q(t-\ydt)$. For this reason we
-can express our \dob\ about $\yS(t)$ given only our knowledge about
-$\yS(t-\ydt)$ and other initial assumptions $\yI$:
+and the values of the external quantities $Q(t)$. For this reason we can
+express our \dob\ about $\yS(t)$ given only our knowledge about the
+previous states and other initial assumptions $\yI$:
 \begin{equation}
   \label{eq:prob_dynamic}
-  \pf[\yS(t) \| \yS(t-\ydt), \yI],
+  \pf[\yS(t) \| \set{\yS(\yt)}_{\yt<t}, \yI],
 \end{equation}
-and, given a sequence of states, our \dob\ about the dynamical law:
+and, given a time sequence of states, our \dob\ about the dynamical law:
 \begin{equation}
   \label{eq:prob_dynamical_law}
-  \pf[F \| \yS(t_1), \yS(t_2), \dotsc, \yI].
+  \pf[F \| \set{\yS(\yt)}, \yI].
 \end{equation}
 Our present problem doesn't concern this inference of the dynamics, but is
 very relevant to it, because to infer the dynamics we must infer the
-population states $\yS(t_k)$ first, from the observation of a population sample.
+population states $\yS(\yt)$ first, from the observation of a population sample.
 
 
 
