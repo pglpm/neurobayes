@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-26T00:57:39+0100
+%% Last-Updated: 2019-01-26T12:15:25+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -790,42 +790,53 @@ The problem we want to consider is the inference about the state of a
 population of neurons from the observation of the state of a sample of that
 population. By inference we mean the numerical evaluation of our \dob\
 about the population's state. We consider the state at one instant of time.
-The state will be taken to be the binarized activity from a time-binned
-sequence; but our discussion shall apply to more general definitions of
-\enquote{state}. Denote by $N$ the size of the population, by $n$ that of
-the sample, by $S_i$ the activity of the $i$th neuron in the population, by
-$\yS \defd (S_1, \dotsc, S_N)$ the joint activity -- the state -- and by
-$s_j$, $\ys \defd (s_1, \dotsc, s_n)$ the corresponding activities and
-state of the sample.
+The state is taken to be the binarized activity from a time-binned
+sequence. Denote by $N$ the size of the population, by $n$ that of the
+sample, by $S_i$ the activity of the $i$th neuron in the population, by
+$\yS \defd (S_1, \dotsc, S_N)$ the joint activity -- the state -- of the
+population, and by $s_j$, $\ys \defd (s_1, \dotsc, s_n)$ the corresponding
+activities and state of the neurons making up the sample. Many points of
+our discussion, however, apply to more general definitions of
+\enquote{state}.
 
-Let's make some additional remarks to better understand what our inference
-is about.
-
-First, our inference is not about the dynamics of the population. In the
-problem of inferring the dynamics, we assume that the state $\yS(t)$ at
-time $t$ is determined through a dynamical law by the states
-$\set{\yS(\yt)}_{\yt<t}$ at some previous times together with some external
-quantities $Q(t)$:
+In order to better understand what our inference is about, let's also
+stress what it is \emph{not} about. Our inference is not about the
+\emph{dynamics} of the population. This latter inference is roughly as
+follows. We assume that the state $\yS(t)$ at time $t$ is determined
+through a dynamical law by the states $\set{\yS(\yt)}_{\yt<t}$ at some
+previous times together with some external quantities $Q(t)$ (such as
+physical states of synapses, inputs from peripheral nervous system, and
+similar extra-neuronal quantities):
 \begin{equation}
   \label{eq:determ_dynamics}
-  \yS(t) = F[\set{\yS(\yt)}_{\yt<t}, Q(t)],
+  \yS(t) = F[\set{\yS(\yt)}_{\yt<t}, Q(t)].
 \end{equation}
-but we are uncertain about the mathematical form of the dynamical law $F$
-and the values of the external quantities $Q(t)$. For this reason we can
-express our \dob\ about $\yS(t)$ given only our knowledge about the
-previous states and other initial assumptions $\yI$:
+We are uncertain about the mathematical form of the dynamical law $F$ and
+the values of the external quantities $Q(t)$. We can therefore consider
+various \dobs: for example the one about $\yS(t)$ given only knowledge
+about some previous states and other initial assumptions $\yI$:
 \begin{equation}
   \label{eq:prob_dynamic}
   \pf[\yS(t) \| \set{\yS(\yt)}_{\yt<t}, \yI],
 \end{equation}
-and, given a time sequence of states, our \dob\ about the dynamical law:
+or the one about the dynamical law, given a time sequence of states:
 \begin{equation}
   \label{eq:prob_dynamical_law}
   \pf[F \| \set{\yS(\yt)}, \yI].
 \end{equation}
-Our present problem doesn't concern this inference of the dynamics, but is
-very relevant to it, because to infer the dynamics we must infer the
-population states $\yS(\yt)$ first, from the observation of a population sample.
+Our present problem doesn't concern this kind of inferences, but is very
+relevant to them: to infer the dynamics,
+\eqn~\eqref{eq:prob_dynamical_law}, we usually must first infer the
+population states $\yS(\yt)$ from the observation of a population sample.
+
+Note that if the dynamics is excluded from our problem, then samples at
+times $\yt< t$ cannot be used for the inference of the population state at
+time $t$, because such inferential chain involves the dynamics:
+schematically, the inference would be
+$\ys(\yt) \rightsquigarrow \yS(\yt) \rightsquigarrow \yS(t)$, and the
+latter step involves the \dob~\eqref{eq:prob_dynamic}. Our discussion will
+therefore refer to one time $t$ only, which is conveniently suppressed from
+our notation.
 
 
 
