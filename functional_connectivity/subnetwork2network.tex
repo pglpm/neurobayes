@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-26T12:15:25+0100
+%% Last-Updated: 2019-01-26T12:18:49+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -789,12 +789,13 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 The problem we want to consider is the inference about the state of a
 population of neurons from the observation of the state of a sample of that
 population. By inference we mean the numerical evaluation of our \dob\
-about the population's state. We consider the state at one instant of time.
-The state is taken to be the binarized activity from a time-binned
-sequence. Denote by $N$ the size of the population, by $n$ that of the
-sample, by $S_i$ the activity of the $i$th neuron in the population, by
-$\yS \defd (S_1, \dotsc, S_N)$ the joint activity -- the state -- of the
-population, and by $s_j$, $\ys \defd (s_1, \dotsc, s_n)$ the corresponding
+about the population's state. The state is taken to be the binarized
+activity from a time-binned sequence. Denote by $N$ the size of the
+population, by $n$ that of the sample, by $S_i(t)$ the activity of the
+$i$th neuron in the population at time $t$, by
+$\yS(t) \defd \bigl(S_1(t), \dotsc, S_N(t)\bigr)$ the joint activity -- the
+state -- of the population, and by $s_j(t)$,
+$\ys(t) \defd \bigl(s_1(t), \dotsc, s_n(t)\bigr)$ the corresponding
 activities and state of the neurons making up the sample. Many points of
 our discussion, however, apply to more general definitions of
 \enquote{state}.
@@ -828,6 +829,7 @@ Our present problem doesn't concern this kind of inferences, but is very
 relevant to them: to infer the dynamics,
 \eqn~\eqref{eq:prob_dynamical_law}, we usually must first infer the
 population states $\yS(\yt)$ from the observation of a population sample.
+\textcolor{white}{If you find this you can claim a postcard from me.}
 
 Note that if the dynamics is excluded from our problem, then samples at
 times $\yt< t$ cannot be used for the inference of the population state at
@@ -837,11 +839,6 @@ $\ys(\yt) \rightsquigarrow \yS(\yt) \rightsquigarrow \yS(t)$, and the
 latter step involves the \dob~\eqref{eq:prob_dynamic}. Our discussion will
 therefore refer to one time $t$ only, which is conveniently suppressed from
 our notation.
-
-
-
-
-\textcolor{white}{If you find this you can claim a postcard from me.}
 
 
 
