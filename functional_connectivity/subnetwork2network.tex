@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-26T12:18:49+0100
+%% Last-Updated: 2019-01-26T12:45:36+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -796,9 +796,14 @@ $i$th neuron in the population at time $t$, by
 $\yS(t) \defd \bigl(S_1(t), \dotsc, S_N(t)\bigr)$ the joint activity -- the
 state -- of the population, and by $s_j(t)$,
 $\ys(t) \defd \bigl(s_1(t), \dotsc, s_n(t)\bigr)$ the corresponding
-activities and state of the neurons making up the sample. Many points of
-our discussion, however, apply to more general definitions of
-\enquote{state}.
+activities and state of the neurons making up the sample. Our main task is
+to calculate our \dob
+\begin{equation}
+  \label{eq:main_dob_sample2pop}
+  \pf[\yS(t) \| \ys(t), \yI],
+\end{equation}
+where $\yI$ denotes other initial information and assumptions. Many points
+of our discussion apply to more general definitions of \enquote{state}.
 
 In order to better understand what our inference is about, let's also
 stress what it is \emph{not} about. Our inference is not about the
@@ -815,7 +820,7 @@ similar extra-neuronal quantities):
 We are uncertain about the mathematical form of the dynamical law $F$ and
 the values of the external quantities $Q(t)$. We can therefore consider
 various \dobs: for example the one about $\yS(t)$ given only knowledge
-about some previous states and other initial assumptions $\yI$:
+about some previous states:
 \begin{equation}
   \label{eq:prob_dynamic}
   \pf[\yS(t) \| \set{\yS(\yt)}_{\yt<t}, \yI],
@@ -837,8 +842,34 @@ time $t$, because such inferential chain involves the dynamics:
 schematically, the inference would be
 $\ys(\yt) \rightsquigarrow \yS(\yt) \rightsquigarrow \yS(t)$, and the
 latter step involves the \dob~\eqref{eq:prob_dynamic}. Our discussion will
-therefore refer to one time $t$ only, which is conveniently suppressed from
+therefore refer to one time $t$ only, conveniently suppressed from
 our notation.
+
+
+\bigskip
+
+To calculate our \dob~\eqref{eq:main_dob_sample2pop}, the probability
+calculus requires us to specify: 1. our initial belief distribution about
+the population state:
+\begin{equation}
+  \label{eq:initial_dob_pop}
+  \pf(\yS \| \yI);
+\end{equation}
+2. our belief distribution about the sample state given the population
+state:
+\begin{equation}
+  \label{eq:sample_dob}
+  \pf(\ys \| \yS, \yI),
+\end{equation}
+usually called \enquote{sampling distribution}. The two distribution above
+yield the distribution~\eqref{eq:main_dob_sample2pop} by Bayes's theorem:
+\begin{equation}
+  \label{eq:main_bayes_theorem}
+  \pf(\yS \| \ys, \yI) =
+  \frac{\pf(\ys \| \yS, \yI)\;\pf(\yS \| \yI)}{
+    \sum_{\yS}\pf(\ys \| \yS, \yI)\;\pf(\yS \| \yI)
+  }.
+\end{equation}
 
 
 
