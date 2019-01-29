@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-26T12:45:36+0100
+%% Last-Updated: 2019-01-29T14:12:04+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -666,7 +666,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-%\newcommand*{\E}{\mathrm{E}}
+\newcommand*{\E}{\mathrm{E}}
 \renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 %\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
@@ -739,6 +739,8 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \newcommand*{\yS}{\bm{S}}
 \newcommand*{\ydt}{\incr t}
 \newcommand*{\yt}{\tau}
+\newcommand*{\yIme}{\varIota_{\text{ME}}}
+\newcommand*{\ym}{\mathte{m}}
 %@@@@@@@@@@ new macros end @@@@@@@@@@
 
 \firmlists
@@ -782,22 +784,23 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 
 
 
-\section{The Question}
+\section{The question}
 \label{sec:question}
 
 
 The problem we want to consider is the inference about the state of a
 population of neurons from the observation of the state of a sample of that
-population. By inference we mean the numerical evaluation of our \dob\
-about the population's state. The state is taken to be the binarized
-activity from a time-binned sequence. Denote by $N$ the size of the
-population, by $n$ that of the sample, by $S_i(t)$ the activity of the
-$i$th neuron in the population at time $t$, by
+population. By inference we mean \emph{the numerical evaluation of our
+  \dob}, in this case about the population's state. The state is taken to
+be the binarized activity from a time-binned sequence. Denote by $N$ the
+size of the population, by $n$ that of the sample, by $S_i(t)$ the activity
+of the $i$th neuron in the population at time $t$, by
 $\yS(t) \defd \bigl(S_1(t), \dotsc, S_N(t)\bigr)$ the joint activity -- the
 state -- of the population, and by $s_j(t)$,
 $\ys(t) \defd \bigl(s_1(t), \dotsc, s_n(t)\bigr)$ the corresponding
-activities and state of the neurons making up the sample. Our main task is
-to calculate our \dob
+activities and state of the neurons making up the sample. We will discuss
+the exact relationship between $\yS$ and $\ys$ in the next sections. Our
+main task is to calculate our \dob
 \begin{equation}
   \label{eq:main_dob_sample2pop}
   \pf[\yS(t) \| \ys(t), \yI],
@@ -830,11 +833,10 @@ or the one about the dynamical law, given a time sequence of states:
   \label{eq:prob_dynamical_law}
   \pf[F \| \set{\yS(\yt)}, \yI].
 \end{equation}
-Our present problem doesn't concern this kind of inferences, but is very
+Our present problem doesn't concern this kind of inferences, but it's very
 relevant to them: to infer the dynamics,
-\eqn~\eqref{eq:prob_dynamical_law}, we usually must first infer the
-population states $\yS(\yt)$ from the observation of a population sample.
-\textcolor{white}{If you find this you can claim a postcard from me.}
+\eqn~\eqref{eq:prob_dynamical_law}, we usually must first infer the states
+$\yS(\yt)$ from the observation of a population sample.
 
 Note that if the dynamics is excluded from our problem, then samples at
 times $\yt< t$ cannot be used for the inference of the population state at
@@ -856,13 +858,15 @@ the population state:
   \pf(\yS \| \yI);
 \end{equation}
 2. our belief distribution about the sample state given the population
-state:
+state: \textcolor{white}{(If you find this you can claim a postcard from
+  me)}
 \begin{equation}
   \label{eq:sample_dob}
   \pf(\ys \| \yS, \yI),
 \end{equation}
-usually called \enquote{sampling distribution}. The two distribution above
-yield the distribution~\eqref{eq:main_dob_sample2pop} by Bayes's theorem:
+which we can call the \enquote{sampling distribution}. The two distribution
+above yield the distribution~\eqref{eq:main_dob_sample2pop} by Bayes's
+theorem:
 \begin{equation}
   \label{eq:main_bayes_theorem}
   \pf(\yS \| \ys, \yI) =
@@ -870,6 +874,114 @@ yield the distribution~\eqref{eq:main_dob_sample2pop} by Bayes's theorem:
     \sum_{\yS}\pf(\ys \| \yS, \yI)\;\pf(\yS \| \yI)
   }.
 \end{equation}
+
+\bigskip
+
+Let's investigate the sampling distribution~\eqref{eq:sample_dob}. First of
+all we note that we may \emph{label} the $N$ neurons in an arbitrary way --
+this doesn't mean that we consider them identical or indistinguishable. It
+is then convenient to give the labels $1, \dotsc, n$ to the neurons we have
+measured, and the remaining $N-n$ labels to the rest. Then we have the
+identity
+\begin{equation}
+  \label{eq:label_sample}
+  s_i=S_i, \quad i\in\set{1, \dotsc, n},
+\end{equation}
+and the sampling distribution~\eqref{eq:sample_dob} is a delta:
+\begin{equation}
+  \label{eq:sample_dob_delta}
+  \pf(\ys \| \yS, \yI) = \prod_{i=1}^{n} \delt(s_i,S_i).
+\end{equation}
+
+\bigskip
+
+Let's now investigate our initial belief~\eqref{eq:initial_dob_pop} about
+the population state. To start with, I'd like to consider belief
+distributions of a maximum-entropy form and offer a couple of comments on
+them, because they seem very popular in the literature.
+
+If the activities of the neurons are binarized, the set of all possible
+population states $\set{\yS}$ is discrete, of cardinality $2^N$. The
+set of all possible initial belief distributions for $\yS$ has then
+dimension $2^N-1$ because of normalization. It is a simplex. % homeomorphic
+% to the set of points
+% \begin{equation}
+%   \label{eq:simplex_in_R}
+%   \varDelta_{2^N-1} \defd
+%   \set{\bm{q} \in \clcl{0,1}^{2^N-1} \suchthat \sum_l q_l \le 1}
+% \end{equation}
+% and each point in this simplex represents a distribution of degrees of
+% belief among the possible population states.
+Each such distribution has moments -- for example,
+$\E(S_3\;S_5\;S_8 \| \yI)$ --- with precise numerical values. A
+maximum-entropy distribution is chosen by first choosing a subset of
+distributions having specific values for some moments, and then selecting
+the distribution having maximum Shannon entropy in this subset. Such a
+distribution is unique because the fixed-moment subsets are convex and the
+Shannon entropy is a convex function. A maximum-entropy distribution is
+therefore identified by the moments chosen -- for example, first and second
+moments -- and their numerical values. We can write this as
+\begin{equation}
+  \label{eq:initial_dob_me}
+  \pf(\yS \| \ym, \yIme),
+\end{equation}
+a familiar example being
+\begin{multline}
+  \label{eq:initial_dob_me_example}
+  \pf(\yS \| \set{m_i, m_{ij}}, \yIme) ={}\\
+  \frac{1}{Z(\set{m_i, m_{ij}})}\,
+  \exp\biggl[\sum_i h_i(\set{m_i, m_{ij}})\,S_i +
+  \sum_{i,j}^{i<j} J_{ij}(\set{m_i, m_{ij}})\,S_i\,S_j\biggr],
+\end{multline}
+where $\set{m_i}$ are the $N$ first moments, $\set{m_{ij}}$ the
+$\binom{N}{2}$ second moments, $Z$ is a normalization constant, and
+$\set{h_i, J_{ij}}$ are specific one-one functions of the moments.
+
+This kind of distributions can assign asymmetric \dob\ about the activities
+of the neurons -- for example a higher belief that neuron $14$ is active
+than that neuron $6$ is active. By keeping the \emph{kind} of moments (for
+example, all first moments and some specific third moments) fixed but
+choosing different numerical values for them we form a set of
+distributions. If the number of moments considered is less than $2^N-1$
+then this set has strictly lower dimension than the simplex.
+
+A remark may be useful speaking of maximum-entropy distributions. With
+other kinds of inference, convex mixtures of maximum-entropy distributions
+are sometimes considered, which can be written as
+\begin{equation}
+  \label{eq:initial_dob_me_mixture}
+  \pf(\yS \| \yIme) =
+  \int\!\di\ym\;\pf(\yS \| \ym, \yIme)\; \pf(\ym \| \yIme).
+\end{equation}
+For our present inference, however, such a mixture is not meaningful
+because redundant: its redundancy is clear when we consider the
+distribution for $\ym$ conditional on perfect knowledge of the state $\yS$:
+\begin{equation}
+  \label{eq:dob_m_conditional_S}
+  \pf(\ym \| \yS, \yIme) \propto
+  \pf(\yS \| \ym, \yIme)\; \pf(\ym \| \yIme).
+\end{equation}
+This distribution is not a delta, that is, it says we're uncertain about
+the values of the parameter $\ym$ -- even though the state $\yS$ is known!
+
+The reason for this redundancy is that two different sets of weights
+$\set*{\pf(\ym \| \yIme')}$, $\set*{\pf(\ym \| \yIme'')}$ for $\ym$ may yield
+the same resulting distribution for $\yS$. Mixtures of maximum-entropy
+distributions like~\eqref{eq:initial_dob_me_mixture} make sense when we are
+making inferences about an \emph{unlimited} sequence of states -- for
+example, a time sequence $\bigl( \yS(t_1), \yS(t_2), \dotsc \bigr)$ --
+because in this case each set of weights for $\ym$ gives rise to a unique
+distribution \emph{for the unlimited sequence}.
+
+
+\bigskip
+
+It's important to ask ourselves: in which experimental situations do
+asymmetric belief distributions represent our initial state of knowledge
+about the population state? The signals of the neurons picked up by neural
+recording instruments is usually
+
+
 
 
 
