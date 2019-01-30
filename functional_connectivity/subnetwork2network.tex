@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-29T14:12:04+0100
+%% Last-Updated: 2019-01-30T11:47:06+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -965,13 +965,15 @@ This distribution is not a delta, that is, it says we're uncertain about
 the values of the parameter $\ym$ -- even though the state $\yS$ is known!
 
 The reason for this redundancy is that two different sets of weights
-$\set*{\pf(\ym \| \yIme')}$, $\set*{\pf(\ym \| \yIme'')}$ for $\ym$ may yield
-the same resulting distribution for $\yS$. Mixtures of maximum-entropy
-distributions like~\eqref{eq:initial_dob_me_mixture} make sense when we are
-making inferences about an \emph{unlimited} sequence of states -- for
-example, a time sequence $\bigl( \yS(t_1), \yS(t_2), \dotsc \bigr)$ --
-because in this case each set of weights for $\ym$ gives rise to a unique
-distribution \emph{for the unlimited sequence}.
+$\set*{\pf(\ym \| \yIme')}$, $\set*{\pf(\ym \| \yIme'')}$ for $\ym$ may
+yield the same resulting distribution for $\yS$. Mixtures of
+maximum-entropy distributions like~\eqref{eq:initial_dob_me_mixture} make
+sense when we are making inferences about an \emph{unlimited} sequence of
+states -- for example, a time sequence
+$\bigl( \yS(t_1), \yS(t_2), \dotsc \bigr)$ -- because in this case each set
+of weights for $\ym$ gives rise to a unique distribution \emph{for the
+  unlimited sequence}. In fact, in this case such mixtures are called
+models by sufficient statistics \citep[\sect~4.5]{bernardoetal1994_r2000}.
 
 
 \bigskip
@@ -979,10 +981,47 @@ distribution \emph{for the unlimited sequence}.
 It's important to ask ourselves: in which experimental situations do
 asymmetric belief distributions represent our initial state of knowledge
 about the population state? The signals of the neurons picked up by neural
-recording instruments is usually
+recording instruments are usually
 
 
 
+
+\section{Intro}
+\label{sec:intro}
+
+The probabilistic study of the activity of networks of neurons has enjoyed
+many mathematical advances from other scientific fields, statistical
+mechanics in particular. Together with their mathematical understanding,
+these fields have also brought into neuroscience their technical
+terminology and, behind it, specific ways of physically picturing the
+problem.
+
+Although the mathematical tools are a great help, I believe that the
+technical jargon and physical picture of other fields will in the long run
+be a hinder to understanding neuronal-network activity, because the
+physical phenomena at its core are very different from those of these
+fields.
+
+Some people will object that this is \enquote{just semantics} and it's
+unimportant. People who make this kind of objection are usually poorly
+acquainted with the history of science, where most of the advances have
+been, first of all, advances in semantics. The mathematical Ptolemaic
+system, for example, had great predictive power and could be improved
+without limit. The reason for its ultimate dismissal in favour of the
+Copernican-Keplerian-Newtonian one was that the latter was based on a more
+fruitful physical \emph{picture}, which in turn led to more agile
+mathematics \citep[\chap~?]{kline1980_r1982}. Another example is semantic
+change about the idea of pressure -- pressure as something we can speak
+about even when there are no physical walls -- offered by Euler
+\citep{euler1753_r1757,truesdell1954d}[\chap~IV]{truesdell1968}, which
+eventually led to continuum thermomechanics. The most famous example is
+Einstein's \citey{einstein1905c} semantic analysis of the concept of
+\enquote{simultaneity}, which led to a completely different understanding
+of the mathematically already known Lorentz transformations and their
+related phenomena of length contraction and time dilation \citep[and of the
+relation between mass and energy, already pointed out
+by][p.~487]{poincare1900}. A final example is Born \citey[p.~865,
+footnote]{born1926} ***
 
 
 % \[
