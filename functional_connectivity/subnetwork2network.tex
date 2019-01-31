@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-01-30T11:47:06+0100
+%% Last-Updated: 2019-01-31T22:36:22+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Report-no: ***
 \newif\ifarxiv
@@ -20,9 +20,10 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{25 January 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{Given sample, infer population}
-\newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{\propertitle}
+\newcommand*{\propertitle}{An overview of inferences\\about neuronal
+networks}
+\newcommand*{\pdftitle}{An overview of inferences about neuronal networks}
+\newcommand*{\headtitle}{Inferences for neuronal networks}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}
@@ -527,7 +528,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\Large\sffamily%
+\pretitle{\begin{center}\LARGE\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -637,12 +638,9 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
 %\newcommand*{\Lor}{\bigvee}
-%\newcommand*{\lland}{\mathbin{\ \land\ }}
-%\newcommand*{\llor}{\mathbin{\ \lor\ }}
-%\newcommand*{\lonlyif}{\mathbin{\Rightarrow}}%implies
+%\newcommand*{\lland}{\DOTSB\;\land\;}
+%\newcommand*{\llor}{\DOTSB\;\lor\;}
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
-\newcommand*{\mimplies}{\Rightarrow}%implies
-%\newcommand*{\liff}{\mathbin{\Leftrightarrow}}%if and only if
 \newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
@@ -720,10 +718,10 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
 
-%\definecolor{notecolour}{RGB}{68,170,153}
-%\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
+\definecolor{notecolour}{RGB}{68,170,153}
+\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
 %\newcommand*{\puzzle}{\maltese}
-%\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
 \newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
@@ -784,8 +782,48 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 
 
 
-\section{The question}
-\label{sec:question}
+\section{Intro}
+\label{sec:intro}
+
+
+
+The probabilistic study of the activity of networks of neurons has enjoyed
+many mathematical advances from other scientific fields, statistical
+mechanics in particular. Together with their mathematical understanding,
+these fields have also brought into neuroscience their technical
+terminology and, behind it, specific ways of physically picturing the
+problem.
+
+Although the mathematical tools are a great help, there's the risk that the
+very specialized technical jargon and physical picture of other fields may
+in the long run be a hinder to understanding neuronal-network activity,
+because the physical phenomena at its core are very different from those of
+these fields. The history of science reminds us that such semantic
+distinctions are important and have often originated scientific
+revolutions.\footnote{The mathematical Ptolemaic system, for example, had
+  great predictive power and could be improved without limit. The reason
+  for its ultimate dismissal in favour of the
+  Copernican-Keplerian-Newtonian one was that the latter was based on a
+  more fruitful physical \emph{picture}, which in turn led to more agile
+  mathematics \citep[\chap~***]{kline1980_r1982}. Another example is semantic
+  change about the idea of pressure -- pressure as something we can speak
+  about even when there are no physical walls -- offered by Euler
+  \citep{euler1753_r1757,truesdell1954d}[\chap~IV]{truesdell1968}, which
+  eventually led to continuum thermomechanics. The most famous example is
+  Einstein's \citey{einstein1905c} semantic analysis of the concept of
+  \enquote{simultaneity}, which led to a completely different understanding
+  of the mathematically already known Lorentz transformations and their
+  related phenomena of length contraction and time dilation \citep[and of
+  the relation between mass and energy, already pointed out
+  by][p.~487]{poincare1900}. A final example is Born's \citey[p.~865,
+  footnote]{born1926} reinterpretation of the wave function as a
+  probability density rather than as charge density, which lead to a better
+  understanding of the quantum-mechanical mathematical formalism.}
+
+
+
+\section{Given sample state, infer population state}
+\label{sec:sample_population}
 
 
 The problem we want to consider is the inference about the state of a
@@ -966,7 +1004,9 @@ the values of the parameter $\ym$ -- even though the state $\yS$ is known!
 
 The reason for this redundancy is that two different sets of weights
 $\set*{\pf(\ym \| \yIme')}$, $\set*{\pf(\ym \| \yIme'')}$ for $\ym$ may
-yield the same resulting distribution for $\yS$. Mixtures of
+yield the same resulting distribution for $\yS$. Geometrically, the
+distributions $\set{\pf(\yS \| \ym, \yIme)}_{\ym}$ are not the extreme
+points of a simplex within the simplex $\set{\yS}$. Mixtures of
 maximum-entropy distributions like~\eqref{eq:initial_dob_me_mixture} make
 sense when we are making inferences about an \emph{unlimited} sequence of
 states -- for example, a time sequence
@@ -980,48 +1020,34 @@ models by sufficient statistics \citep[\sect~4.5]{bernardoetal1994_r2000}.
 
 It's important to ask ourselves: in which experimental situations do
 asymmetric belief distributions represent our initial state of knowledge
-about the population state? The signals of the neurons picked up by neural
-recording instruments are usually
+about the population state? Neural-recording instruments usually pick up
+the sample of recorded neurons in an uncontrollable, unknown way. Our
+initial \dob\ about the state of the full population is therefore
+symmetric.
 
+\mynote{Continue this discussion referring to
+  \citep{portamanaetal2015,portamanaetal2018b}.}
 
+$\textquotedblleft a$
+\section{Inferences of dynamics}
+\label{sec:inferences_dynamics}
 
+\mynote{Important points:
+  \begin{itemize}
+  \item there cannot be \enquote{model-free} approaches
+  \item prior gives the greatest contribution to posterior
+  \item selection of a \enquote{model} is already a selection of class of priors
+  \item parameters that \enquote{couple} two neurons need not have any
+    direct biological meaning
+  \item to make such a connection we'd need to start from the physics of
+    the connections (typical delay times, other physical consequences of
+    synaptic connections, and similar)
+  \item some literature chooses parameter priors based on the data: mistake
+    in methodology
+  \item inferences about dynamical law aren't very meaningful if they aren't
+    meant for a set of similar experiments
+  \end{itemize}}
 
-\section{Intro}
-\label{sec:intro}
-
-The probabilistic study of the activity of networks of neurons has enjoyed
-many mathematical advances from other scientific fields, statistical
-mechanics in particular. Together with their mathematical understanding,
-these fields have also brought into neuroscience their technical
-terminology and, behind it, specific ways of physically picturing the
-problem.
-
-Although the mathematical tools are a great help, I believe that the
-technical jargon and physical picture of other fields will in the long run
-be a hinder to understanding neuronal-network activity, because the
-physical phenomena at its core are very different from those of these
-fields.
-
-Some people will object that this is \enquote{just semantics} and it's
-unimportant. People who make this kind of objection are usually poorly
-acquainted with the history of science, where most of the advances have
-been, first of all, advances in semantics. The mathematical Ptolemaic
-system, for example, had great predictive power and could be improved
-without limit. The reason for its ultimate dismissal in favour of the
-Copernican-Keplerian-Newtonian one was that the latter was based on a more
-fruitful physical \emph{picture}, which in turn led to more agile
-mathematics \citep[\chap~?]{kline1980_r1982}. Another example is semantic
-change about the idea of pressure -- pressure as something we can speak
-about even when there are no physical walls -- offered by Euler
-\citep{euler1753_r1757,truesdell1954d}[\chap~IV]{truesdell1968}, which
-eventually led to continuum thermomechanics. The most famous example is
-Einstein's \citey{einstein1905c} semantic analysis of the concept of
-\enquote{simultaneity}, which led to a completely different understanding
-of the mathematically already known Lorentz transformations and their
-related phenomena of length contraction and time dilation \citep[and of the
-relation between mass and energy, already pointed out
-by][p.~487]{poincare1900}. A final example is Born \citey[p.~865,
-footnote]{born1926} ***
 
 
 % \[
