@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-02-15T16:02:43+0100
+%% Last-Updated: 2019-02-15T17:38:43+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -695,11 +695,16 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 A probability distribution is our quantified uncertainty about a set of
 mutually exclusive and exhaustive propositions. So when we see a
 probability distribution it's natural to ask: what \emph{exactly} are we
-uncertain about? Asking this question is also a good way to distinguish
-probability distributions from other distributions. For example, if we're
-shown a \emph{frequency} distribution and we ask \enquote{what are we
-  uncertain about, in this distribution?}, it's clear that the question
-makes no sense.
+uncertain about? The answer to this question shouldn't be vague, as for
+example \enquote{the network state}: what network? at what time? To give a
+meaningful answer it's useful to specify in detail what experiment would be
+done to answer the question with certainty.
+
+Asking the question above is also a good way to distinguish probability
+distributions from other distributions. For example, if we're shown a
+\emph{frequency} distribution and we ask \enquote{what are we uncertain
+  about, with this distribution?}, it's clear that the question makes no
+sense.
 
 Together with asking what the uncertainty is about, it's also natural to
 ask:
@@ -725,13 +730,15 @@ The question: What is the neural activity $s(t')$ in a new time bin $t'$
 
 The assumptions:
 \begin{enumerate*}
-\item the order of the time bins is irrelevant;
-\item for some biological reason only the first $k$ moments of the data are
-  relevant for the prediction of the activity in a new time bin.
+\item The order of the time bins, \emph{including any number of new ones},
+  is irrelevant;
+\item for some biological reason, only the first $k$ moments of the data
+  are relevant for the prediction of the activity in a new time bin, for
+  any amount of data.
 \end{enumerate*}
 (The second assumption implies the first.)
 
-The data: the set of recorded activities $\set{s(t)}$.
+The data: The set of recorded activities $\set{s(t)}$.
 
 
 
