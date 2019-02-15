@@ -6,7 +6,7 @@
 %% Home page: http://magnaspesmeretrix.org/
 %% Email (remove ZZ): pglpm0ZZ[at]gmail.com
 %% Created: 2000-08-23T16:53:30+0200
-%% Last-Updated: 2019-01-31T22:27:46+0100
+%% Last-Updated: 2019-02-15T14:32:33+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % NB: This database contains also items whose content's validity I
@@ -248,6 +248,7 @@
 @String{ce = {Chem.\ Eng.}}
 @String{ced = {Chem.\ Educat.}}
 @String{cejp = {Central Eur.\ J. Phys.}}
+@String{cell = {Cell}}
 @String{cerp = {\langfrench{Correspondance sur l'{\'E}cole Royale Polytechnique}}}
 @String{ces = {Chem.\ Eng.\ Sci.}}
 @String{cesw = {Combust.\ Explo.\ Shock Waves}}
@@ -785,6 +786,7 @@
 @String{pe = {Physica E}}
 @String{ped = {Phys.\ Educ.}}
 @String{pem = {Probabilist.\ Eng.\ Mech.}}
+@String{pems = {Proc.\ Edinb.\ Math.\ Soc.}}
 @String{perc = {Perception}}
 @String{pes = {Polymer Eng.\ Sci.}}
 @String{pess = {Phys.\ Essays}}
@@ -2747,6 +2749,16 @@ year =	       {2005},
 note =	       {\arxiveprint{quant-ph/0507145}}
 }
 
+@Article{allardice1891,
+author =       {R. E. Allardice},
+title =	       {The Barycentric Calculus of {M{\"o}bius}},
+journal =      pems,
+year =	       {1891},
+volume =       {10},
+pages =	       {2-21},
+keywords =     {affine forms, Grassmann spaces}
+}
+
 @Article{allen1974,
 author =       {David M. Allen},
 title =	       {The Relationship Between Variable Selection and Data Agumentation and a Method for Prediction},
@@ -2820,6 +2832,17 @@ volume =       {70},
 number =       {6},
 pages =	       {567--568},
 note =	       {See \citebi{khrapko2001} and also \citebi{yurchenko2002}}
+}
+
+@Article{allisonetal2016,
+author =       {David B. Allison and Andrew W. Brown and Brandon J. George and Kathryn A. Kaiser},
+title =	       {A tragedy of errors},
+journal =      nat,
+year =	       {2016},
+volume =       {530},
+number =       {7588},
+pages =	       {27--29},
+keywords =     {reproducibility}
 }
 
 @Book{almeidaetal1990,
@@ -3043,7 +3066,7 @@ title =	       {Differential Geometry in Statistical Inference},
 publisher =    {Institute of Mathematical Statistics},
 year =	       {1987},
 volume =       {10},
-series =       {Lecture notes-monograph series},
+series =       {Lecture notes--monograph series},
 address =      {Hayward, USA},
 keywords =     {probability theory, minimum-discrimination-information, minimum-relative-entropy, symmetries of Fisher-information metric}
 }
@@ -5962,13 +5985,14 @@ note =	       {\arxiveprint{quant-ph/0511263}}
 
 @Article{baierlein1986,
 author =       {Ralph Baierlein},
-title =	       {Book review: \textbf{{Entropy in relation to incomplete knowledge}} by {K. G. Denbigh} and {J. S. Denbigh}},
+title =	       {{[Book review:]} \textbf{{Entropy in relation to incomplete knowledge}} by {K. G. Denbigh} and {J. S. Denbigh}},
 journal =      ajp,
 year =	       {1986},
 volume =       {54},
 number =       {12},
 pages =	       {1156},
-note =	       {Review of \citebi{denbighetal1985}}
+note =	       {Review of \citebi{denbighetal1985}},
+mynote =       {\equote{Textbooks that try to make students comfortable by telling them that entropy is just a measure of ``disorder'' are intellectually shallow}}
 }
 
 @Article{baierlein1991,
@@ -10159,7 +10183,7 @@ volume =       {76},
 number =       {2},
 pages =	       {159--165},
 note =	       {\url{http://drsmorey.org/research/rdmorey/bibtex/upload/Berger:Berry:1988.pdf}},
-keywords =     {Bayesian probability theory, teaching}
+keywords =     {Bayesian probability theory, teaching, p-values}
 }
 
 @Article{bergeretal1996,
@@ -16706,14 +16730,15 @@ pages =	       {727--744},
 keywords =     {relativity}
 }
 
-@Book{browne2009,
+@Book{browne2012,
 author =       {John Browne},
-title =	       {Grassmann Algebra: Exploring extended vector algebra with \emph{Mathematica}},
-publisher =    {Quantica},
-year =	       {2009},
-address =      {Melbourne},
-note =	       {\url{http://www.grassmannalgebra.info/}},
-keywords =     {differential forms}
+title =	       {Grassmann Algebra. Vol.~1: Foundations},
+publisher =    {Barnard},
+year =	       {2012},
+address =      {Eltham, Australia},
+note =	       {\url{https://books.google.com/books?id=IuYIAwAAQBAJ}. First drafted 2009},
+keywords =     {Peano space, meet, join, exterior product},
+origdate =     {2009}
 }
 
 @Article{browneetal2006,
@@ -19138,6 +19163,17 @@ pages =	       {3490--3494},
 keywords =     {temperature definition}
 }
 
+@Article{camereretal2018,
+author =       {Colin F. Camerer and Anna Dreber and Felix Holzmeister and Teck-Hua Ho and J{\"u}rgen Huber and Magnus Johannesson and Michael Kirchler and Gideon Nave and Brian A. Nosek and Thomas Pfeiffer and Adam Altmejd and Nick Buttrick and Taizan Chan and Yiling Chen and Eskil Forsell and Anup Gampa and Emma Heikensten and Lily Hummer and Taisuke Imai and Siri Isaksson and Dylan Manfredi and Julia Rose and Eric-Jan Wagenmakers and Hang Wu},
+title =	       {Evaluating the replicability of social science experiments in {\emph{Nature}} and {\emph{Science}} between 2010 and 2015},
+journal =      nathb,
+year =	       {2018},
+volume =       {2},
+number =       {9},
+pages =	       {637--644},
+keywords =     {reproducibility, p-values}
+}
+
 @Article{campa2008,
 author =       {Alessandro Campa},
 title =	       {The study of the equilibrium and of the dynamical properties of long-range interacting systems},
@@ -19649,6 +19685,17 @@ number =       {4},
 pages =	       {289--305}
 }
 
+@Book{carlyle1831_r2014,
+author =       {Thomas Carlyle},
+title =	       {Sartor Resartus},
+publisher =    {eBooks@Adelaide},
+year =	       {2014},
+address =      {Adelaide},
+note =	       {\url{https://ebooks.adelaide.edu.au/c/carlyle/thomas/sartor_resartus/}. First publ.\ 1831},
+mynote =       {\enquote{It is a mathematical fact that the casting of this pebble from my hand alters the centre of gravity of the Universe.} \chap~VII},
+origdate =     {1831}
+}
+
 @Article{carmichael1913,
 author =       {R. D. Carmichael},
 title =	       {On the Theory of Relativity: Mass, Force and Energy},
@@ -19941,7 +19988,7 @@ year =	       {1986},
 address =      {Napoli},
 note =	       {Transl.\ of \citebi{cartan1923,cartan1924,cartan1925} by Anne Magnon and Abhay Ashtekar. First publ.\ 1923--1925},
 keywords =     {differential geometry},
-origdate =     {1922--1955}
+origdate =     {1922}
 }
 
 @Article{cartan1924,
@@ -24537,6 +24584,18 @@ note =	       {\arxiveprint{math/0601054}},
 keywords =     {non-commutative geometry}
 }
 
+@Article{connorsetal1990,
+author =       {Barry W. Connors and Michael J. Gutnick},
+title =	       {Intrinsic firing patterns of diverse neocortical neurons},
+journal =      trendsns,
+year =	       {1990},
+volume =       {13},
+number =       {3},
+pages =	       {99--104},
+note =	       {\url{http://research.mssm.edu/cnic/pdfs/connors90_firing.pdf}},
+keywords =     {neuronal activity}
+}
+
 @Unpublished{conrad2014,
 author =       {Keith Conrad},
 title =	       {Probability distributions and maximum entropy},
@@ -28338,7 +28397,7 @@ note =	       {\arxiveprint{math.CO/0407373}}
 @Book{debotton2006_r2008,
 author =       {de Botton, Alain},
 title =	       {The Architecture of Happiness},
-publisher =    {Vintage Books},
+publisher =    {Vintage},
 year =	       {2008},
 address =      {New York},
 note =	       {First publ.\ 2006},
@@ -29798,7 +29857,7 @@ title =	       {Entropy in relation to incomplete knowledge},
 publisher =    {Cambridge University Press},
 year =	       {1985},
 address =      {Cambridge},
-note =	       {See also \citebi{baierlein1986}}
+note =	       {See also the review in \citebi{baierlein1986}}
 }
 
 @Article{dence1983,
@@ -31805,7 +31864,7 @@ keywords =     {probability theory, measure theory}
 }
 
 @PhdThesis{doran1994,
-author =       {C J. L. Doran},
+author =       {C. J. L. Doran},
 title =	       {Geometric Algebra and its Application to Mathematical Physics},
 school =       {University of Cambridge},
 year =	       {1994},
@@ -31849,14 +31908,12 @@ pages =	       {271--386},
 address =      {Englewood Cliffs, USA}
 }
 
-@Book{doranetal2003_r2004,
+@Book{doranetal2003,
 author =       {Chris Doran and Anthony Lasenby},
 title =	       {Geometric Algebra for Physicists},
 publisher =    {Cambridge University Press},
-year =	       {2004},
-address =      {Cambridge},
-note =	       {First publ.\ 2003},
-origdate =     {2003}
+year =	       {2003},
+address =      {Cambridge}
 }
 
 @Book{dorfmannetal2014,
@@ -31933,12 +31990,9 @@ note =	       {Corrected version at \url{http://www.science.uva.nl/ga/publicatio
 @InCollection{dorst2002,
 author =       {Leo Dorst},
 title =	       {The Inner Products of Geometric Algebra},
-booktitle =    {Applications of Geometric Algebra in Computer Science and Engineering},
-publisher =    {Birkh{\"a}user},
+booktitle =    {\citein{dorstetal2002}},
 year =	       {2002},
-editor =       {Leo Dorst and C. Doran and J. Lasenby},
 pages =	       {37--48},
-address =      {Boston},
 note =	       {\url{http://www.science.uva.nl/ga/publications/index.html}}
 }
 
@@ -33177,6 +33231,17 @@ number =       {11},
 pages =	       {1946--1950}
 }
 
+@Article{dykeetal1952,
+author =       {G. V. Dyke and H. D. Patterson},
+title =	       {Analysis of Factorial Arrangements when the Data are Proportions},
+journal =      bmetrics,
+year =	       {1952},
+volume =       {8},
+number =       {1},
+pages =	       {1--12},
+keywords =     {logit distribution}
+}
+
 @Article{dykstraetal1981,
 author =       {R. L. Dykstra and Purushottam Laud},
 title =	       {A {Bayesian} Nonparametric Approach to Reliability},
@@ -33867,7 +33932,7 @@ volume =       {15},
 series =       {Ann Arbor paperbacks},
 address =      {Ann Arbor, USA},
 note =	       {First publ.\ 1928; \url{http://www.archive.org/details/natureofthephysi000971mbp}},
-keywords =     {\enquote{From the point of view of philosophy of science the conception associated with entropy must I think be ranked as the great contribution of the nineteenth century to scientific thought. It marked a reaction from the view that everything to which science need pay attention is discovered by a microscopic dissection of objects. It provided an alternative standpoint in which the centre of interest is shifted from the entities reached by the customary analysis (atoms, electric potentials, etc.)\ to qualities possessed by the system as a whole, which cannot be split up and located---a little bit here, and a little bit there.}, \chap~5, p.~103},
+mynote =       {\enquote{From the point of view of philosophy of science the conception associated with entropy must I think be ranked as the great contribution of the nineteenth century to scientific thought. It marked a reaction from the view that everything to which science need pay attention is discovered by a microscopic dissection of objects. It provided an alternative standpoint in which the centre of interest is shifted from the entities reached by the customary analysis (atoms, electric potentials, etc.)\ to qualities possessed by the system as a whole, which cannot be split up and located---a little bit here, and a little bit there.}, \chap~5, p.~103},
 origdate =     {1928}
 }
 
@@ -38884,6 +38949,17 @@ pages =	       {615--629},
 keywords =     {exchangeability, Bayesian probability theory, nonparametrics, de Finetti's theorem, Dirichlet process}
 }
 
+@Book{fergusonetal1996,
+editor =       {T. S. Ferguson and L. S. Shapley and J. B. MacQueen},
+title =	       {Statistics, Probability and Game Theory: Papers in Honor of David Blackwell},
+publisher =    {Institute of Mathematical Statistics},
+year =	       {1996},
+volume =       {30},
+series =       {Lecture notes--monograph series},
+address =      {Hayward, USA},
+note =	       {de Finetti's theorem}
+}
+
 @Article{fergusonetal2006,
 author =       {Allison Ferguson and Bulbul Chakraborty},
 title =	       {Stress and large-scale spatial structures in dense, driven granular flows},
@@ -39281,7 +39357,7 @@ address =      {New York},
 edition =      {reprint},
 note =	       {\enquote{as told to Ralph Leighton}, ed.\ by Edward Hutchings. First publ.\ 1985},
 keywords =     {energy, meaning of physical explanations},
-mynote =       {\enquote{I don't know what's the matter with people: they don't learn by understanding; they learn by some other way -- by rote, or something. Their knowledge is so fragile!} p.~23},
+mynote =       {\enquote{I don't know what's the matter with people: they don't learn by understanding; they learn by some other way -- by rote, or something. Their knowledge is so fragile!} p.~23. \enquote{There were a lot of fools at that conference -- pompous fools -- and pompous fools drive me up the wall. Ordinary fools are all right; you can talk to them, and try to help them out. But pompous fools -- guys who are fools and are covering it all over and impressing people as to how wonderful they are with all this hocus pocus -- THAT, I CANNOT STAND! An ordinary fool isn't a faker; an honest fool is all right. But a dishonest fool is terrible! And that's what I got at the conference, a bunch of pompous fools, and I got very upset}, pp.~258--259. \enquote{Everything was a little bit ambiguous -- they weren't \emph{smart} enough to understand what was meant by ``rigor.'' They were faking it. They were teaching something they didn't understand}, p.~266. \enquote{Everything was written by somebody who didn't know what the hell he was talking about, so it was a little bit wrong, always! And how we are going to teach well by using books written by people who don't \emph{quite} understand what they're talking about, I \emph{cannot} understand.}, p.~267. \enquote{``It's because somebody knows \emph{something} about it that we can't talk about physics. It's the things that nobody knows anything about that we can discuss. We can talk about the weather; we can talk about social problems; we can talk about psychology; we can talk about international finance -- gold transfers we \emph{can't} talk about, because those are understood -- so it's the subject that nobody knows anything about that we can all talk about!''}, p.~283},
 origdate =     {1985}
 }
 
@@ -41284,7 +41360,7 @@ year =	       {1962},
 volume =       {33},
 number =       {3},
 pages =	       {916--923},
-keywords =     {exchangeability, exponential family, Bayesian probability theory, sufficiency}
+keywords =     {exchangeability, exponential family, Bayesian probability theory, sufficiency, Poisson distribution}
 }
 
 @Article{freedman1963,
@@ -41297,6 +41373,17 @@ number =       {4},
 pages =	       {1386--1403},
 note =	       {See also \citebi{freedman1965}},
 keywords =     {Bayesian probability theory}
+}
+
+@Article{freedman1963b,
+author =       {Freedman, David A.},
+title =	       {Invariants Under Mixing which Generalize {de Finetti's} Theorem: Continuous Time Parameter},
+journal =      ams,
+year =	       {1963},
+volume =       {34},
+number =       {4},
+pages =	       {1194--1216},
+keywords =     {exchangeability, exponential family, Bayesian probability theory, sufficiency, Poisson distribution}
 }
 
 @Article{freedman1965,
@@ -41332,6 +41419,15 @@ number =       {1},
 pages =	       {19--39},
 note =	       {\url{https://www.stat.berkeley.edu/users/freedman/}},
 keywords =     {model comparison, Bayesian probability theory, de Finetti, exchangeability, induction}
+}
+
+@InCollection{freedman1996,
+author =       {Freedman, David A.},
+title =	       {{De Finetti's} Theorem in Continuous Time},
+booktitle =    {\citein{fergusonetal1996}},
+publisher =    {},
+year =	       {1996},
+pages =	       {83--98}
 }
 
 @Book{freedmanetal1978_r2007,
@@ -44642,7 +44738,7 @@ pages =	       {422--428}
 @Book{gilbert2005_r2007,
 author =       {Daniel Gilbert},
 title =	       {Stumbling on Happiness},
-publisher =    {Vintage Books},
+publisher =    {Vintage},
 year =	       {2007},
 address =      {New York},
 note =	       {first publ.\ 2005},
@@ -45818,6 +45914,25 @@ note =	       {\mparceprint{08-62}},
 keywords =     {general relativity}
 }
 
+@InCollection{gonzalezcalvet2016,
+author =       {Gonz{\'a}lez Calvet, Ramon},
+title =	       {The affine and projective geometries from {Grassmann's} point of view},
+booktitle =    {\citein{gonzalezcalvetetal2016}},
+year =	       {2016},
+pages =	       {198--226},
+keywords =     {Peano space, meet, join, exterior product}
+}
+
+@Book{gonzalezcalvetetal2016,
+editor =       {Gonz{\'a}lez Calvet, Ramon and Panackal Harikrishnan and Marius Paun and Jos{\'e} G. Vargas and Rafa{\l} Ab{\l}amowicz},
+title =	       {Early Proceedings of the Alterman Conference on Geometric Algebra and Summer School on K{\"a}hler Calculus\subtitleproc{: August 1st to 9th, 2016 Bra\c{s}ov (Romania)}},
+publisher =    {University of Bra\c{s}ov},
+year =	       {2016},
+address =      {Bra\c{s}ov, Romania},
+note =	       {\url{http://cs.unitbv.ro/~acami/}},
+keywords =     {Peano space, meet, join, exterior product}
+}
+
 @Article{gonzalezetal2014,
 author =       {Diego Gonz{\'a}lez and Sergio Davis and Gonzalo Guti{\'e}rrez},
 title =	       {Newtonian Dynamics from the Principle of Maximum Caliber},
@@ -46206,6 +46321,15 @@ year =	       {1980},
 volume =       {102},
 number =       {2},
 pages =	       {379--388}
+}
+
+@Book{goodsteinetal1997,
+author =       {David L. Goodstein and Judith R. Goodstein},
+title =	       {Feynman's Lost Lecture: The Motion of Planets Around the Sun},
+publisher =    {Vintage},
+year =	       {1997},
+address =      {London},
+mynote =       {\enquote{I couldn't reduce it to the freshman level. That means we don't really understand it.}, \chap~2}
 }
 
 @Article{gopenetal1990,
@@ -47133,24 +47257,48 @@ keywords =     {probability theory}
 }
 
 @Book{grassmann1844_r1878,
-author =       {Hermann Gra{\ss}mann},
+author =       {Hermann Grassmann},
 title =	       {\langgerman{Die lineale Ausdehnungslehre: ein neuer Zweig der Mathematik dargestellt und durch Anwendungen auf die {\"u}brigen Zweige der Mathematik, wie auch auf die Statik, Mechanik, die Lehre vom Magnetismus und die Krystallonomie erl{\"a}utert}},
 publisher =    {Wigand},
 year =	       {1878},
 address =      {Leipzig},
 edition =      {2},
-note =	       {First publ.\ 1844},
+note =	       {First publ.\ 1844. Transl.\ as \citebi{grassmann1844_t1995}},
+keywords =     {the linear calculus of extensions: a new branch of mathematics, geometric algebra, Peano spaces},
+origdate =     {1844}
+}
+
+@Book{grassmann1844_t1995,
+author =       {Hermann Grassmann},
+title =	       {A New Branch of Mathematics: The \emph{\langgerman{Ausdehnungslehre}} of 1844 and Other Works},
+publisher =    {Open Court},
+year =	       {1995},
+address =      {Chicago and La Salle},
+note =	       {Transl.\ of \citebi{grassmann1844_r1878} by Lloyd C. Kannenberg},
 keywords =     {the linear calculus of extensions: a new branch of mathematics, geometric algebra, Peano spaces},
 origdate =     {1844}
 }
 
 @Book{grassmann1862,
-author =       {Hermann Gra{\ss}mann},
+author =       {Hermann Grassmann},
 title =	       {\langgerman{Die Ausdehnungslehre. Vollst{\"a}ndig und in strenger Form}},
 publisher =    {Enslin},
 year =	       {1862},
 address =      {Berlin},
+note =	       {Transl.\ as \citebi{grassmann1862_t2000}},
 keywords =     {the calculus of extensions. In full and stricter form, geometric algebra, Peano spaces}
+}
+
+@Book{grassmann1862_t2000,
+author =       {Hermann Grassmann},
+title =	       {Extension Theory},
+publisher =    {American Mathematical Society},
+year =	       {2000},
+volume =       {19},
+series =       {History of mathematics},
+address =      {Providence, USA},
+note =	       {Transl.\ of \citebi{grassmann1862} by Lloyd C. Kannenberg},
+origdate =     {1862}
 }
 
 @Article{grattanguinness1999,
@@ -47569,7 +47717,8 @@ year =	       {2016},
 volume =       {70},
 number =       {2},
 pages =	       {129},
-note =	       {\url{http://www.tandfonline.com/doi/suppl/10.1080/00031305.2016.1154108}. See \citebi{wassersteinetal2016}}
+note =	       {\url{http://www.tandfonline.com/doi/suppl/10.1080/00031305.2016.1154108}. See \citebi{wassersteinetal2016}},
+mynote =       {\enquote{Ironically though, the same null bias found in significance tests is tightly integrated into the confirmationist version of ``objective Bayesian'' testing, which assigns a spike (point prior mass) to test a point null hypothesis against a continuous composite alternative (Jeffreys 1961; Berger and Sellke 1987). That isolated spike identifies the null as the point with special added cost to falsely reject, and the mass of the spike is a surrogate for that added cost. Again Neyman's example should be borne in mind, for in such cases the spike serves only the parties invested in maintaining the null.} S. Greenland.}
 }
 
 @Article{greeno1970,
@@ -49106,6 +49255,14 @@ year =	       {2013},
 volume =       {110},
 pages =	       {234502},
 keywords =     {thermodynamics, entropy, second law}
+}
+
+@Misc{gunn2011,
+author =       {Charles Gunn},
+title =	       {On the Homogeneous Model Of {Euclidean} Geometry},
+year =	       {2011},
+note =	       {\arxiveprint{1101.4542}},
+keywords =     {Peano space, meet, join, exterior product}
 }
 
 @Article{gunnarssonetal1997,
@@ -54587,6 +54744,17 @@ note =	       {Two volumes bound as one. First publ.\ 1963--1964},
 origdate =     {1963}
 }
 
+@Article{hill1968,
+author =       {Bruce M. Hill},
+title =	       {Posterior Distribution of Percentiles: {Bayes'} Theorem for Sampling from a Population},
+journal =      jasa,
+year =	       {1968},
+volume =       {63},
+number =       {322},
+pages =	       {677--691},
+keywords =     {de Finetti theorem, nonparametric models, exchangeability}
+}
+
 @Article{hill1993,
 author =       {Bruce M. Hill},
 title =	       {Parametric Models for {$A_n$}: Splitting Processes and Mixtures},
@@ -54995,6 +55163,16 @@ volume =       {45},
 number =       {2},
 pages =	       {214--215},
 keywords =     {See also \citebi{brush1967}}
+}
+
+@TechReport{hjort1986,
+author =       {Nils Lid Hjort},
+title =	       {Notes on the Theory of Statistical Symbol Recognition},
+institution =  {Norwegian Computing Center},
+year =	       {1986},
+number =       {778/1986},
+address =      {Oslo},
+keywords =     {probability theory, exchangeability, extremal family}
 }
 
 @Book{hjortetal2010,
@@ -60658,7 +60836,8 @@ year =	       {2001},
 volume =       {352},
 number =       {4--6},
 pages =	       {439--458},
-keywords =     {exchangeability, statistical mechanics, sufficiency}
+keywords =     {exchangeability, statistical mechanics, sufficiency},
+mynote =       {A poor work: the author doesn't credit Jaynes, Grandy, and others like Caticha who already established this framework; it means that the author purposely omits them or hasn't read the articles of his own bibliography. He also lack knowledge of the full development of equilibrium and non-equilibrium thermodynamics since 1940 (Eckart) up to Truesdell, Day, and all modern developments.}
 }
 
 @Article{jonalasinio2010,
@@ -60671,10 +60850,14 @@ pages =	       {262--275},
 keywords =     {thermodynamics, extensivity, statistical mechanics}
 }
 
-@Misc{jonasetal2016,
+@Article{jonasetal2017,
 author =       {Eric Jonas and Konrad Kording},
 title =	       {Could a neuroscientist understand a microprocessor?},
-year =	       {2016},
+journal =      ploscb,
+year =	       {2017},
+volume =       {13},
+number =       {1},
+pages =	       {e1005268},
 note =	       {\biorxiveprint{055624}}
 }
 
@@ -64878,6 +65061,14 @@ pages =	       {563--565},
 keywords =     {quantum mechanics}
 }
 
+@Misc{kleinetal2018,
+author =       {Richard Klein and Michelangelo Vianello and Fred Hasselman and Byron Adams and Adams, Jr., Reginald B. and Sinan Alper and Mark Aveyard and Jordan Axt and Mayowa Babalola and {\v{S}}t{\v{e}}p{\'a}n Bahn{\'\i}k and Mihaly Berkics and Michael Bernstein and Daniel Berry and Olga Bialobrzeska and Konrad Bocian and Mark Brandt and Robert Busching and Huajian Cai and Fanny Cambier and Katarzyna Cantarero and Cheryl Carmichael and Zeynep Cemalcilar and Jesse Chandler and Jen-Ho Chang and Armand Chatard and Eva E. Chen and Winnee Cheong and David Cicero and Sharon Coen and Jennifer Coleman and Brian Collisson and Morgan Conway and Katherine Corker and Paul Curran and Fiery Cushman and Ilker Dalgar and William Davis and de Bruijn, Maaike and de Vries, Marieke and Thierry Devos and Canay Do{\u{g}}ulu and Nerisa Dozo and Kristin Dukes and Yarrow Dunham and Kevin Durrheim and Matthew Easterbrook and Charles Ebersole and John Edlund and Alexander English and Anja Eller and Carolyn Finck and Miguel-{\'A}ngel Freyre and Mike Friedman and Natalia Frankowska and Elisa Galliani and Tanuka Ghoshal and Steffen Giessner and Tripat Gill and Timo Gnambs and Angel Gomez and Roberto Gonzalez and Jesse Graham and Jon Grahe and Ivan Grahek and Eva Green and Kakul Hai and Matthew Haigh and Elizabeth Haines and Michael Hall and Marie Heffernan and Joshua Hicks and Petr Houdek and van der Hulst, Marije and Jeffrey Huntsinger and Ho Huynh and Hans IJzerman and Yoel Inbar and Innes-Ker, {\AA}se and Jimenez-Leal, William and Melissa-Sue John and Joy-Gaba, Jennifer A. and Roza Kamiloglu and Andreas Kappes and Heather Kappes and Serdar Karabati and Haruna Karick and Victor Keller and Anna Kende and Nicolas Kervyn and Goran Kne{\v{z}}evi{\'c} and Carrie Kovacs and Lacy Krueger and German Kurapov and Jaime Kurtz and Daniel Lakens and Ljiljana Lazarevi{\'c} and Carmel Levitan and Neil Lewis and Samuel Lins and Esther Maassen and Angela Maitner and Winfrida Malingumu and Robyn Mallett and Satia Marotta and Jason McIntyre and Janko Me{\dj}edovi{\'c} and Taciano Milfont and Wendy Morris and Andriy Myachykov and Sean Murphy and Koen Neijenhuijs and Anthony Nelson and Felix Neto and Austin Nichols and O'Donnell, Susan and Masanori Oikawa and Gabor Orosz and Malgorzata Osowiecka and Grant Packard and Rolando P{\'e}rez and Boban Petrovi{\'c} and Ronaldo Pilati and Brad Pinter and Lysandra Podesta and Monique Pollmann and Dalla Rosa, Anna and Abraham Rutchick and Patricio Saavedra and Airi Sacco and Alexander Saeri and Erika Salomon and Kathleen Schmidt and Felix Sch{\"o}nbrodt and Maciek Sekerdej and David Sirlopu and Jeanine Skorinko and Michael Smith and Smith-Castro, Vanessa and Agata Sobkow and Walter Sowden and Philipp Spachtholz and Troy Steiner and Jeroen Stouten and Chris Street and Oskar Sundfelt and Ewa Szumowska and Andrew Tang and Norbert Tanzer and Morgan Tear and Jordan Theriault and Manuela Thomae and Torres-Fern{\'a}ndez, David and Jakub Traczyk and Joshua Tybur and Adrienn Ujhelyi and van Assen, Marcel and van `t Veer, Anna and V{\'a}squez Echeverr{\'\i}a, Alejandro and Leigh Ann Vaughn and Alexandra V{\'a}zquez and Diego Vega and Catherine Verniers and Mark Verschoor and Ingrid Voermans and Marek Vranka and Cheryl Welch and Aaron Wichman and Lisa Williams and Julie Woodzicka and Marta Wronska and Liane Young and John Zelenski and Brian Nosek},
+title =	       {{Many Labs 2}: Investigating Variation in Replicability Across Sample and Setting},
+year =	       {2018},
+note =	       {\texttt{\urlalt{https://doi.org/10.31234/osf.io/9654g}{PsyArXiv doi:10.31234/osf.io/9654g}}},
+keywords =     {reproducibility}
+}
+
 @Misc{klibanov2005,
 author =       {Michael V. Klibanov},
 title =	       {Estimates of Initial Conditions of Parabolic Equations and Inequalities Via the Lateral {Cauchy} Data},
@@ -65442,6 +65633,17 @@ address =      {Weinheim, Germany},
 edition =      {2},
 note =	       {First publ.\ 2000},
 origdate =     {2000}
+}
+
+@Article{kochetal2015,
+author =       {Christof Koch and Michael A. Buice},
+title =	       {A Biological Imitation Game},
+journal =      cell,
+year =	       {2015},
+volume =       {163},
+number =       {2},
+pages =	       {277--280},
+note =	       {See \citebi{markrametal2015}}
 }
 
 @Article{koehler1941,
@@ -67011,6 +67213,17 @@ title =	       {Expansion of the effective action around {non-Gaussian} theories
 year =	       {2017},
 note =	       {\arxiveprint{1711.05599}},
 keywords =     {Feynman diagrams, field theory}
+}
+
+@Article{kuehnetal2017b,
+author =       {Tobias K{\"u}hn and Moritz Helias},
+title =	       {Locking of correlated neural activity to ongoing oscillations},
+journal =      ploscb,
+year =	       {2017},
+volume =       {13},
+number =       {6},
+pages =	       {e1005534},
+keywords =     {neuronal dynamics}
 }
 
 @Article{kuenzle1972,
@@ -68863,7 +69076,7 @@ keywords =     {Bell's theorem}
 }
 
 @Article{lasenbyetal1993,
-author =       {Lasenby, A. N. and Doran, C. J. L. and Gull, S. F.},
+author =       {Lasenby, A. N. and Doran, C. J. L. and Gull, Stephen F.},
 title =	       {Grassmann Calculus, Pseudoclassical Mechanics and Geometric Algebra},
 journal =      jmp,
 year =	       {1993},
@@ -69588,6 +69801,16 @@ number =       {2},
 pages =	       {153--171},
 note =	       {\url{https://www.stat.washington.edu/people/jaw/COURSES/580s/581/HO/LeCam-1990.ISIRev.pdf}},
 keywords =     {probability theory}
+}
+
+@InCollection{lecam1996,
+author =       {Le Cam, Lucien M.},
+title =	       {Comparison of Experiments: A Short Review},
+booktitle =    {\citein{fergusonetal1996}},
+publisher =    {},
+year =	       {1996},
+pages =	       {127--138},
+keywords =     {statistical models, parametric models, decision theory}
 }
 
 @Article{lecaretal2001,
@@ -72133,6 +72356,15 @@ edition =      {reprint},
 note =	       {First publ.\ 1965},
 keywords =     {Bayesian probability theory},
 origdate =     {1965}
+}
+
+@TechReport{lindley1987,
+author =       {Dennis V. Lindley},
+title =	       {Statistical Inference Concerning {Hardy-Weinberg} Equilibrium},
+institution =  {Duke University},
+year =	       {1987},
+number =       {87-03},
+note =	       {\url{https://stat.duke.edu/research/papers/1987-3}}
 }
 
 @Article{lindley1990,
@@ -76144,6 +76376,28 @@ pages =	       {025001},
 keywords =     {plasma, continuum mechanics, quantum mechanics}
 }
 
+@Article{markrametal2004,
+author =       {Henry Markram and Toledo-Rodriguez, Maria and Yun Wang and Anirudh Gupta and Gilad Silberberg and Caizhi Wu},
+title =	       {Interneurons of the neocortical inhibitory system},
+journal =      natrns,
+year =	       {2004},
+volume =       {5},
+number =       {10},
+pages =	       {793--807},
+keywords =     {deterministic neuron behaviour}
+}
+
+@Article{markrametal2015,
+author =       {Henry Markram and Eilif Muller and Srikanth Ramaswamy and Michael W. Reimann and Marwan Abdellah and Aguado Sanchez, Carlos and Anastasia Ailamaki and Alonso-Nanclares, Lidia and Nicolas Antille and Selim Arsever and Guy Antoine Atenekeng Kahou and Thomas K. Berger and Ahmet Bilgili and Nenad Buncic and Athanassia Chalimourda and Giuseppe Chindemi and Jean-Denis Courcol and Fabien Delalondre and Vincent Delattre and Shaul Druckmann and Raphael Dumusc and James Dynes and Stefan Eilemann and Eyal Gal and Michael Emiel Gevaert and Jean-Pierre Ghobril and Albert Gidon and Joe W. Graham and Anirudh Gupta and Valentin Haenel and Etay Hay and Thomas Heinis and Juan B. Hernando and Michael Hines and Lida Kanari and Daniel Keller and John Kenyon and Georges Khazen and Yihwa Kim and James G. King and Zoltan Kisvarday and Pramod Kumbhar and S{\'e}bastien Lasserre and Le B{\'e}, Jean-Vincent and Bruno R.C. Magalh{\~a}es and Merch{\'a}n-P{\'e}rez, Angel and Julie Meystre and Benjamin Roy Morrice and Jeffrey Muller and Mu{\~n}oz-C{\'e}spedes, Alberto and Shruti Muralidhar and Keerthan Muthurasa and Daniel Nachbaur and Taylor H. Newton and Max Nolte and Aleksandr Ovcharenko and Juan Palacios and Luis Pastor and Rodrigo Perin and Rajnish Ranjan and Imad Riachi and Jos{\'e}-Rodrigo Rodr{\'\i}guez and Juan Luis Riquelme and Christian R{\"o}ssert and Konstantinos Sfyrakis and Ying Shi and Julian C. Shillcock and Gilad Silberberg and Ricardo Silva and Farhan Tauheed and Martin Telefont and Toledo-Rodriguez, Maria and Thomas Tr{\"a}nkler and Werner Van Geit and Jafet Villafranca D{\'\i}az and Richard Walker and Yun Wang and Stefano M. Zaninetta and Javier DeFelipe and Sean L. Hill and Idan Segev and Felix Sch{\"u}rmann},
+title =	       {Reconstruction and Simulation of Neocortical Microcircuitry},
+journal =      cell,
+year =	       {2015},
+volume =       {163},
+number =       {2},
+pages =	       {456--492},
+note =	       {See also \citebi{kochetal2015}}
+}
+
 @Article{markusetal1974,
 author =       {L. Markus and K. R. Meyer},
 title =	       {Generic {Hamiltonian} dynamical systems are neither integrable nor ergodic},
@@ -76952,7 +77206,8 @@ publisher =    {University of Chicago Press},
 year =	       {1929},
 address =      {Chicago},
 note =	       {\url{http://www.archive.org/details/electromagneticf030976mbp}},
-keywords =     {Poynting vector, energy density, energy flux; \enquote{The interpretation just given suggests several comments. In the first place, the present authors are not able to ascribe any significance whatever to the phrase ``localized energy.'' They do not believe that ``Where?''\ is a fair or sensible question to ask concerning energy. Energy is a function of configuration, just as the beauty of a certain black-and-white design is a function of configuration. The authors see no more reason or excuse for speaking of a spatial energy density than they would for saying, in the case of a design, that its beauty was distributed over it with a certain density. Such a view would lead one to assign to a perfectly blank square inch in one portion of the design a certain amount of beauty, and to an equally blank square inch in another portion a certain different amount of beauty. [\ldots Entropy, like energy, is a function of configuration.]}, \sect~54}
+keywords =     {Poynting vector, energy density, energy flux},
+mynote =       {\enquote{The interpretation just given suggests several comments. In the first place, the present authors are not able to ascribe any significance whatever to the phrase ``localized energy.'' They do not believe that ``Where?''\ is a fair or sensible question to ask concerning energy. Energy is a function of configuration, just as the beauty of a certain black-and-white design is a function of configuration. The authors see no more reason or excuse for speaking of a spatial energy density than they would for saying, in the case of a design, that its beauty was distributed over it with a certain density. Such a view would lead one to assign to a perfectly blank square inch in one portion of the design a certain amount of beauty, and to an equally blank square inch in another portion a certain different amount of beauty. [\ldots Entropy, like energy, is a function of configuration.]}, \sect~54}
 }
 
 @Article{masonetal1962,
@@ -80547,6 +80802,37 @@ pages =	       {319--336},
 keywords =     {conjugate prior}
 }
 
+@Book{moebius1827,
+author =       {August Ferdinand M{\"o}bius},
+title =	       {\langgerman{Der barycentrische Calcul: ein neues H{\"u}lfsmittel zur analytischen Behandlung der Geometrie}},
+publisher =    {Barth},
+year =	       {1827},
+address =      {Leipzig},
+note =	       {\url{http://doi.org/10.3931/e-rara-14538}, \url{https://gallica.bnf.fr/ark:/12148/bpt6k99419h}. Summary given in \citebi{allardice1891}},
+keywords =     {The barycentric calculus: a new aid in the analytic presentation of geometry}
+}
+
+@Article{moebius1844,
+author =       {August Ferdinand M{\"o}bius},
+title =	       {\langgerman{{\"Uber die Zusammensetzung gerader Linien und eine daraus entspringende neue Begr\"undungsweise des barycentrischen Calculs}}},
+journal =      jram,
+year =	       {1844},
+volume =       {28},
+number =       {1},
+pages =	       {1--9},
+note =	       {Transl.\ as \citebi{moebius1844_t2012}},
+keywords =     {On the composition of line segments and a new way of founding the barycentric calculus that arises from it, affine forms, Grassmann spaces}
+}
+
+@Misc{moebius1844_t2012,
+author =       {August Ferdinand M{\"o}bius},
+title =	       {On the composition of line segments and a new way of founding the barycentric calculus that arises from it},
+year =	       {2012},
+note =	       {\url{http://www.neo-classical-physics.info/topology.html}. Transl.\ of \citebi{moebius1844} by D. H. Delphenich},
+keywords =     {gravitation, inertia, continuum mechanics},
+origdate =     {1844}
+}
+
 @Book{moeller1952_r1955,
 author =       {C. M{\o}ller},
 title =	       {The Theory of Relativity},
@@ -82289,7 +82575,7 @@ origdate =     {1905}
 @Book{murakami1994_t1998,
 author =       {Haruki Murakami},
 title =	       {The Wind-Up Bird Chronicle},
-publisher =    {Vintage International},
+publisher =    {Vintage},
 year =	       {1998},
 address =      {New York},
 note =	       {Transl.\ from the Japanese by Jay Rubin. First publ.\ 1994--1995},
@@ -91484,19 +91770,20 @@ note =	       {\arxiveprint{1012.3091}},
 keywords =     {thermodynamics}
 }
 
-@Misc{portamana2011,
+@Misc{portamana2011_r2019,
 author =       {Porta Mana, Piero Giovanni Luca},
-title =	       {Notes on affine and convex spaces},
-year =	       {2011},
-note =	       {\arxiveprint{1104.0032}},
-keywords =     {quantum theory, Newtonian mechanics, statistical models}
+title =	       {Affine and convex spaces: blending the analytic and geometric viewpoints},
+year =	       {2019},
+note =	       {\osfeprint{jw9f6}, \arxiveprint{1104.0032}. First publ.\ 2011},
+keywords =     {quantum theory, Newtonian mechanics, statistical models},
+origdate =     {2011}
 }
 
 @Misc{portamana2011b,
 author =       {Porta Mana, Piero Giovanni Luca},
 title =	       {Conjectures and questions in convex geometry: of interest for quantum theory and other physical statistical theories},
 year =	       {2011},
-note =	       {\arxiveprint{1105.3238}. See also \citebi{portamanaetal2011}},
+note =	       {\osfeprint{8anwr}, \arxiveprint{1105.3238}. See also \citebi{portamanaetal2011}},
 keywords =     {quantum theory, statistical models}
 }
 
@@ -91655,9 +91942,9 @@ note =	       {In preparation}
 
 @Misc{portamanaetal2017,
 author =       {Porta Mana, Piero Giovanni Luca and Ingemar Bengtsson},
-title =	       {The beauty of {Gra{\ss}mann} spaces},
+title =	       {The beauty of {Grassmann} spaces},
 year =	       {2017},
-note =	       {In preparation; draft available at \url{https://portamana.org/linko.php?w=portamanaetal2017.pdf} (please treat confidentially)}
+note =	       {In preparation; current draft available at \url{https://github.com/pglpm/grassmannpeano/}}
 }
 
 @Misc{portamanaetal2018,
@@ -93308,7 +93595,7 @@ series =       {Monographs in physical measurement},
 address =      {London},
 edition =      {2},
 note =	       {First publ.\ 1983},
-mynote =       {interesting difference amongst `non-uniqueness', `irreproducibility', `sub-range inconsistency', \sect~2-4},
+mynote =       {interesting difference among `non-uniqueness', `irreproducibility', `sub-range inconsistency', \sect~2-4},
 origdate =     {1983}
 }
 
@@ -112335,7 +112622,7 @@ volume =       {15},
 number =       {1},
 pages =	       {1--66},
 keywords =     {thermodynamics, kinetic theory, statistical mechanics},
-mynote =       {\enquote{\citebi[p.~53]{truesdell1975}The reader who has heard some very early names brought forward in candidature for proposing the kinetic theory will not find many of them repeated here. In excuse I can do no better than quote what \textsc{Jochmann} wrote in 1864 on p.~324 of the \emph{\langgerman{Fortschritte der Physik}} \textbf{18} (1862). Those were the days when physicists had studied the classics and could read Greek. \textsc{Jochmann} sarcastically overtopped a spate of pretensions of antique priority: ``Even \textsc{Herakleitos} the Obscure of Ephesos, were he yet living, would not fail to make his claims of priority for discovery of the mechanical theory of heat.'' For the basis \textsc{Jochmann} quotes we now have a purer text (\textsc{Diels} B90), which I translate as follows: ``Everything is in exchange for fire, and fire for all things, just as goods for gold and for gold, goods.'' As \textsc{Jochmann} concluded, ``Does not this contain the equivalence of heat and work? Only the numerical constant is wanting!''}}
+mynote =       {\enquote{The reader who has heard some very early names brought forward in candidature for proposing the kinetic theory will not find many of them repeated here. In excuse I can do no better than quote what \textsc{Jochmann} wrote in 1864 on p.~324 of the \emph{\langgerman{Fortschritte der Physik}} \textbf{18} (1862). Those were the days when physicists had studied the classics and could read Greek. \textsc{Jochmann} sarcastically overtopped a spate of pretensions of antique priority: ``Even \textsc{Herakleitos} the Obscure of Ephesos, were he yet living, would not fail to make his claims of priority for discovery of the mechanical theory of heat.'' For the basis \textsc{Jochmann} quotes we now have a purer text (\textsc{Diels} B90), which I translate as follows: ``Everything is in exchange for fire, and fire for all things, just as goods for gold and for gold, goods.'' As \textsc{Jochmann} concluded, ``Does not this contain the equivalence of heat and work? Only the numerical constant is wanting!''} p.~53}
 }
 
 @Article{truesdell1976,
@@ -114839,8 +115126,17 @@ pages =	       {199--214},
 keywords =     {maximum-entropy, maximum-relative-entropy, minimum-discrimination-information, Kullback-Leibler divergence, statistical mechanics, probability theory}
 }
 
+@InCollection{vargas2016,
+author =       {Jos{\'e} G. Vargas},
+title =	       {Grassmannian algebras and the {Erlangen} program with emphasis on projective geometry},
+booktitle =    {\citein{gonzalezcalvetetal2016}},
+year =	       {2016},
+pages =	       {227--239},
+keywords =     {Peano space, meet, join, exterior product}
+}
+
 @Article{vargasetal1999,
-author =       {Jose G. Vargas and Douglas G. Torr},
+author =       {Jos{\'e} G. Vargas and Douglas G. Torr},
 title =	       {The {Cartan-Einstein} Unification with Teleparallelism and the Discrepant Measurements of {Newton's} Constant {$G$}},
 journal =      fp,
 year =	       {1999},
@@ -116831,7 +117127,7 @@ keywords =     {spinodal regions, convexity of entropy, non-equilibrium thermody
 @Book{watts1951_r2011,
 author =       {Alan W. Watts},
 title =	       {The Wisdom of Insecurity: A Message for an Age of Anxiety},
-publisher =    {Vintage Books},
+publisher =    {Vintage},
 year =	       {2011},
 address =      {New York},
 note =	       {First publ.\ 1951},
@@ -116841,7 +117137,7 @@ origdate =     {1951}
 @Book{watts1957_r1989,
 author =       {Alan W. Watts},
 title =	       {The Way of Zen},
-publisher =    {Vintage Books},
+publisher =    {Vintage},
 year =	       {1989},
 series =       {Vintage spiritual classics},
 address =      {New York},

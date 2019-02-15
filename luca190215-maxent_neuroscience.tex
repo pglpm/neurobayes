@@ -1,14 +1,13 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-02-03T02:10:50+0100
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Report-no: ***
+%% Last-Updated: 2019-02-15T16:02:43+0100
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
 \ifarxiv\pdfmapfile{+classico.map}\fi
 \newif\ifafour
-\afourfalse % true = A4, false = A5
+\afourfalse% true = A4, false = A5
 \newif\iftypodisclaim % typographical disclaim on the side
 \typodisclaimtrue
 \newcommand*{\memfontfamily}{zplx}
@@ -18,22 +17,29 @@ onecolumn,oneside,article,%french,italian,german,swedish,latin,
 british%
 ]{memoir}
 \newcommand*{\updated}{\today}
-\newcommand*{\firstdraft}{25 January 2019}
+\newcommand*{\firstdraft}{15 February 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{An overview of inferences\\about neuronal
-networks}
-\newcommand*{\pdftitle}{An overview of inferences about neuronal networks}
-\newcommand*{\headtitle}{Inferences for neuronal networks}
+\newcommand*{\propertitle}{Interpretations of maximum-entropy distributions in neuroscience% \\{\large ***}%
+}
+\newcommand*{\pdftitle}{\propertitle}
+\newcommand*{\headtitle}{Maximum-entropy in neurscience}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
-\newcommand*{\reporthead}{}
+\newcommand*{\reporthead}{}% Report number
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Calls to packages (uncomment as needed)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %\usepackage{pifont}
+
 %\usepackage{fontawesome}
+
 \usepackage[T1]{fontenc} 
 \input{glyphtounicode} \pdfgentounicode=1
+
 \usepackage[utf8]{inputenx}
+
 %\usepackage{newunicodechar}
 % \newunicodechar{Ĕ}{\u{E}}
 % \newunicodechar{ĕ}{\u{e}}
@@ -56,27 +62,37 @@ networks}
 % \newunicodechar{Ȳ}{\=Y}
 % \newunicodechar{ȳ}{\=y}
 
-\newcommand*{\bmmax}{0} % reduce number of bold fonts, before bm
-\newcommand*{\hmmax}{0} % reduce number of heavy fonts, before bm
+\newcommand*{\bmmax}{0} % reduce number of bold fonts, before font packages
+\newcommand*{\hmmax}{0} % reduce number of heavy fonts, before font packages
+
 \usepackage{textcomp}
-\usepackage[normalem]{ulem}
+
+%\usepackage[normalem]{ulem}% package for underlining
 % \makeatletter
 % \def\ssout{\bgroup \ULdepth=-.35ex%\UL@setULdepth
 %  \markoverwith{\lower\ULdepth\hbox
 %    {\kern-.03em\vbox{\hrule width.2em\kern1.2\p@\hrule}\kern-.03em}}%
 %  \ULon}
 % \makeatother
+
 \usepackage{amsmath}
+
 \usepackage{mathtools}
 \addtolength{\jot}{\jot} % increase spacing in multiline formulae
-\usepackage{empheq}% automatically calls amsmath and mathtools
-\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 \setlength{\multlinegap}{0pt}
+
+%\usepackage{empheq}% automatically calls amsmath and mathtools
+\newcommand*{\widefbox}[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+
 %\usepackage{fancybox}
+
 %\usepackage{framed}
+
 % \usepackage[misc]{ifsym} % for dice
 % \newcommand*{\diceone}{{\scriptsize\Cube{1}}}
+
 \usepackage{amssymb}
+
 \usepackage{amsxtra}
 
 \usepackage[main=british,french,italian,german,swedish,latin,esperanto]{babel}\selectlanguage{british}
@@ -100,13 +116,12 @@ networks}
 \theoremstyle{innote}
 \newtheorem*{innote}{}
 
-
-\usepackage[shortlabels,inline]{enumitem}
+\usepackage[shortlabels,inline,mode=unboxed]{enumitem}
 \SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
 % \begin{asparaenum} = \begin{enumerate}[para]
 % \begin{inparaenum} = \begin{enumerate*}
-\setlist[enumerate,2]{label=\alph*.}
-\setlist[enumerate]{label=\arabic*.,leftmargin=1.5\parindent}
+\setlist[enumerate,2]{label=(\alph*)}
+\setlist[enumerate]{label=(\arabic*),leftmargin=1.5\parindent}
 \setlist[itemize]{leftmargin=1.5\parindent}
 \setlist[description]{leftmargin=1.5\parindent}
 % old alternative:
@@ -116,6 +131,7 @@ networks}
 % \setlist[description]{leftmargin=\parindent}
 
 \usepackage[babel,theoremfont,largesc]{newpxtext}
+
 \usepackage[bigdelims,nosymbolsc%,smallerops % probably arXiv doesn't have it
 ]{newpxmath}
 \useosf\linespread{1.083}
@@ -144,8 +160,7 @@ networks}
 %\re@DeclareMathSymbol{\coprodop}{\mathop}{largesymbols}{"60}
 %\re@DeclareMathSymbol{\varprod}{\mathop}{largesymbolsPXA}{16}
 \makeatother
-
-
+%%
 %% With euler font cursive for Greek letters - the [1] means 100% scaling
 \DeclareFontFamily{U}{egreek}{\skewchar\font'177}%
 \DeclareFontShape{U}{egreek}{m}{n}{<-6>s*[1]eurm5 <6-8>s*[1]eurm7 <8->s*[1]eurm10}{}%
@@ -173,22 +188,20 @@ networks}
 \def\prod{\DOTSI\prodop\slimits@}
 \def\coprod{\DOTSI\coprodop\slimits@}
 \makeatother
-\input{../definegreek.tex}% 
+\input{definegreek.tex}% Greek letters not usually given in LaTeX.
 
-% Optima as sans-serif font
 %\usepackage%[scaled=0.9]%
-%{classico}
+%{classico}%  Optima as sans-serif font
 \renewcommand\sfdefault{uop}
 \DeclareMathAlphabet{\mathsf}  {T1}{\sfdefault}{m}{sl}
 \SetMathAlphabet{\mathsf}{bold}{T1}{\sfdefault}{b}{sl}
-\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
+%\newcommand*{\mathte}[1]{\textbf{\textit{\textsf{#1}}}}
 % Upright sans-serif math alphabet
 % \DeclareMathAlphabet{\mathsu}  {T1}{\sfdefault}{m}{n}
 % \SetMathAlphabet{\mathsu}{bold}{T1}{\sfdefault}{b}{n}
 
 % DejaVu Mono as typewriter text
 \usepackage[scaled=0.84]{DejaVuSansMono}
-
 
 \usepackage{mathdots}
 
@@ -201,7 +214,6 @@ networks}
 \definecolor{myred}{RGB}{238,102,119}
 \definecolor{myredpurple}{RGB}{170,51,119}
 \definecolor{mygrey}{RGB}{187,187,187}
-
 % Tol (2012) colour-blind-, print-, screen-friendly colours; Munsell terminology
 % \definecolor{lbpurple}{RGB}{51,34,136}
 % \definecolor{lblue}{RGB}{136,204,238}
@@ -212,12 +224,13 @@ networks}
 % \definecolor{lred}{RGB}{204,102,119}
 % \definecolor{lpred}{RGB}{136,34,85}
 % \definecolor{lrpurple}{RGB}{170,68,153}
- \definecolor{lgrey}{RGB}{221,221,221}
+\definecolor{lgrey}{RGB}{221,221,221}
 %\newcommand*\mycolourbox[1]{%
 %\colorbox{mygrey}{\hspace{1em}#1\hspace{1em}}}
 \colorlet{shadecolor}{lgrey}
 
 \usepackage{bm}
+
 \usepackage{microtype}
 
 \usepackage[backend=biber,mcite,%subentry,
@@ -243,7 +256,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
 \DeclareDelimFormat{compcitedelim}{\addsemicolon\space}
 \DeclareDelimFormat{postnotedelim}{\space}
-\ifarxiv\else\addbibresource{../portamanabib.bib}\fi
+\ifarxiv\else\addbibresource{portamanabib.bib}\fi
 \renewcommand{\bibfont}{\footnotesize}
 %\appto{\citesetup}{\footnotesize}% smaller font for citations
 \defbibheading{bibliography}[\bibname]{\section*{#1}\addcontentsline{toc}{section}{#1}%\markboth{#1}{#1}
@@ -263,7 +276,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 }
 \newcommand*{\subtitleproc}[1]{}
 \newcommand*{\chapb}{ch.}
-
+%
 % \def\arxivp{}
 % \def\mparcp{}
 % \def\philscip{}
@@ -297,20 +310,34 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 }
 
 \usepackage{graphicx}
+
 %\usepackage{wrapfig}
+
 %\usepackage{tikz-cd}
 
 \PassOptionsToPackage{hyphens}{url}\usepackage[hypertexnames=false]{hyperref}
+
 \usepackage[depth=4]{bookmark}
 \hypersetup{colorlinks=true,bookmarksnumbered,pdfborder={0 0 0.25},citebordercolor={0.2667 0.4667 0.6667},citecolor=mypurpleblue,linkbordercolor={0.6667 0.2 0.4667},linkcolor=myredpurple,urlbordercolor={0.1333 0.5333 0.2},urlcolor=mygreen,breaklinks=true,pdftitle={\pdftitle},pdfauthor={\pdfauthor}}
 % \usepackage[vertfit=local]{breakurl}% only for arXiv
 \providecommand*{\urlalt}{\href}
 
+\usepackage[british]{datetime2}
+\DTMnewdatestyle{mydate}%
+{% definitions
+\renewcommand*{\DTMdisplaydate}[4]{%
+\number##3\ \DTMenglishmonthname{##2} ##1}%
+\renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}%
+}
+\DTMsetdatestyle{mydate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Layout. I do not know on which kind of paper the reader will print the
 %%% paper on (A4? letter? one-sided? double-sided?). So I choose A5, which
 %%% provides a good layout for reading on screen and save paper if printed
 %%% two pages per sheet. Average length line is 66 characters and page
 %%% numbers are centred.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifafour\setstocksize{297mm}{210mm}%{*}% A4
 \else\setstocksize{210mm}{5.5in}%{*}% 210x139.7
 \fi
@@ -355,7 +382,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \counterwithout{section}{chapter}
 \setsecnumformat{\upshape\csname the#1\endcsname\quad}
 \setsecheadstyle{\large\bfseries\sffamily%
-\raggedright}
+\centering}
 \setsubsecheadstyle{\bfseries\sffamily%
 \raggedright}
 %\setbeforesecskip{-1.5ex plus 1ex minus .2ex}% plus 1ex minus .2ex}
@@ -374,7 +401,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \newcommand{\addpara}[1]{\paragraph*{#1.}\addcontentsline{toc}{subsubsection}{#1}}
 \newcommand{\addparap}[1]{\paragraph*{#1}\addcontentsline{toc}{subsubsection}{#1}}
 
-% Headers and footers
+%%% Headers, footers, pagestyle
 \copypagestyle{manaart}{plain}
 \makeheadrule{manaart}{\headwidth}{0.5\normalrulethickness}
 \makeoddhead{manaart}{%
@@ -400,7 +427,6 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \makeoddfoot{plain}{}{\makebox[0pt]{\thepage}}{}
 \fi%typodisclaimtrue
 \makeoddhead{plain}{}{}{\footnotesize\reporthead}
-
 % \copypagestyle{manainitial}{plain}
 % \makeheadrule{manainitial}{\headwidth}{0.5\normalrulethickness}
 % \makeoddhead{manainitial}{%
@@ -412,12 +438,12 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\LARGE\sffamily%
+\pretitle{\begin{center}\Large\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
 \makeatletter\newcommand*{\atf}{\includegraphics[%trim=1pt 1pt 0pt 0pt,
-totalheight=\heightof{@}]{../atblack.png}}\makeatother
+totalheight=\heightof{@}]{atblack.png}}\makeatother
 \providecommand{\affiliation}[1]{\textsl{\textsf{\footnotesize #1}}}
 \providecommand{\epost}[1]{\texttt{\footnotesize\textless#1\textgreater}}
 \providecommand{\email}[2]{\href{mailto:#1ZZ@#2 ((remove ZZ))}{#1\protect\atf#2}}
@@ -428,15 +454,6 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \postauthor{\par\end{center}}
 \predate{\DTMsetdatestyle{mydate}\begin{center}\footnotesize}
 \postdate{\end{center}\vspace{-\medskipamount}}
-\usepackage[british]{datetime2}
-\DTMnewdatestyle{mydate}%
-{% definitions
-\renewcommand*{\DTMdisplaydate}[4]{%
-\number##3\ \DTMenglishmonthname{##2} ##1}%
-\renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}%
-}
-\DTMsetdatestyle{mydate}
-
 
 \setfloatadjustment{figure}{\footnotesize}
 \captiondelim{\quad}
@@ -445,7 +462,6 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \captiontitlefont{\footnotesize}
 \firmlists*
 \midsloppy
-
 % handling orphan/widow lines, memman.pdf
 % \clubpenalty=10000
 % \widowpenalty=10000
@@ -457,14 +473,12 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \predisplaypenalty=10000
 \postdisplaypenalty=1549
 \displaywidowpenalty=1602
-
 \selectlanguage{british}\frenchspacing
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Paper's details
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Paper's details %%%%
-\title{\propertitle%\\
-%  {\large A geometric commentary on maximum-entropy proofs}% ***
-}
+\title{\propertitle}
 \author{%
 \hspace*{\stretch{1}}%
 %% uncomment if additional authors present
@@ -473,7 +487,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
 \parbox{0.5\linewidth}%\makebox[0pt][c]%
-{\protect\centering Luca %
+{\protect\centering P.G.L.  Porta Mana\\%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
@@ -482,7 +496,10 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \date{Draft of \today\ (first drafted \firstdraft)}
 %\date{\firstpublished; updated \updated}
 
-%@@@@@@@@@@ new macros @@@@@@@@@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Macros @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Common ones - uncomment as needed
 %\providecommand{\nequiv}{\not\equiv}
 %\providecommand{\coloneqq}{\mathrel{\mathop:}=}
@@ -517,7 +534,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\DeclareMathOperator{\ent}{ent}%integer less or equal to
 %\DeclareMathOperator{\Ord}{O}%same order as
 %\DeclareMathOperator{\ord}{o}%lower order than
-\newcommand*{\incr}{\triangle}%finite increment
+%\newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
@@ -525,7 +542,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
-\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
+%\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
 %\newcommand*{\inn}{\cdot}%inner product
@@ -548,7 +565,7 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-\newcommand*{\E}{\mathrm{E}}
+%\newcommand*{\E}{\mathrm{E}}
 \renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 %\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
@@ -602,36 +619,36 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 %\newcommand*{\qem}{\leavevmode\unskip\penalty9999 \hbox{}\nobreak\hfill
 %\quad\hbox{\QEM}}
 
-\definecolor{notecolour}{RGB}{68,170,153}
-\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Custom macros for this file @@@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definecolor{notecolour}{RGB}{68,170,153}
+%\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
 %\newcommand*{\puzzle}{\maltese}
-\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+%\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
 \newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
 % %\smash{
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
 % \newcommand*{\ptext}[1]{\text{\small #1}}
-%@@@@ Custom macros for this file @@@@
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-\newcommand*{\yI}{\varIota}
-\newcommand*{\ys}{\bm{s}}
-\newcommand*{\yS}{\bm{S}}
-\newcommand*{\ydt}{\incr t}
-\newcommand*{\yt}{\tau}
-\newcommand*{\yIme}{\varIota_{\text{ME}}}
-\newcommand*{\ym}{\mathte{m}}
-%@@@@@@@@@@ new macros end @@@@@@@@@@
+%%% Custom macros end @@@
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Beginning of document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \firmlists
 \begin{document}
 \captiondelim{\quad}\captionnamefont{\footnotesize}\captiontitlefont{\footnotesize}
 \selectlanguage{british}\frenchspacing
-
-%%% Title and abstract %%%
 \maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \abstractrunin
 \abslabeldelim{}
 \renewcommand*{\abstractname}{}
@@ -639,8 +656,8 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent An analysis of the problem of inferring the state of a
-  population of neurons from that of a sample.
+  \noindent Possible interpretations of maximum-entropy distributions in
+  neuroscience.
 \\\noindent\emph{\footnotesize Note: Dear Reader
     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -649,327 +666,91 @@ totalheight=\heightof{@}]{../atblack.png}}\makeatother
 % {\footnotesize MSC: ***}%
 %\qquad{\footnotesize Keywords: ***}
 \end{abstract}
-
 \selectlanguage{british}\frenchspacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Epigraph
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \asudedication{\small ***}
-% \vspace{\bigskipamount}
+\vspace{\bigskipamount}
+\setlength{\epigraphwidth}{.7\columnwidth}
+%\epigraphposition{flushright}
+\epigraphtextposition{flushright}
+%\epigraphsourceposition{flushright}
+\epigraphfontsize{\footnotesize}
+\setlength{\epigraphrule}{0pt}
+%\setlength{\beforeepigraphskip}{0pt}
+%\setlength{\afterepigraphskip}{0pt}
+\epigraph{\emph{And how we are going to teach well by using books written
+    by people who don't \emph{quite} understand what they're talking about,
+    I \emph{cannot} understand.}}{Feynman \citey[p.~267]{feynman1985_r1989}}
 
-% \setlength{\epigraphwidth}{.7\columnwidth}
-% %\epigraphposition{flushright}
-% \epigraphtextposition{flushright}
-% %\epigraphsourceposition{flushright}
-% \epigraphfontsize{\footnotesize}
-% \setlength{\epigraphrule}{0pt}
-% %\setlength{\beforeepigraphskip}{0pt}
-% %\setlength{\afterepigraphskip}{0pt}
-% \epigraph{\emph{text}}{source}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEGINNING OF MAIN TEXT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{The problem}
+\label{sec:prblem}
 
+A probability distribution is our quantified uncertainty about a set of
+mutually exclusive and exhaustive propositions. So when we see a
+probability distribution it's natural to ask: what \emph{exactly} are we
+uncertain about? Asking this question is also a good way to distinguish
+probability distributions from other distributions. For example, if we're
+shown a \emph{frequency} distribution and we ask \enquote{what are we
+  uncertain about, in this distribution?}, it's clear that the question
+makes no sense.
 
-\section{Intro}
-\label{sec:intro}
+Together with asking what the uncertainty is about, it's also natural to
+ask:
+\begin{enumerate*}
+\item What initial assumptions lead to this distribution?
+\item What data lead to this distribution?
+\end{enumerate*}
 
+This note tries to answer these questions for probability distribution of
+maximum-entropy form appearing in the neuroscientific literature.
 
+\section{First interpretation}
+\label{sec:1st_interpretation}
 
-The probabilistic study of the activity of networks of neurons has enjoyed
-many mathematical advances from other scientific fields, statistical
-mechanics in particular. Together with their mathematical understanding,
-these fields have also brought into neuroscience their technical
-terminology and, behind it, specific ways of physically picturing the
-problem.
+In the following interpretation the maximum-entropy distribution is
+actually an approximation.
 
-Although the mathematical tools are a great help, there's the risk that the
-very specialized technical jargon and physical picture of other fields may
-in the long run be a hinder to understanding neuronal-network activity,
-because the physical phenomena at its core are very different from those of
-these fields. The history of science reminds us that such semantic
-distinctions are important and have often originated scientific
-revolutions.\footnote{The mathematical Ptolemaic system, for example, had
-  great predictive power and could be improved without limit. The reason
-  for its ultimate dismissal in favour of the
-  Copernican-Keplerian-Newtonian one was that the latter was based on a
-  more fruitful physical \emph{picture}, which in turn led to more agile
-  mathematics \citep[\chap~***]{kline1980_r1982}. Another example is semantic
-  change about the idea of pressure -- pressure as something we can speak
-  about even when there are no physical walls -- offered by Euler
-  \citep{euler1753_r1757,truesdell1954d}[\chap~IV]{truesdell1968}, which
-  eventually led to continuum thermomechanics. The most famous example is
-  Einstein's \citey{einstein1905c} semantic analysis of the concept of
-  \enquote{simultaneity}, which led to a completely different understanding
-  of the mathematically already known Lorentz transformations and their
-  related phenomena of length contraction and time dilation \citep[and of
-  the relation between mass and energy, already pointed out
-  by][p.~487]{poincare1900}. A final example is Born's \citey[p.~865,
-  footnote]{born1926} reinterpretation of the wave function as a
-  probability density rather than as charge density, which lead to a better
-  understanding of the quantum-mechanical mathematical formalism.}
+We have a recorded sequence of neural activity $\set{s(t)}$, time-binned
+and binarized.
 
+The question: What is the neural activity $s(t')$ in a new time bin $t'$
+\emph{outside} of the recorded ones?
 
+The assumptions:
+\begin{enumerate*}
+\item the order of the time bins is irrelevant;
+\item for some biological reason only the first $k$ moments of the data are
+  relevant for the prediction of the activity in a new time bin.
+\end{enumerate*}
+(The second assumption implies the first.)
 
-\section{Given sample state, infer population state}
-\label{sec:sample_population}
-
-The problem we want to consider is the inference about the state of a
-population of neurons from the observation of the state of a sample of that
-population. By inference we mean \emph{the numerical evaluation of our
-  \dob}, in this case about the population's state. The state is taken to
-be the binarized activity from a time-binned sequence. Denote by $N$ the
-size of the population, by $n$ that of the sample, by $S_i(t)$ the activity
-of the $i$th neuron in the population at time $t$, by
-$\yS(t) \defd \bigl(S_1(t), \dotsc, S_N(t)\bigr)$ the joint activity -- the
-state -- of the population, and by $s_j(t)$,
-$\ys(t) \defd \bigl(s_1(t), \dotsc, s_n(t)\bigr)$ the corresponding
-activities and state of the neurons making up the sample. We will discuss
-the exact relationship between $\yS$ and $\ys$ in the next sections. Our
-main task is to calculate our \dob
-\begin{equation}
-  \label{eq:main_dob_sample2pop}
-  \pf[\yS(t) \| \ys(t), \yI],
-\end{equation}
-where $\yI$ denotes other initial information and assumptions. Many points
-of our discussion apply to more general definitions of \enquote{state}.
-
-In order to better understand what our inference is about, let's also
-stress what it is \emph{not} about. Our inference is not about the
-\emph{dynamics} of the population. This latter inference is roughly as
-follows. We assume that the state $\yS(t)$ at time $t$ is determined
-through a dynamical law by the states $\set{\yS(\yt)}_{\yt<t}$ at some
-previous times together with some external quantities $Q(t)$ (such as
-physical states of synapses, inputs from peripheral nervous system, and
-similar extra-neuronal quantities):
-\begin{equation}
-  \label{eq:determ_dynamics}
-  \yS(t) = F[\set{\yS(\yt)}_{\yt<t}, Q(t)].
-\end{equation}
-We are uncertain about the mathematical form of the dynamical law $F$ and
-the values of the external quantities $Q(t)$. We can therefore consider
-various \dobs: for example the one about $\yS(t)$ given only knowledge
-about some previous states:
-\begin{equation}
-  \label{eq:prob_dynamic}
-  \pf[\yS(t) \| \set{\yS(\yt)}_{\yt<t}, \yI],
-\end{equation}
-or the one about the dynamical law, given a time sequence of states:
-\begin{equation}
-  \label{eq:prob_dynamical_law}
-  \pf[F \| \set{\yS(\yt)}, \yI].
-\end{equation}
-Our present problem doesn't concern this kind of inferences, but it's very
-relevant to them: to infer the dynamics,
-\eqn~\eqref{eq:prob_dynamical_law}, we usually must first infer the states
-$\yS(\yt)$ from the observation of a population sample.
-
-Note that if the dynamics is excluded from our problem, then samples at
-times $\yt< t$ cannot be used for the inference of the population state at
-time $t$, because such inferential chain involves the dynamics:
-schematically, the inference would be
-$\ys(\yt) \rightsquigarrow \yS(\yt) \rightsquigarrow \yS(t)$, and the
-latter step involves the \dob~\eqref{eq:prob_dynamic}. Our discussion will
-therefore refer to one time $t$ only, conveniently suppressed from
-our notation.
-
-
-\bigskip
-
-To calculate our \dob~\eqref{eq:main_dob_sample2pop}, the probability
-calculus requires us to specify: 1. our initial belief distribution about
-the population state:
-\begin{equation}
-  \label{eq:initial_dob_pop}
-  \pf(\yS \| \yI);
-\end{equation}
-2. our belief distribution about the sample state given the population
-state: \textcolor{white}{(If you find this you can claim a postcard from
-  me)}
-\begin{equation}
-  \label{eq:sample_dob}
-  \pf(\ys \| \yS, \yI),
-\end{equation}
-which we can call the \enquote{sampling distribution}. The two distribution
-above yield the distribution~\eqref{eq:main_dob_sample2pop} by Bayes's
-theorem:
-\begin{equation}
-  \label{eq:main_bayes_theorem}
-  \pf(\yS \| \ys, \yI) =
-  \frac{\pf(\ys \| \yS, \yI)\;\pf(\yS \| \yI)}{
-    \sum_{\yS}\pf(\ys \| \yS, \yI)\;\pf(\yS \| \yI)
-  }.
-\end{equation}
-
-\bigskip
-
-Let's investigate the sampling distribution~\eqref{eq:sample_dob}. First of
-all we note that we may \emph{label} the $N$ neurons in an arbitrary way --
-this doesn't mean that we consider them identical or indistinguishable. It
-is then convenient to give the labels $1, \dotsc, n$ to the neurons we have
-measured, and the remaining $N-n$ labels to the rest. Then we have the
-identity
-\begin{equation}
-  \label{eq:label_sample}
-  s_i=S_i, \quad i\in\set{1, \dotsc, n},
-\end{equation}
-and the sampling distribution~\eqref{eq:sample_dob} is a delta:
-\begin{equation}
-  \label{eq:sample_dob_delta}
-  \pf(\ys \| \yS, \yI) = \prod_{i=1}^{n} \delt(s_i,S_i).
-\end{equation}
-
-\bigskip
-
-Let's now investigate our initial belief~\eqref{eq:initial_dob_pop} about
-the population state. To start with, I'd like to consider belief
-distributions of a maximum-entropy form and offer a couple of comments on
-them, because they seem very popular in the literature.
-
-If the activities of the neurons are binarized, the set of all possible
-population states $\set{\yS}$ is discrete, of cardinality $2^N$. The
-set of all possible initial belief distributions for $\yS$ has then
-dimension $2^N-1$ because of normalization. It is a simplex. % homeomorphic
-% to the set of points
-% \begin{equation}
-%   \label{eq:simplex_in_R}
-%   \varDelta_{2^N-1} \defd
-%   \set{\bm{q} \in \clcl{0,1}^{2^N-1} \suchthat \sum_l q_l \le 1}
-% \end{equation}
-% and each point in this simplex represents a distribution of degrees of
-% belief among the possible population states.
-Each such distribution has moments -- for example,
-$\E(S_3\;S_5\;S_8 \| \yI)$ --- with precise numerical values. A
-maximum-entropy distribution is chosen by first choosing a subset of
-distributions having specific values for some moments, and then selecting
-the distribution having maximum Shannon entropy in this subset. Such a
-distribution is unique because the fixed-moment subsets are convex and the
-Shannon entropy is a convex function. A maximum-entropy distribution is
-therefore identified by the moments chosen -- for example, first and second
-moments -- and their numerical values. We can write this as
-\begin{equation}
-  \label{eq:initial_dob_me}
-  \pf(\yS \| \ym, \yIme),
-\end{equation}
-a familiar example being
-\begin{multline}
-  \label{eq:initial_dob_me_example}
-  \pf(\yS \| \set{m_i, m_{ij}}, \yIme) ={}\\
-  \frac{1}{Z(\set{m_i, m_{ij}})}\,
-  \exp\biggl[\sum_i h_i(\set{m_i, m_{ij}})\,S_i +
-  \sum_{i,j}^{i<j} J_{ij}(\set{m_i, m_{ij}})\,S_i\,S_j\biggr],
-\end{multline}
-where $\set{m_i}$ are the $N$ first moments, $\set{m_{ij}}$ the
-$\binom{N}{2}$ second moments, $Z$ is a normalization constant, and
-$\set{h_i, J_{ij}}$ are specific one-one functions of the moments.
-
-This kind of distributions can assign asymmetric \dob\ about the activities
-of the neurons -- for example a higher belief that neuron $14$ is active
-than that neuron $6$ is active. By keeping the \emph{kind} of moments (for
-example, all first moments and some specific third moments) fixed but
-choosing different numerical values for them we form a set of
-distributions. If the number of moments considered is less than $2^N-1$
-then this set has strictly lower dimension than the simplex.
-
-A remark may be useful speaking of maximum-entropy distributions. With
-other kinds of inference, convex mixtures of maximum-entropy distributions
-are sometimes considered, which can be written as
-\begin{equation}
-  \label{eq:initial_dob_me_mixture}
-  \pf(\yS \| \yIme) =
-  \int\!\di\ym\;\pf(\yS \| \ym, \yIme)\; \pf(\ym \| \yIme).
-\end{equation}
-For our present inference, however, such a mixture is not meaningful
-because redundant: its redundancy is clear when we consider the
-distribution for $\ym$ conditional on perfect knowledge of the state $\yS$:
-\begin{equation}
-  \label{eq:dob_m_conditional_S}
-  \pf(\ym \| \yS, \yIme) \propto
-  \pf(\yS \| \ym, \yIme)\; \pf(\ym \| \yIme).
-\end{equation}
-This distribution is not a delta, that is, it says we're uncertain about
-the values of the parameter $\ym$ -- even though the state $\yS$ is known!
-
-The reason for this redundancy is that two different sets of weights
-$\set*{\pf(\ym \| \yIme')}$, $\set*{\pf(\ym \| \yIme'')}$ for $\ym$ may
-yield the same resulting distribution for $\yS$. Geometrically, the
-distributions $\set{\pf(\yS \| \ym, \yIme)}_{\ym}$ are not the extreme
-points of a simplex within the simplex $\set{\yS}$. Mixtures of
-maximum-entropy distributions like~\eqref{eq:initial_dob_me_mixture} make
-sense when we are making inferences about an \emph{unlimited} sequence of
-states -- for example, a time sequence
-$\bigl( \yS(t_1), \yS(t_2), \dotsc \bigr)$ -- because in this case each set
-of weights for $\ym$ gives rise to a unique distribution \emph{for the
-  unlimited sequence}. In fact, in this case such mixtures are called
-models by sufficient statistics \citep[\sect~4.5]{bernardoetal1994_r2000}.
-
-
-\bigskip
-
-It's important to ask ourselves: in which experimental situations do
-asymmetric belief distributions represent our initial state of knowledge
-about the population state? Neural-recording instruments usually pick up
-the sample of recorded neurons in an uncontrollable, unknown way. Our
-initial \dob\ about the state of the full population is therefore
-symmetric.
-
-\mynote{Continue this discussion referring to
-  \citep{portamanaetal2015,portamanaetal2018b}.}
-
-
-\section{Inferences of dynamics}
-\label{sec:inferences_dynamics}
-
-\mynote{What is the inference about? prediction of this specific sequence?
-  -- not quite, because we've seen it. Inference is about sequence in
-  \emph{similar} experiments. Exchangeability involved.}
-
-\mynote{Important points:
-  \begin{itemize}
-  \item there cannot be \enquote{model-free} approaches
-  \item prior gives the greatest contribution to posterior
-  \item selection of a \enquote{model} is already a selection of class of priors
-  \item parameters that \enquote{couple} two neurons need not have any
-    direct biological meaning
-  \item to make such a connection we'd need to start from the physics of
-    the connections (typical delay times, other physical consequences of
-    synaptic connections, and similar)
-  \item some literature chooses parameter priors based on the data: mistake
-    in methodology
-  \item inferences about dynamical law aren't very meaningful if they aren't
-    meant for a set of similar experiments
-  \end{itemize}}
+The data: the set of recorded activities $\set{s(t)}$.
 
 
 
-% \[
-%   \begin{tikzcd}
-%       M_{n,n}(\CC) \arrow{r}{R'_{**}(\Hat{U})} & M_{n,n}(\CC)
-%     \\
-%     L(\mathcal{H}) \arrow{r}{\Hat{U}} \arrow[swap]{d}{R_*}\arrow[swap]{u}{R'_*} & L(\mathcal{H}) \arrow{d}{R_*}\arrow{u}{R'_*} \\
-%       M_{n,n}(\CC) \arrow{r}{R_{**}(\Hat{U})} & M_{n,n}(\CC)
-%   \end{tikzcd}
-% \]
-
-% \[
-%   \begin{tikzcd}
-%       \CC^n \arrow{r}{R'_*(A)} & \CC^n
-%     \\
-%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R}\arrow[swap]{u}{R'} & \mathcal{H} \arrow{d}{R}\arrow{u}{R'} \\
-%       \CC^n \arrow{r}{R_*(A)} & \CC^n
-%   \end{tikzcd}
-% \]
 
 
-% \[
-%   \begin{tikzcd}
-%     \mathcal{H} \arrow{r}{A} \arrow[swap]{d}{R} & \mathcal{H} \arrow{d}{R} \\
-%       \CC^n \arrow{r}{R_*(A)} & \CC^n
-%   \end{tikzcd}
-% \]
+\textcolor{white}{If you find this you can claim a postcard from me.}
+
+
 
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
 %  \centering\includegraphics[trim={12ex 0 18ex 0},clip,width=\linewidth]{maxent_saddle.png}\\
-%\caption{***}\label{fig:comparison_a5}
+%\caption{caption}\label{fig:comparison_a5}
 %\end{figure}% exp_family_maxent.nb
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \iffalse
 \begin{acknowledgements}
   \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
@@ -982,16 +763,18 @@ symmetric.
 \end{acknowledgements}
 \fi
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \newpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage
 % \appendix
 
-
-%%%%%%%%%%%%%%% BIB %%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \defbibnote{prenote}{{\footnotesize (\enquote{de $X$} is listed under D,
     \enquote{van $X$} under V, and so on, regardless of national
     conventions.)\par}}
@@ -1001,9 +784,11 @@ symmetric.
 \printbibliography[prenote=prenote%,postnote=postnote
 ]
 
-
 \end{document}
----------- cut text ----------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Cut text (won't be compiled)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
 %%% Local Variables: 
