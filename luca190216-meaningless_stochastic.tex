@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-15T15:50:24+0100
-%% Last-Updated: 2019-02-17T11:59:33+0100
+%% Last-Updated: 2019-02-17T14:58:32+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -601,7 +601,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\nbd}{\nobreakdash}%
 %\newcommand*{\bd}{\hspace{0pt}}%
 %\def\hy{-\penalty0\hskip0pt\relax}
-%\newcommand*{\labelbis}[1]{\tag*{(\ref{#1})$_\text{r}$}}
+\newcommand*{\labelbis}[1]{\tag{\ref{#1}'}}
 %\newcommand*{\mathbox}[2][.8]{\parbox[t]{#1\columnwidth}{#2}}
 %\newcommand*{\zerob}[1]{\makebox[0pt][l]{#1}}
 \newcommand*{\tprod}{\mathop{\textstyle\prod}\nolimits}
@@ -688,16 +688,17 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{***}
-\label{sec:***}
+\bigskip
+%\section{***}
+%\label{sec:***}
 
 Modern scientific literature abounds with statements and explanations
-involving words like \enquote{stochastic} or \enquote{random}. Here is a
-recent example from the neuroscientific literature:
+involving the terms \enquote{stochastic}, \enquote{random}, and similar
+ones. Here is a recent example from the neuroscientific literature:
 \begin{equation}
   \label{eq:statement}
-  \parbox[c]{0.75\columnwidth}{\emph{stochastic spike arrival in the input can lead
-      to a broad interspike interval distribution in the output of a neuron}}
+  \parbox[c]{0.9\columnwidth}{\emph{stochastic spike arrival in the input can lead
+      to a broad interspike interval distribution in the output of a neuron.}}
 \end{equation}
 I won't give the source of this statement because my discussion concerns
 this kind of statements in general, not just this particular one; and
@@ -707,28 +708,28 @@ The statement above is grammatically correct. It contains several technical
 terms and seems to have a meaning. It also suggests the following ideas:
 \begin{enumerate}
 \item \label{item:stochastic_physical}stochasticity is a possible physical
-  property of spike arrivals;
+  property of spike arrival;
 \item \label{item:stochastic_cause}the stochasticity of spike arrival can
   be the cause of a broad interspike-interval distribution; hence,
 \item \label{item:stochastic_inverse_cause}if a broad interspike-interval
   distribution is observed, a possible cause is the stochasticity of the
-  spike arrivals.
+  spike arrival.
 \end{enumerate}
 
 Unfortunately statement~\eqref{eq:statement} and the three ideas it
-suggests are either false or meaningless -- \enquote{not even wrong}, as
+suggests are false or meaningless -- \enquote{not even wrong}, as
 Pauli would say \citep{peierls1960}. Let's analyse it.
 
 We must first ask: what does \emph{stochastic} mean? Scientific works that
-try to explain what \emph{stochastic} means -- and not all do -- define it
-in terms that are just as vague, such as \emph{randomness} or
-\emph{chance}. I can't recall any work in which the meaning of these latter
-terms is accurately given. This is a strange attitude in modern science,
-considering that Einstein \citey[\sect~1]{einstein1905c} showed us that
-even an apparently unambiguous term like \emph{simultaneous} can be
-operationally ill-defined\footnote{The scientific community felt shock and
-  shame at Einstein's \emph{semantic} findings, as can be sensed in this
-  passage by Bridgman \citey[p.~1]{bridgman1927_r1958}:
+try to explain this term -- and not all do -- define it in terms that are
+just as vague, such as \emph{randomness} or \emph{chance}. I can't recall
+any work in which the meaning of the latter terms is accurately given. This
+nonchalant attitude is unexpected in modern science, considering that
+Einstein \citey[\sect~1]{einstein1905c} showed that even an apparently
+unambiguous term like \emph{simultaneous} can be operationally
+ill-defined.\footnote{The scientific community felt shock and shame at
+  Einstein's \emph{semantic} findings, as can be sensed in this passage by
+  Bridgman \citey[p.~1]{bridgman1927_r1958}:
 \begin{quote}
   It was a great shock to discover that classical concepts, accepted
   unquestioningly, were inadequate to meet the actual situation, and the
@@ -741,36 +742,52 @@ operationally ill-defined\footnote{The scientific community felt shock and
   what Einstein did.
 \end{quote}}
 
-The Concise Oxford English Dictionary \citey{coed1911_r2004} defines
+Since scientific texts don't help us, let us consult a dictionary. The
+Concise Oxford English Dictionary \citey{coed1911_r2004} defines
 \emph{stochastic} in terms of \emph{random}, and \emph{random} as
 \enquote{made, done, or happening without method or conscious
-  decision}.\footnote{It can also specifically mean \enquote{governed by or
-    involving equal chances for each item}, but this circular definition
-  (what's \enquote{chance}?) is not usually associated with
-  \enquote{stochastic}. Originally, \enquote{random} roughly meant
-  \enquote{fast}, a meaning still present in \enquote{random-access
-    memory}.} In the following I'll replace \emph{stochastic} and
-\emph{random} with \enquote{unpredictable} or \enquote{unknown}, in place
-of the long definition above; but please feel free to mentally use the
-dictionary definition instead. The result of our analysis will be the same.
+  decision}.\footnote{It also gives the more specific meaning
+  \enquote{governed by or involving equal chances for each item}, but this
+  circular definition (what's \emph{chance}?) is not usually associated
+  with \emph{stochastic}. Originally, \emph{random} roughly meant
+  \enquote{fast}, a meaning still visible in \enquote{random-access
+    memory}.} I'd like to refine this definition by saying \enquote{without
+  \emph{apparent} method}, since there could be a method but we aren't
+aware of it.
 
-The original statement becomes:
-\begin{equation}
+Statement~\eqref{eq:statement} is therefore equivalent to this:
+\begin{equation}\labelbis{eq:statement}
   \label{eq:statement_translated}
-  \parbox[c]{0.75\columnwidth}{\emph{unpredictable spike arrival in the input
-      can lead to a broad interspike interval distribution
-      in the output of a neuron}}
+  \parbox[c]{0.9\columnwidth}{\emph{spike arrival that happens
+      without apparent method
+      in the input can lead to a broad interspike interval distribution
+      in the output of a neuron.}}
 \end{equation}
-and is three consequences:
+If you want to argue against the equivalence of the two statements, then
+you first owe me an accurate, non-circular definition of \emph{stochastic},
+\emph{random}, and similar words.
+
+The rephrased statement~\eqref{eq:statement_translated} is trivial and
+empty. Sure, spikes arriving without apparent method might lead to a broad
+interspike-interval distribution. And then again they just might not.
+Likewise for spikes arriving \emph{with} apparent method: they might or
+might not. The ideas suggested by the first formulation of the statement
+are therefore false:
 \begin{enumerate}[(\arabic*')]
-\item \label{item:stochastic_physical_transl}unpredictability is a possible
-  physical property of spike arrivals;
-\item \label{item:stochastic_cause_transl}the unpredictability of spike arrival can be the cause
-  of a broad interspike-interval distribution; hence,
+\item \label{item:stochastic_physical_transl}the absence of apparent method
+  is not a physical property of spike arrivals, but just our state of
+  knowledge about them;
+\item \label{item:stochastic_cause_transl}there isn't any causal or
+  explanatory relationship between the apparent absence of method in spike
+  arrival and a broad interspike-interval distribution; hence
 \item \label{item:stochastic_inverse_cause_transl}if a broad
-  interspike-interval distribution is observed, a possible cause is the
-  unpredictability of the spike arrivals.
+  interspike-interval distribution is observed, we can't say whether the
+  was an apparent method in spike arrival or not.
 \end{enumerate}
+
+So there isn't any causal or explanatory relationship between
+the apparent absence of method in spike arrival and a broad
+interspike-interval distribution.
 
 
 
