@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-02-19T15:02:49+0100
+%% Last-Updated: 2019-02-19T16:29:14+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -22,7 +22,7 @@ british%
 \newcommand*{\propertitle}{Interpretations of maximum-entropy distributions in neuroscience% \\{\large ***}%
 }
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{Maximum-entropy in neurscience}
+\newcommand*{\headtitle}{Maximum-entropy in neuroscience}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}% Report number
@@ -438,7 +438,7 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\Large\sffamily%
+\pretitle{\begin{center}\LARGE\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -486,9 +486,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % {\protect\centering ***\\%
 % \footnotesize\epost{\email{***}{***}}}%
 % \hspace*{\stretch{1}}%
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\parbox{0.75\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
-\footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\footnotesize\epost{\email{piero.mana}{ntnu.no}}\\Kavli Institute for Systems Neuroscience, Trondheim}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -635,10 +635,11 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
-\newcommand*{\ya}{\alpha}
+\newcommand*{\ya}{\lambda}
 \newcommand*{\yb}{\beta}
 \newcommand*{\yc}{\gamma}
 \newcommand*{\yp}{f}
+\newcommand*{\yt}{\tau}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -677,7 +678,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \asudedication{\small ***}
 \vspace{\bigskipamount}
-\setlength{\epigraphwidth}{.7\columnwidth}
+\setlength{\epigraphwidth}{.55\columnwidth}
 %\epigraphposition{flushright}
 \epigraphtextposition{flushright}
 %\epigraphsourceposition{flushright}
@@ -744,17 +745,18 @@ $t'$ \emph{outside} of the recorded ones?
 \medskip
 
 \textbf{The assumptions:}
-\begin{enumerate}
-\item The order of the time bins, \emph{including any number of new ones},
-  is irrelevant for our inferences.
-\item \label{item:sufficiency}For some biological reason, only the first $k$ moments of observed
+\begin{enumerate}[label=\textsc{a}\arabic*.,ref=\textsc{a}\arabic*]
+\item \label{item:exchangeability}The order of the time bins,
+  \emph{including any number of new ones}, is irrelevant for our
+  inferences.
+\item \label{item:sufficiency}For some biological reason, only the first $R$ moments of observed
   data are \emph{relevant} for the prediction of the activity in a new time
   bin; this is true for any amount of data.
 \item \label{item:p_moments}Some assumption that leads to a quantified
-  uncertainty about the first $k$ moments of the activities of \emph{every}
+  uncertainty about the first $R$ moments of the activities of \emph{every}
   number of time bins (not just the recorded ones).
 \item \label{item:p_g}Some assumption that leads to a quantified
-  uncertainty about $s(t')$ \emph{if we knew the first $k$ moments} of the
+  uncertainty about $s(t')$ \emph{if we knew the first $R$ moments} of the
   activities of \emph{every} number of time bins.
 \end{enumerate}
 Note that the second assumption implies the first.
@@ -765,29 +767,31 @@ Note that the second assumption implies the first.
 
 \medskip
 
-The assumptions above -- denote them by $A$ -- determine a unique
-distribution of \dobs\ for all possible sequences of activity $\set{s(t)}$,
-before the observation of any data. For simplicity let me consider the case
-$k=3$:
+The assumptions above -- denote them by $A$ -- determine a unique \dob\ for
+\emph{every possible} sequence of activities $\set{s(\yt)}$, before the
+observation of any data. For simplicity let me consider the case $R=3$:
 \begin{subequations}\label{eq:dob_new_activity}
   \begin{gather}
     \begin{multlined}[b][0.9\linewidth]
-      \pf\bigl[\set{s(t)} \| A\bigr] =
-      \int\!\di\ya\,\di\yb\,\di\yc\;
-      \yp(\ya,\yb,\yc)\times{}\\
-      \prod_t\frac{g[s(t)]}{Z(\ya,\yb,\yc)}\;
+      \pf\bigl[\set{s(\yt)} \| A\bigr] =
+      \int\!\di\ya\;
+      \yp(\ya)\times{}\\
+      \prod_{\yt}\frac{g[s(\yt)]}{Z(\ya)}\;
       % g(s)\;%\times{}\\
-      \exp\bigl[\ya^i s_i(t) + \yb^{ij} s_i(t)\, s_j(t) + \yc^{ijk} s_i(t)\, s_j(t)\, s_k(t)\bigr]\;
+      \exp\bigl[\ya^i s_i(\yt) + \ya^{ij} s_i(\yt)\, s_j(\yt) + \ya^{ijk} s_i(\yt)\, s_j(\yt)\, s_k(\yt)\bigr]\;
     \end{multlined}
     \\\shortintertext{with}
     \label{eq:Z}
-    Z(\ya,\yb,\yc) \defd \sum_s
+    Z(\ya) \defd \sum_s
     g(s)\;
-    \exp\bigl(\ya^i s_i + \yb^{ij} s_i s_j + \yc^{ijk} s_i s_j s_k\bigr).
+    \exp\bigl(\ya^i s_i + \ya^{ij} s_i s_j + \ya^{ijk} s_i s_j s_k\bigr).
   \end{gather}
 \end{subequations}
 Einstein's summation convention is used in the formula above, and the sums
-run over increasing sequences $i<j<k$.
+run over increasing sequences $i<j<k$. The integral is over
+$N+N\,(N-1)/2+N\,(N-1)\,(N-2)/6$ parameters
+$\ya\defd (\ya^{i}, \ya^{ij}, \ya^{ijk})$; in general it will be over
+$\tbinom{N}{1}+\dotsb+\tbinom{N}{R}$ parameters.
 
 The fact that the assumptions above determine
 formula~\eqref{eq:dob_new_activity}, and vice versa, is the discrete
@@ -811,16 +815,43 @@ subsequence:
 with numerator and denominator given by~\eqref{eq:dob_new_activity}.
 
 If the data $\set{s(t)}$ comprise a sequence long enough to render the
-product of exponentials much sharper in $(\ya,\yb,\yc)$ than the density
-$\yp$, then the conditional
-probability~\eqref{eq:dob_new_activity_conditional} is approximated by a
-product of maximum-entropy distributions with Lagrange multipliers
-$(\ya, \yb, \yc)$ determined by the usual constraint equations with data
-$\set{s(t)}$.
+product of exponentials much more peaked in $ya$ than the density $\yp$,
+then the conditional probability~\eqref{eq:dob_new_activity_conditional} is
+approximated by a product of maximum-entropy distributions with Lagrange
+multipliers $\ya$ determined by the usual constraint equations with data
+$\set{s(t)}$ \citep{portamana2017}. Thus the probability
+distribution~\eqref{eq:dob_new_activity_conditional} will be approximated
+by a product of maximum-entropy distributions.
+
+\medskip
+
+There are several important points about this interpretation that are
+rarely mentioned in the neuroscientific literature:
+\begin{description}[wide,mode=unboxed]
+\item[Which data are \emph{relevant}?] There's a natural question regarding
+  assumptions~\ref{item:exchangeability} and \ref{item:sufficiency}: which
+  time bins should be considered \emph{relevant} for one another, but with
+  their particular order still irrelevant? The choice is subjective. Note
+  that in principle we could consider sequences of activities from
+  different recording sessions, and even different neurons (as long as
+  there are $N$ of them), even from different test subjects. We may adduce
+  biological reasons for limiting our choices; the point is that such a
+  choice is beyond the probability calculus. We can of course compare two
+  different choices within the probability calculus -- for example to
+  consider only data within one recording session, or across multiple
+  sessions -- and then calculate their posterior probabilities given some
+  data. But to do this we'd need to make an assumption of what's relevant
+  and what's not on a more general level. The subjective choice has just
+  been pushed somewhere else; it hasn't disappeared.
+\item[Stationarity.] 
+\end{description}
+
+
+
+
+
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
-
-
 
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
 %\begin{figure}[p!]%{r}{0.4\linewidth} % with wrapfigure
