@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-02-15T17:38:43+0100
+%% Last-Updated: 2019-02-19T15:02:49+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -116,12 +116,12 @@ british%
 \theoremstyle{innote}
 \newtheorem*{innote}{}
 
-\usepackage[shortlabels,inline,mode=unboxed]{enumitem}
+\usepackage[shortlabels,inline]{enumitem}
 \SetEnumitemKey{para}{itemindent=\parindent,leftmargin=0pt,listparindent=\parindent,parsep=0pt,itemsep=\topsep}
 % \begin{asparaenum} = \begin{enumerate}[para]
 % \begin{inparaenum} = \begin{enumerate*}
-\setlist[enumerate,2]{label=(\alph*)}
-\setlist[enumerate]{label=(\arabic*),leftmargin=1.5\parindent}
+\setlist[enumerate]{label=\arabic*.,ref=\arabic*,leftmargin=1.5\parindent}
+\setlist[enumerate,2]{label=\alph*.ref=\alph*}
 \setlist[itemize]{leftmargin=1.5\parindent}
 \setlist[description]{leftmargin=1.5\parindent}
 % old alternative:
@@ -542,7 +542,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\lland}{\DOTSB\;\land\;}
 %\newcommand*{\llor}{\DOTSB\;\lor\;}
 %\newcommand*{\limplies}{\mathbin{\Rightarrow}}%implies
-%\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
+\newcommand*{\suchthat}{\mid}%{\mathpunct{|}}%such that (eg in sets)
 %\newcommand*{\with}{\colon}%with (list of indices)
 %\newcommand*{\mul}{\times}%multiplication
 %\newcommand*{\inn}{\cdot}%inner product
@@ -635,6 +635,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\ya}{\alpha}
+\newcommand*{\yb}{\beta}
+\newcommand*{\yc}{\gamma}
+\newcommand*{\yp}{f}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -694,8 +698,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 A probability distribution is our quantified uncertainty about a set of
 mutually exclusive and exhaustive propositions. So when we see a
-probability distribution it's natural to ask: what \emph{exactly} are we
-uncertain about? The answer to this question shouldn't be vague, as for
+probability distribution it's natural to ask: \emph{what are we uncertain
+  about?} The answer to this question should be precise, not vague as for
 example \enquote{the network state}: what network? at what time? To give a
 meaningful answer it's useful to specify in detail what experiment would be
 done to answer the question with certainty.
@@ -703,14 +707,13 @@ done to answer the question with certainty.
 Asking the question above is also a good way to distinguish probability
 distributions from other distributions. For example, if we're shown a
 \emph{frequency} distribution and we ask \enquote{what are we uncertain
-  about, with this distribution?}, it's clear that the question makes no
-sense.
+  about?}, our question makes no sense.
 
-Together with asking what the uncertainty is about, it's also natural to
+Together with asking what our uncertainty is about, it's also natural to
 ask:
 \begin{enumerate*}
-\item What initial assumptions lead to this distribution?
-\item What data lead to this distribution?
+\item Which initial assumptions lead to this distribution?
+\item Which data lead to this distribution?
 \end{enumerate*}
 
 This note tries to answer these questions for probability distribution of
@@ -719,30 +722,101 @@ maximum-entropy form appearing in the neuroscientific literature.
 \section{First interpretation}
 \label{sec:1st_interpretation}
 
-In the following interpretation the maximum-entropy distribution is
-actually an approximation.
+In this first interpretation the maximum-entropy distribution is actually
+an approximation. The context is the following. We have a recorded sequence
+of neural activities of $N$ neurons, time-binned and binarized:
+$\set*{s(t) \suchthat t=1,2,\dotsc; s(t) \in \set{0,1}^N}$. We wonder what
+activity we would measure in a \emph{new} time bin, in the past, or in the
+future, or some intermediate time bin missing from the data above.
 
-We have a recorded sequence of neural activity $\set{s(t)}$, time-binned
-and binarized.
+Let's explicitly describe the question, the assumptions, and the data, and
+then discuss them in more depth. I'd like you to pay particular attention
+to the assumptions: it's rare for them to be explicitly spelled out in the
+neuroscientific literature, thus giving the wrong impression that fewer
+assumptions are needed.
 
-The question: What is the neural activity $s(t')$ in a new time bin $t'$
-\emph{outside} of the recorded ones?
 
-The assumptions:
-\begin{enumerate*}
+\medskip
+
+\textbf{The question:} What is the neural activity $s(t')$ in a time bin
+$t'$ \emph{outside} of the recorded ones?
+
+\medskip
+
+\textbf{The assumptions:}
+\begin{enumerate}
 \item The order of the time bins, \emph{including any number of new ones},
-  is irrelevant;
-\item for some biological reason, only the first $k$ moments of the data
-  are relevant for the prediction of the activity in a new time bin, for
-  any amount of data.
-\end{enumerate*}
-(The second assumption implies the first.)
+  is irrelevant for our inferences.
+\item \label{item:sufficiency}For some biological reason, only the first $k$ moments of observed
+  data are \emph{relevant} for the prediction of the activity in a new time
+  bin; this is true for any amount of data.
+\item \label{item:p_moments}Some assumption that leads to a quantified
+  uncertainty about the first $k$ moments of the activities of \emph{every}
+  number of time bins (not just the recorded ones).
+\item \label{item:p_g}Some assumption that leads to a quantified
+  uncertainty about $s(t')$ \emph{if we knew the first $k$ moments} of the
+  activities of \emph{every} number of time bins.
+\end{enumerate}
+Note that the second assumption implies the first.
 
-The data: The set of recorded activities $\set{s(t)}$.
+\medskip
 
+\textbf{The data:} The set of recorded activities $\set{s(t)}$.
 
+\medskip
 
+The assumptions above -- denote them by $A$ -- determine a unique
+distribution of \dobs\ for all possible sequences of activity $\set{s(t)}$,
+before the observation of any data. For simplicity let me consider the case
+$k=3$:
+\begin{subequations}\label{eq:dob_new_activity}
+  \begin{gather}
+    \begin{multlined}[b][0.9\linewidth]
+      \pf\bigl[\set{s(t)} \| A\bigr] =
+      \int\!\di\ya\,\di\yb\,\di\yc\;
+      \yp(\ya,\yb,\yc)\times{}\\
+      \prod_t\frac{g[s(t)]}{Z(\ya,\yb,\yc)}\;
+      % g(s)\;%\times{}\\
+      \exp\bigl[\ya^i s_i(t) + \yb^{ij} s_i(t)\, s_j(t) + \yc^{ijk} s_i(t)\, s_j(t)\, s_k(t)\bigr]\;
+    \end{multlined}
+    \\\shortintertext{with}
+    \label{eq:Z}
+    Z(\ya,\yb,\yc) \defd \sum_s
+    g(s)\;
+    \exp\bigl(\ya^i s_i + \yb^{ij} s_i s_j + \yc^{ijk} s_i s_j s_k\bigr).
+  \end{gather}
+\end{subequations}
+Einstein's summation convention is used in the formula above, and the sums
+run over increasing sequences $i<j<k$.
 
+The fact that the assumptions above determine
+formula~\eqref{eq:dob_new_activity}, and vice versa, is the discrete
+version \citep{fraser1963,andersen1970} of the Koopman-Pitman-Darmois
+theorem \citep{koopman1936,pitman1936,darmois1935}[see
+also][]{barankinetal1963,denny1967,hipp1974,lauritzen1974,lauritzen1984,lauritzen1982_r1988}.
+Assumption~\ref{item:sufficiency} -- the assumption about a sufficient
+statistics -- is the one leading to a mixture of exponentials, but it
+doesn't determine the density $\yp$ and the distribution $g$. These are
+determined by assumptions~\ref{item:p_moments} and~\ref{item:p_g}.
+
+From the distributions~\eqref{eq:dob_new_activity} we can calculate our
+\dob\ about any subsequence of activities conditional on any other distinct
+subsequence:
+\begin{equation}\label{eq:dob_new_activity_conditional}
+      \pf\bigl[\set{s(t')} \| \set{s(t)}, A\bigr] =
+      \frac{\pf\bigl[\set{s(t'), s(t)} \| A\bigr]
+      }{
+        \pf\bigl[\set{s(t)} \| A\bigr]},
+\end{equation}
+with numerator and denominator given by~\eqref{eq:dob_new_activity}.
+
+If the data $\set{s(t)}$ comprise a sequence long enough to render the
+product of exponentials much sharper in $(\ya,\yb,\yc)$ than the density
+$\yp$, then the conditional
+probability~\eqref{eq:dob_new_activity_conditional} is approximated by a
+product of maximum-entropy distributions with Lagrange multipliers
+$(\ya, \yb, \yc)$ determined by the usual constraint equations with data
+$\set{s(t)}$.
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
