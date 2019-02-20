@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2019-02-19T16:29:14+0100
+%% Last-Updated: 2019-02-19T16:42:44+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -830,19 +830,22 @@ rarely mentioned in the neuroscientific literature:
 \begin{description}[wide,mode=unboxed]
 \item[Which data are \emph{relevant}?] There's a natural question regarding
   assumptions~\ref{item:exchangeability} and \ref{item:sufficiency}: which
-  time bins should be considered \emph{relevant} for one another, but with
-  their particular order still irrelevant? The choice is subjective. Note
-  that in principle we could consider sequences of activities from
-  different recording sessions, and even different neurons (as long as
-  there are $N$ of them), even from different test subjects. We may adduce
-  biological reasons for limiting our choices; the point is that such a
-  choice is beyond the probability calculus. We can of course compare two
-  different choices within the probability calculus -- for example to
-  consider only data within one recording session, or across multiple
-  sessions -- and then calculate their posterior probabilities given some
-  data. But to do this we'd need to make an assumption of what's relevant
-  and what's not on a more general level. The subjective choice has just
-  been pushed somewhere else; it hasn't disappeared.
+  time bins should be considered \emph{relevant} for one another, with
+  their particular order still irrelevant? The choice is subjective. We
+  could consider, for example, the sequence of activities between minute 1
+  and minute 3 of a recording session done on Monday on test subject \#1; or
+  the whole of Monday's recording session; or the sequences from Monday's
+  and Wednesday's recording sessions; or combined sequences from test
+  subjects \#1 and \#4 (hence with different neurons); and so on -- as long
+  as every sequence has $N$ neurons. We may give biological reasons for one
+  choice and against another; the point is that such a choice is beyond the
+  probability calculus. We can of course compare two different choices
+  within the probability calculus -- for example to consider only data
+  within one recording session, or across multiple sessions -- and then
+  calculate their posterior probabilities given some common data. But to do
+  this we'd need to make assumptions about what's relevant and what's not
+  on a more general level. The subjective choice hasn't disappeared; it has
+  just been pushed somewhere else.
 \item[Stationarity.] 
 \end{description}
 
