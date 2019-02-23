@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-23T16:35:53+0100
+%% Last-Updated: 2019-02-23T19:17:55+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -637,9 +637,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
 \newcommand*{\yS}{S}
-\newcommand*{\ySt}{S(\dotv)}
+\newcommand*{\ySt}{\bm{\yS}}
 \newcommand*{\ys}{s}
-\newcommand*{\yst}{s(\dotv)}
+\newcommand*{\yst}{\bm{\ys}}
 \newcommand*{\yll}{\lambda}
 \newcommand*{\yl}{\bm{\lambda}}
 \newcommand*{\yC}{\mathte{C}}
@@ -706,14 +706,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 We have a population of $N$ neurons whose activities we imagine to have
 time-binned into $T$ bins and binarized. Denote their total population
-activity at time bin $t$ by $\yS(t) \in \set{0,1,\dotsc,N}$, their total
+activity at time bin $t$ by $\yS_{t} \in \set{0,1,\dotsc,N}$, their total
 activity at an unspecified bin by $\yS$, and the time sequence of total
-activities by $\ySt\defd \bigl( \yS(1), \yS(2), \dotsc, \yS(T) \bigr)$.
+activities by $\ySt\defd ( \yS_{t_1}, \yS_{t_2}, \dotsc, \yS_{t_T} )$.
 
 We have recorded the activities of a sample of $n$ neurons from the
 population above. Denote the total activity of the sample at time bin $t$
-by $\ys(t) \in \set{0,1,\dotsc,n}$, at an unspecified bin by $\ys$, and the
-time sequence by $\yst \defd \bigl( \ys(1), \ys(2), \dotsc, \ys(T) \bigr)$.
+by $\ys_{t} \in \set{0,1,\dotsc,n}$, at an unspecified bin by $\ys$, and the
+time sequence by $\yst \defd ( \ys_{t_1}, \ys_{t_2}, \dotsc, \ys_{t_T} )$.
 
 
 We don't know how these sampled neurons were chosen from the full
@@ -732,98 +732,141 @@ background information.
 
 \bigskip
 
-Now suppose that we knew the total activities of the \emph{full} population
-at some $T$ time bins $\set{t}$, and we wanted to infer the total
-activities at $T'$ \emph{different} time bins $\set{t'}$:
+Now suppose that we knew the total activities $\ySt$ of the \emph{full}
+population at some $T$ time bins $\set{t}$, and we wanted to infer the
+total activities $\ySt'$ at $T'$ \emph{different} time bins $\set{t'}$:
 \begin{equation}
   \label{eq:goal_new_bins_from_known}
-  \pf[\set{\yS(t')} \| \set{\yS(t)}, \yI].
+  \pf(\ySt' \| \ySt, \yI).
 \end{equation}
 
 We want to consider the hypotheses that \emph{only a specific set of
-  statistics} about our data at $\set{t}$ are \emph{relevant} for our
-inference about $\set{t'}$; that is, they are a sufficient statistics. Any
-aspect of the data not contained in those statistics would be irrelevant
-for our inference. This inferential property could be the result of
-biological properties of the population.
+  statistics} about our data $\ySt$ are \emph{relevant} for our inference
+about $\ySt'$; that is, they are a sufficient statistics. Any aspect of the
+data not contained in those statistics would be irrelevant for our
+inference. This inferential property could be the result of biological
+properties of the population.
 
-Let's assume that there are $R$ such statistics (besides $T$). Each
-statistic is the sum over time of a specific function of the total activity
-$\yS$. We can arrange these functions in an $R$-by$(N+1)$ matrix
-$\yC \defd (C_{r\yS})$, where $C_{r\yS}$ is the value of the function for
-the $r$th statistic when the total activity is $\yS$. The $R$ sufficient
-statistics for data at $\set{t}$ would thus be
+Let's assume that there are $R$ such statistics (besides $T$, which is
+always part of a set of sufficient statistics). Each statistic is the sum
+over time of a specific function of the total activity $\yS$. We can
+arrange these functions in an $R$-by-$(N+1)$ matrix $\yC \defd (C_{r\yS})$,
+where $C_{r\yS}$ is the value of the function for the $r$th statistic when
+the total activity is $\yS$. The $R$ sufficient statistics for the data
+$\ySt$ would thus be
 \begin{equation}
   \label{eq:suff_statistics_t}
-\ycc_{r} \defd  \frac{1}{T}\sum_{t} C_{r\yS(t)},\quad r \in \set{1, \dotsc, R}.
+\ycc_{r} \defd  \frac{1}{T}\sum_{t} C_{r\yS_{t}},\quad r \in \set{1, \dotsc, R}.
 \end{equation}
 
 \bigskip
 
 Our goal is to quantify our uncertainty about these hypotheses of
 sufficient statistics, given the activity data from a sample of neurons.
-Let's make this goal more precise and note some important points:
-\begin{enumerate}
-\item The hypotheses we must consider are not discrete or of a yes-or-no type:
-  they form a continuum. This is because we have a continuum of degrees of
-  relevance. Consider for example two statistics $\ya_1$ and $\ya_2$ from
-  the bins $\set{t}$. Our \dobs\ about the activities at bins $\set{t'}$
-  are
-  \begin{equation}
-    \label{eq:continuum_stat_example}
-    \pf[\set{\yS(t')} \| \ya_1, \ya_2, \yI].
-  \end{equation}
+It's important to note that the hypotheses we must consider are not
+discrete or of a yes-or-no type: they form a continuum. This is because we
+have a continuum of degrees of relevance. Consider for example two
+statistics $\ya_1$ and $\ya_2$ from the bins $\set{t}$. Our \dobs\ about
+the activities at bins $\set{t'}$ are
+\begin{equation}
+  \label{eq:continuum_stat_example}
+  \pf(\ySt' \| \ya_1, \ya_2, \yI).
+\end{equation}
 It may happen that lack of knowledge about $\ya_2$ doesn't change our \dob:
-  \begin{equation}
-    \label{eq:continuum_stat_example_irrel}
-    \pf[\set{\yS(t')} \| \ya_1, \yI] =
-     \pf[\set{\yS(t')} \| \ya_1, \ya_2, \yI],
-   \end{equation}
-in which case $\ya_2$ is irrelevant. It may also happen that our \dob\
-is changed but in a negligible way, for all values of $\set{\yS(t')}$ and $\ya_1$:
-  \begin{equation}
-    \label{eq:continuum_stat_example_irrel_slightly}
-    \pf[\set{\yS(t')} \| \ya_1, \yI] \approx
-     \pf[\set{\yS(t')} \| \ya_1, \ya_2, \yI],
-   \end{equation}
-   so that $\ya_2$ could be dropped in practice. We can imagine larger and
-   larger changes to the point where dropping $\ya_2$ would lead to
-   drastically different \dobs. The question of the relevance of $\ya_2$ is
-   therefore not dichotomous. We will thus deal with a continuum of
-   hypotheses, each representing a degree of relevance of some statistics.
+\begin{equation}
+  \label{eq:continuum_stat_example_irrel}
+  \pf(\ySt' \| \ya_1, \yI) =
+  \pf(\ySt' \| \ya_1, \ya_2, \yI),
+\end{equation}
+in which case $\ya_2$ is irrelevant. It may also happen that our \dob\ is
+changed but in a negligible way, for all values of $\ySt'$ and $\ya_1$:
+\begin{equation}
+  \label{eq:continuum_stat_example_irrel_slightly}
+  \pf(\ySt' \| \ya_1, \yI) \approx
+  \pf(\ySt' \| \ya_1, \ya_2, \yI),
+\end{equation}
+so that $\ya_2$ could be dropped in practice. We can imagine larger and
+larger changes to the point where dropping $\ya_2$ would lead to
+drastically different \dobs. The question of the relevance of $\ya_2$ is
+therefore not dichotomous. We will thus deal with a continuum of
+hypotheses, each representing a degree of relevance of some statistics. We
+shall shortly see how to mathematically represent this continuum of
+hypotheses.
 
- \item How does a hypothesis about a sufficient statistic affect our \dobs?
-   The answer comes from the Koopman-Pitman theorem
-   \citep{koopman1936,pitman1936}[see
-   also][]{darmois1935,barankinetal1963,denny1967,hipp1974,lauritzen1974,lauritzen1984,lauritzen1982_r1988}[for
-   the discrete version:][]{fraser1963,andersen1970}, which says that the
-   \dob~\eqref{eq:goal_new_bins_from_known} has a very specific
-   mathematical expression if only some statistics of $\set{\yS(t')}$ are
-   relevant. The main statement of the theorem is this: if $R$ sufficient
-   statistics are given by functions $C_{r\yS}$, then
-   \begin{subequations}
-     \label{eq:koopman-pitman}
-     \begin{gather}
-     \pf[ \set{\yS(t)} \| \yI] =
-     \int\!\di\yl\; \pf(\yl \| \yI)\;
-     \prod_{t} \frac{\yg_{\yS(t)}}{Z(\yl)}
-     \exp\bigl[\tsum_{r} \yll_r C_{r\yS(t)}\bigr]
-     \\
-     \shortintertext{with}
-     \yl \defd (\yll_1, \dotsc, \yll_R),
-     \qquad
-     Z(\yl) \defd \sum_{\yS}
-     \yg_{\yS}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr).
-   \end{gather}
-   \end{subequations}
-   
+\bigskip
 
-   It is important to note that a hypothesis solely about a sufficient
-   statistics  does not determine the density  $\pf(\yl \| \yI)$ or the
-   function $\yg$ in the formula above.
+How does a hypothesis about a sufficient statistic affect our \dobs? The
+answer comes from the Koopman-Pitman theorem
+\citep{koopman1936,pitman1936}[see
+also][]{darmois1935,barankinetal1963,denny1967,hipp1974,lauritzen1974,lauritzen1984,lauritzen1982_r1988}[for
+the discrete version:][]{fraser1963,andersen1970}, which says that the
+\dob~\eqref{eq:goal_new_bins_from_known} has a very specific mathematical
+expression if only some statistics of $\ySt$ relevant. The main statement
+of the theorem is this: if $R$ sufficient statistics are given by functions
+$C_{r\yS}$, then for any number of time bins $T$
+\begin{subequations}
+  \label{eq:koopman-pitman}
+  \begin{gather}
+    \pf( \ySt \| \yI) =
+    \int\!\di\yl\; \pf(\yl \| \yI)\;
+    \prod_{t} \frac{\yg_{\yS_{t}}}{Z(\yl)}
+    \exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr)
+    \label{eq:koopman-pitman_integral}
+    \\
+    \shortintertext{with}
+    \yl \defd (\yll_1, \dotsc, \yll_R) \in \RR^{R},
+    \qquad
+    Z(\yl) \defd \sum_{\yS}
+    \yg_{\yS}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr),
+  \end{gather}
+\end{subequations}
+and $\yg$ a positive function of $\yS$.
+
+Some important remarks about the Pitman-Koopman
+formula~\eqref{eq:koopman-pitman}:
+\begin{enumerate}[label=\alph*.]
+\item A hypothesis that only stated what the sufficient statistics are
+  would not determine the density $\pf(\yl \| \yI)$ or the function $\yg$
+  in the formula above. The hypotheses we are going to compare thus contain
+  additional information besides sufficiency.
+\item The formula can be interpreted this way: our \dob\ about $\ySt$ is
+  given by the \dob\ we would have if we knew the values of the sufficient
+  statistics $\yc$ for an unlimited number of time bins, mixed over our
+  uncertainty about the values themselves:
+  \begin{equation}
+    \label{eq:koopman-pitman_interpreted}
+        \pf( \ySt \| \yI) =
+        \int\!\di\yc\; \pf(\yc \| \yI)\;
+        \pf(\ySt \| \yc, \yI).
+  \end{equation}
+\item \label{item:reparametrization}Formula~\eqref{eq:koopman-pitman} is
+  obtained from the latter one by the one-to-one reparametrization
+\begin{equation}
+  \label{eq:pitman-koopman_reparametrization}
+  \ycc_{r}(\yl) = \sum_{\yS} C_{r\yS} \frac{\yg_{\yS}}{Z(\yl)}
+  \exp\bigl(\tsum_{r} \yll_{r} C_{r\yS}\bigr)
+  \equiv \de_{\yll_{r}} \ln Z(\yl)
+\end{equation}
+This equation cannot be solved explicitly for $\yl$ in terms of $\yc$. The
+parametrization in terms of $\yl$ has several special properties:
+\begin{enumerate}[label=\alph{enumi}.\arabic*.]
+\item The quantities $(\yll_{r})$ can assume any values
+  independently of one another, whereas the limit statistics $\yc$ have
+  interdependent ranges.
+\item The expression for $\pf(\ySt \| \yc, \yI)$ can be written explicitly
+  in terms of $\yl$, but not in terms of $\yc$.
+\item If some $\yll_{r}$ vanishes then the corresponding statistic is
+  \emph{irrelevant} -- the corresponding term indeed disappears from the
+  exponential in formula~\eqref{eq:koopman-pitman}.
+\end{enumerate}
 \end{enumerate}
 
 
+Remark \ref{item:reparametrization} shows that the absolute value of each
+parameter, $\abs{\yll_{r}}$, somehow quantifies the degree of relevance of
+the corresponding statistic, zero meaning complete irrelevance. These
+absolute values can therefore be used as parameters for our continuum of
+hypotheses about the sufficient statistics.
 
 
 
