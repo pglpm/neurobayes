@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-23T22:56:36+0100
+%% Last-Updated: 2019-02-23T23:43:50+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -566,7 +566,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\pr}{P}%probability
 \newcommand*{\pf}{\mathrm{p}}%probability
 \newcommand*{\p}{\mathrm{P}}%probability
-%\newcommand*{\E}{\mathrm{E}}
+\newcommand*{\E}{\mathrm{E}}
 \renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
 \DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
@@ -645,7 +645,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yC}{\mathte{C}}
 \newcommand*{\ycc}{\widebar{C}}
 \newcommand*{\yc}{\widebar{\bm{C}}}
-\newcommand*{\yG}{\mathte{H}}
+\newcommand*{\yG}{G}
 \newcommand*{\yg}{g}
 \newcommand*{\ygt}{\widebar{\yg}}
 \newcommand*{\yI}{\varIota}
@@ -653,6 +653,9 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yF}{\bm{F}}
 \newcommand*{\yf}{\bm{f}}
 \newcommand*{\yH}{\varEta}
+\newcommand*{\yCs}{\mathte{c}}
+\newcommand*{\yccs}{\widebar{c}}
+\newcommand*{\ycs}{\widebar{\bm{c}}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -730,7 +733,7 @@ full population \citep[\sect~2.3]{portamanaetal2015}[\sect~2]{portamanaetal2018b
 \begin{equation}
   \label{eq:dob_sample_given_pop}
   \pf(\ys \| \yS, \yI) = \binom{n}{\ys} \binom{N-n}{\yS-\ys} \binom{N}{\yS}^{-1}
-  \defs H_{\ys\yS},
+  \defs G_{\ys\yS},
 \end{equation}
 namely, a hypergeometryc distribution.
 
@@ -942,15 +945,90 @@ The last expression shows that:
   $\pf(\yS \| \yl, \yI)$, leading to the maximum-entropy equations for $\yl$.
 \end{enumerate*}
 
-
+\bigskip
 
 
 The data for which we want to calculate the
 \dob~\eqref{eq:posterior_hypotheses_data} do not involve the full
-population, but only a sample of it: they are a sequence $\yst$ of recorded
-sample activities.
+population, though, but only a sample of it: they are a sequence $\yst$ of
+recorded sample activities:
+\begin{equation}
+  \label{eq:posterior_given_sample}
+  \pf(\yl \| \yst, \yI) \propto \pf(\yl \| \yI)\;
+  \pf(\yst \| \yl, \I).
+\end{equation}
+We can calculate the last factor by introducing $\ySt$ and using the
+hypergeometric distribution~\eqref{eq:dob_sample_given_pop}, the
+Koopman-Pitman formula~\eqref{eq:koopman-pitman}, and introducing the
+relative frequencies $\yf$ of the sample activities:
+\begin{equation}
+  \label{eq:likelihood_via_total_probability}
+  \begin{split}
+    \pf(\yst \| \yl, \yI) &=
+\sum_{\ySt} \pf(\yst \| \ySt, \yl, \yI)\;
+\pf(\ySt \| \yl, \yI),
+\\ &=
+\sum_{\yS_{t_1} \dotso \yS_{t_T}}
+\prod_{t}
+\pf( \ys_t \| yS_t, \yl, \yI)\;
+\frac{\yg_{\yS_{t}}}{Z(\yl)}
+\exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr)
+\\ &=
+\prod_{t}\sum_{\yS}
+G_{\ys_{t}\yS}\;
+\frac{\yg_{\yS}}{Z(\yl)}
+\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)
+\\ &=
+\prod_{\ys}\biggl[ \sum_{\yS}
+G_{\ys_{t}\yS}\;
+\frac{\yg_{\yS}}{Z(\yl)}
+\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \biggr]^{Tf_{\ys}}
+\\ &=
+\exp\biggl\{-T\,
+\yH\biggl[\yf,
+\sum_{\yS}
+G_{\ys_{t}\yS}\;
+\frac{\yg_{\yS}}{Z(\yl)}
+\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \biggr]
+ -T\yH(\yf)\biggr\}.
+\end{split}
+\end{equation}
 
-
+The maximum of the expression above with respect to $\yl$ is again found by
+minimizing a relative entropy. If we try to find such minimum by taking the
+partial derivatives with respect to $\yll_{r}$ we arrive at the following
+system of equations:
+\begin{subequations}
+  \label{eq:minimize_lagrangian}
+  \begin{gather}
+    \de_{\yll_{r}}\ln Z(\yl) = \yccs_{r}(\yl)
+    \\
+    \shortintertext{with}
+   \yccs_{r}(\yl) \defd
+   \tsum_{\ys} f_{\ys}\; c_{r\ys}(\yl),
+   \qquad
+    c_{r\ys}(\yl) \defd \frac{
+      \sum_{\yS} C_{r\yS}\; G_{\ys\yS}\;\pf(\yS \| \yl, \yI)
+    }{
+      \sum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI)
+    }.
+  \end{gather}
+\end{subequations}
+The last expression defines $r$ functions $c_{r\ys}$ of the sample activity
+$\ys$ that have the same role as the statistic $C_{r\yS}$ of the
+full-population activity $\yS$, in the sense that
+\begin{equation}
+  \label{eq:statistics_for_sample}
+  \begin{split}
+  \E(c_{r\ys} \| \yl, \yI) 
+  &=  \E(C_{r\yS} \| \yl, \yI),
+  \\
+  \sum_{\ys} c_{r\ys}\; \pf(\ys \| \yl, \yI)
+ &= \sum_{\yS} C_{r\yS}\; \pf(\yS \| \yl, \yI),
+\end{split}
+\end{equation}
+as can be verified by substitution and the
+definition~\eqref{eq:dob_sample_given_pop} of $G_{\ys\yS}$.
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
