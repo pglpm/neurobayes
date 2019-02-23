@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-23T16:29:01+0100
+%% Last-Updated: 2019-02-23T16:35:53+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -801,14 +801,26 @@ is changed but in a negligible way, for all values of $\set{\yS(t')}$ and $\ya_1
    mathematical expression if only some statistics of $\set{\yS(t')}$ are
    relevant. The main statement of the theorem is this: if $R$ sufficient
    statistics are given by functions $C_{r\yS}$, then
-   \begin{equation}
+   \begin{subequations}
      \label{eq:koopman-pitman}
+     \begin{gather}
      \pf[ \set{\yS(t)} \| \yI] =
      \int\!\di\yl\; \pf(\yl \| \yI)\;
-     \prod_{t} \frac{g[\yS(t)]}{Z(\yl)}
-     \exp\bigl(\tsum_{r} \yll_r C_{r\yS(t)}\bigr).
-   \end{equation}
+     \prod_{t} \frac{\yg_{\yS(t)}}{Z(\yl)}
+     \exp\bigl[\tsum_{r} \yll_r C_{r\yS(t)}\bigr]
+     \\
+     \shortintertext{with}
+     \yl \defd (\yll_1, \dotsc, \yll_R),
+     \qquad
+     Z(\yl) \defd \sum_{\yS}
+     \yg_{\yS}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr).
+   \end{gather}
+   \end{subequations}
+   
 
+   It is important to note that a hypothesis solely about a sufficient
+   statistics  does not determine the density  $\pf(\yl \| \yI)$ or the
+   function $\yg$ in the formula above.
 \end{enumerate}
 
 
