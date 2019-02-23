@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-23T19:23:27+0100
+%% Last-Updated: 2019-02-23T22:56:36+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -647,8 +647,12 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yc}{\widebar{\bm{C}}}
 \newcommand*{\yG}{\mathte{H}}
 \newcommand*{\yg}{g}
+\newcommand*{\ygt}{\widebar{\yg}}
 \newcommand*{\yI}{\varIota}
 \newcommand*{\ya}{\ycc}
+\newcommand*{\yF}{\bm{F}}
+\newcommand*{\yf}{\bm{f}}
+\newcommand*{\yH}{\varEta}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -702,7 +706,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bigskip
+\section{Hypotheses about sufficient statistics}
+\label{sec:hypotheses}
+
+
 
 We have a population of $N$ neurons whose activities we imagine to have
 time-binned into $T$ bins and binarized. Denote their total population
@@ -793,7 +800,9 @@ hypotheses, each representing a degree of relevance of some statistics. We
 shall shortly see how to mathematically represent this continuum of
 hypotheses.
 
-\bigskip
+\section{The Koopman-Pitman theorem}
+\label{sec:koopman-pitman}
+
 
 How does a hypothesis about a sufficient statistic affect our \dobs? The
 answer comes from the Koopman-Pitman theorem
@@ -840,19 +849,26 @@ formula~\eqref{eq:koopman-pitman}:
         \pf(\ySt \| \yc, \yI).
   \end{equation}
 \item \label{item:reparametrization}Formula~\eqref{eq:koopman-pitman} is
-  obtained from the latter one by the one-to-one reparametrization
-\begin{equation}
+  obtained from~\eqref{eq:koopman-pitman_interpreted} by a one-to-one
+  reparametrization:
+\begin{gather}
   \label{eq:pitman-koopman_reparametrization}
   \ycc_{r}(\yl) = \sum_{\yS} C_{r\yS} \frac{\yg_{\yS}}{Z(\yl)}
   \exp\bigl(\tsum_{r} \yll_{r} C_{r\yS}\bigr)
-  \equiv \de_{\yll_{r}} \ln Z(\yl)
-\end{equation}
-This equation cannot be solved explicitly for $\yl$ in terms of $\yc$. The
+  \equiv \de_{\yll_{r}} \ln Z(\yl),
+  \\
+  \pf(\yc \| \yI)\,\di\yc = \pf(\yl \| \yI)\,\di\yl,
+  \\
+  \pf[\yS \| \yc(\yl), \yI] =
+  \frac{\yg_{\yS}}{Z(\yl)}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr).
+\end{gather}
+Equation~\eqref{eq:pitman-koopman_reparametrization} cannot be solved
+explicitly for $\yl$ in terms of $\yc$ except for very simple cases. The
 parametrization in terms of $\yl$ has several special properties:
 \begin{enumerate}[label=\alph{enumi}.\arabic*.]
-\item The quantities $(\yll_{r})$ can assume any values
-  independently of one another, whereas the limit statistics $\yc$ have
-  interdependent ranges.
+\item The quantities $(\yll_{r})$ can assume any values independently of
+  one another, whereas the limit statistics $(\ycc_r)$ have interdependent
+  ranges.
 \item The expression for $\pf(\ySt \| \yc, \yI)$ can be written explicitly
   in terms of $\yl$, but not in terms of $\yc$.
 \item If some $\yll_{r}$ vanishes then the corresponding statistic is
@@ -862,17 +878,78 @@ parametrization in terms of $\yl$ has several special properties:
 \end{enumerate}
 
 
-Remark \ref{item:reparametrization} shows that the absolute value of each
-parameter, $\abs{\yll_{r}}$, somehow quantifies the degree of relevance of
-the corresponding statistic, zero meaning complete irrelevance. These
-absolute values can therefore be used as parameters for our continuum of
-hypotheses about the sufficient statistics. The \dob\ we ultimately want to
-quantify is thus
+Remark \ref{item:reparametrization} suggests that the absolute value of
+each parameter, $\abs{\yll_{r}}$, might be used to quantify the degree of
+relevance of the corresponding statistic, zero meaning complete
+irrelevance. These absolute values can therefore be used as parameters for
+our continuum of hypotheses about the sufficient statistics. The \dob\ we
+ultimately want to quantify is thus
 \begin{equation}
   \label{eq:posterior_hypotheses_data}
   \pf\cond[\big]{\abs{\yl}}{\ptext{data}, \yI}
 \end{equation}
 and its marginals for the various $\abs{\yll_{r}}$.
+
+\section{Conditionalization on sample data}
+\label{sec:sample_data}
+
+First let us recapitulate the expression for
+\begin{equation}
+  \label{eq:posterior_given_full_population}
+  \pf(\yl \| \ySt, \yI) \propto \pf(\yl \| \yI)\;
+  \pf(\ySt \| \yl, \I).
+\end{equation}
+Introduce the relative frequencies $\yF \defd (F_{\yS})$ with which the
+activity $\yS$ appears during the $T$ time bins, given by
+\begin{equation}
+  \label{eq:frequencies}
+  F_{\yS} = \frac{1}{T}\sum_{t}\delt(\yS_{t}-\yS).
+\end{equation}
+From formula~\eqref{eq:koopman-pitman}, bringing several terms within the
+exponential, we can rewrite, using the frequencies,
+\begin{equation}
+  \label{eq:to_maxent}
+  \begin{split}
+  \pf(\ySt \| \yl, \yI) &=
+    \prod_{t} \frac{\yg_{\yS_{t}}}{Z(\yl)}
+    \exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr),
+    \\ &=
+    \prod_{\yS} \Biggl[ \frac{\yg_{\yS}}{Z(\yl)}
+    \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \Biggr]^{T F_{\yS}},
+    % \\ &=
+    % \exp\{-\tsum_t[
+    % \ln Z(\yl) - \ln \yg_{\yS_{t}} -\tsum_{r} \yll_r C_{r\yS_{t}}]\}
+    % \\ &=
+    % \exp\{-\tsum_{\yS}F_{\yS}\,[
+    % \ln Z(\yl) - \ln \yg_{\yS_{t}} -\tsum_{r} \yll_r C_{r\yS_{t}}]\}
+    \\ &=
+    \exp\biggl\{-T\,
+    \yH\biggl[\yF,
+    \frac{\yg_{\yS}}{Z(\yl)}\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)\biggr]
+    -T\yH(\yF)\biggr\},
+\end{split}
+\end{equation}
+where $\yH(\bm{a},\bm{b})$ is the relative entropy of $\bm{a}$ with respect
+to $\bm{b}$ and $\yH(\bm{a})$ is the Shannon entropy of $\bm{a}$.
+
+The last expression shows that:
+\begin{enumerate*}[label=(\alph*)]
+\item our \dob\ about the sequence $\ySt$ depends only on the frequencies
+  $\yF$ of that sequence;
+\item if $\pf(\yl \| \yI)$ is constant, the mode of our
+  \dob~\eqref{eq:posterior_given_full_population} about $\yl$ can be calculated by
+  minimizing with respect to $\yl$ the relative entropy between $\yF$ and
+  $\pf(\yS \| \yl, \yI)$, leading to the maximum-entropy equations for $\yl$.
+\end{enumerate*}
+
+
+
+
+The data for which we want to calculate the
+\dob~\eqref{eq:posterior_hypotheses_data} do not involve the full
+population, but only a sample of it: they are a sequence $\yst$ of recorded
+sample activities.
+
 
 
 
