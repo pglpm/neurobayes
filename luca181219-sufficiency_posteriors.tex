@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-23T19:17:55+0100
+%% Last-Updated: 2019-02-23T19:23:27+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -568,7 +568,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\p}{\mathrm{P}}%probability
 %\newcommand*{\E}{\mathrm{E}}
 \renewcommand*{\|}{\nonscript\,\vert\nonscript\;\mathopen{}}
-%\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
+\DeclarePairedDelimiterX{\cond}[2]{(}{)}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\condt}[2]{[}{]}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\DeclarePairedDelimiterX{\conds}[2]{\{}{\}}{#1\nonscript\,\delimsize\vert\nonscript\;\mathopen{}#2}
 %\newcommand*{\+}{\lor}
@@ -632,7 +632,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
 % %\smash{
 % \begin{tabular}[#1]{c}#2\\[0.5\jot]\rule{1pt}{#3}\\#4\end{tabular}}%}
-% \newcommand*{\ptext}[1]{\text{\small #1}}
+\newcommand*{\ptext}[1]{\text{\small #1}}
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
@@ -866,7 +866,13 @@ Remark \ref{item:reparametrization} shows that the absolute value of each
 parameter, $\abs{\yll_{r}}$, somehow quantifies the degree of relevance of
 the corresponding statistic, zero meaning complete irrelevance. These
 absolute values can therefore be used as parameters for our continuum of
-hypotheses about the sufficient statistics.
+hypotheses about the sufficient statistics. The \dob\ we ultimately want to
+quantify is thus
+\begin{equation}
+  \label{eq:posterior_hypotheses_data}
+  \pf\cond[\big]{\abs{\yl}}{\ptext{data}, \yI}
+\end{equation}
+and its marginals for the various $\abs{\yll_{r}}$.
 
 
 
