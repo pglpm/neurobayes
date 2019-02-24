@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-24T23:15:38+0100
+%% Last-Updated: 2019-02-24T23:36:51+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1047,10 +1047,28 @@ classical maximum-entropy equations. We find instead
     }.
   \end{gather}
 \end{subequations}
-The last expression defines $r$ functions $c_{r\ys}(\yl)$ of the sample
-activity $\ys$ \emph{and of $\yl$} that have a role analogous to the
-statistic $C_{r\yS}$ of the full-population activity $\yS$, in the sense
-that
+or more explicitly
+\begin{equation}
+  \label{eq:explicit_eqn_lambda_sample}
+  \frac{\sum_{\yS} C_{r\yS}\;\yg_{\yS}
+    \exp\bigl( \tsum_{r} \yll_{r} C_{r\yS} \bigr)}{
+    \sum_{\yS} \yg_{\yS}
+    \exp\bigl( \tsum_{r} \yll_{r} C_{r\yS} \bigr)
+  }
+  =
+  \sum_{\ys} f_{\ys}\;
+  \frac{
+    \sum_{\yS} C_{r\yS}\; G_{\ys\yS}\;\yg_{\yS}
+    \exp\bigl( \tsum_{r} \yll_{r} C_{r\yS} \bigr)
+  }{
+    \sum_{\yS} G_{\ys\yS}\;\yg_{\yS}
+    \exp\bigl( \tsum_{r} \yll_{r} C_{r\yS} \bigr)
+  }.
+\end{equation}
+The expressions~\eqref{eq:minimize_lagrangian} define $r$ functions
+$c_{r\ys}(\yl)$ of the sample activity $\ys$ \emph{and of $\yl$} that have
+a role analogous to the statistic $C_{r\yS}$ of the full-population
+activity $\yS$, in the sense that
 \begin{equation}
   \label{eq:statistics_for_sample}
   \begin{split}
