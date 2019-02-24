@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-24T17:20:28+0100
+%% Last-Updated: 2019-02-24T18:06:11+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1063,7 +1063,84 @@ that
 as can be verified by substitution and the
 definition~\eqref{eq:dob_sample_given_pop} of $G_{\ys\yS}$.
 
+\bigskip
 
+\textbf{Important differences from the \enquote{dilemma} paper:}
+
+Consider the following statistics:
+\begin{equation}
+  \label{eq:statistics_factorial}
+  C_{r\yS} \defd \binom{\yS}{r}\;\binom{N}{r}^{-1}
+  \qquad r\in{1,2,\dotsc}.
+\end{equation}
+In particular, $C_{1\yS} = \yS/N$ and $C_{r\yS}$ is the number of
+$r$-tuples of simultaneously active neurons divided by the number of
+possible ones. Analogous statistics $\binom{\ys}{r}\;\binom{n}{r}^{-1}$ can
+be considered for the sample.
+
+These statistics have this special property
+\citep{portamanaetal2015,portamanaetal2018b}:
+\begin{equation}
+  \label{eq:equality_statistics_sample_pop}
+  \sum_{\ys} \binom{\ys}{r}\;\binom{n}{r}^{-1}\;p(\ys)
+=   \sum_{\yS} \binom{\yS}{r}\;\binom{N}{r}^{-1}\;p(\yS),
+\end{equation}
+no matter what the \dobs\ about full-population and sample might be,
+provided that they are related by $p(\ys) = G_{\ys\yS}\;p(\yS)$.
+
+Note, however, that given a \emph{specific} $p(\yS)$ and any statistic
+$C_{r\yS}$ it is always possible to create a function $c_{r\yS}$ of the
+sample activity that satisfies
+\begin{equation}
+  \label{eq:equality_statistics_general}
+  \sum_{\ys} c_{r\ys}\;p(\ys)
+=   \sum_{\yS} C_{r\yS}\;p(\yS)
+\end{equation}
+namely,
+\begin{equation}
+  \label{eq:ad-hoc_statistics}
+  c_{r\ys} \defd \frac{\sum_{\yS} C_{r\yS}\;G_{\ys\yS}\;p(\yS)}{
+    \sum_{\yS}G_{\ys\yS}\;p(\yS)}.
+\end{equation}
+But note that this function \emph{depends on the specific p(\yS)}.
+
+Now consider the minimization of the relative entropy in
+\eqn~\eqref{eq:to_maxent_sample}, corresponding to
+\eqns~\eqref{eq:minimize_lagrangian}, for statistics given
+by~\eqref{eq:statistics_factorial}. Remember that the assumption of
+sufficiency asymptotically gives zero probability to observing relative
+frequencies of full population and sample that lie outside a particular
+$R$-dimensional set.
+
+We have two possibilities when $T$ is very large:
+\begin{enumerate}[label=\arabic*.]
+\item If the frequencies $\yf$ observed for the sample are among those
+  admitted by the sufficiency hypothesis, then there is a $\yl$ for which
+  \begin{equation}
+    \label{eq:condition_admitted_freqs}
+    f_{\ys} \approx \sum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI).
+  \end{equation}
+Moreover, for that $\yl$ we also have
+\begin{equation}
+  \label{eq:condition_admitted_freqs_expectation}
+  \sum_{\ys} \binom{\ys}{r}\binom{n}{r}^{-1} f_{\ys}
+  \approx
+  \sum_{\ys} c_{r\ys}(\yl) f_{\ys},
+\end{equation}
+and the result of the relative-entropy minimization is equivalent to
+finding the maximum-entropy distribution for the full population with
+expectations for the statistics~\eqref{eq:statistics_factorial} constrained
+to equal the empirical ones observed in the sample.
+\item If the frequencies $\yf$ observed for the sample are \emph{not} among
+  those admitted by the sufficiency hypothesis, then the minimization of
+  the relative entropy yields a distribution for the full-population that
+  does \emph{not} satisfy those constraints.
+\end{enumerate}
+
+
+
+
+\iffalse
 Result:
 \begin{equation}
     \pf(\yl\| \yst, \yI) \propto
@@ -1075,7 +1152,7 @@ Result:
     \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)
     \Bigr]\Bigr\}.
 \end{equation}
-
+\fi
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
