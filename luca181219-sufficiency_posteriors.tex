@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-23T23:43:50+0100
+%% Last-Updated: 2019-02-24T16:30:36+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -820,12 +820,14 @@ $C_{r\yS}$, then for any number of time bins $T$
   \label{eq:koopman-pitman}
   \begin{gather}
     \pf( \ySt \| \yI) =
-    \int\!\di\yl\; \pf(\yl \| \yI)\;
-    \prod_{t} \frac{\yg_{\yS_{t}}}{Z(\yl)}
-    \exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr)
+    \int\!\di\yl\; \pf(\yl \| \yI)\; \prod_{t}\pf(\yS_{t} \| \yl, \yI)
     \label{eq:koopman-pitman_integral}
     \\
     \shortintertext{with}
+    \pf(\yS \| \yl, \yI) \defd \frac{\yg_{\yS}}{Z(\yl)}
+    \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr),
+    \label{eq:koopman-pitman_likelihood}
+    \\
     \yl \defd (\yll_1, \dotsc, \yll_R) \in \RR^{R},
     \qquad
     Z(\yl) \defd \sum_{\yS}
@@ -862,7 +864,7 @@ formula~\eqref{eq:koopman-pitman}:
   \\
   \pf(\yc \| \yI)\,\di\yc = \pf(\yl \| \yI)\,\di\yl,
   \\
-  \pf[\yS \| \yc(\yl), \yI] =
+  \pf[\yS \| \yc(\yl), \yI] = \pf(\yS \| \yl, \yI) \equiv
   \frac{\yg_{\yS}}{Z(\yl)}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr).
 \end{gather}
 Equation~\eqref{eq:pitman-koopman_reparametrization} cannot be solved
@@ -893,8 +895,8 @@ ultimately want to quantify is thus
 \end{equation}
 and its marginals for the various $\abs{\yll_{r}}$.
 
-\section{Conditionalization on sample data}
-\label{sec:sample_data}
+\section{Conditionalization on full-population data}
+\label{sec:full-pop_data}
 
 First let us recapitulate the expression for
 \begin{equation}
@@ -913,12 +915,13 @@ exponential, we can rewrite, using the frequencies,
 \begin{equation}
   \label{eq:to_maxent}
   \begin{split}
-  \pf(\ySt \| \yl, \yI) &=
-    \prod_{t} \frac{\yg_{\yS_{t}}}{Z(\yl)}
-    \exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr),
+  \pf(\ySt \| \yl, \yI) &= \prod_{t} \pf(\yS_{t} \| \yl, \yI)
+    % \prod_{t} \frac{\yg_{\yS_{t}}}{Z(\yl)}
+    % \exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr),
     \\ &=
-    \prod_{\yS} \Biggl[ \frac{\yg_{\yS}}{Z(\yl)}
-    \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \Biggr]^{T F_{\yS}},
+    % \prod_{\yS} \Biggl[ \frac{\yg_{\yS}}{Z(\yl)}
+    % \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \Biggr]^{T F_{\yS}},
+    \prod_{\yS}\bigl[ \pf(\yS \| \yl, \yI) \bigr]^{T F_{\yS}}
     % \\ &=
     % \exp\{-\tsum_t[
     % \ln Z(\yl) - \ln \yg_{\yS_{t}} -\tsum_{r} \yll_r C_{r\yS_{t}}]\}
@@ -926,26 +929,38 @@ exponential, we can rewrite, using the frequencies,
     % \exp\{-\tsum_{\yS}F_{\yS}\,[
     % \ln Z(\yl) - \ln \yg_{\yS_{t}} -\tsum_{r} \yll_r C_{r\yS_{t}}]\}
     \\ &=
-    \exp\biggl\{-T\,
-    \yH\biggl[\yF,
-    \frac{\yg_{\yS}}{Z(\yl)}\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)\biggr]
-    -T\yH(\yF)\biggr\},
+    \exp\Bigl(-T\bigl\{
+    \yH\bigl[\yF, \pf(\yS \| \yl, \yI)\bigr]
+    -\yH(\yF)\bigr\}\Bigr),
+    % \exp\biggl\{-T\,
+    % \yH\biggl[\yF,
+    % \frac{\yg_{\yS}}{Z(\yl)}\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)\biggr]
+    % -T\yH(\yF)\biggr\},
 \end{split}
 \end{equation}
 where $\yH(\bm{a},\bm{b})$ is the relative entropy of $\bm{a}$ with respect
 to $\bm{b}$ and $\yH(\bm{a})$ is the Shannon entropy of $\bm{a}$.
 
 The last expression shows that:
-\begin{enumerate*}[label=(\alph*)]
+\begin{enumerate*}[label=(\alph*),mode=unboxed]
 \item our \dob\ about the sequence $\ySt$ depends only on the frequencies
   $\yF$ of that sequence;
-\item if $\pf(\yl \| \yI)$ is constant, the mode of our
-  \dob~\eqref{eq:posterior_given_full_population} about $\yl$ can be calculated by
-  minimizing with respect to $\yl$ the relative entropy between $\yF$ and
-  $\pf(\yS \| \yl, \yI)$, leading to the maximum-entropy equations for $\yl$.
+\item if $\pf(\yl \| \yI)$ is constant, the mode of the
+  density~\eqref{eq:posterior_given_full_population} for $\yl$ can be
+  calculated by minimizing with respect to $\yl$ the relative entropy
+  between $\yF$ and $\pf(\yS \| \yl, \yI)$;
+\item owing to the mathematical form~\eqref{eq:koopman-pitman_likelihood}
+  of $\pf(\yS \| \yl, \yI)$, minimization of the relative entropy leads to
+  the classical maximum-entropy equations
+  \begin{equation}
+    \label{eq:standard_maxent_eqns}
+    \E(C_{r\yS} \| \yl, \yI) \equiv
+        \de_{\yll_{r}}\ln Z(\yl) = \yc_{r} \equiv \tsum_{\yS} C_{r\yS} F_{\yS}.
+  \end{equation}
 \end{enumerate*}
 
-\bigskip
+\section{Conditionalization on sample data}
+\label{sec:sample_data}
 
 
 The data for which we want to calculate the
@@ -955,49 +970,66 @@ recorded sample activities:
 \begin{equation}
   \label{eq:posterior_given_sample}
   \pf(\yl \| \yst, \yI) \propto \pf(\yl \| \yI)\;
-  \pf(\yst \| \yl, \I).
+  \pf(\yst \| \yl, \yI).
 \end{equation}
-We can calculate the last factor by introducing $\ySt$ and using the
-hypergeometric distribution~\eqref{eq:dob_sample_given_pop}, the
-Koopman-Pitman formula~\eqref{eq:koopman-pitman}, and introducing the
-relative frequencies $\yf$ of the sample activities:
+
+Let's start by checking how our \dob\ about a sequence $\yst$ of sample
+activities looks like under the hypothesis of sufficiency \emph{for the
+  full population}. We can calculate it by marginalizing with respect to
+all possible \emph{sequences} of activities $\ySt$ for the full population, using
+the hypergeometric distribution~\eqref{eq:dob_sample_given_pop} and the
+Koopman-Pitman formula~\eqref{eq:koopman-pitman}:
+\begin{subequations}
+  \label{eq:koopman-pitman_sample}
+  \begin{gather}
+      \pf( \yst \| \yI) =\sum_{\ySt} \pf(\yst \| \ySt, \yI)\;\pf(\ySt \| \yI)
+=    \int\!\di\yl\; \pf(\yl \| \yI)\; \prod_{t}\pf(\ys_{t} \| \yl, \yI)
+    \label{eq:koopman-pitman_integral_sample}
+    \\
+    \shortintertext{with}
+    \pf(\ys \| \yl, \yI) \defd
+\sum_{\yS} G_{\ys\yS}\;
+    \frac{\yg_{\yS}}{Z(\yl)}
+    \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr).
+    \label{eq:koopman-pitman_likelihood_sample}
+    % \\
+    % \yl \defd (\yll_1, \dotsc, \yll_R) \in \RR^{R},
+    % \qquad
+    % Z(\yl) \defd \sum_{\yS}
+    % \yg_{\yS}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr),
+  \end{gather}
+\end{subequations}
+This formula shows that our \dob\ about the sample activities does
+\emph{not} have a sufficient statistics. This fact is mathematically
+similar to what happens in statistical mechanics: if our uncertainty about
+a system of particles is expressed by a Gibbs distribution, then our
+uncertainty about a subsystem won't generally be of a Gibbsian type
+\citep{maesetal1999}.
+
+
+We can now calculate the density for $\yl$ given the sequence of sample
+activities $\yst$ using Bayes's theorem. We can introduce the relative
+frequencies $\yf$ for the sample activities and proceed as in
+\sect~\ref{sec:full-pop_data}, obtaining
 \begin{equation}
-  \label{eq:likelihood_via_total_probability}
+  \label{eq:to_maxent_sample}
   \begin{split}
-    \pf(\yst \| \yl, \yI) &=
-\sum_{\ySt} \pf(\yst \| \ySt, \yl, \yI)\;
-\pf(\ySt \| \yl, \yI),
-\\ &=
-\sum_{\yS_{t_1} \dotso \yS_{t_T}}
-\prod_{t}
-\pf( \ys_t \| yS_t, \yl, \yI)\;
-\frac{\yg_{\yS_{t}}}{Z(\yl)}
-\exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr)
-\\ &=
-\prod_{t}\sum_{\yS}
-G_{\ys_{t}\yS}\;
-\frac{\yg_{\yS}}{Z(\yl)}
-\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)
-\\ &=
-\prod_{\ys}\biggl[ \sum_{\yS}
-G_{\ys_{t}\yS}\;
-\frac{\yg_{\yS}}{Z(\yl)}
-\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \biggr]^{Tf_{\ys}}
-\\ &=
-\exp\biggl\{-T\,
-\yH\biggl[\yf,
-\sum_{\yS}
-G_{\ys_{t}\yS}\;
-\frac{\yg_{\yS}}{Z(\yl)}
-\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \biggr]
- -T\yH(\yf)\biggr\}.
+  \pf(\yst \| \yl, \yI) &= \prod_{t} \pf(\ys_{t} \| \yl, \yI)
+    \\ &=
+    \prod_{\ys}\bigl[ \pf(\ys \| \yl, \yI) \bigr]^{T f_{\ys}}
+    \\ &=
+    \exp\Bigl(-T\bigl\{
+    \yH\bigl[\yf, \pf(\ys \| \yl, \yI)\bigr]
+    -\yH(\yf)\bigr\}\Bigr).
 \end{split}
 \end{equation}
 
-The maximum of the expression above with respect to $\yl$ is again found by
-minimizing a relative entropy. If we try to find such minimum by taking the
-partial derivatives with respect to $\yll_{r}$ we arrive at the following
-system of equations:
+As in the previous section, if the density $\pf(\yl \| \yI)$ for $\yl$ is
+uniform then the mode of $\pf(\yl \| \yst, \yI)$ can be obtained by
+minimizing the relative entropy between $\yf$ and $\pf(\ys \| \yl, \yI)$.
+In the present case, however, the expression for the latter probability,
+\eqn~\eqref{eq:koopman-pitman_likelihood_sample}, does not lead to the
+classical maximum-entropy equations. We find instead
 \begin{subequations}
   \label{eq:minimize_lagrangian}
   \begin{gather}
@@ -1083,6 +1115,38 @@ definition~\eqref{eq:dob_sample_given_pop} of $G_{\ys\yS}$.
 %%% Cut text (won't be compiled)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
+% \begin{equation}
+%   \label{eq:likelihood_via_total_probability}
+%   \begin{split}
+%     \pf(\yst \| \yl, \yI) &=
+% \sum_{\ySt} \pf(\yst \| \ySt, \yl, \yI)\;
+% \pf(\ySt \| \yl, \yI),
+% \\ &=
+% \sum_{\yS_{t_1} \dotso \yS_{t_T}}
+% \prod_{t}
+% \pf( \ys_t \| yS_t, \yl, \yI)\;
+% \frac{\yg_{\yS_{t}}}{Z(\yl)}
+% \exp\bigl(\tsum_{r} \yll_r C_{r\yS_{t}}\bigr)
+% \\ &=
+% \prod_{t}\sum_{\yS}
+% G_{\ys_{t}\yS}\;
+% \frac{\yg_{\yS}}{Z(\yl)}
+% \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)
+% \\ &=
+% \prod_{\ys}\biggl[ \sum_{\yS}
+% G_{\ys_{t}\yS}\;
+% \frac{\yg_{\yS}}{Z(\yl)}
+% \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \biggr]^{Tf_{\ys}}
+% \\ &=
+% \exp\biggl\{-T\,
+% \yH\biggl[\yf,
+% \sum_{\yS}
+% G_{\ys_{t}\yS}\;
+% \frac{\yg_{\yS}}{Z(\yl)}
+% \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr) \biggr]
+%  -T\yH(\yf)\biggr\}.
+% \end{split}
+% \end{equation}
 
 %%% Local Variables: 
 %%% mode: LaTeX
