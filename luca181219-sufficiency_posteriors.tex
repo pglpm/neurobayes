@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-02-24T16:35:01+0100
+%% Last-Updated: 2019-02-24T17:20:28+0100
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1062,6 +1062,20 @@ that
 \end{equation}
 as can be verified by substitution and the
 definition~\eqref{eq:dob_sample_given_pop} of $G_{\ys\yS}$.
+
+
+Result:
+\begin{equation}
+    \pf(\yl\| \yst, \yI) \propto
+    \pf(\yl \| \yI)\;
+    \exp\Bigl\{T \sum_{\ys}
+    f_{\ys} \ln\Bigl[
+    \tsum_{\yS} G_{\ys\yS}\;
+    \tfrac{\yg_{\yS}}{Z(\yl)}
+    \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)
+    \Bigr]\Bigr\}.
+\end{equation}
+
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
