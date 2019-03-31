@@ -566,8 +566,8 @@ Cell[BoxData[
  CellLabel->"Out[44]=",ExpressionUUID->"dfeb2544-0aef-41ac-91d7-6537a9f81a79"]
 }, Open  ]]
 },
-WindowSize->{640, 767},
-WindowMargins->{{Automatic, 104}, {Automatic, 0}},
+WindowSize->{640, 755},
+WindowMargins->{{166, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.3 for Microsoft Windows (32-bit) (March 6, 2018)",
 StyleDefinitions->"Default.nb"
 ]
