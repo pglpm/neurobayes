@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-03-31T23:02:03+0200
+%% Last-Updated: 2019-04-01T00:33:42+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -971,13 +971,21 @@ the same conclusions.
 \medskip
 
 The erroneous conclusions reached in Panzeri \etal\ \citey{panzerietal2007}
-stem from a combination of factors. First of all the analysis given there
-is topsy-turvy: our problem is not to infer data from a specific known
-frequency, but to infer an unknown frequency -- among several possible ones
--- from known data. The second, related factor is the focus on one particular
-frequency only at a time: what matters, instead, is the relative
-probabilities that the data have under several candidate frequencies. The
-third factor
+stem from a combination of mutually connected oversights. First of all the
+analysis given there is a little topsy-turvy: our problem is not to infer
+data from a specific known frequency, but to infer an unknown frequency
+\emph{among several possible ones} from known data -- because our
+uncertainty about the long-run mutual information is a consequence of our
+uncertainty about the long-run frequency. You can't estimate which
+frequency is correct by sampling only a specific one. For this reason it
+isn't meaningful to focus on only one particular frequency at a time, as
+done there. What matters instead is the relative probabilities that the
+data have under several candidate frequencies. It's therefore unclear
+what's achieved by sampling multiple times 
+
+
+The third slip is the multiple
+sampling of
 
 
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
