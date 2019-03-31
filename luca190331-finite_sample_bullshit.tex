@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-03-31T18:59:35+0200
+%% Last-Updated: 2019-03-31T23:02:03+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -740,7 +740,7 @@ I show this first with a quick calculation in the next section, and then
 with a longer reasoning in §***. The final section discusses what kind of
 incorrect reasoning leads to the idea that there's a bias.
 
-The calculations use the example given by Panzeri \etal
+The calculations use the example given by Panzeri \etal\
 \citey[Fig.~1]{panzerietal2007}: the stimulus can assume two values, the
 response ten values.
 
@@ -771,7 +771,7 @@ the stimulus $\yp$.
 We can use the concrete data summarized in
 \fig~\ref{fig:sample_histograms}, consisting in $n=20$ samples per
 stimulus.
-\begin{figure}[b!]
+\begin{figure}[h!]
 \centering\includegraphics[width=\linewidth]{samples.png}\\
 \caption{}\label{fig:sample_histograms}
 \end{figure}% finite_sampling_bullshit.nb
@@ -827,14 +827,14 @@ of conditional frequencies are equally possible, then
 Let's sample $5\,000$ pairs of conditional frequencies from the
 density~\eqref{eq:prob_freqs_from_data} obtained from this probability and
 our example data. The resulting distribution of their associated mutual
-information is shown in \fig~\ref{fig:mutual_info_histo_unif}. It tells us
-that the response is likely to be informative; the most likely values of
-the long-range mutual information are around $0.2\,\textrm{bit}$. The next
-section explains intuitively why this inference is correct.
+information is shown in \fig~\ref{fig:mutual_info_histo_unif}.
 \begin{figure}[h!]
 \centering\includegraphics[width=0.5\linewidth]{A_mutualinfo_hist.png}\\
 \caption{}\label{fig:mutual_info_histo_unif}
 \end{figure}% finite_sampling_bullshit.nb
+It tells us that the response is likely to be informative; the most likely
+values of the long-range mutual information are around $0.2\,\textrm{bit}$.
+The next section explains intuitively why this inference is correct.
 
 \subsection{Conservative uncertainty about the frequencies}
 \label{sec:credib_cons}
@@ -842,7 +842,8 @@ section explains intuitively why this inference is correct.
 If we initially think that the long-run response frequencies conditional on
 the stimuli should be very similar, or if we simply wan to do a
 conservative estimate, then the initial probability will be higher for
-pairs with similar conditional frequencies; for example
+pairs with similar conditional frequencies; for example \mynote{replace
+  with combination of Dirichlet -- same effect}
 \begin{equation}
   \label{eq:credib_cons}
   \pf(\yfvm, \yfvp \| \yIc) \propto \exp\Biggl[
@@ -857,13 +858,14 @@ A sample of $5\,000$ pairs of conditional frequencies from the
 density~\eqref{eq:prob_freqs_from_data} with the conservative initial
 density~\eqref{eq:credib_cons} \mynote{specify $\sigma$} leads to the
 distribution of mutual information of
-\fig~\ref{fig:mutual_info_histo_cons}. The estimate now says that we should
-expect a negligible mutual information, with a most probable value around
-100 times smaller than in the previous case.
+\fig~\ref{fig:mutual_info_histo_cons}.
 \begin{figure}[h!]
 \centering\includegraphics[width=0.5\linewidth]{B_mutualinfo_hist.png}\\
 \caption{}\label{fig:mutual_info_histo_cons}
 \end{figure}% finite_sampling_bullshit.nb
+The estimate now says that we should
+expect a negligible mutual information, with a most probable value around
+100 times smaller than in the previous case.
 
 \section{Intuitive understanding}
 \label{sec:intuitive_understanding}
@@ -873,11 +875,18 @@ Let's try to understand why the estimate of \sect~\ref{sec:credib_unif},
 happens in the conservative case of \sect~\ref{sec:credib_cons}.
 
 If we deem all pairs of conditional frequencies equally possible, let's
-sample $5\,000$ pairs uniformly. Let's now plot the samples by showing the
-probability that each assigns to our observed data on the horizontal axis,
-and their associated mutual information on the vertical axis. We obtain the
-scatter plot of \fig~\ref{fig:init_scatter_unif}.
-\begin{figure}[b!]
+sample $5\,000$ pairs uniformly. The scatter plot of the two conditional
+frequencies for the response value $1$ is shown in \fig~\ref{fig:f1_unif}.
+\begin{figure}[h!]
+\centering\includegraphics[width=0.5\linewidth]{A_sample_f1.png}\\
+\caption{}\label{fig:f1_unif}
+\end{figure}% finite_sampling_bullshit.nb
+
+Let's now plot the samples showing the probability that each assigns to our
+observed data on the horizontal axis, and their associated mutual
+information on the vertical axis. We obtain the scatter plot of
+\fig~\ref{fig:init_scatter_unif}.
+\begin{figure}[h!]
 \centering\includegraphics[width=0.75\linewidth]{A_init_scatter.png}\\
 \caption{}\label{fig:init_scatter_unif}
 \end{figure}% finite_sampling_bullshit.nb
@@ -907,14 +916,24 @@ correct and reliable, not biased at all.
 
 \medskip
 
-Now consider the conservative initial density~\eqref{eq:credib_cons}.
-Figure~\ref{fig:init_scatter_cons} shows $5\,000$ samples from it, plotted
-as in the previous case. The majority of those that give high probability
-to the data have a negligible mutual information. This is reflected by the
-estimate of \fig~\ref{fig:mutual_info_histo_cons}. \mynote{Need new scatter
-plot}
+Now consider the conservative initial density~\eqref{eq:credib_cons}. The
+scatter plot of $5\,000$ of the two conditional frequencies for the
+response value $1$ is shown in \fig~\ref{fig:f1_cons}.
+\begin{figure}[h!]
+\centering\includegraphics[width=0.5\linewidth]{B_sample_f1.png}\\
+\caption{}\label{fig:f1_cons}
+\end{figure}% finite_sampling_bullshit.nb
+It shows that the two frequencies are very similar to each other and close
+to $1/10$.
+
+
+Figure~\ref{fig:init_scatter_cons} shows the samples plotted as in the
+previous case. There are now many pairs that assign roughly the same
+probability to the data as the uniform-distribution pair does. The majority
+of all samples a negligible mutual information. This is reflected by the
+estimate of \fig~\ref{fig:mutual_info_histo_cons}.
 \begin{figure}[b!]
-\centering\includegraphics[width=0.75\linewidth]{A_init_scatter.png}\\
+\centering\includegraphics[width=0.75\linewidth]{B_init_scatter.png}\\
 \caption{}\label{fig:init_scatter_cons}
 \end{figure}% finite_sampling_bullshit.nb
 
@@ -923,9 +942,42 @@ plot}
 \label{sec:discussion}
 
 
+We have found that the estimates of the mutual information from a small
+sample have no bias whatsoever, and we've seen intuitively why they are
+correct. The crucial point is the specification of the initial joint probability
+for the long-run conditional frequencies. This specification is especially
+important if the data are few. It's possible to specify a probability that
+express a conservative guess, and the resulting estimate of the mutual
+information is very close to zero.
 
+This conclusion isn't surprising: the main point is the same as, for
+example, in the inference of genetic peculiarities from diseases (or
+phenotype in general) and vice versa. Imagine that we know the relative
+frequencies of two diseases among people have a particular variant of a
+gene, and the relative frequencies among people having another variant. Now
+we ask: given that a specific person has one of the diseases, what's the
+probability they have a particular gene variant? The answer is that we
+don't know until we specify the proportions of individuals having the two
+gene variants or the diseases. Because, even if the disease occurs more
+frequently for one genetic variant, the number of people having such
+variant may be so small that the probability still favours the other
+variant. It's the well-known importance of incidence rates.
 
+For this reason the result we obtained is not connected to a choice between
+Bayesian or frequentist mindsets, even if we used Bayes's theorem in
+\sect~\ref{sec:bias_bayes}. A serious frequentist statistician would reach
+the same conclusions.
 
+\medskip
+
+The erroneous conclusions reached in Panzeri \etal\ \citey{panzerietal2007}
+stem from a combination of factors. First of all the analysis given there
+is topsy-turvy: our problem is not to infer data from a specific known
+frequency, but to infer an unknown frequency -- among several possible ones
+-- from known data. The second, related factor is the focus on one particular
+frequency only at a time: what matters, instead, is the relative
+probabilities that the data have under several candidate frequencies. The
+third factor
 
 
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
