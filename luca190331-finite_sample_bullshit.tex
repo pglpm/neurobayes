@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-01T00:33:42+0200
+%% Last-Updated: 2019-04-01T01:02:41+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -967,6 +967,17 @@ For this reason the result we obtained is not connected to a choice between
 Bayesian or frequentist mindsets, even if we used Bayes's theorem in
 \sect~\ref{sec:bias_bayes}. A serious frequentist statistician would reach
 the same conclusions.
+
+From a frequentist point of view, the \enquote{unknown distribution} is not
+the pair of conditional frequencies, but \emph{their} distribution
+$\p(\yfm,\yfp)$ (the fact that they're (a) a pair, (b) conditional, should
+already warn us about this). This is a so-called non-parametric problem,
+and the two conditional frequencies have rather the role of a parameter
+here. From this frequentist point of view the estimate of the mutual
+information~\ref{fig:mutual_info_histo_unif} is not biased or has at most a
+negligible correction factor (similar to the \enquote{$n/(n-1)$} factor for
+the variance estimator).
+
 
 \medskip
 
