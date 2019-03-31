@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-03-31T08:53:42+0200
+%% Last-Updated: 2019-03-31T18:59:35+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,10 +19,10 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{31 March 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{The `finite-sampling bias' is not a bias%\\{\large ***}%
+\newcommand*{\propertitle}{The `sampling bias' is not a bias%\\{\large ***}%
 }
 \newcommand*{\pdftitle}{\propertitle}
-\newcommand*{\headtitle}{finite-sampling non-bias}
+\newcommand*{\headtitle}{Sampling non-bias}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}% Report number
@@ -536,7 +536,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator{\ent}{ent}%integer less or equal to
 %\DeclareMathOperator{\Ord}{O}%same order as
 %\DeclareMathOperator{\ord}{o}%lower order than
-%\newcommand*{\incr}{\triangle}%finite increment
+\newcommand*{\incr}{\triangle}%finite increment
 \newcommand*{\defd}{\coloneqq}
 \newcommand*{\defs}{\eqqcolon}
 %\newcommand*{\Land}{\bigwedge}
@@ -624,10 +624,10 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Custom macros for this file @@@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \definecolor{notecolour}{RGB}{68,170,153}
-%\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
+ \definecolor{notecolour}{RGB}{68,170,153}
+\newcommand*{\puzzle}{{\fontencoding{U}\fontfamily{fontawesometwo}\selectfont\symbol{225}}}
 %\newcommand*{\puzzle}{\maltese}
-%\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
+\newcommand{\mynote}[1]{ {\color{notecolour}\puzzle\ #1}}
 \newcommand*{\widebar}[1]{{\mkern1.5mu\skew{2}\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}}
 
 % \newcommand{\explanation}[4][t]{%\setlength{\tabcolsep}{-1ex}
@@ -637,6 +637,21 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\ym}{\mathord{-}}
+\newcommand*{\yp}{\mathord{+}}
+\newcommand*{\yrm}{r^{-}}
+\newcommand*{\yrp}{r^{+}}
+\newcommand*{\yfm}{f^{-}}
+\newcommand*{\yfp}{f^{+}}
+\newcommand*{\yfvm}{\bm{f}^{-}}
+\newcommand*{\yfvp}{\bm{f}^{+}}
+\newcommand*{\yqm}{q^{-}}
+\newcommand*{\yqp}{q^{+}}
+\newcommand*{\yqvm}{\bm{q}^{-}}
+\newcommand*{\yqvp}{\bm{q}^{+}}
+\newcommand*{\yI}{K}
+\newcommand*{\yIu}{K_{\text{u}}}
+\newcommand*{\yIc}{K_{\text{c}}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -658,13 +673,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent It is shown that the so-called \enquote{finite-sampling bias}
-  is not a bias at all: it's the mutual information that should be expected
-  in a much larger sample, given the observation of the smaller sample, if
-  we are completely uncertain about the conditional response frequencies.
-  On the other hand, if we have reasons to expect the conditional response
-  frequencies to be similar, the expected mutual information forecast from
-  the small sample becomes negligible.%
+  \noindent It is shown that the so-called \enquote{sampling bias} in the
+  estimation of the mutual information for stimulus-response frequencies
+  is not a bias at all. If the estimate from the sample forecasts a high
+  mutual information, then we response is indeed very likely to be
+  informative. On the other hand, if we expect the response to be
+  uninformative or if we just want to be conservative, a correct
+  calculation of the estimate leads to a negligible mutual information.\par
+  In either case no corrections of any kind are needed.%
   \\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
     manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -696,10 +712,219 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{***}
-\label{sec:***}
+\section{Bias?}
+\label{sec:intro}
 
-\textcolor{white}{If you find this you can claim a postcard from me.}
+The mutual information between the long-run relative frequency of a signal
+and that of a response is a measure of how much our uncertainty about the
+signal is reduced by knowledge of the response. This measure is sometimes
+used in neuroscience, the response being some characteristic -- such as the
+activity or the firing rate -- of a neuron or of a network of neurons.
+
+Recent works in neuroscience claim that our estimate about the mutual
+information for long-run frequencies from a small sample is subject to a
+bias, a systematic error. Other works have proposed various corrections to
+this alleged error.
+
+In this note I show that no such bias exists, and the estimates are
+reliable. On the one hand, if we are  equally uncertain about the long-run
+response frequencies, and the estimate from a small sample suggests a large
+mutual information, then we should indeed expect the response to be
+informative. On the other hand, if we  initially suspect that the
+long-run response frequencies should be uninformative, or if we are very
+conservative in our inference, then a correct calculation leads to very low
+estimates of the mutual information. As a consequence no corrections of any
+kind are needed for the estimates.
+
+I show this first with a quick calculation in the next section, and then
+with a longer reasoning in §***. The final section discusses what kind of
+incorrect reasoning leads to the idea that there's a bias.
+
+The calculations use the example given by Panzeri \etal
+\citey[Fig.~1]{panzerietal2007}: the stimulus can assume two values, the
+response ten values.
+
+\mynote{Comment on \enquote{sampling bias}: it has a different meaning in statistics}
+
+\section{Bias? No: Bayes}
+\label{sec:bias_bayes}
+
+First of all let's state what our inference is about. Given a sample of
+stimulus-response data we want to assess what's the most probable set of
+long-run\footnote{\enquote{But this \emph{long run} is a misleading guide
+    to current affairs. \emph{In the long run} we are all dead.}
+  \citep[\sect~3.I, p.~65]{keynes1923_r2013}} relative frequencies of the
+response conditional on each stimulus value, and from these assess what's
+the most probable value of the associated mutual information between
+stimulus and response. We assume that all stimuli appear with the equal
+relative frequencies.
+
+Let the stimulus $s$ have two possible values $\set{\ym,\yp}$, and the
+response $r$ ten possible values $\set{1,\dotsc, 10}$. Let the data $D$ be
+a set of $n$ stimuli $\ym$ which yielded $n$ responses $(\yrm_i)$,
+$i \in \set{1,\dotsc, n}$, and $n$ stimuli $\yp$ which yielded $n$
+responses $(\yrp_i)$. The ten response state appeared with relative
+frequencies $\yqvm \defd (\yqm_r)$, $r \in \set{1,\dotsc,10}$, for the
+stimulus $\ym$, and with relative frequencies $\yqvp \defd (\yqp_r)$ for
+the stimulus $\yp$.
+
+We can use the concrete data summarized in
+\fig~\ref{fig:sample_histograms}, consisting in $n=20$ samples per
+stimulus.
+\begin{figure}[b!]
+\centering\includegraphics[width=\linewidth]{samples.png}\\
+\caption{}\label{fig:sample_histograms}
+\end{figure}% finite_sampling_bullshit.nb
+
+If the long-run frequencies conditional on stimulus $\ym$ are
+$\yfvm \defd (\yfm_r)$, and conditional on $\yp$, $\yfvp \defd (\yfp_r)$,
+then out of symmetry the probability of obtaining the data $D$ is
+\begin{equation}
+  \label{eq:prob_data_from_freqs}
+  \pf(D \| \yfvm, \yfvp, \yI) =
+  \prod_r \Bigl[  (\yfm_r)^{n\yqm_r}\;  (\yfp_r)^{n\yqp_r}\Bigr].
+\end{equation}
+This is also the \emph{likelihood} of the long-run frequencies in view of
+the sample. Their probability density is proportional to the likelihood,
+corrected by their initial probabilities $\pf(\yfvm, \yfvp \| \yI)$
+\begin{multline}
+  \label{eq:prob_freqs_from_data}
+  \pf(\yfvm, \yfvp \| D, \yI) \propto
+  \pf(D \| \yfvm, \yfvp, \yI) \; \pf(\yfvm, \yfvp \| \yI) ={}\\
+  \pf(\yfvm, \yfvp \| \yI)\;
+  \prod_r \Bigl[  (\yfm_r)^{n\yqm_r}\;  (\yfp_r)^{n\yqp_r}\Bigr].
+\end{multline}
+
+We can calculate this probability analytically when possible, or estimate
+it with Monte Carlo sampling. From such samples we can also estimate the
+probability distribution of the long-run mutual information
+\begin{equation}
+  \label{eq:mutual_info}
+  I \defd \sum_r \tfrac{1}{2}\yfvm_r\;
+  \ln\Biggl(\frac{\frac{1}{2}\yfvm_r}{
+    \frac{1}{2}\yfvm_r + \frac{1}{2}\yfvp_r}
+  \Biggr) +
+  \sum_r \tfrac{1}{2}\yfvp_r\;
+  \ln\Biggl(\frac{\frac{1}{2}\yfvp_r}{
+    \frac{1}{2}\yfvm_r + \frac{1}{2}\yfvp_r}
+  \Biggr).
+\end{equation}
+
+Let's consider two possible probabilities for the long-run conditional
+frequencies: \textcolor{white}{If you find this you can claim a postcard from me.}
+
+
+\subsection{Uniform uncertainty about the frequencies}
+\label{sec:credib_unif}
+
+If we initially think that equal ranges $(\incr\yfvm, \incr\yfvp)$ of pairs
+of conditional frequencies are equally possible, then
+\begin{equation}
+  \label{eq:credib_unif}
+    \pf(\yfvm, \yfvp \| \yIu) = 1.
+\end{equation}
+
+Let's sample $5\,000$ pairs of conditional frequencies from the
+density~\eqref{eq:prob_freqs_from_data} obtained from this probability and
+our example data. The resulting distribution of their associated mutual
+information is shown in \fig~\ref{fig:mutual_info_histo_unif}. It tells us
+that the response is likely to be informative; the most likely values of
+the long-range mutual information are around $0.2\,\textrm{bit}$. The next
+section explains intuitively why this inference is correct.
+\begin{figure}[h!]
+\centering\includegraphics[width=0.5\linewidth]{A_mutualinfo_hist.png}\\
+\caption{}\label{fig:mutual_info_histo_unif}
+\end{figure}% finite_sampling_bullshit.nb
+
+\subsection{Conservative uncertainty about the frequencies}
+\label{sec:credib_cons}
+
+If we initially think that the long-run response frequencies conditional on
+the stimuli should be very similar, or if we simply wan to do a
+conservative estimate, then the initial probability will be higher for
+pairs with similar conditional frequencies; for example
+\begin{equation}
+  \label{eq:credib_cons}
+  \pf(\yfvm, \yfvp \| \yIc) \propto \exp\Biggl[
+\frac{\sum_r(\yfm_r - \yfp_r)^2}{2\sigma^2}
+  \Biggr].
+\end{equation}
+This density states that the two conditional frequencies should be roughly
+equal, but otherwise leaves a uniform uncertainty about the values of each.
+Smaller values of $\sigma$ represent more conservative estimates.
+
+A sample of $5\,000$ pairs of conditional frequencies from the
+density~\eqref{eq:prob_freqs_from_data} with the conservative initial
+density~\eqref{eq:credib_cons} \mynote{specify $\sigma$} leads to the
+distribution of mutual information of
+\fig~\ref{fig:mutual_info_histo_cons}. The estimate now says that we should
+expect a negligible mutual information, with a most probable value around
+100 times smaller than in the previous case.
+\begin{figure}[h!]
+\centering\includegraphics[width=0.5\linewidth]{B_mutualinfo_hist.png}\\
+\caption{}\label{fig:mutual_info_histo_cons}
+\end{figure}% finite_sampling_bullshit.nb
+
+\section{Intuitive understanding}
+\label{sec:intuitive_understanding}
+
+Let's try to understand why the estimate of \sect~\ref{sec:credib_unif},
+\fig~\ref{fig:mutual_info_histo_unif}, is reliable; and to understand what
+happens in the conservative case of \sect~\ref{sec:credib_cons}.
+
+If we deem all pairs of conditional frequencies equally possible, let's
+sample $5\,000$ pairs uniformly. Let's now plot the samples by showing the
+probability that each assigns to our observed data on the horizontal axis,
+and their associated mutual information on the vertical axis. We obtain the
+scatter plot of \fig~\ref{fig:init_scatter_unif}.
+\begin{figure}[b!]
+\centering\includegraphics[width=0.75\linewidth]{A_init_scatter.png}\\
+\caption{}\label{fig:init_scatter_unif}
+\end{figure}% finite_sampling_bullshit.nb
+The points of all three sizes and colours are part of the plot. The pair
+consisting of two uniform conditional frequencies ($1/10$ probability for
+each response) is the largest, yellow point. This pair of long-run
+conditional frequencies assigns probability $10^{-40}$ to the data and has
+zero mutual information.
+
+It's clear from this scatter plot that the data strongly suggest a large
+estimated mutual information, for two reasons:
+\begin{enumerate}[label=\arabic*.]
+\item The pairs that assign very low probability to our data, say less than
+  $10^{-40}$, are represented by small blue points. Each one very unlikely
+  to be the continuation of our data. But at the same time they constitute
+  the overwhelming majority of samples, and therefore there is a
+  non-negligible probability that the data come from one of them. Most of
+  them have high mutual information.
+\item The pairs that assign high probability to our data, $10^{-40}$ or
+  more, are represented by the larger red points and the largest yellow
+  point. The majority of them also have high mutual information. In fact,
+  the pair of uniform conditional frequencies is an outlier: it's very unlikely
+  that our data come from it, compared with the other possibilities.
+\end{enumerate}
+The estimate of \fig~\ref{fig:mutual_info_histo_unif} is therefore quite
+correct and reliable, not biased at all.
+
+\medskip
+
+Now consider the conservative initial density~\eqref{eq:credib_cons}.
+Figure~\ref{fig:init_scatter_cons} shows $5\,000$ samples from it, plotted
+as in the previous case. The majority of those that give high probability
+to the data have a negligible mutual information. This is reflected by the
+estimate of \fig~\ref{fig:mutual_info_histo_cons}. \mynote{Need new scatter
+plot}
+\begin{figure}[b!]
+\centering\includegraphics[width=0.75\linewidth]{A_init_scatter.png}\\
+\caption{}\label{fig:init_scatter_cons}
+\end{figure}% finite_sampling_bullshit.nb
+
+
+\section{Discussion}
+\label{sec:discussion}
+
+
+
+
 
 
 
