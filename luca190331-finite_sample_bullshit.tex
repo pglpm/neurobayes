@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-01T13:23:35+0200
+%% Last-Updated: 2019-04-01T14:18:28+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -24,7 +24,7 @@ british%
 \newcommand*{\pdftitle}{There's no 'sampling bias' for the mutual information}
 \newcommand*{\headtitle}{Sampling non-bias}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana, C. Battistin}
-\newcommand*{\headauthor}{Porta Mana}
+\newcommand*{\headauthor}{Porta Mana \amp\ Battistin}
 \newcommand*{\reporthead}{}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -455,7 +455,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \providecommand{\epost}[1]{\texttt{\footnotesize\textless#1\textgreater}}
 \providecommand{\email}[2]{\href{mailto:#1ZZ@#2 ((remove ZZ))}{#1\protect\atf#2}}
 
-\preauthor{\vspace{-0.5\baselineskip}\begin{center}
+\preauthor{\vspace{0\baselineskip}\begin{center}
 \normalsize\sffamily%
 \lineskip  0.5em}
 \postauthor{\par\end{center}}
@@ -678,15 +678,15 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent This note shows that the so-called \enquote{sampling bias} in the
-  estimation of the mutual information for stimulus-response frequencies
-  doesn't exist. If the estimate from the sample forecasts a high mutual
-  information, then the response is indeed very likely to be informative.
-  On the other hand, if we expect the response to be uninformative or if we
-  just want to be conservative, a correct calculation of the estimate leads
-  to a negligible mutual information. A correct frequentist analysis also
-  shows that the estimator is unbiased. No corrections of any kind are
-  needed.%
+  \noindent This note shows that the so-called \enquote{sampling bias} in
+  the estimation of the mutual information for stimulus-response
+  frequencies doesn't exist. If the estimate from the sample forecasts a
+  high mutual information, then the response is indeed very likely to be
+  informative. On the other hand, if we expect the response to be
+  uninformative or if we just want to be conservative, a correct
+  calculation of the estimate leads to a negligible mutual information. A
+  correct frequentist analysis also shows that the frequentist estimator is
+  unbiased. No corrections of any kind are needed.%
   \\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
     manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -727,11 +727,12 @@ signal is reduced by knowledge of the response. This measure is sometimes
 used in neuroscience, the response being some characteristic -- such as the
 activity or the firing rate -- of a neuron or of a network of neurons.
 
-Recent works in neuroscience claim that our estimate about the mutual
-information for long-run frequencies from a small sample is biased; that
-is, in frequentist terms: the expected value of its sample estimate is
-different from its \enquote{true} value. Other works have proposed various
-corrections to this alleged bias.
+Recent works in neuroscience \citep{panzerietal2007}\mynote{add others}
+claim that our estimate about the mutual information for long-run
+frequencies from a small sample is biased; that is, in frequentist terms:
+the expected value of its sample estimate is different from its
+\enquote{true} value. Other works have proposed various corrections to this
+alleged bias.
 
 In this note we show three main results:
 \begin{enumerate}[label=\arabic*.,wide]
@@ -812,8 +813,8 @@ corrected by their initial probabilities $\pf(\yfvm, \yfvp \| \yI)$
 \end{multline}
 
 We can calculate this probability analytically when possible, or estimate
-it with Monte Carlo sampling. From such samples we can also estimate the
-probability distribution of the long-run mutual information
+it with Monte Carlo sampling. From such samples we estimate the probability
+distribution of the long-run mutual information
 \begin{equation}
   \label{eq:mutual_info}
   I \defd \sum_r \tfrac{1}{2}\yfvm_r\;
@@ -840,24 +841,25 @@ of conditional frequencies are equally possible, then
     \pf(\yfvm, \yfvp \| \yIu) = 1.
 \end{equation}
 
-Let's sample $5\,000$ pairs of conditional frequencies from the
-density~\eqref{eq:prob_freqs_from_data} obtained from this probability and
-our example data. The resulting distribution of their associated mutual
-information is shown in \fig~\ref{fig:mutual_info_histo_unif}.
+We sample $5\,000$ pairs of conditional frequencies from the
+density~\eqref{eq:prob_freqs_from_data} obtained from our example data and
+this pre-data probability. The resulting distribution of their associated
+mutual information is shown in \fig~\ref{fig:mutual_info_histo_unif}.
 \begin{figure}[h!]
 \centering\includegraphics[width=0.5\linewidth]{A_mutualinfo_hist.png}\\
 \caption{}\label{fig:mutual_info_histo_unif}
 \end{figure}% finite_sampling_bullshit.nb
 It tells us that the response is likely to be informative; the most likely
 values of the long-range mutual information are around $0.2\,\textrm{bit}$.
-The next section explains intuitively why this inference is correct.
+The next section explains intuitively why this probability distribution is
+correct.
 
 \subsection{Conservative uncertainty about the frequencies}
 \label{sec:credib_cons}
 
 If we initially think that the long-run response frequencies conditional on
-the stimuli should be very similar, or if we simply wan to do a
-conservative estimate, then the initial probability will be higher for
+the stimuli should be very similar, or if we simply want to do a
+conservative estimate, then our pre-data probability must be higher for
 pairs with similar conditional frequencies; for example \mynote{replace
   with combination of Dirichlet -- same effect}
 \begin{equation}
@@ -890,64 +892,70 @@ Let's try to understand why the estimate of \sect~\ref{sec:credib_unif},
 \fig~\ref{fig:mutual_info_histo_unif}, is reliable; and to understand what
 happens in the conservative case of \sect~\ref{sec:credib_cons}.
 
-If we deem all pairs of conditional frequencies equally possible, let's
-sample $5\,000$ pairs uniformly. The scatter plot of the two conditional
-frequencies for the response value $1$ is shown in \fig~\ref{fig:f1_unif}.
+If we deem all pairs of conditional frequencies equally possible, we can
+sample $5\,000$ pairs uniformly. Figure~\ref{fig:f1_unif} shows the
+resulting scatter plot for first component of the two conditional
+frequencies, that is, the frequency of the response value $1$.
 \begin{figure}[h!]
 \centering\includegraphics[width=0.5\linewidth]{A_sample_f1.png}\\
 \caption{}\label{fig:f1_unif}
 \end{figure}% finite_sampling_bullshit.nb
 
-Let's now plot the samples showing the probability that each assigns to our
-observed data on the horizontal axis, and their associated mutual
-information on the vertical axis. We obtain the scatter plot of
+Let's now visualize the samples of long-run conditional frequencies in two
+dimensions as follows: for each sample, the horizontal coordinate is the
+probability that the frequencies assigns to our observed data; and the
+vertical coordinate is the mutual information associated with the
+frequencies. We obtain the scatter plot of
 \fig~\ref{fig:init_scatter_unif}.
 \begin{figure}[h!]
 \centering\includegraphics[width=0.75\linewidth]{A_init_scatter.png}\\
 \caption{}\label{fig:init_scatter_unif}
 \end{figure}% finite_sampling_bullshit.nb
-The points of all three sizes and colours are part of the plot. The pair
-consisting of two uniform conditional frequencies ($1/10$ probability for
-each response) is the largest, yellow point. This pair of long-run
-conditional frequencies assigns probability $10^{-40}$ to the data and has
-zero mutual information.
+All points, of three different sizes and colours, are part of the plot. The
+pair of two uniform conditional frequencies ($1/10$ probability for each
+response) is the largest, yellow point. This pair of long-run conditional
+frequencies assigns probability $10^{-40}$ to the data and has zero mutual
+information.
 
 It's clear from this scatter plot that the data strongly suggest a large
 estimated mutual information, for two reasons:
 \begin{enumerate}[label=\arabic*.]
-\item The pairs that assign very low probability to our data, say less than
-  $10^{-40}$, are represented by small blue points. Each one very unlikely
-  to be the continuation of our data. But at the same time they constitute
-  the overwhelming majority of samples, and therefore there is a
-  non-negligible probability that the data come from one of them. Most of
-  them have high mutual information.
-\item The pairs that assign high probability to our data, $10^{-40}$ or
+\item All pairs that assign very low probability to our data, say less than
+  $10^{-40}$, are represented by small blue points. Each one is very
+  unlikely to be the continuation of our data. But at the same time they
+  constitute the overwhelming majority of possible pairs, and therefore
+  there is a non-negligible probability that the data come from one of
+  them. Most of them have high mutual information.
+\item The pairs that assign higher probability to our data, $10^{-40}$ or
   more, are represented by the larger red points and the largest yellow
-  point. The majority of them also have high mutual information. In fact,
-  the pair of uniform conditional frequencies is an outlier: it's very unlikely
-  that our data come from it, compared with the other possibilities.
+  point. The majority of these pairs also have high mutual information. In
+  fact, the pair of uniform conditional frequencies is an outlier: it's
+  very unlikely that our data come from it, compared with the other
+  possible pairs of frequencies.
 \end{enumerate}
 The estimate of \fig~\ref{fig:mutual_info_histo_unif} is therefore quite
-correct and reliable, not biased at all.
+correct and reliable.
 
 \medskip
 
-Now consider the conservative initial density~\eqref{eq:credib_cons}. The
-scatter plot of $5\,000$ of the two conditional frequencies for the
-response value $1$ is shown in \fig~\ref{fig:f1_cons}.
+Now consider the conservative initial density~\eqref{eq:credib_cons}, and
+sample $5\,000$ pairs of conditional frequencies from it. The scatter plot
+for the first components of the sampled frequencies is shown in
+\fig~\ref{fig:f1_cons}.
 \begin{figure}[h!]
 \centering\includegraphics[width=0.5\linewidth]{B_sample_f1.png}\\
 \caption{}\label{fig:f1_cons}
 \end{figure}% finite_sampling_bullshit.nb
-It shows that the two frequencies are very similar to each other and close
+It shows that the two long-run frequencies are very similar to each other and close
 to $1/10$, the probability given by the uniform distribution.
 
 
-Figure~\ref{fig:init_scatter_cons} shows the samples plotted as in the
-previous case. There are now many pairs that assign roughly the same
-probability to the data as the uniform-distribution pair does. The majority
-of all samples a negligible mutual information. This is reflected by the
-estimate of \fig~\ref{fig:mutual_info_histo_cons}.
+Figure~\ref{fig:init_scatter_cons} shows the pairs of long-run frequencies
+plotted as in the previous case. There are now many pairs that assign
+roughly the same probability to the data as the uniform-distribution pair
+does. The majority of all pairs has a negligible mutual information. This
+is indeed reflected by the estimate of
+\fig~\ref{fig:mutual_info_histo_cons}.
 \begin{figure}[b!]
 \centering\includegraphics[width=0.75\linewidth]{B_init_scatter.png}\\
 \caption{}\label{fig:init_scatter_cons}
@@ -958,13 +966,17 @@ estimate of \fig~\ref{fig:mutual_info_histo_cons}.
 \label{sec:discussion}
 
 
-We have found that the estimates of the mutual information from a small
-sample have no bias whatsoever, and we've seen intuitively why they are
-correct. The crucial point is the specification of the initial joint probability
-for the long-run conditional frequencies. This specification is especially
-important if the data are few. It's possible to specify a probability that
-express a conservative guess, and the resulting estimate of the mutual
-information is very close to zero.
+We have calculated the probability distribution for the long-run mutual
+information, given our knowledge of a small sample. The calculation was
+conceptually straightforward and needed no corrections, even if it may
+require numerical sampling methods. \mynote{Mention partial
+  exchangeability.} We also saw (\sect~\ref{sec:intuitive_understanding})
+why the distribution thus fund is intuitively correct. The crucial point is
+the specification of the pre-data joint probability for the long-run
+conditional frequencies. This specification is especially important if the
+data are few. It's possible to specify a pre-data probability that express
+a conservative guess, and the resulting estimate of the mutual information
+is very close to zero.
 
 This conclusion isn't surprising: the main point is the same as, for
 example, in the inference of diseases or some phenotypes from genetic
@@ -976,14 +988,16 @@ probability that this person has the disease? The answer is that in general
 we don't know until we specify the incidence rate of the disease in the
 full population. Because even if that gene variant appears more frequently among
 people with the disease, the number of people having such disease may be so
-small that the probability still favours the person's being healthy. 
+small that the probability still favours the person's being healthy.
 
-Note that, even though we used Bayes's theorem in
-\sect~\ref{sec:bias_bayes}, the general conclusion that there's no bias
-would also be reached by a serious frequentist statistician. The erroneous
-conclusions reached in papers claiming a sampling bias for mutual
-information \citep{panzerietal2007} may be summarized thus: they confuse a
-\emph{non-parametric} problem \citep[see \eg][\!\!, a frequentist
+The direct calculation via the probability calculus
+\citep{jaynes1994_r2003,soxetal1988_r2013,hailperin1996} makes any
+discussion about biases superfluous. Note, however, that a serious
+frequentist statistician would also find that the estimator of the mutual
+information is \emph{un}biased. The erroneous conclusions reached in papers
+claiming a sampling bias for mutual information
+\citep{panzerietal2007}\mynote{add others} may be summarized thus: they
+confuse a \emph{non-parametric} problem \citep[see \eg][\!\!, a frequentist
 book]{wasserman2006} with a parametric one. The problem is not the
 estimation of a parameter that identifies a distribution in a family, but
 the estimation of the distribution itself: the whole distribution -- or
@@ -997,11 +1011,12 @@ therefore wrong.\footnote{Note in passing that plotting the distribution of
 assess the expectation of the estimator we must sample the
 \enquote{parameter}; in our case this means drawing $N$ samples of the
 empirical conditional frequencies in $n$ data and then taking their average
-to estimate the long-run frequency. \emph{Then} we compute the mutual
-information from this estimate. If we do this with $N=5\,000$ and $n=20$
-for a pair of uniform conditional distributions we obtain a
-mutual-information estimate of the order of $10^{-5}$. As $N$ increases,
-with $n=20$ fixed, the estimate goes to zero. There is no bias.
+to estimate the long-run frequency. The latter is a notoriously unbiased
+estimator. \emph{Then} we compute the mutual information from this
+estimate. If we do this with $N=5\,000$ and $n=20$ for a pair of uniform
+conditional distributions we obtain a mutual-information estimate of the
+order of $10^{-5}$. As $N$ increases, with $n=20$ fixed, the estimate goes
+to zero. There is no bias.
 
 The topsy-turvy point of view typical of frequentist-like analyses
 unfortunately leads to this kind of oversights. Our problem is not to infer
