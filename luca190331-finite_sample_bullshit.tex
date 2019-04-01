@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-01T12:49:31+0200
+%% Last-Updated: 2019-04-01T13:23:35+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -23,7 +23,7 @@ british%
 }
 \newcommand*{\pdftitle}{There's no 'sampling bias' for the mutual information}
 \newcommand*{\headtitle}{Sampling non-bias}
-\newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana, C. Battistin}
 \newcommand*{\headauthor}{Porta Mana}
 \newcommand*{\reporthead}{}% Report number
 
@@ -369,7 +369,12 @@ citestyle=authoryear-comp,bibstyle=pglpm-authoryear,autopunct=false,sorting=ny,s
 %%% Sectioning
 \newcommand*{\asudedication}[1]{%
 {\par\centering\textit{#1}\par}}
-\newenvironment{acknowledgements}{\section*{Thanks}\addcontentsline{toc}{section}{Thanks}}{\par}
+\newenvironment{acknowledgements}{\section*{%
+%Basimeh% Assirian
+%Bedankt% Dutch
+Baraka%
+% Thanks...
+}\addcontentsline{toc}{section}{Thanks}}{\par}
 \makeatletter\renewcommand{\appendix}{\par
   \bigskip{\centering
    \interlinepenalty \@M
@@ -484,13 +489,13 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \author{%
 \hspace*{\stretch{1}}%
 %% uncomment if additional authors present
-% \parbox{0.5\linewidth}%\makebox[0pt][c]%
-% {\protect\centering ***\\%
-% \footnotesize\epost{\email{***}{***}}}%
-% \hspace*{\stretch{1}}%
 \parbox{0.5\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\hspace*{\stretch{1}}%
+\parbox{0.5\linewidth}%\makebox[0pt][c]%
+{\protect\centering C. Battistin\\%
+\footnotesize\epost{\email{claudia.battistin}{gmail.com}}}%
 \hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
@@ -673,7 +678,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent It is shown that the so-called \enquote{sampling bias} in the
+  \noindent This note shows that the so-called \enquote{sampling bias} in the
   estimation of the mutual information for stimulus-response frequencies
   doesn't exist. If the estimate from the sample forecasts a high mutual
   information, then the response is indeed very likely to be informative.
@@ -728,7 +733,7 @@ is, in frequentist terms: the expected value of its sample estimate is
 different from its \enquote{true} value. Other works have proposed various
 corrections to this alleged bias.
 
-In this note I show three main results:
+In this note we show three main results:
 \begin{enumerate}[label=\arabic*.,wide]
 \item The direct estimation of the \enquote{long-run} mutual information
   from a sample is reliable and doesn't need any kind of correction. On the
@@ -745,7 +750,7 @@ In this note I show three main results:
   give some thought to assessing this pre-data probability, rather than
   correcting non-existing biases.
 \item A correct frequentist analysis proves that the estimator for the
-  mutual information is unbiased.
+  long-run mutual information is unbiased.
 \end{enumerate}
 
 The main result is first shown in the next section with a straightforward
@@ -767,7 +772,7 @@ long-run\footnote{\enquote{But this \emph{long run} is a misleading guide
   \citep[\sect~3.I, p.~65]{keynes1923_r2013}} relative frequencies of the
 response conditional on each stimulus value, and from these assess what's
 the most probable value of the associated mutual information between
-stimulus and response. We assume that all stimuli appear with the equal
+stimulus and response. We assume that all stimuli appear with equal
 relative frequencies.
 
 Let the stimulus $s$ have two possible values $\set{\ym,\yp}$, and the
@@ -935,7 +940,7 @@ response value $1$ is shown in \fig~\ref{fig:f1_cons}.
 \caption{}\label{fig:f1_cons}
 \end{figure}% finite_sampling_bullshit.nb
 It shows that the two frequencies are very similar to each other and close
-to $1/10$.
+to $1/10$, the probability given by the uniform distribution.
 
 
 Figure~\ref{fig:init_scatter_cons} shows the samples plotted as in the
@@ -973,7 +978,7 @@ full population. Because even if that gene variant appears more frequently among
 people with the disease, the number of people having such disease may be so
 small that the probability still favours the person's being healthy. 
 
-Note that, even though I used Bayes's theorem in
+Note that, even though we used Bayes's theorem in
 \sect~\ref{sec:bias_bayes}, the general conclusion that there's no bias
 would also be reached by a serious frequentist statistician. The erroneous
 conclusions reached in papers claiming a sampling bias for mutual
@@ -1047,11 +1052,11 @@ uncertainty about the long-run frequency.
 %%% Acknowledgements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{acknowledgements}
-  \ldots to Mari \amp\ Miri for continuous encouragement and affection, and
-  to Buster Keaton and Saitama for filling life with awe and inspiration.
-  To the developers and maintainers of \LaTeX, Emacs, AUC\TeX, Open Science
-  Framework, Python, Inkscape, Sci-Hub for making a free and unfiltered
-  scientific exchange possible.
+  PGLPM thanks Mari, Miri, \amp\ Emma for continuous encouragement and
+  affection; Buster Keaton and Saitama for filling life with awe and
+  inspiration; and the developers and maintainers of \LaTeX, Emacs, AUC\TeX,
+  Open Science Framework, Python, Inkscape, Sci-Hub for making a free and
+  unfiltered scientific exchange possible.
 %\rotatebox{15}{P}\rotatebox{5}{I}\rotatebox{-10}{P}\rotatebox{10}{\reflectbox{P}}\rotatebox{-5}{O}.
 \sourceatright{\autanet}
 \end{acknowledgements}
