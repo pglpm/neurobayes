@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-01T01:02:41+0200
+%% Last-Updated: 2019-04-01T11:19:25+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,9 +19,9 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{31 March 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{The `sampling bias' is not a bias%\\{\large ***}%
+\newcommand*{\propertitle}{There's no `sampling bias'\\for the mutual information%\\{\large ***}%
 }
-\newcommand*{\pdftitle}{\propertitle}
+\newcommand*{\pdftitle}{There's no 'sampling bias' for the mutual information}
 \newcommand*{\headtitle}{Sampling non-bias}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana}
@@ -589,7 +589,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\newcommand*{\etc}{{etc.}}
 %\newcommand*{\ie}{{i.e.}}
 %\newcommand*{\ca}{{c.}}
-%\newcommand*{\eg}{{e.g.}}
+\newcommand*{\eg}{{e.g.}}
 \newcommand*{\foll}{{ff.}}
 %\newcommand*{\viz}{{viz}}
 \newcommand*{\cf}{{cf.}}
@@ -951,52 +951,78 @@ express a conservative guess, and the resulting estimate of the mutual
 information is very close to zero.
 
 This conclusion isn't surprising: the main point is the same as, for
-example, in the inference of genetic peculiarities from diseases (or
-phenotype in general) and vice versa. Imagine that we know the relative
-frequencies of two diseases among people have a particular variant of a
-gene, and the relative frequencies among people having another variant. Now
-we ask: given that a specific person has one of the diseases, what's the
-probability they have a particular gene variant? The answer is that we
-don't know until we specify the proportions of individuals having the two
-gene variants or the diseases. Because, even if the disease occurs more
-frequently for one genetic variant, the number of people having such
-variant may be so small that the probability still favours the other
-variant. It's the well-known importance of incidence rates.
+example, in the inference of diseases or some phenotypes from genetic
+peculiarities and vice versa. Imagine that we know the relative frequencies
+of two gene variants among people who have a particular disease, and the
+relative frequencies among people who don't have the disease. Now we ask:
+given that a specific person has one of the gene variants, what's the
+probability that this person has the disease? The answer is that in general
+we don't know until we specify the incidence rate of the disease in the
+full population. Because even if that gene variant appears more frequently among
+people with the disease, the number of people having such disease may be so
+small that the probability still favours the person's being healthy. 
 
-For this reason the result we obtained is not connected to a choice between
-Bayesian or frequentist mindsets, even if we used Bayes's theorem in
-\sect~\ref{sec:bias_bayes}. A serious frequentist statistician would reach
-the same conclusions.
+Note that, even though I used Bayes's theorem in
+\sect~\ref{sec:bias_bayes}, the general conclusion that there's no bias
+would also be reached by a serious frequentist statistician. The erroneous
+conclusions reached in papers claiming a sampling bias for mutual
+information \citep{panzerietal2007} may be summarized thus: they confuse a
+\emph{non-parametric} problem \citep[see \eg][\!\!, a frequentist
+book]{wasserman2006} with a parametric one. The problem is not the
+estimation of a parameter that identifies a distribution in a family, but
+the estimation of the distribution itself: the whole distribution -- or
+distribution\textbf{\emph{s}} in our case -- is the \enquote{parameter}.
+The mutual information is a function of this \enquote{parameter}. The
+procedure of Panzeri \etal\ \citey[pp.~1065--1066]{panzerietal2007} is
+therefore wrong.\footnote{Note in passing that plotting the distribution of
+  a parameter or of a function thereof, as in \textcite[Fig.~1, right
+  columns]{panzerietal2007}, is anathema from a frequentist point of view:
+  parameters do not have distributions, by divine Fisherian decree.} To
+assess the expectation of the estimator we must sample the
+\enquote{parameter}; in our case this means drawing $N$ samples of the
+empirical conditional frequencies in $n$ data and then taking their average
+to estimate the long-run frequency. \emph{Then} we compute the mutual
+information from this estimate. If we do this with $N=5\,000$ and $n=20$
+for a pair of uniform conditional distributions we obtain a
+mutual-information estimate of the order of $10^{-5}$. As $N$ increases,
+with $n=20$ fixed, the estimate goes to zero. There is no bias.
 
-From a frequentist point of view, the \enquote{unknown distribution} is not
-the pair of conditional frequencies, but \emph{their} distribution
-$\p(\yfm,\yfp)$ (the fact that they're (a) a pair, (b) conditional, should
-already warn us about this). This is a so-called non-parametric problem,
-and the two conditional frequencies have rather the role of a parameter
-here. From this frequentist point of view the estimate of the mutual
-information~\ref{fig:mutual_info_histo_unif} is not biased or has at most a
-negligible correction factor (similar to the \enquote{$n/(n-1)$} factor for
-the variance estimator).
-
-
-\medskip
-
-The erroneous conclusions reached in Panzeri \etal\ \citey{panzerietal2007}
-stem from a combination of mutually connected oversights. First of all the
-analysis given there is a little topsy-turvy: our problem is not to infer
+The topsy-turvy point of view typical of frequentist-like analyses
+unfortunately leads to this kind of oversights. Our problem is not to infer
 data from a specific known frequency, but to infer an unknown frequency
 \emph{among several possible ones} from known data -- because our
 uncertainty about the long-run mutual information is a consequence of our
-uncertainty about the long-run frequency. You can't estimate which
-frequency is correct by sampling only a specific one. For this reason it
-isn't meaningful to focus on only one particular frequency at a time, as
-done there. What matters instead is the relative probabilities that the
-data have under several candidate frequencies. It's therefore unclear
-what's achieved by sampling multiple times 
+uncertainty about the long-run frequency.
+
+\bigskip
+
+\mynote{Paragraph on shrinkage}
 
 
-The third slip is the multiple
-sampling of
+% From a frequentist point of view, the \enquote{unknown distribution} is not
+% the pair of conditional frequencies, but \emph{their} distribution
+% $\p(\yfm,\yfp)$ (the fact that they're (a) a pair, (b) conditional, should
+% already warn us about this). This is a so-called non-parametric problem,
+% and the two conditional frequencies have rather the role of a parameter
+% here. From this frequentist point of view the estimate of the mutual
+% information~\ref{fig:mutual_info_histo_unif} is not biased or has at most a
+% negligible correction factor (similar to the \enquote{$n/(n-1)$} factor for
+% the variance estimator).
+
+
+% The erroneous conclusions reached in Panzeri \etal\ \citey{panzerietal2007}
+% stem from a combination of mutually connected oversights. First of all the
+% analysis given there is a little topsy-turvy: our problem is not to infer
+% data from a specific known frequency, but to infer an unknown frequency
+% \emph{among several possible ones} from known data -- because our
+% uncertainty about the long-run mutual information is a consequence of our
+% uncertainty about the long-run frequency. You can't estimate which
+% frequency is correct by sampling only a specific one. For this reason it
+% isn't meaningful to focus on only one particular frequency at a time, as
+% done there. What matters instead is the relative probabilities that the
+% data have under several candidate frequencies. It's therefore unclear
+% what's achieved by sampling multiple times 
+
 
 
 %%\setlength{\intextsep}{0.5ex}% with wrapfigure
@@ -1022,7 +1048,7 @@ sampling of
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\clearpage
+%\clearpage
 % %\renewcommand*{\appendixpagename}{Appendix}
 % %\renewcommand*{\appendixname}{Appendix}
 % %\appendixpage
