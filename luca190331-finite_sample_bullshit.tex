@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-01T11:19:25+0200
+%% Last-Updated: 2019-04-01T12:49:31+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -675,12 +675,13 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \begin{abstract}\labelsep 0pt%
   \noindent It is shown that the so-called \enquote{sampling bias} in the
   estimation of the mutual information for stimulus-response frequencies
-  is not a bias at all. If the estimate from the sample forecasts a high
-  mutual information, then we response is indeed very likely to be
-  informative. On the other hand, if we expect the response to be
-  uninformative or if we just want to be conservative, a correct
-  calculation of the estimate leads to a negligible mutual information.\par
-  In either case no corrections of any kind are needed.%
+  doesn't exist. If the estimate from the sample forecasts a high mutual
+  information, then the response is indeed very likely to be informative.
+  On the other hand, if we expect the response to be uninformative or if we
+  just want to be conservative, a correct calculation of the estimate leads
+  to a negligible mutual information. A correct frequentist analysis also
+  shows that the estimator is unbiased. No corrections of any kind are
+  needed.%
   \\\noindent\emph{\footnotesize Note: Dear Reader \amp\ Peer, this
     manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -722,31 +723,41 @@ used in neuroscience, the response being some characteristic -- such as the
 activity or the firing rate -- of a neuron or of a network of neurons.
 
 Recent works in neuroscience claim that our estimate about the mutual
-information for long-run frequencies from a small sample is subject to a
-bias, a systematic error. Other works have proposed various corrections to
-this alleged error.
+information for long-run frequencies from a small sample is biased; that
+is, in frequentist terms: the expected value of its sample estimate is
+different from its \enquote{true} value. Other works have proposed various
+corrections to this alleged bias.
 
-In this note I show that no such bias exists, and the estimates are
-reliable. On the one hand, if we are  equally uncertain about the long-run
-response frequencies, and the estimate from a small sample suggests a large
-mutual information, then we should indeed expect the response to be
-informative. On the other hand, if we  initially suspect that the
-long-run response frequencies should be uninformative, or if we are very
-conservative in our inference, then a correct calculation leads to very low
-estimates of the mutual information. As a consequence no corrections of any
-kind are needed for the estimates.
+In this note I show three main results:
+\begin{enumerate}[label=\arabic*.,wide]
+\item The direct estimation of the \enquote{long-run} mutual information
+  from a sample is reliable and doesn't need any kind of correction. On the
+  one hand, if we are equally uncertain about the long-run response
+  frequencies, and the estimate from a small sample suggests a large mutual
+  information, then we should indeed expect the response to be informative.
+  On the other hand, if we initially suspect that the long-run response
+  frequencies should be uninformative, or if we are very conservative in
+  our inference, then a correct calculation consistently leads to very low
+  estimates of the mutual information.
+\item For small samples, our estimate crucially depends on the pre-data
+  probability for the long-run relative frequencies of the response
+  conditional on the stimulus. In making such estimates we must therefore
+  give some thought to assessing this pre-data probability, rather than
+  correcting non-existing biases.
+\item A correct frequentist analysis proves that the estimator for the
+  mutual information is unbiased.
+\end{enumerate}
 
-I show this first with a quick calculation in the next section, and then
-with a longer reasoning in §***. The final section discusses what kind of
-incorrect reasoning leads to the idea that there's a bias.
+The main result is first shown in the next section with a straightforward
+calculation, and explained intuitively in the subsequent section. The
+calculations use the example given by \textcite[Fig.~1]{panzerietal2007}.
+The final section briefly discusses the third result and the importance of
+the pre-data probability in our estimations when the sample is small. Some
+ways to assess this probability are also discussed.
 
-The calculations use the example given by Panzeri \etal\
-\citey[Fig.~1]{panzerietal2007}: the stimulus can assume two values, the
-response ten values.
+% \mynote{Comment on \enquote{sampling bias}: it has a different meaning in statistics}
 
-\mynote{Comment on \enquote{sampling bias}: it has a different meaning in statistics}
-
-\section{Bias? No: Bayes}
+\section{Bayes}
 \label{sec:bias_bayes}
 
 First of all let's state what our inference is about. Given a sample of
@@ -867,7 +878,7 @@ The estimate now says that we should
 expect a negligible mutual information, with a most probable value around
 100 times smaller than in the previous case.
 
-\section{Intuitive understanding}
+\section{Because}
 \label{sec:intuitive_understanding}
 
 Let's try to understand why the estimate of \sect~\ref{sec:credib_unif},
@@ -938,7 +949,7 @@ estimate of \fig~\ref{fig:mutual_info_histo_cons}.
 \end{figure}% finite_sampling_bullshit.nb
 
 
-\section{Discussion}
+\section{Brief}
 \label{sec:discussion}
 
 
