@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-02T16:32:52+0200
+%% Last-Updated: 2019-04-02T17:19:17+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -493,20 +493,22 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \settowidth{\mylc}{\footnotesize\slshape\textless soledad.g.cogno@ntnu.no\textgreater}
 \title{\propertitle}
 \author{%
-%\hspace*{\stretch{1}}%
+\hspace*{\stretch{1}}%
 %% uncomment if additional authors present
-\parbox{\myla}%\makebox[0pt][c]%
+\parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
+\hspace*{\stretch{100}}\mbox{}\\%
 \hspace*{\stretch{1}}%
-\parbox{\mylb}%\makebox[0pt][c]%
+\parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering C. Battistin\\%
 \footnotesize\epost{\email{claudia.battistin}{gmail.com}}}%
-\hspace*{\stretch{1}}%
-\parbox{\mylc}%\makebox[0pt][c]%
+\hspace*{\stretch{1}}\mbox{}\\%
+\hspace*{\stretch{100}}%
+\parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering S. Gonzalo Cogno\\%
 \footnotesize\epost{\email{soledad.g.cogno}{ntnu.no}}}%
-%\hspace*{\stretch{1}}%
+\hspace*{\stretch{1}}\mbox{}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
 
