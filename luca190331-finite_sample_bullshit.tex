@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-02T11:02:14+0200
+%% Last-Updated: 2019-04-02T16:32:52+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,12 +19,12 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{31 March 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{A direct route to the mutual information\\of stimulus and response%\\{\large ***}%
+\newcommand*{\propertitle}{A direct forecast for the mutual information\\of stimulus and response%\\{\large ***}%
 }
-\newcommand*{\pdftitle}{A direct route to the mutual information of stimulus and response}
+\newcommand*{\pdftitle}{A direct forecast for the mutual information of stimulus and response}
 \newcommand*{\headtitle}{Sampling non-bias}
-\newcommand*{\pdfauthor}{P.G.L.  Porta Mana, C. Battistin}
-\newcommand*{\headauthor}{Porta Mana \amp\ Battistin}
+\newcommand*{\pdfauthor}{P.G.L.  Porta Mana, C. Battistin, S. Gonzalo Cogno}
+\newcommand*{\headauthor}{Porta Mana, Battistin, Gonzalo Cogno}
 \newcommand*{\reporthead}{}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -485,18 +485,28 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Paper's details
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\myla}
+\settowidth{\myla}{\footnotesize\slshape\textless piero.mana@ntnu.no\textgreater}
+\newlength{\mylb}
+\settowidth{\mylb}{\footnotesize\slshape\textless claudia.battistin@gmail.com\textgreater}
+\newlength{\mylc}
+\settowidth{\mylc}{\footnotesize\slshape\textless soledad.g.cogno@ntnu.no\textgreater}
 \title{\propertitle}
 \author{%
-\hspace*{\stretch{1}}%
+%\hspace*{\stretch{1}}%
 %% uncomment if additional authors present
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\parbox{\myla}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana\\%
 \footnotesize\epost{\email{piero.mana}{ntnu.no}}}%
 \hspace*{\stretch{1}}%
-\parbox{0.5\linewidth}%\makebox[0pt][c]%
+\parbox{\mylb}%\makebox[0pt][c]%
 {\protect\centering C. Battistin\\%
 \footnotesize\epost{\email{claudia.battistin}{gmail.com}}}%
 \hspace*{\stretch{1}}%
+\parbox{\mylc}%\makebox[0pt][c]%
+{\protect\centering S. Gonzalo Cogno\\%
+\footnotesize\epost{\email{soledad.g.cogno}{ntnu.no}}}%
+%\hspace*{\stretch{1}}%
 %\quad\href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}\textsc{orcid}:0000-0002-6070-0784}%
 }
 
@@ -742,7 +752,7 @@ Our analysis is pertinent to recent works in neuroscience
 \citep{panzerietal2007}\mynote{add others} that use a more topsy-turvy
 approach to this inference problem. These works try to correct
 \enquote{biased} estimates that appear to predict too high values of the
-long-run mutual information, when the sample size is small. The example we
+long-run mutual information when the sample size is small. The example we
 present shows that such \enquote{biased} estimates may have to be taken
 seriously instead: we should indeed expect the response to be very
 informative. This depends, again, on our pre-data forecast for the response
