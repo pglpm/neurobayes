@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-03-25T15:02:24+0100
-%% Last-Updated: 2019-04-02T00:27:49+0200
+%% Last-Updated: 2019-04-02T11:02:14+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,9 +19,9 @@ british%
 \newcommand*{\updated}{\today}
 \newcommand*{\firstdraft}{31 March 2019}
 \newcommand*{\firstpublished}{***}
-\newcommand*{\propertitle}{There's no `sampling bias'\\for the mutual information%\\{\large ***}%
+\newcommand*{\propertitle}{A direct route to the mutual information\\of stimulus and response%\\{\large ***}%
 }
-\newcommand*{\pdftitle}{There's no 'sampling bias' for the mutual information}
+\newcommand*{\pdftitle}{A direct route to the mutual information of stimulus and response}
 \newcommand*{\headtitle}{Sampling non-bias}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana, C. Battistin}
 \newcommand*{\headauthor}{Porta Mana \amp\ Battistin}
@@ -678,13 +678,13 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent This note shows that the so-called \enquote{sampling bias} in
-  the estimation of the mutual information for stimulus-response
-  frequencies doesn't exist. If the estimate from the sample forecasts a
-  high mutual information, then the response is indeed very likely to be
-  informative. On the other hand, if we expect the response to be
-  uninformative or if we just want to be conservative, a correct
-  calculation of the estimate leads to a negligible mutual information. % A
+  \noindent This note shows a direct route to forecast the mutual
+  information of stimulus-response long-run frequencies from sample data of
+  any size. Using an intuitive example it is demonstrated that our pre-data
+  forecast about the long-run frequencies is crucial when the sample is
+  small. It turns out that estimates considered \enquote{biased} in some
+  literature should be considered seriously instead: the response is indeed
+  very likely to be informative.% A
   % correct frequentist analysis also shows that the frequentist estimator is
   % unbiased. No corrections of any kind are needed.
   % 
@@ -728,43 +728,66 @@ signal is reduced by knowledge of the response. This measure is sometimes
 used in neuroscience, the response being some characteristic -- such as the
 activity or the firing rate -- of a neuron or of a network of neurons.
 
-Recent works in neuroscience \citep{panzerietal2007}\mynote{add others}
-claim that our estimate about the mutual information for long-run
-frequencies from a small sample is biased; that is, in frequentist terms:
-the expected value of its sample estimate is different from its
-\enquote{true} value. Other works have proposed various corrections to this
-alleged bias.
+In this note we show a direct route to forecast the long-run mutual
+information, given a sample of stimulus-response frequencies. The forecast
+consists in a probability distribution for the values of the long-run
+mutual information. The sample can be of any size.
 
-In this note we show three main results:
-\begin{enumerate}[label=\arabic*.,wide]
-\item The direct estimation of the \enquote{long-run} mutual information
-  from a sample is reliable and doesn't need any kind of correction. On the
-  one hand, if we are equally uncertain about the long-run response
-  frequencies, and the estimate from a small sample suggests a large mutual
-  information, then we should indeed expect the response to be informative.
-  On the other hand, if we initially suspect that the long-run response
-  frequencies should be uninformative, or if we are very conservative in
-  our inference, then a correct calculation consistently leads to very low
-  estimates of the mutual information.
-\item For small samples, our estimate crucially depends on the pre-data
-  probability for the long-run relative frequencies of the response
-  conditional on the stimulus. In making such estimates we must therefore
-  give some thought to assessing this pre-data probability, rather than
-  correcting non-existing biases.
-\item The distribution of mutual information obtained with the sampling
-  procedure in \textcite{panzerietal2007} for a pair of uniform conditional
-  frequencies actually makes sense: we should expect such a large mutual
-  information from those data.
-\end{enumerate}
+The intuitive reliability of the forecast is shown by a simple numerical
+example. The example also shows that the forecast always depends on our pre-data
+forecast of the response frequencies -- the more so the smaller the sample
+is.
 
-The main result is first shown in the next section with a straightforward
-calculation, and explained intuitively in the subsequent section. The
-calculations use the example given by \textcite[Fig.~1]{panzerietal2007}.
-The final section briefly discusses the third result and the importance of
-the pre-data probability in our estimations when the sample is small. Some
-ways to assess this probability are also discussed.
+Our analysis is pertinent to recent works in neuroscience
+\citep{panzerietal2007}\mynote{add others} that use a more topsy-turvy
+approach to this inference problem. These works try to correct
+\enquote{biased} estimates that appear to predict too high values of the
+long-run mutual information, when the sample size is small. The example we
+present shows that such \enquote{biased} estimates may have to be taken
+seriously instead: we should indeed expect the response to be very
+informative. This depends, again, on our pre-data forecast for the response
+frequencies.
 
-% \mynote{Comment on \enquote{sampling bias}: it has a different meaning in statistics}
+For small samples it's therefore important to be very judicious in our
+pre-data forecasts. We discuss some methods, used in many other fields, to
+make such educated assessments.
+
+% claim that our estimate about the mutual information for long-run
+% frequencies from a small sample is biased; that is, in frequentist terms:
+% the expected value of its sample estimate is different from its
+% \enquote{true} value. Other works have proposed various corrections to this
+% alleged bias.
+
+% In this note we show three main results:
+% \begin{enumerate}[label=\arabic*.,wide]
+% \item The direct estimation of the \enquote{long-run} mutual information
+%   from a sample is reliable and doesn't need any kind of correction. On the
+%   one hand, if we are equally uncertain about the long-run response
+%   frequencies, and the estimate from a small sample suggests a large mutual
+%   information, then we should indeed expect the response to be informative.
+%   On the other hand, if we initially suspect that the long-run response
+%   frequencies should be uninformative, or if we are very conservative in
+%   our inference, then a correct calculation consistently leads to very low
+%   estimates of the mutual information.
+% \item For small samples, our estimate crucially depends on the pre-data
+%   probability for the long-run relative frequencies of the response
+%   conditional on the stimulus. In making such estimates we must therefore
+%   give some thought to assessing this pre-data probability, rather than
+%   correcting non-existing biases.
+% \item The distribution of mutual information obtained with the sampling
+%   procedure in \textcite{panzerietal2007} for a pair of uniform conditional
+%   frequencies actually makes sense: we should expect such a large mutual
+%   information from those data.
+% \end{enumerate}
+
+% The main result is first shown in the next section with a straightforward
+% calculation, and explained intuitively in the subsequent section. The
+% calculations use the example given by \textcite[Fig.~1]{panzerietal2007}.
+% The final section briefly discusses the third result and the importance of
+% the pre-data probability in our estimations when the sample is small. Some
+% ways to assess this probability are also discussed.
+
+% % \mynote{Comment on \enquote{sampling bias}: it has a different meaning in statistics}
 
 \section{Bayes}
 \label{sec:bias_bayes}
@@ -1009,8 +1032,9 @@ that have larger likelihoods under that dataset. It turns out that for
 the latter pair is an outlier; there are always many other pairs with
 larger likelihoods. The sampling procedure is implicitly selecting those
 more likely pairs and taking \emph{their} mutual information as most
-likely. \mynote{The problem is the inversion of the conditional, done
-  without Bayes's theorem and therefore implicitly assuming a uniform prior.}
+likely. \mynote{The problem is that a small sample is as likely to have
+  been generated by a uniform pair as by all possible pairs. Show the
+  calculation about this.}
 
 
 % Note, however, that a serious
