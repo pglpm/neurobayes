@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-04-03T16:55:04+0200
+%% Last-Updated: 2019-04-06T20:15:15+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -967,19 +967,119 @@ The last expression shows that:
 The data for which we want to calculate the
 \dob~\eqref{eq:posterior_hypotheses_data} do not involve the full
 population, though, but only a sample of it: they are a sequence $\yst$ of
-recorded sample activities:
+recorded sample activities with relative frequencies $\yf$:
 \begin{equation}
   \label{eq:posterior_given_sample}
-  \pf(\yl \| \yst, \yI) \propto \pf(\yl \| \yI)\;
-  \pf(\yst \| \yl, \yI).
+  \pf(\yl \| \yf, \yI) \propto \pf(\yl \| \yI)\;
+  \pf(\yf \| \yl, \yI).
 \end{equation}
 
-Let's start by checking how our \dob\ about a sequence $\yst$ of sample
-activities looks like under the hypothesis of sufficiency \emph{for the
-  full population}. We can calculate it by marginalizing with respect to
-all possible \emph{sequences} of activities $\ySt$ for the full population, using
-the hypergeometric distribution~\eqref{eq:dob_sample_given_pop} and the
-Koopman-Pitman formula~\eqref{eq:koopman-pitman}:
+First we note that our \dob\ about every sequence $\yst$ having frequencies
+$\yf$ have the same value, under the hypothesis of sufficiency \emph{for
+  the full population} and assuming the long-run statistics are known --
+that is, with $\yl$ given:
+\begin{equation}
+  \label{eq:prob_particular_sequence}
+  \pf(\yst \|\yl, \yI) = \prod_t \pf(\ys_{t} \| \yl, \yI)
+  = \prod_{\ys} \pf(\ys \| \yl, \yI)^{T f_{\ys}}.
+\end{equation}
+The joint \dob\ factorizes because the \dob\ for each $\ys_{t}$ is
+independent of the other $t$ if the corresponding $\yS_{t}$ is known, and
+the joint \dob\ for all the $\yS_{t}$ factorizes if $\yl$ is known.
+
+Our \dob\ $\pf(\ys \| \yl, \yI)$ about the sample activity at any
+particular time, given $\yl$, can be obtained by marginalizing the
+corresponding $\yS$:
+\begin{equation}
+  \label{eq:prob_sample_lambda}
+  \pf(\ys \| \yl, \yI) =
+  \sum_{\yS} \pf(\ys \| \yS, \yl, \yI)\;\pf(\yS \| \yl, \yI)
+  = \sum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI),
+\end{equation}
+since the first \dob\ in the sum is independent on $\yl$; the second is
+given by \eqn~\eqref{eq:koopman-pitman_likelihood}.
+
+
+Our \dob\ $\pf(\yf \| \yl, \yI)$ about the relative frequencies of sample
+activities is then proportional to the number of sequences having those
+frequencies:
+\begin{equation}
+  \label{eq:koopman-pitman_sample}
+  \begin{split}
+    \pf(\yf \| \yl, \yI) &= \binom{T}{T\;\yf}\; \pf(\yst \| \yl, \yI)
+    = \binom{T}{T\;\yf}\; \prod_{\ys}\Bigl[
+    \tsum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI)
+    \Bigr]^{T f_{\ys}}
+    \\
+    &\approx
+    \exp\Bigl\{
+    T\;\yH\Bigl[\yf,
+    \bigl(\tsum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI)\bigr)_{\ys}\Bigr]
+    \Bigr\}
+  \end{split}
+% \pf( \yst \|\yl, \yI) =\sum_{\ySt} \pf(\yst \| \ySt, \yI)\;\pf(\ySt \| \yI)
+% =    \int\!\di\yl\; \pf(\yl \| \yI)\; \prod_{t}\pf(\ys_{t} \| \yl, \yI)
+%     \label{eq:koopman-pitman_integral_sample}
+%     \\
+%     \shortintertext{with}
+%     \pf(\ys \| \yl, \yI) \defd
+% \sum_{\yS} G_{\ys\yS}\;
+%     \frac{\yg_{\yS}}{Z(\yl)}
+%     \exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr).
+%     \label{eq:koopman-pitman_likelihood_sample}
+%     \\
+%     \yl \defd (\yll_1, \dotsc, \yll_R) \in \RR^{R},
+%     \qquad
+%     Z(\yl) \defd \sum_{\yS}
+%     \yg_{\yS}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr),
+\end{equation}
+
+As in the previous section, if the density $\pf(\yl \| \yI)$ for $\yl$ is
+uniform then from \eqn~\eqref{eq:posterior_given_sample} the mode of
+$\pf(\yl \| \yst, \yI)$ can be obtained by maximizing
+$\pf(\yf \| \yl, \yI)$, which amount to maximizing the relative entropy
+between $\yf$ and $\bigl(\tsum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl,
+\yI)\bigr)_{\ys}$ with respect to $\yl$. We have the maximum of the latter
+for the $\yl$ satisfying
+\begin{equation}
+  \label{eq:lambda_condition}
+%  \tsum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI) =
+  \tsum_{\yS} G_{\ys\yS}\;
+  \frac{\yg_{\yS}}{Z(\yl)}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr)
+=  f_{\ys} \quad\forall \ys.
+\end{equation}
+
+
+
+minimizing the relative entropy between $\yf$ and $\pf(\ys \| \yl, \yI)$.
+In the present case, however, the expression for the latter probability,
+\eqn~\eqref{eq:koopman-pitman_likelihood_sample}, does not lead to the
+classical maximum-entropy equations. We find instead
+\begin{subequations}
+  \label{eq:minimize_lagrangian}
+  \begin{gather}
+    \de_{\yll_{r}}\ln Z(\yl) = \yccs_{r}(\yl)
+    \\
+    \shortintertext{with}
+   \yccs_{r}(\yl) \defd
+   \tsum_{\ys} f_{\ys}\; c_{r\ys}(\yl),
+   \qquad
+    c_{r\ys}(\yl) \defd \frac{
+      \sum_{\yS} C_{r\yS}\; G_{\ys\yS}\;\pf(\yS \| \yl, \yI)
+    }{
+      \sum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI)
+    }.
+  \end{gather}
+\end{subequations}
+
+
+
+
+We can calculate it by marginalizing with respect
+to all possible \emph{sequences} of activities $\ySt$ for the full
+population, using the hypergeometric
+distribution~\eqref{eq:dob_sample_given_pop} and the Koopman-Pitman
+formula~\eqref{eq:koopman-pitman}:
 \begin{subequations}
   \label{eq:koopman-pitman_sample}
   \begin{gather}
