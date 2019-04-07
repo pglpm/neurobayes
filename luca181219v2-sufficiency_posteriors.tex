@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-04-06T20:15:15+0200
+%% Last-Updated: 2019-04-07T18:09:03+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -653,9 +653,8 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \newcommand*{\yF}{\bm{F}}
 \newcommand*{\yf}{\bm{f}}
 \newcommand*{\yH}{\varEta}
-\newcommand*{\yCs}{\mathte{c}}
-\newcommand*{\yccs}{\widebar{c}}
-\newcommand*{\ycs}{\widebar{\bm{c}}}
+\newcommand*{\ycs}{\bm{c}}
+\newcommand*{\yccs}{\Hat{\bm{c}}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -964,32 +963,46 @@ The last expression shows that:
 \label{sec:sample_data}
 
 
-The data for which we want to calculate the
+The data conditional on which we want to calculate the
 \dob~\eqref{eq:posterior_hypotheses_data} do not involve the full
-population, though, but only a sample of it: they are a sequence $\yst$ of
-recorded sample activities with relative frequencies $\yf$:
+population, though, but only a sample of it: they are some statistics
+\begin{equation}
+  \label{eq:def_sample_statistics}
+  \yccs \defd \frac{1}{T}\sum_{t} \ycs_{\ys_{t}} \equiv
+  \sum_{\ys} \ycs_{\ys} f_{\ys}
+\end{equation}
+of a sequence $\yst$ of recorded sample activities with relative
+frequencies $\yf$. The statistic $\ycs_{\ys}$ can be vector-valued.
+
+We use Bayes's theorem:
 \begin{equation}
   \label{eq:posterior_given_sample}
-  \pf(\yl \| \yf, \yI) \propto \pf(\yl \| \yI)\;
+  \pf(\yl \| \yccs, \yI) \propto \pf(\yl \| \yI)\;
+  \pf(\yccs \| \yl, \yI)
+\end{equation}
+and focus our attention on the last term. It can be written as the sum of
+our \dobs\ for the frequencies satisfying the statistics:
+\begin{equation}
+  \label{eq:stat_from_freqs}
+  \pf(\yccs \| \yl, \yI) =
+  \sum_{\yf} \delt\bigl(\tsum_{\ys} \ycs_{\ys} f_{\ys} = \yccs\bigr)\;
   \pf(\yf \| \yl, \yI).
 \end{equation}
-
-First we note that our \dob\ about every sequence $\yst$ having frequencies
-$\yf$ have the same value, under the hypothesis of sufficiency \emph{for
-  the full population} and assuming the long-run statistics are known --
-that is, with $\yl$ given:
+To calculate our \dob\ about the frequencies, we note that all sequences
+$\yst$ having frequencies $\yf$ have the same \dob\ under the hypothesis
+of sufficiency \emph{for the full population} and assuming the long-run
+statistics are known -- that is, with $\yl$ given:
 \begin{equation}
   \label{eq:prob_particular_sequence}
   \pf(\yst \|\yl, \yI) = \prod_t \pf(\ys_{t} \| \yl, \yI)
   = \prod_{\ys} \pf(\ys \| \yl, \yI)^{T f_{\ys}}.
 \end{equation}
-The joint \dob\ factorizes because the \dob\ for each $\ys_{t}$ is
+The first, joint \dob\ factorizes because the \dob\ for each $\ys_{t}$ is
 independent of the other $t$ if the corresponding $\yS_{t}$ is known, and
 the joint \dob\ for all the $\yS_{t}$ factorizes if $\yl$ is known.
 
-Our \dob\ $\pf(\ys \| \yl, \yI)$ about the sample activity at any
-particular time, given $\yl$, can be obtained by marginalizing the
-corresponding $\yS$:
+Our \dob\ $\pf(\ys \| \yl, \yI)$ about the sample activity at any time,
+given $\yl$, can be obtained by marginalizing the corresponding $\yS$:
 \begin{equation}
   \label{eq:prob_sample_lambda}
   \pf(\ys \| \yl, \yI) =
@@ -1001,8 +1014,8 @@ given by \eqn~\eqref{eq:koopman-pitman_likelihood}.
 
 
 Our \dob\ $\pf(\yf \| \yl, \yI)$ about the relative frequencies of sample
-activities is then proportional to the number of sequences having those
-frequencies:
+activities is then proportional to the \dob\ above, times the number of
+sequences having those frequencies:
 \begin{equation}
   \label{eq:koopman-pitman_sample}
   \begin{split}
@@ -1033,6 +1046,14 @@ frequencies:
 %     Z(\yl) \defd \sum_{\yS}
 %     \yg_{\yS}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr),
 \end{equation}
+
+
+***
+
+
+
+
+
 
 As in the previous section, if the density $\pf(\yl \| \yI)$ for $\yl$ is
 uniform then from \eqn~\eqref{eq:posterior_given_sample} the mode of
