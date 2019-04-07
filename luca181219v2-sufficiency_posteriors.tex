@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2019-02-16T18:38:32+0100
-%% Last-Updated: 2019-04-07T18:09:03+0200
+%% Last-Updated: 2019-04-07T19:03:32+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -1017,7 +1017,7 @@ Our \dob\ $\pf(\yf \| \yl, \yI)$ about the relative frequencies of sample
 activities is then proportional to the \dob\ above, times the number of
 sequences having those frequencies:
 \begin{equation}
-  \label{eq:koopman-pitman_sample}
+  \label{eq:koopman-pitman_sample_freqs}
   \begin{split}
     \pf(\yf \| \yl, \yI) &= \binom{T}{T\;\yf}\; \pf(\yst \| \yl, \yI)
     = \binom{T}{T\;\yf}\; \prod_{\ys}\Bigl[
@@ -1046,6 +1046,52 @@ sequences having those frequencies:
 %     Z(\yl) \defd \sum_{\yS}
 %     \yg_{\yS}\;\exp\bigl(\tsum_{r} \yll_r C_{r\yS}\bigr),
 \end{equation}
+The last expression valid for enough large $T$.
+
+Combining \eqns~\eqref{eq:stat_from_freqs}
+and~\eqref{eq:koopman-pitman_sample_freqs} we obtain
+\begin{equation}
+  \label{eq:posterior_given_statistics}
+    \pf(\yccs \| \yl, \yI) \approx
+    \sum_{\yf} \delt\bigl(\tsum_{\ys} \ycs_{\ys} f_{\ys} = \yccs\bigr)\;
+    \exp\Bigl\{
+    T\;\yH\Bigl[\yf,
+    \bigl(\tsum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI)\bigr)_{\ys}\Bigr]
+    \Bigr\}.    
+\end{equation}
+
+When $T$ is very large compared to the number of possible values of $\ys$,
+the expression above becomes negligible for all $\yl$ such that
+$\tsum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI)$ equal some set of frequencies
+$f_{\ys}$ that satisfy the constraints~\eqref{eq:def_sample_statistics}. It
+can therefore be approximated as
+\begin{multline}
+  \label{eq:posterior_given_statistics_approx_delta}
+  \pf(\yccs \| \yl, \yI) \approx
+  \delt\bigl[\tsum_{\ys} \ycs_{\ys}
+  \tsum_{\yS} G_{\ys\yS}\;\pf(\yS \| \yl, \yI) = \yccs \bigr]
+  \equiv{}\\
+  \delt\Biggl[
+  \sum_{\yS} \tsum_{\ys}\ycs_{\ys}\,G_{\ys\yS}\;
+  \frac{\yg_{\yS}}{Z(\yl)}\;\exp\bigl(\yl \bm{C}_{\yS}\bigr)
+  = \yccs \Biggr].
+\end{multline}
+This equation differ from the constraint equation obtained with the usual
+maximum-entropy method: since
+\begin{equation}
+  \label{eq:diff_constr_sample_full}
+  \tsum_{\ys} \ycs_{\ys}\,G_{\ys\yS} \ne \bm{C}_{\yS},
+\end{equation}
+we are not seeking $\yl$ for which the expectation of \emph{its conjugate
+  statistics} $\bm{C}_{\yS}$ satisfies a constraint, but for which the
+expectation of a different statistics satisfies a constraint. The only
+exception is when 
+\begin{equation}
+  \label{eq:equal_constr_sample_full}
+  \tsum_{\ys} \ycs_{\ys}\,G_{\ys\yS} = \bm{C}_{\yS},
+\end{equation}
+which happens, for example, for the factorial moments.
+
 
 
 ***
