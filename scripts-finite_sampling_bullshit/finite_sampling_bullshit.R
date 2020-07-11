@@ -49,31 +49,166 @@ freqsampling <- function(freqs,nsamples=20){
 
 plotsingle <- function(rfreqs0,filename,tit0,nmcsamples=1000,base=2){
     nstim <- ncol(rfreqs0)
+    nresp <- nrow(rfreqs0)
     milongrun0 <- mutualinfo(rfreqs0)
 
     misamples0 <- foreach(i=1:nmcsamples,.combine=c)%do%{
         fsample <- foreach(s=1:nstim,.combine=cbind)%do%{
-            rdirichlet(n=1,alpha=rfreqs0[,s])
+            tabulate(sample(x=1:nresp,size=20,replace=TRUE,prob=rfreqs0[,s]),nbins=nresp)/20
         }
         mutualinfo(fsample)
     }
 
-    hires <- hist(misamples0,breaks='FD',plot=FALSE)
+    hires <- hist(misamples0,breaks='Sturges',plot=FALSE)
     maxy <- max(hires$counts)
+    minx <- min(hires$breaks,milongrun0*1.1)
     maxx <- max(hires$breaks,milongrun0*1.1)
-    pdff(paste0(filename))
-    matplot(x=misamples0,y=rep(-maxy/20,nmcsamples),type='p',lty=1,lwd=3,pch='.',cex=2,col=myblue,xlim=c(0,maxx),ylim=c(-maxy/20,maxy),xlab='sampled I/bit',ylab='',main=tit0)
-    hist(misamples0,breaks='FD',xlim=c(0,maxx),ylim=c(-maxy/20,maxy),xlab='I',ylab='',add=TRUE)
+    subs <- misamples0[seq(1,length(misamples0),length.out=100)]
+    
+    pdff(paste0('histo_',filename))
+    matplot(x=subs,y=rep(-maxy/20,100),type='p',lty=1,lwd=3,pch='.',cex=2,col=myblue,xlim=c(minx,maxx),ylim=c(-maxy/20,maxy),xlab=paste0('sampled MI/bit    (sampled mean=',signif(mean(misamples0),2),' bit,   long-run=',signif(milongrun0,2),' bit)'),ylab='',main=tit0)
+    hist(misamples0,breaks='Sturges',xlim=c(minx,maxx),ylim=c(-maxy/20,maxy),xlab='I',ylab='',add=TRUE)
 ##legend('top',paste0('\nblack: mean, blue: median\nyellow: 16%q'),bty='n')
     matlines(x=rep(milongrun0,2),y=c(0,maxy),type='l',lty=1,lwd=3,pch='.',col=myred)
-dev.off()
+    dev.off()
+
+    pdff(paste0('resp_',filename))
+    barplot(t(freqs0),beside=TRUE,xlab='responses',ylab='long-run frequencies',main=tit0,names=1:10,space=c(0.2,1))
+    dev.off()
 }
 
 freqs0 <- matrix(1/10,10,2)
-plotsingle(freqs0,'hist_caseA', 'case A')
+plotsingle(freqs0,'caseA', 'case A')
 
 
-f1 <- c(rep(1/7,7),rep(0,3))
+f1 <- c(rep(1/5,5),rep(0,5))
 freqs0 <- cbind(f1,rev(f1))
-plotsingle(freqs0,'hist_caseB', 'case B')
+plotsingle(freqs0,'caseB', 'case B')
 
+f1 <- c(rep(1/5,5)*90/100,10/100,rep(0,4))
+freqs0 <- cbind(f1,rev(f1))
+plotsingle(freqs0,'caseB', 'case B')
+
+dcoe <- function(a,n=10){(1-n*a)*2/(n^2+n)*(1:n)+a}
+f1 <- dcoe(0)
+freqs0 <- cbind(f1,rev(f1))
+plotsingle(freqs0,'caseC', 'case C')
+
+
+f1 <- dcoe(0)
+freqs0 <- cbind(f1,rev(f1))
+plotsingle(freqs0,'test', 'case C')
+
+pt <- 6
+fr <- 99
+f1 <- c(rev(dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
+freqs0 <- cbind(rev(f1),(f1))
+plotsingle(freqs0,'test', 'case C')
+
+
+pt <- 2
+fr <- 100
+f1 <- c(rev(dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
+freqs0 <- cbind(rev(f1),rep(1/10,10))
+plotsingle(freqs0,'test', 'case C')
+
+pt <- 8
+fr <- 90
+f1 <- c(rev(dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
+pt <- 2
+fr <- 90
+f2 <- c(rev(dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
+freqs0 <- cbind(rev(f1),(f2))
+plotsingle(freqs0,'test', 'case C')
+
+
+f1 <- c((dcoe(0,n=6)), rep(0,4))
+freqs0 <- cbind(f1,rev(f1))
+plotsingle(freqs0,'test', 'case C')
+
+
+plotmulti <- function(afreqs,filename,tit0,nmcsamples=1000,base=2){
+    nstim <- 2
+    if(is.null(dim(afreqs))){afreqs <- cbind(afreqs,afreqs)}
+
+    misamples <- foreach(i=1:nmcsamples,.combine=rbind)%do%{
+        rfreqs0 <- cbind(c(rdirichlet(n=1,alpha=afreqs[,1])),
+                         c(rdirichlet(n=1,alpha=afreqs[,2])))
+        
+        fsample <- foreach(s=1:nstim,.combine=cbind)%do%{
+            tabulate(sample(x=1:nresp,size=20,replace=TRUE,prob=rfreqs0[,s]),nbins=nresp)/20
+        }
+        c(mutualinfo(rfreqs0), mutualinfo(fsample))
+    }
+
+    maxmi <- max(c(misamples))
+    pdff(paste0('scatter_',filename))
+    par(pty = "s")
+    matplot(x=misamples[,1],y=misamples[,2],type='p',lty=1,lwd=3,pch='.',cex=4,col=myblue,xlim=c(0,maxmi),ylim=c(0,maxmi),xlab=paste0('long-run MI/bit'),ylab=paste0('sampled MI/bit'),main=tit0)
+    dev.off()
+}
+
+
+
+plotmulti(rep(10,10),filename='centrepeak',tit0='')
+
+plotmulti(rep(1,10),filename='unif',tit0='')
+
+plotmulti(rep(0.1,10),filename='jeffr',tit0='')
+
+plotmulti(rep(1,10),filename='test',tit0='')
+
+
+plotmulti(dcoe(0)*5,filename='test',tit0='')
+
+f1 <- dcoe(0)*1
+plotmulti(cbind(f1,rev(f1)),filename='test',tit0='')
+
+plotmulti(rep(1,10),filename='unif',tit0='')
+
+plotmulti(rep(0.1,10),filename='jeffr',tit0='')
+
+
+
+
+plotmultih <- function(afreqs0,stre,filename,tit0,nmcsamples=1000,base=2){
+    nstim <- 2
+
+    misamples <- foreach(i=1:nmcsamples,.combine=rbind)%do%{
+        afreqs <- stre*t(rdirichlet(n=2,alpha=afreqs0))
+        
+        rfreqs0 <- cbind(c(rdirichlet(n=1,alpha=afreqs[,1])),
+                         c(rdirichlet(n=1,alpha=afreqs[,2])))
+        
+        fsample <- foreach(s=1:nstim,.combine=cbind)%do%{
+            tabulate(sample(x=1:nresp,size=20,replace=TRUE,prob=rfreqs0[,s]),nbins=nresp)/20
+        }
+        c(mutualinfo(rfreqs0), mutualinfo(fsample))
+    }
+
+    maxmi <- max(c(misamples))
+    pdff(paste0('scatter_',filename))
+    par(pty = "s")
+    matplot(x=misamples[,1],y=misamples[,2],type='p',lty=1,lwd=3,pch='.',cex=4,col=myblue,xlim=c(0,maxmi),ylim=c(0,maxmi),xlab=paste0('long-run MI/bit'),ylab=paste0('sampled MI/bit'),main=tit0)
+    matlines(x=c(0,maxmi),y=c(0,maxmi),type='l',lty=2,lwd=2,pch='.',col=myyellow)
+
+    dev.off()
+}
+
+
+
+plotmulti(rep(10,10),filename='centrepeak',tit0='')
+
+plotmulti(rep(1,10),filename='unif',tit0='')
+
+plotmulti(rep(0.1,10),filename='jeffr',tit0='')
+
+plotmultih(rep(1,10),stre=1,filename='test',tit0='',nmcsamples=2000)
+
+plotmultih(rep(1,10),stre=1,filename='unifhier',tit0='',nmcsamples=2000)
+
+
+plotmulti(dcoe(0)*5,filename='test',tit0='')
+
+f1 <- dcoe(0)*1
+plotmulti(cbind(f1,rev(f1)),filename='test',tit0='')

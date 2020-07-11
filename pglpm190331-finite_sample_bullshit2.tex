@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-11T08:40:29+0200
+%% Last-Updated: 2020-07-11T12:53:39+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -24,7 +24,7 @@ british%
 \newcommand*{\pdftitle}{\propertitle}
 \newcommand*{\headtitle}{Guessing long-run mutual information}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
-\newcommand*{\headauthor}{P.G.L.  Porta Mana, C. Battistin, S. Gonzalo Cogno}
+\newcommand*{\headauthor}{Porta Mana, Battistin, Gonzalo Cogno}
 \newcommand*{\reporthead}{\ifarxiv\else Open Science Framework \href{https://doi.org/10.31219/osf.io/***}{\textsc{doi}:10.31219/osf.io/***}\fi}% Report number
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -323,7 +323,7 @@ Open Science Framework \texttt{doi:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 
 \usepackage{graphicx}
 
-%\usepackage{wrapfig}
+\usepackage{wrapfig}
 
 %\usepackage{tikz-cd}
 
@@ -504,15 +504,15 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \title{\propertitle}
 \author{%
 \hspace*{\stretch{1}}%
-\parbox{0.75\linewidth}%\makebox[0pt][c]%
+\parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering P.G.L.  Porta Mana  \href{https://orcid.org/0000-0002-6070-0784}{\protect\includegraphics[scale=0.16]{orcid_32x32.png}}\\%
 \footnotesize\epost{\email{pgl}{portamana.org}}}%
 \hspace*{\stretch{1}}%
-\parbox{0.75\linewidth}%\makebox[0pt][c]%
+\parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering C. Battistin\\%
 \footnotesize\epost{}{}}%
 \hspace*{\stretch{1}}%
-\parbox{0.75\linewidth}%\makebox[0pt][c]%
+\parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering S. Gonzalo Cogno\\%
 \footnotesize\epost{\email{}{}}}%
 \hspace*{\stretch{1}}%
@@ -667,6 +667,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\DeclareMathOperator*{\argsup}{arg\,sup}
 \newcommand*{\dob}{degree of belief}
 \newcommand*{\dobs}{degrees of belief}
+\newcommand*{\bit}{\mathrm{bit}}
 %%% Custom macros end @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -722,6 +723,100 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 
 \section{Introduction}
 \label{sec:intro}
+
+We have two kinds of stimuli and, say, ten kinds of neural responses to
+these stimuli, under specific environmental and behavioural conditions, and
+for a specific kind of subjects. The responses could be, for example, ten
+different firing rates of a specific neuron, or ten different
+total-population activities of a brain region.
+
+Imagine that a researcher told us the results of $10^{60}$
+stimulus-response measurements, all performed for the specified conditions
+and subjects, and in which the two kinds of stimulus occurred equally
+often. From the long-run\footnote{\enquote{But this \emph{long run} is a
+    misleading guide to current affairs. \emph{In the long run} we are all
+    dead.} \citep[\sect~3.I, p.~65]{keynes1923_r2013}} joint frequencies of
+stimulus-response pairs we could calculate the long-run mutual information
+between stimulus and response.
+
+But we don't have access to such a wealth of observations, and never will.
+Suppose we only have actual knowledge of a sample of few, say 20,
+measurements for each kind of stimulus, from such long-run sequence. We can
+calculate the joint frequencies of stimulus-response pairs in this sample
+and the resulting sample mutual information.
+
+Our question is: how do the mutual information of the sample and of the
+long-run sequence differ?
+
+Let's explore some possibilities.\newpage
+
+% \setlength{\intextsep}{0ex}% with wrapfigure
+% \setlength{\columnsep}{0ex}% with wrapfigure
+\begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
+\centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseA.pdf}\\%
+\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseA.pdf}\\
+\caption{Case A}\label{fig:resp_caseA}
+\end{figure}% finite_sampling_bullshit.R
+\textbf{Case A}. Suppose the long-run frequencies of responses conditional
+on each kind of stimulus are as given in the top panel of
+\fig~\ref{fig:resp_caseA} \citep[as the example in][]{panzerietal2007}. In
+the long run all responses occur equally often for either stimulus. The
+long-run mutual information is $0\:\bit$.
+
+Now we consider a sample of 20 response measurements for each stimulus from
+such long-run distribution. From this sample we calculate the joint
+frequencies and their mutual information. The exact long-run sequence is
+unknown, so such a sample could yield different results. Considering all
+long-run sequences (having the same long-run distribution) as equally
+possible, we plot some possible results for the sample mutual information
+in the bottom panel. The long-run mutual information is indicated by the
+red line. The sampled mutual information is most surely always higher than
+the long-run one, with an average of $0.21\:\bit$.
+
+\medskip
+
+\begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
+\centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseB.pdf}\\%
+\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseB.pdf}\\
+\caption{Case B}\label{fig:resp_caseB}
+\end{figure}% finite_sampling_bullshit.R
+\textbf{Case B}. Suppose the long-run frequencies of responses conditional
+on each kind of stimulus are as given in the top panel of
+\fig~\ref{fig:resp_caseB}. The responses do not occur equally often in the
+long run, and the frequencies of some of them are different for the two
+kinds of stimulus. The long-run mutual information is $0.43\:\bit$.
+
+We again consider a sample of 20 response measurements for each stimulus.
+The corresponding plot for the sampled mutual information is shown in the
+bottom panel. The sampled mutual information is most surely always lower
+that the long-run one, with an average of $0.22\:\bit$.
+
+\medskip
+
+\begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
+\centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseC.pdf}\\%
+\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseC.pdf}\\
+\caption{Case C}\label{fig:resp_caseC}
+\end{figure}% finite_sampling_bullshit.R
+\textbf{Case C}. Suppose the long-run frequencies of responses conditional
+on each kind of stimulus are as given in the top panel of
+\fig~\ref{fig:resp_caseC}. Also in this case the responses do not occur
+equally often in the long run, and their frequencies are different for the
+two kinds of stimulus. The long-run mutual information is $0.22\:\bit$.
+
+We again consider a sample of 20 response measurements for each stimulus.
+The corresponding plot for the sampled mutual information is shown in the
+bottom panel. The sampled mutual information is on average $0.22\:\bit$,
+equal to the long-run one.
+
+
+\medskip
+
+
+
+
+
+
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
