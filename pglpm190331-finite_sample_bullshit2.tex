@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-11T12:53:39+0200
+%% Last-Updated: 2020-07-11T17:53:18+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -771,7 +771,7 @@ long-run sequences (having the same long-run distribution) as equally
 possible, we plot some possible results for the sample mutual information
 in the bottom panel. The long-run mutual information is indicated by the
 red line. The sampled mutual information is most surely always higher than
-the long-run one, with an average of $0.21\:\bit$.
+the long-run one, with an average of $0.2\:\bit$.
 
 \medskip
 
@@ -784,12 +784,12 @@ the long-run one, with an average of $0.21\:\bit$.
 on each kind of stimulus are as given in the top panel of
 \fig~\ref{fig:resp_caseB}. The responses do not occur equally often in the
 long run, and the frequencies of some of them are different for the two
-kinds of stimulus. The long-run mutual information is $0.43\:\bit$.
+kinds of stimulus. The long-run mutual information is $0.48\:\bit$.
 
 We again consider a sample of 20 response measurements for each stimulus.
 The corresponding plot for the sampled mutual information is shown in the
-bottom panel. The sampled mutual information is most surely always lower
-that the long-run one, with an average of $0.22\:\bit$.
+bottom panel. The sampled mutual information is almost symmetrically
+distributed around  the long-run value, with an average of $0.51\:\bit$.
 
 \medskip
 
@@ -802,12 +802,16 @@ that the long-run one, with an average of $0.22\:\bit$.
 on each kind of stimulus are as given in the top panel of
 \fig~\ref{fig:resp_caseC}. Also in this case the responses do not occur
 equally often in the long run, and their frequencies are different for the
-two kinds of stimulus. The long-run mutual information is $0.22\:\bit$.
+two kinds of stimulus. The long-run mutual information is $0.92\:\bit$.
 
 We again consider a sample of 20 response measurements for each stimulus.
 The corresponding plot for the sampled mutual information is shown in the
-bottom panel. The sampled mutual information is on average $0.22\:\bit$,
-equal to the long-run one.
+bottom panel. The distribution of the sampled mutual information is very
+skewed, with an average $0.97\:\bit$. The distribution's support is almost
+divided in distinct blocks; this is the result of the discreteness of the
+possible values of the frequencies from the sample (they must be multiples
+of $1/20$), together with the extreme separation of the long-run frequency
+distributions for the two stimuli.
 
 
 \medskip
@@ -819,6 +823,18 @@ equal to the long-run one.
 
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
+
+\section{Caveats}
+\label{sec:caveats}
+
+The long-run frequencies of the two kinds of stimulus are also very
+important. Even if the conditional responses seem to yield low mutual info
+when stimuli occur equally often, they may yield a sufficient amount of
+mutual info when the stimuli don't occur equally often. In fact, this is
+partly a \emph{decision} problem, which can't be judged only by checking
+frequencies or probabilities.
+
+
 
 %%%% examples use empheq
 %   \begin{empheq}[left={\mathllap{\begin{aligned}    \de\yF_{\yc}/\de\yp&=0\text{:} \\
