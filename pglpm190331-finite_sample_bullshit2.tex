@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-12T18:20:27+0200
+%% Last-Updated: 2020-07-12T20:01:55+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -19,9 +19,10 @@ british%
 \newcommand*{\firstdraft}{***}
 \newcommand*{\firstpublished}{***}
 \newcommand*{\updated}{\ifarxiv***\else\today\fi}
-\newcommand*{\propertitle}{Guessing long-run mutual information [draft]%\\{\large ***}%
+\newcommand*{\propertitle}{Reasoned inference of long-run mutual
+  information\\\normalsize(Bayesian theory for dummies) [draft]%\\{\large ***}%
 }% title uses LARGE; set Large for smaller
-\newcommand*{\pdftitle}{\propertitle}
+\newcommand*{\pdftitle}{Reasoned inference of long-run mutual information}
 \newcommand*{\headtitle}{Guessing long-run mutual information}
 \newcommand*{\pdfauthor}{P.G.L.  Porta Mana}
 \newcommand*{\headauthor}{Porta Mana, Battistin, Gonzalo Cogno}
@@ -450,7 +451,7 @@ Open Science Framework \texttt{doi:\urlalt{https://doi.org/10.17605/osf.io/#1}{1
 \pagestyle{manaart}
 
 \setlength{\droptitle}{-3.9\onelineskip}
-\pretitle{\begin{center}\LARGE\sffamily%
+\pretitle{\begin{center}\Large\sffamily%
 \bfseries}
 \posttitle{\bigskip\end{center}}
 
@@ -510,7 +511,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \hspace*{\stretch{1}}%
 \parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering C. Battistin\\%
-\footnotesize\epost{}{}}%
+\footnotesize\epost{\email{}{}}}%
 \hspace*{\stretch{1}}%
 \parbox{0.33\linewidth}%\makebox[0pt][c]%
 {\protect\centering S. Gonzalo Cogno\\%
@@ -689,7 +690,14 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \setlength{\absrightindent}{0pt}
 \setlength{\abstitleskip}{-\absparindent}
 \begin{abstract}\labelsep 0pt%
-  \noindent ***
+  \noindent A reasoned analysis of inference for long-run mutual
+  information between stimuli and responses from small samples is given.
+  The use of estimators, biased or not, is found to be inadequate for the
+  small-sample case. Moreover, any inference or formula for bias is found
+  to heavily depend on the specific peculiarities of the problem -- the
+  specific kind of stimuli and responses, brain region, behavioural and
+  environmental conditions, and so on -- making any one-fits-all formula
+  universally poor.
 % \\\noindent\emph{\footnotesize Note: Dear Reader
 %     \amp\ Peer, this manuscript is being peer-reviewed by you. Thank you.}
 % \par%\\[\jot]
@@ -724,26 +732,28 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 \section{Long-run mutual info and sample mutual info}
 \label{sec:intro}
 
-We have two kinds of stimuli and, say, ten kinds of neural responses to
+We have, say, two kinds of stimuli and ten kinds of neural responses to
 these stimuli, under specific environmental and behavioural conditions, and
 for a specific kind of subjects. The responses could be, for example, ten
 different firing rates of a specific neuron, or ten different
-total-population activities of a brain region.
+total-population activities of a brain region, to two different kinds of
+visual stimuli.
 
-Imagine that a researcher told us the results of $10^{60}$
+Imagine that a researcher gave us the results of $10^{60}$
 stimulus-response measurements, all performed for the specified conditions
 and subjects, and in which the two kinds of stimulus occurred equally
 often. From the long-run\footnote{\enquote{But this \emph{long run} is a
     misleading guide to current affairs. \emph{In the long run} we are all
-    dead.} \parencite[\sect~3.I, p.~65]{keynes1923_r2013}} joint frequencies of
-stimulus-response pairs we could calculate the long-run mutual information
-between stimulus and response.
+    dead.} \parencite[\sect~3.I p.~65]{keynes1923_r2013}} joint frequencies
+of the given stimulus-response pairs we could calculate the long-run mutual
+information between stimulus and response.
 
 But we don't have access to such a wealth of observations, and never will.
 Suppose we only have actual knowledge of a sample of few, say 20,
-measurements for each kind of stimulus, from such long-run sequence. We can
-calculate the joint frequencies of stimulus-response pairs in this sample
-and the resulting sample mutual information.
+measurements for each kind of stimulus. They are a sample from such
+unobservable long-run sequence. We can calculate the joint frequencies of
+stimulus-response pairs in this sample and the resulting sample mutual
+information.
 
 Our question is: how do the mutual information of the sample and of the
 long-run sequence differ?
@@ -760,8 +770,8 @@ Let's explore some possibilities.
 \caption{Case A}\label{fig:resp_caseA}
 \end{figure}% finite_sampling_bullshit.R
 \textbf{Case A}. Suppose the long-run frequencies of responses conditional
-on each kind of stimulus are as given in the top panel of
-\fig~\ref{fig:resp_caseA} \citep[as the example in][]{panzerietal2007}. The
+on each kind of stimulus are as given\citep[as the example
+in][]{panzerietal2007} in the top panel of \fig~\ref{fig:resp_caseA}. The
 light-grey histogram is for the responses to the first kind of stimulus;
 dark-grey for the second kind. In the long run all responses occur equally
 often for either stimulus. The long-run mutual information is $0\:\bit$.
@@ -770,12 +780,13 @@ Now we consider a sample of 20 response measurements for each stimulus from
 such long-run distribution. From this sample we calculate the joint
 frequencies and their mutual information. The exact long-run sequence is
 unknown, so such a sample could yield different results. Considering all
-long-run sequences (having the same long-run distribution) as equally
-plausible, we plot some possible results for the sample mutual information
-in the bottom panel, with a histogram. The long-run mutual information is
-indicated by the red line. The sampled mutual information is most surely
-always higher than the long-run one; it is even outside the inner 95\%
-interval range.
+long-run sequences having the frequencies of \fig~\ref{fig:resp_caseA} as
+equally plausible, we plot some possible results for the sample mutual
+information in the bottom panel, as a scatter plot (blue dots) and with a
+histogram (10\,000 samples, a subsample of 100 shown in the scatter plot).
+The long-run mutual information is indicated by the red line. The sampled
+mutual information is most surely always higher than the long-run one in
+this case. The long-run one is even outside the inner 95\% interval range.
 
 \clearpage
 
@@ -791,10 +802,10 @@ for the two kinds of stimulus. The long-run mutual information is
 $0.48\:\bit$.
 
 We again consider a sample of 20 response measurements for each stimulus.
-The histogram of the possible sampled mutual information is shown in the
-bottom panel. The possible values are almost symmetrically distributed
-around the long-run value, which is well within their inner 68\% quantile
-range, close to the median, $0.50\:\bit$, and the mean, $0.51\:\bit$.
+The histogram of the possible values of sample mutual information is shown
+in the bottom panel. The possible values are almost symmetrically
+distributed around the long-run value, which is well within their inner
+68\% quantile range, close to the median and mean, $0.51\:\bit$.
 
 \clearpage
 
@@ -828,7 +839,7 @@ The histogram of possible values of the sampled mutual information is shown
 in the bottom panel. The histogram is very skewed, with an average of
 $0.97\:\bit$ (the histogram's support is almost divided in distinct blocks;
 this is the result of the discreteness of the possible values of the
-frequencies from the sample: they must be multiples of $1/20$). The
+frequencies from the sample and their small-overlapping supports). The
 long-run mutual information is within the inner 68\% quantile.
 
 
@@ -841,18 +852,19 @@ What conclusions can we draw from the examples above?
 \item In some cases the sample mutual information may be quite close to the
   long-run one; in others, very far from it.
 \item The range and spread of the possible values of the sample mutual
-  information are heavily dependent on the long-run conditional response
-  distributions.
-\item In some cases the spread (say, 95\%) is over a short range, compared
-  with the possible range of the long-run mutual information,
-  $\clcl{0, 1}\:\bit$; for example 18\% for Case D. In other cases it is
-  over a very broad range, for example 53\% for Case C.
+  information are heavily dependent on the long-run response distributions.
+\item In some cases the spread (say, the inner 95\% interval) of the
+  possible values is over a short range, compared with the maximal possible
+  range of the long-run mutual information, $\clcl{0, 1}\:\bit$; for
+  example 18\% for Case D. In other cases the spread is over a very broad
+  range compared to the maximal possible one, for example 53\% for Case C.
 \item The distribution of these possible values is in some cases very
   skewed.
-\item Owing to the preceding points, it is misleading to just report the
-  mean of the sample mutual information, even when such a mean is close to
-  the long-run one.
 \end{enumerate}
+
+Owing to the preceding points, it is misleading to just report the mean of
+the sample mutual information, even when such a mean is close to the
+long-run one.
 
 Thus it is not possible to say, in general, that the long-run and the
 sample mutual informations have values far apart or close. Note that even
@@ -860,32 +872,34 @@ speaking of the \enquote{mean} of the sample mutual information is
 misleading: from a set of observations we only get \emph{one} value of the
 sample mutual information, not the mean. And we cannot know what the mean
 is, because we don't know what the long-run conditional frequencies are --
-if we knew them we wouldn't need to make guesses. So, once we calculate the
-mutual information from a small sample, we don't know whether case A, B, C,
-D above, or some completely different case, applies. Suppose we observe 20
-trials and we find a sample mutual information of $0.5\:\bit$. How do we
-know whether this should be considered a sample from the right tail of
-\fig~\ref{fig:resp_caseA} (so the long-run mutual info is actually lower),
-or from the left side of \fig~\ref{fig:resp_caseB} (the long-run is
-actually higher), or from the left of \fig~\ref{fig:resp_caseC} (long-run
-is lower, in this case), or finally from the left tail of
-\fig~\ref{fig:resp_caseD} (long-run is higher)?
+if we knew them we wouldn't need to make guesses.
 
-This last remark is also important for \enquote{validations by simulation}.
-They would be validations only if the chosen long-run frequencies for the
-simulation were \emph{representative of the true ones}. To check whether
-they really are representative, we therefore would need to know the true
-ones. And we don't -- this was indeed the problem we started from. Such
-\enquote{validations} are therefore logically circular and completely
-groundless.
+Therefore, once we calculate the mutual information from a small sample we
+don't know whether case A, B, C, D above, or some completely different
+case, applies. Suppose we observe 20 trials and we find a sample mutual
+information of $0.5\:\bit$. How do we know whether this should be
+considered a sample from the right tail of \fig~\ref{fig:resp_caseA} (so
+the long-run mutual info is actually lower)? or from the left side of
+\fig~\ref{fig:resp_caseB} (the long-run is actually higher)? or from the
+left of \fig~\ref{fig:resp_caseC} (long-run is lower, in this case)? or
+finally from the left tail of \fig~\ref{fig:resp_caseD} (long-run is
+higher)?
+
+The latter remark is also important in regard of \enquote{validations by
+  simulation}. They would be validations only if the chosen long-run
+frequencies for the simulation were \emph{representative of the true ones}.
+To check whether they really are representative, we therefore would need to
+know the true ones. And we don't -- this was indeed the problem we started
+from. Such \enquote{validations} are therefore logically circular and
+completely groundless.
 
 \section{What are the long-run frequencies?}
 \label{sec:longrun_freqs}
 
 
 One may say \enquote{OK, I don't know the long-run response frequency
-  distributions, but I may check what's the relation between the long-run
-  and sample mutual informations on average among all possible such
+  distributions, but I may check what's the relation between long-run \amp\
+  sample mutual informations on average among all possible such
   distributions}. The problem with this approach is that to calculate such
 \enquote{average} we must specify a distribution over all possible pairs of
 conditional frequency distributions -- let's call this a
@@ -901,7 +915,7 @@ space. And it isn't clear whether some parametrization is more natural than
 some other.
 
 We could, for example, choose a superdistribution that gives equal weights
-to equal intervals of conditional frequencies; that is, the same weight to
+to equal intervals of conditional frequencies. That is, the same weight to
 each hypercube $\prod_{r,s}\clcl{f(r \|s), f(r \|s) + \Delta}$, for fixed
 $\Delta$, for all values of $f(r \|s)$. Such a superdistribution is
 proportional to $\prod_{rs}\di f(r \|s)$.
@@ -912,27 +926,29 @@ given equal weight. Then the weights given to equal intervals in the
 frequency ranges \emph{cannot} be uniform, because some frequencies are
 realized by more sequences than others. We would obtain a superdistribution
 proportional to $\prod_{s} M\{f(r \|s)\}\,\di f(r \|s)$, where $M$ is
-proportional to a multinomial coefficient.
+proportional to a multinomial coefficient. \mynote{will write the exact
+  formula}
 
 But also this last choice could be debatable. If the responses represent
 population activities or rates, for example, we know that low values should
-be expected more often that high values, owing to biological reasons and
-out of common experience. Thus we should give more weight to sequences in
-which low responses occur more frequently than high responses. This would
-lead to yet another superdistribution on the space of frequencies.
+generally be expected more often that high values, owing to biological
+reasons and out of common experience. Thus we should give more weight to
+sequences in which low responses occur more frequently than high responses.
+This would lead to yet another superdistribution on the space of
+frequencies. \mynote{will write the exact formula}
 
 Finally, should such a superdistribution be factorizable over the frequency
-distributions for the different stimuli (as in the three examples above)?
-Owing to biological constraints there should be some similarity across such
-distributions, and such factorizability might be not be a sensible
-assumption.
+distributions for the two different kinds of stimulus (as is the case in
+the three examples above)? Owing to biological constraints there should be
+some similarity across such distributions, and such factorizability might
+be not be a sensible assumption.
 
 \medskip
 
 We can see the importance of the choice of superdistribution over pairs of
-long-run conditional frequency distributions by examining some examples. We
-proceed as follows: given a superdistribution, we choose from it two
-long-run response-frequency distributions; from these we calculate the
+long-run conditional frequency distributions by examining some examples.
+Let's proceed as follows. Given a superdistribution, we choose from it two
+long-run response-frequency distributions. From these we calculate the
 long-run mutual information; then we sample 20 responses from each, and
 calculate the sample mutual information obtained from such sample of
 responses. This way we obtain a density or scatter plot that tells us how
@@ -957,32 +973,33 @@ The results are shown in \fig~\ref{fig:superdistributions} for the four
 kinds of superdistribution entertained in the discussion above.
 
 Note that this kind of plot can be used to guess the long-run mutual
-information given the one observed in a sample, under the assumption of the
-specific superdistribution related to the plot. An example is given in
+information given the one observed in the sample, under the assumption of
+the specific superdistribution underlying the plot. An example is given in
 \fig~\ref{fig:backward}: if in an observation of 20 responses per stimulus
 we find a mutual information of $0.2\:\bit$, then the long-run mutual
 information is at 68\% between $0.15\:\bit$ and $0.30\:\bit$, with a median
 of $0.22\:\bit$. Such inference assumes the superdistribution underlying
-the bottom-right of \fig~\ref{fig:superdistributions},
+the bottom-right of \fig~\ref{fig:superdistributions}.
 \begin{figure}[bt!]%{l}{0.75\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/scatter_backward.png}%
 \\%
 \caption{Example of guess for long-run mutual information from the mutual
   information observed in 20 samples per stimulus, under a specific
-  superdistribution. If the sample mutual info is $0.2\:\bit$ (horizontal,
-  yellow dashed line), then the long-run mutual info can in this case
-  inferred to be at 95\% between $(0.097, 0.39)\:\bit$ and at 68\% between
-  $(0.15, 0.30)\:\bit$ (vertical, yellow dashed lines), with a median of
-  $0.22\:\bit$}\label{fig:backward}
+  superdistribution. If the sample mutual info is $0.2\:\bit$ ( yellow
+  dashed horizontal line), then the long-run mutual info is in this case
+  inferred to be at 95\% between $\clcl{0.097, 0.39}\:\bit$ and at 68\%
+  between $\clcl{0.15, 0.30}\:\bit$ (yellow dashed vertical lines), with a
+  median of $0.22\:\bit$, not far from the sample one \parencite[compare
+  with the conclusions in][Fig.~1A]{panzerietal2007}.}\label{fig:backward}
 \end{figure}% finite_sampling_bullshit.R
 % 50\%: 0.21573429
 % 68\%: 0.15244061 0.29950121
 % 95\%: 0.09731645 0.38798742
 
-The examples of \fig~\ref{fig:superdistributions} show that the joint
+The four examples of \fig~\ref{fig:superdistributions} show that the joint
 distribution of long-run \amp\ sample mutual informations can be wildly
 different, depending on the assumed superdistribution. Consequently, any
-inferences of the former from the latter and any quantifications of
+inferences of long-run from sample and any quantifications of
 \enquote{bias} heavily depend on the assumed superdistribution.
 
 \medskip
@@ -991,8 +1008,61 @@ We obviously can't say \enquote{let's just take the average over all
   possible superdistributions}, because that would just lead to the
 analogous problem of choosing a super-superdistribution, and so on.
 
-Choosing a \enquote{standard} superdistribution, to be universally used
-\citep[\cf][]{nemenmanetal2004}, is not a sensible option either.
+Choosing a sort of \enquote{standard} or \enquote{default}
+superdistribution, to be universally used for this kind of inference
+\citep[\cf][]{nemenmanetal2004}, is not a sensible option either. The
+responses' frequency distributions that we can expect are extremely
+different depending on what kind of quantities the responses are (rates,
+total activities, bin totals, trial averages, and so on), on the brain
+region under study, and on the environmental, physiological, behavioural
+conditions of the stimulus-response situation. Any one-fits-all choice
+would simply \enquote{fit} every concrete case extremely poorly.
+
+Not choosing a superdistribution is impossible. It should be clear from
+\fig~\ref{fig:superdistributions} that any proposed algorithm or formula to
+infer the long-run mutual info from the sample one is explicitly or
+implicitly choosing a superdistribution. Hiding such a choice will just
+lead to the same poor inferences as a default choice.
+
+The only possibility -- it is simply forced on us -- is to choose a
+superdistribution as best as possible, from considerations of the specific
+stimuli, response quantities, brain region, and so on. Any such choice,
+even if based on a very cursory analysis, will always be better than any
+default choice that completely disregards the specific case.
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+Speaking of estimators and biases for the long-run mutual information in
+small-sample situations is very misleading. The distributions involved are
+so broad and skewed that any estimator would be a poor guess. It is best to
+give one or more credible intervals for the long-run mutual information, as
+shown in \fig~\ref{fig:backward}.
+
+Moreover, such credible intervals or the bias of the estimator are heavily
+dependent on our assumptions (superdistribution) about the possible
+response frequencies -- as should be expected in a small-sample situation.
+This heavy dependence makes any universal formulae for the credible
+interval or for the bias universally poor instead. Consider, for example,
+what would happen if any of the four assumptions underlying the plots of
+\fig~\ref{fig:superdistributions} were taken as universal and used in the
+other three cases.
+
+Finally, since the long-run response frequency distributions are unknown to
+us, and the choice of a superdistribution is heavily case-dependent, any
+\enquote{validation} based on simulated data \citep[\cf][\emph{Comparing
+  procedures to correct for the bias}]{panzerietal2007} is logically
+circular and meaningless. Such simulation depends on a choice either of
+long-run frequencies (and how do we know they are representative of the
+true ones?), or of a superdistribution (and is such choice appropriate for
+the specific case?).
+
+
+\medskip
+
+(Note that the inference made in \fig~\ref{fig:backward} is simply a
+Bayesian posterior calculation. The prior is the superdistribution about
+the two long-run response frequencies.)
 
 
 
@@ -1000,15 +1070,12 @@ Choosing a \enquote{standard} superdistribution, to be universally used
 
 \textcolor{white}{If you find this you can claim a postcard from me.}
 
-\section{Caveats}
-\label{sec:caveats}
-
-The long-run frequencies of the two kinds of stimulus are also very
+\mynote{The long-run frequencies of the two kinds of stimulus are also very
 important. Even if the conditional responses seem to yield low mutual info
 when stimuli occur equally often, they may yield a sufficient amount of
 mutual info when the stimuli don't occur equally often. In fact, this is
 partly a \emph{decision} problem, which can't be judged only by checking
-frequencies or probabilities.
+frequencies or probabilities.}
 
 
 
