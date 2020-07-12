@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-11T17:53:18+0200
+%% Last-Updated: 2020-07-12T12:32:45+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -580,7 +580,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %\providecommand{\varparallel}{\ensuremath{\mathbin{/\mkern-7mu/}}}%parallel (tentative symbol)
 \renewcommand*{\le}{\leqslant}%less or equal
 \renewcommand*{\ge}{\geqslant}%greater or equal
-%\DeclarePairedDelimiter\clcl{[}{]}
+\DeclarePairedDelimiter\clcl{[}{]}
 %\DeclarePairedDelimiter\clop{[}{[}
 %\DeclarePairedDelimiter\opcl{]}{]}
 %\DeclarePairedDelimiter\opop{]}{[}
@@ -735,7 +735,7 @@ stimulus-response measurements, all performed for the specified conditions
 and subjects, and in which the two kinds of stimulus occurred equally
 often. From the long-run\footnote{\enquote{But this \emph{long run} is a
     misleading guide to current affairs. \emph{In the long run} we are all
-    dead.} \citep[\sect~3.I, p.~65]{keynes1923_r2013}} joint frequencies of
+    dead.} \parencite[\sect~3.I, p.~65]{keynes1923_r2013}} joint frequencies of
 stimulus-response pairs we could calculate the long-run mutual information
 between stimulus and response.
 
@@ -768,10 +768,11 @@ such long-run distribution. From this sample we calculate the joint
 frequencies and their mutual information. The exact long-run sequence is
 unknown, so such a sample could yield different results. Considering all
 long-run sequences (having the same long-run distribution) as equally
-possible, we plot some possible results for the sample mutual information
-in the bottom panel. The long-run mutual information is indicated by the
-red line. The sampled mutual information is most surely always higher than
-the long-run one, with an average of $0.2\:\bit$.
+plausible, we plot some possible results for the sample mutual information
+in the bottom panel, with a histogram. The long-run mutual information is
+indicated by the red line. The sampled mutual information is most surely
+always higher than the long-run one; it is even outside the inner 95\%
+interval range.
 
 \medskip
 
@@ -780,16 +781,17 @@ the long-run one, with an average of $0.2\:\bit$.
 \includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseB.pdf}\\
 \caption{Case B}\label{fig:resp_caseB}
 \end{figure}% finite_sampling_bullshit.R
-\textbf{Case B}. Suppose the long-run frequencies of responses conditional
-on each kind of stimulus are as given in the top panel of
-\fig~\ref{fig:resp_caseB}. The responses do not occur equally often in the
-long run, and the frequencies of some of them are different for the two
-kinds of stimulus. The long-run mutual information is $0.48\:\bit$.
+\textbf{Case B}. The long-run frequencies of responses are given in the top
+panel of \fig~\ref{fig:resp_caseB}. The responses do not occur equally
+often in the long run, and the frequencies of some of them are different
+for the two kinds of stimulus. The long-run mutual information is
+$0.48\:\bit$.
 
 We again consider a sample of 20 response measurements for each stimulus.
-The corresponding plot for the sampled mutual information is shown in the
-bottom panel. The sampled mutual information is almost symmetrically
-distributed around  the long-run value, with an average of $0.51\:\bit$.
+The histogram of the possible sampled mutual information is shown in the
+bottom panel. The possible values are almost symmetrically distributed
+around the long-run value, which is well within their inner 68\% quantile
+range, close to the median, $0.50\:\bit$, and the mean, $0.51\:\bit$.
 
 \medskip
 
@@ -798,25 +800,54 @@ distributed around  the long-run value, with an average of $0.51\:\bit$.
 \includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseC.pdf}\\
 \caption{Case C}\label{fig:resp_caseC}
 \end{figure}% finite_sampling_bullshit.R
-\textbf{Case C}. Suppose the long-run frequencies of responses conditional
-on each kind of stimulus are as given in the top panel of
-\fig~\ref{fig:resp_caseC}. Also in this case the responses do not occur
-equally often in the long run, and their frequencies are different for the
-two kinds of stimulus. The long-run mutual information is $0.92\:\bit$.
+\textbf{Case C}. The long-run frequencies of responses are given in the top
+panel of \fig~\ref{fig:resp_caseC}. There is some difference in the
+long-run conditional frequency distributions of the responses . The
+long-run mutual information is $0.38\:\bit$.
 
-We again consider a sample of 20 response measurements for each stimulus.
-The corresponding plot for the sampled mutual information is shown in the
-bottom panel. The distribution of the sampled mutual information is very
-skewed, with an average $0.97\:\bit$. The distribution's support is almost
-divided in distinct blocks; this is the result of the discreteness of the
-possible values of the frequencies from the sample (they must be multiples
-of $1/20$), together with the extreme separation of the long-run frequency
-distributions for the two stimuli.
+The histogram for the possible values of the mutual information from 20
+samples is shown in the bottom panel. The long-run mutual information is
+outside the inner 75\% quantile (not reported).
+
+\medskip
+
+\begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
+\centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseD.pdf}\\%
+\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseD.pdf}\\
+\caption{Case D}\label{fig:resp_caseD}
+\end{figure}% finite_sampling_bullshit.R
+\textbf{Case D}. The long-run frequencies are shown in the top panel of
+\fig~\ref{fig:resp_caseD}. The conditional frequency distributions of the
+responses have almost no overlap. The long-run mutual information is
+$0.92\:\bit$.
+
+The histogram of possible values of the sampled mutual information is shown
+in the bottom panel. The histogram is very skewed, with an average of
+$0.97\:\bit$ (the histogram's support is almost divided in distinct blocks;
+this is the result of the discreteness of the possible values of the
+frequencies from the sample: they must be multiples of $1/20$). The
+long-run mutual information is within the inner 68\% quantile.
 
 
 \medskip
 
 
+
+What preliminary conclusions can we draw from the examples above?
+\begin{enumerate}[wide,label=\roman*.]
+\item The range and spread of the possible values of the sample mutual
+  information are heavily dependent on the long-run conditional response
+  distributions.
+\item In some cases the spread (say, 95\%) is over a short range, compared
+  with the possible range of the long-run mutual information,
+  $\clcl{0, 1}\:\bit$; for example 18\% for Case D. In other cases it is
+  over a very broad range, for example 53\% for Case C.
+\item The distribution of these possible values is in some cases very
+  skewed.
+\item Owing to the preceding two points, it is very misleading to just
+  report the mean of the sample mutual information, even when such a mean
+  is close to the long-run one; see Case C for example.
+\end{enumerate}
 
 
 

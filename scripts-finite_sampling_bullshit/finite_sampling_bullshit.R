@@ -61,12 +61,22 @@ plotsingle <- function(rfreqs0,filename,tit0,nmcsamples=1000,nbreaks='Sturges',b
 
     hires <- hist(misamples0,breaks=nbreaks,plot=FALSE)
     maxy <- max(hires$counts)
-    minx <- min(hires$breaks,milongrun0)-0.02
-    maxx <- max(hires$breaks,milongrun0)+0.02
+    minx <- -0.02
+    maxx <- 1.02
+    ## minx <- min(hires$breaks,milongrun0)-0.02
+    ## maxx <- max(hires$breaks,milongrun0)+0.02
     subs <- misamples0[seq(1,length(misamples0),length.out=100)]
+    smean <- signif(mean(misamples0),3)
+    q1 <- signif(quantile(misamples0,0.16),3)
+    q2 <- signif(quantile(misamples0,0.84),3)
+    q3 <- signif(quantile(misamples0,0.025),3)
+    q4 <- signif(quantile(misamples0,0.975),3)
+    smedian <- signif(quantile(misamples0,0.5),3)
+
+    maintext <- paste0('long-run=',signif(milongrun0,3),' bit;  sample: mean=',smean,' bit,  median=',smedian,' bit,  68% in (',q1,', ',q2,') bit,  95% in (',q3,', ',q4,') bit')
     
     pdff(paste0('histo_',filename))
-    matplot(x=subs,y=rep(-maxy/20,100),type='p',lty=1,lwd=3,pch=18,cex=1,col=myblue,xlim=c(minx,maxx),ylim=c(-maxy/20,maxy),xlab=paste0('sampled MI/bit    (sampled mean=',signif(mean(misamples0),3),' bit,   long-run=',signif(milongrun0,3),' bit)'),ylab='',main=tit0)
+    matplot(x=subs,y=rep(-maxy/20,100),type='p',lty=1,lwd=3,pch=18,cex=1,col=myblue,xlim=c(minx,maxx),ylim=c(-maxy/20,maxy),xlab=paste0('sampled MI/bit'),ylab='',main=maintext)
     hist(misamples0,breaks=nbreaks,xlim=c(minx,maxx),ylim=c(-maxy/20,maxy),xlab='I',ylab='',add=TRUE)
 ##legend('top',paste0('\nblack: mean, blue: median\nyellow: 16%q'),bty='n')
     matlines(x=rep(milongrun0,2),y=c(-maxy/20,maxy),type='l',lty=1,lwd=3,pch='.',col=myred)
@@ -86,11 +96,20 @@ f1 <- (c((dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100))
 freqs0 <- cbind(rev(f1),f1)
 plotsingle(freqs0,'caseB', 'case B',nmcsamples=10000,nbreaks='Sturges')
 
+pt <- 6
+fr <- 90
+f1 <- c((dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
+pt <- 6
+fr <- 90
+f2 <- c(rev(dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
+freqs0 <- cbind(rev(f1),(f2))
+plotsingle(freqs0,'caseC', 'case C',nmcsamples=10000,nbreaks='Sturges')
+
 pt <- 5
 fr <- 99
 f1 <- c(rev(dcoe(1/pt,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
 freqs0 <- cbind(rev(f1),(f1))
-plotsingle(freqs0,'caseC', 'case C',nmcsamples=10000,nbreaks='Sturges')
+plotsingle(freqs0,'caseD', 'case D',nmcsamples=10000,nbreaks='Sturges')
 
 
 
@@ -131,14 +150,6 @@ plotsingle(freqs0,'test', 'case C')
 
 
 
-pt <- 8
-fr <- 90
-f1 <- c(rev(dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
-pt <- 2
-fr <- 90
-f2 <- c(rev(dcoe(0,n=pt))*fr/100, rep(1/(10-pt),(10-pt))*(100-fr)/100)
-freqs0 <- cbind(rev(f1),(f2))
-plotsingle(freqs0,'test', 'case C')
 
 
 f1 <- c((dcoe(0,n=6)), rep(0,4))
