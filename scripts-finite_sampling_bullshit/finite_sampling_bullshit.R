@@ -279,10 +279,67 @@ plotmultih(rep(1,10),stre=10,filename='test',tit0='',nmcsamples=10000)
 
 plotmultih(rep(1,10),stre=1,filename='test',tit0='',nmcsamples=2000)
 
-plotmultih(rep(1,10),stre=1,filename='unifhier',tit0='',nmcsamples=2000)
+plotmultih(rep(1,10),stre=1,filename='test',tit0='',nmcsamples=2000)
 
 
 plotmulti(dcoe(0)*5,filename='test',tit0='')
 
 f1 <- dcoe(0)*1
 plotmulti(cbind(f1,rev(f1)),filename='test',tit0='')
+
+
+
+backmultih <- function(afreqs0,stre,samplevalue,nmcsamples=1000,base=2){
+    nstim <- 2
+    v1 <- samplevalue[1]
+    v2 <- samplevalue[2]
+
+    misamples <- foreach(i=1:nmcsamples,.combine=c)%dopar%{
+        afreqs <- stre*t(rdirichlet(n=2,alpha=afreqs0))
+        
+        rfreqs0 <- cbind(c(rdirichlet(n=1,alpha=afreqs[,1])),
+                         c(rdirichlet(n=1,alpha=afreqs[,2])))
+        
+        fsample <- foreach(s=1:nstim,.combine=cbind)%do%{
+            tabulate(sample(x=1:nresp,size=20,replace=TRUE,prob=rfreqs0[,s]),nbins=nresp)/20
+        }
+        smi <- mutualinfo(fsample)
+        if(smi<v1 || smi>v2) return(NULL)
+        mutualinfo(rfreqs0)
+    }
+    misamples
+}
+
+
+testsa <- backmultih(rep(1,10),stre=1,c(0.19,0.21),nmcsamples=100000)
+
+saveRDS(testsa,file='example_backmi.rds')
+
+
+
+plotmultihlines <- function(afreqs0,stre,filename,vsample,vlr,tit0,nmcsamples=1000,base=2){
+    nstim <- 2
+
+    misamples <- foreach(i=1:nmcsamples,.combine=rbind)%do%{
+        afreqs <- stre*t(rdirichlet(n=2,alpha=afreqs0))
+        
+        rfreqs0 <- cbind(c(rdirichlet(n=1,alpha=afreqs[,1])),
+                         c(rdirichlet(n=1,alpha=afreqs[,2])))
+        
+        fsample <- foreach(s=1:nstim,.combine=cbind)%do%{
+            tabulate(sample(x=1:nresp,size=20,replace=TRUE,prob=rfreqs0[,s]),nbins=nresp)/20
+        }
+        c(mutualinfo(rfreqs0), mutualinfo(fsample))
+    }
+
+    maxmi <- 1 #max(c(misamples))
+    pdff(paste0('scatter_',filename))
+    par(pty = "s")
+    matplot(x=misamples[,1],y=misamples[,2],type='p',lty=1,lwd=3,pch=16,cex=0.2,col=myblue,xlim=c(0,maxmi),ylim=c(0,maxmi),xlab=paste0('long-run MI/bit'),ylab=paste0('sample MI/bit'),main=tit0)
+    matlines(x=c(-0.1,vlr[2]),y=c(vsample,vsample),type='l',lty=2,lwd=2,pch='.',col=mygreen)
+    matlines(x=rep(vlr[1],2),y=c(vsample,-0.1),type='l',lty=2,lwd=2,pch='.',col=mygreen)
+    matlines(x=rep(vlr[2],2),y=c(vsample,-0.1),type='l',lty=2,lwd=2,pch='.',col=mygreen)
+    dev.off()
+}
+
+plotmultihlines(rep(1,10),stre=1,vsample=0.2,vlr=quantile(testsa,probs=c(0.16,0.84)),filename='test',tit0='',nmcsamples=10000)
