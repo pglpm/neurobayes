@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-12T14:50:12+0200
+%% Last-Updated: 2020-07-12T16:58:33+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -885,8 +885,9 @@ One may say \enquote{OK, I don't know the long-run response frequency
   and sample mutual informations on average among all possible such
   distributions}. The problem with this approach is that to calculate such
 \enquote{average} we must specify a distribution over all possible pairs of
-conditional frequency distributions. And how should we choose such a
-distribution?
+conditional frequency distributions -- let's call this a
+\defquote{super-distribution} to keep it distinct. And how should we choose
+such a superdistribution?
 
 The answer \enquote{we choose a uniform one} has no meaning, because in a
 continuous space, as in the present case, there is no notion of
@@ -894,18 +895,18 @@ continuous space, as in the present case, there is no notion of
 space. And it isn't clear whether some parametrization is more natural than
 some other.
 
-For example, we could choose a distribution that gives equal weights to
-equal intervals of conditional frequencies; that is, the same weight to each
-hypercube $\prod_{r,s}\clcl{f(r \|s), f(r \|s) + \Delta}$, for fixed
-$\Delta$, for all values of $f(r \|s)$. Such a distribution is proportional
+For example, we could choose a superdistribution that gives equal weights
+to equal intervals of conditional frequencies; that is, the same weight to
+each hypercube $\prod_{r,s}\clcl{f(r \|s), f(r \|s) + \Delta}$, for fixed
+$\Delta$, for all values of $f(r \|s)$. Such a superdistribution is proportional
 to $\prod_{rs}\di f(r \|s)$.
 
 But if we consider the possible \emph{sequences} of observable
 stimulus-response pairs, we could say that every such sequence should be
 given equal weight. Then the weights given to equal intervals in the
 frequency ranges \emph{cannot} be uniform, because some frequencies are
-realized by more sequences than others. We would obtain a distribution
-proportional to $\prod_{rs} M[f(r \|s)]\,\di f(r \|s)$, where $M$ is
+realized by more sequences than others. We would obtain a superdistribution
+proportional to $\prod_{s} M\{f(r \|s)\}\,\di f(r \|s)$, where $M$ is
 proportional to a multinomial coefficient.
 
 But also this last choice could be debatable. If the responses represent
@@ -913,7 +914,44 @@ population activities or rates, for example, we know that low values should
 be expected more often that high values, owing to biological reasons and
 out of common experience. Thus we should give more weight to sequences in
 which low responses occur more frequently than high responses. This would
-lead to yet another distribution on the space of frequencies.
+lead to yet another superdistribution on the space of frequencies.
+
+Finally, should such a superdistribution be factorizable over the frequency
+distributions for the different stimuli (as in the three examples above)?
+Owing to biological constraints there should be some similarity across such
+distributions, and such factorizability might be not be a sensible
+assumption.
+
+\medskip
+
+We can see the importance of the choice of superdistribution over pairs of
+long-run conditional frequency distributions by examining some examples. We
+proceed as follows: given a superdistribution, we choose from it two
+long-run response-frequency distributions; from these we calculate the
+long-run mutual information; then we sample 20 responses from each, and
+calculate the sample mutual information obtained from such sample of
+responses. This way we obtain a density or scatter plot that tells us how
+often we should observe every given pair of long-run \amp\ sample mutual
+informations -- under the assumption of that specific superdistribution.
+
+\begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
+\centering\includegraphics[width=0.49\linewidth]{scripts-finite_sampling_bullshit/scatter_unif10.png}%
+\hspace*{\stretch{1}}%  
+\includegraphics[width=0.49\linewidth]{scripts-finite_sampling_bullshit/scatter_peakcentre10.png}%
+\\[10\jot]%
+\includegraphics[width=0.49\linewidth]{scripts-finite_sampling_bullshit/scatter_biolunif.png}%
+\hspace*{\stretch{1}}%  
+\includegraphics[width=0.49\linewidth]{scripts-finite_sampling_bullshit/scatter_Hunif_peak.png}%
+\\%
+\caption{Top left: uniform over frequencies. Top right: more uniform over
+  sequences. Bottom left: low responses preferred. Bottom right: not
+  factorizable over stimuli (positive correlation;
+  hierarchic)}\label{fig:superdistributions}
+\end{figure}% finite_sampling_bullshit.R
+The results are shown in \fig~\ref{fig:superdistributions} for the four
+kinds of superdistribution entertained in the discussion above. 
+
+For the superdistribution uniform over frequencies (top left),
 
 
 
