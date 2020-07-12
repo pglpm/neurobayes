@@ -129,7 +129,7 @@ plotsingle(freqs0,'caseC', 'case C')
 
 
 f1 <- dcoe(0)
-freqs0 <- cbind(f1,rev(f1))
+freqs0 <- cbind(rev(f1),rev(f1))
 plotsingle(freqs0,'test', 'case B')
 
 pt <- 10
@@ -171,14 +171,15 @@ plotmulti <- function(afreqs,filename,tit0,nmcsamples=1000,base=2){
         c(mutualinfo(rfreqs0), mutualinfo(fsample))
     }
 
-    maxmi <- max(c(misamples))
+    maxmi <- 1 #max(c(misamples))
     pdff(paste0('scatter_',filename))
     par(pty = "s")
-    matplot(x=misamples[,1],y=misamples[,2],type='p',lty=1,lwd=3,pch='.',cex=4,col=myblue,xlim=c(0,maxmi),ylim=c(0,maxmi),xlab=paste0('long-run MI/bit'),ylab=paste0('sampled MI/bit'),main=tit0)
+    matplot(x=misamples[,1],y=misamples[,2],type='p',lty=1,lwd=3,pch=16,cex=0.2,col=myblue,xlim=c(0,maxmi),ylim=c(0,maxmi),xlab=paste0('long-run MI/bit'),ylab=paste0('sample MI/bit'),main=tit0)
     matlines(x=c(0,maxmi),y=c(0,maxmi),type='l',lty=2,lwd=2,pch='.',col=myyellow)
     dev.off()
 }
 
+plotmulti(dcoe(0)*5,filename='test',tit0='',nmcsamples=5000)
 
 plotmulti(rep(10,10),filename='centrepeak',tit0='')
 
@@ -186,10 +187,13 @@ plotmulti(rep(1,10),filename='unif',tit0='')
 
 plotmulti(rep(0.1,10),filename='jeffr',tit0='')
 
-plotmulti(rep(0.1,10),filename='test',tit0='')
+plotmulti(rep(1,10),filename='test',tit0='',nmcsamples=5000)
+
+plotmulti(rep(0.1,10),filename='test',tit0='',nmcsamples=10000)
+
+plotmulti(10*rev(dcoe(0)),filename='test',tit0='',nmcsamples=10000)
 
 
-plotmulti(dcoe(0)*5,filename='test',tit0='')
 
 f1 <- dcoe(0)*1
 plotmulti(cbind(f1,rev(f1)),filename='test',tit0='')
@@ -263,22 +267,15 @@ plotmultih <- function(afreqs0,stre,filename,tit0,nmcsamples=1000,base=2){
         c(mutualinfo(rfreqs0), mutualinfo(fsample))
     }
 
-    maxmi <- max(c(misamples))
+    maxmi <- 1 #max(c(misamples))
     pdff(paste0('scatter_',filename))
     par(pty = "s")
-    matplot(x=misamples[,1],y=misamples[,2],type='p',lty=1,lwd=3,pch='.',cex=4,col=myblue,xlim=c(0,maxmi),ylim=c(0,maxmi),xlab=paste0('long-run MI/bit'),ylab=paste0('sampled MI/bit'),main=tit0)
+    matplot(x=misamples[,1],y=misamples[,2],type='p',lty=1,lwd=3,pch=16,cex=0.2,col=myblue,xlim=c(0,maxmi),ylim=c(0,maxmi),xlab=paste0('long-run MI/bit'),ylab=paste0('sample MI/bit'),main=tit0)
     matlines(x=c(0,maxmi),y=c(0,maxmi),type='l',lty=2,lwd=2,pch='.',col=myyellow)
-
     dev.off()
 }
 
-
-
-plotmulti(rep(10,10),filename='centrepeak',tit0='')
-
-plotmulti(rep(1,10),filename='unif',tit0='')
-
-plotmulti(rep(0.1,10),filename='jeffr',tit0='')
+plotmultih(rep(1,10),stre=10,filename='test',tit0='',nmcsamples=10000)
 
 plotmultih(rep(1,10),stre=1,filename='test',tit0='',nmcsamples=2000)
 

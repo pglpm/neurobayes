@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-12T14:28:52+0200
+%% Last-Updated: 2020-07-12T14:50:12+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -861,30 +861,38 @@ sample mutual information, not the mean. And we cannot know what the mean
 is, because we don't know what the long-run conditional frequencies are --
 if we knew them we wouldn't need to make guesses. So, once we calculate the
 mutual information from a small sample, we don't know whether case A, B, C,
-D above, or some completely different case, applies.
+D above, or some completely different case, applies. Suppose we observe 20
+trials and we find a sample mutual information of $0.5\:\bit$. How do we
+know whether this should be considered a sample from the right tail of
+\fig~\ref{fig:resp_caseA} (so the long-run mutual info is actually lower),
+or from the left side of \fig~\ref{fig:resp_caseB} (the long-run is
+actually higher), or from the left of \fig~\ref{fig:resp_caseC} (long-run
+is lower, in this case), or finally from the left tail of
+\fig~\ref{fig:resp_caseD} (long-run is higher)?
 
 This last remark is also important for \enquote{validations by simulation}.
-They are validations only if the chosen long-run frequencies for the
-simulation are \emph{representative} of the true ones. To check whether
-they really are representative, we therefore need to know the true ones.
-And we don't -- this was indeed our initial problem. Such
-\enquote{validations} are therefore logically circular and completely unfounded.
+They would be validations only if the chosen long-run frequencies for the
+simulation were \emph{representative of the true ones}. To check whether
+they really are representative, we therefore would need to know the true
+ones. And we don't -- this was indeed the problem we started from. Such
+\enquote{validations} are therefore logically circular and completely
+groundless.
 
 \medskip
 
 One may say \enquote{OK, I don't know the long-run response frequency
   distributions, but I may check what's the relation between the long-run
   and sample mutual informations on average among all possible such
-  distributions}. The problem with this approach is that to calculate this
-\enquote{on average} we must specify a distribution over all possible pairs
-of conditional frequency distributions. And how should we choose such a
+  distributions}. The problem with this approach is that to calculate such
+\enquote{average} we must specify a distribution over all possible pairs of
+conditional frequency distributions. And how should we choose such a
 distribution?
 
 The answer \enquote{we choose a uniform one} has no meaning, because in a
 continuous space, as in the present case, there is no notion of
 \enquote{uniform} distribution -- it depends on how we parametrize the
-space. And it isn't clear whether a parametrization is more natural than
-another.
+space. And it isn't clear whether some parametrization is more natural than
+some other.
 
 For example, we could choose a distribution that gives equal weights to
 equal intervals of conditional frequencies; that is, the same weight to each
