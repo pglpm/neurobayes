@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-12T17:33:13+0200
+%% Last-Updated: 2020-07-12T18:20:27+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -721,7 +721,7 @@ totalheight=\heightof{@}]{atblack.png}}\makeatother
 %%% BEGINNING OF MAIN TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Introduction}
+\section{Long-run mutual info and sample mutual info}
 \label{sec:intro}
 
 We have two kinds of stimuli and, say, ten kinds of neural responses to
@@ -750,7 +750,7 @@ long-run sequence differ?
 
 Let's explore some possibilities.
 
-\medskip
+\clearpage
 
 % \setlength{\intextsep}{0ex}% with wrapfigure
 % \setlength{\columnsep}{0ex}% with wrapfigure
@@ -761,9 +761,10 @@ Let's explore some possibilities.
 \end{figure}% finite_sampling_bullshit.R
 \textbf{Case A}. Suppose the long-run frequencies of responses conditional
 on each kind of stimulus are as given in the top panel of
-\fig~\ref{fig:resp_caseA} \citep[as the example in][]{panzerietal2007}. In
-the long run all responses occur equally often for either stimulus. The
-long-run mutual information is $0\:\bit$.
+\fig~\ref{fig:resp_caseA} \citep[as the example in][]{panzerietal2007}. The
+light-grey histogram is for the responses to the first kind of stimulus;
+dark-grey for the second kind. In the long run all responses occur equally
+often for either stimulus. The long-run mutual information is $0\:\bit$.
 
 Now we consider a sample of 20 response measurements for each stimulus from
 such long-run distribution. From this sample we calculate the joint
@@ -776,7 +777,7 @@ indicated by the red line. The sampled mutual information is most surely
 always higher than the long-run one; it is even outside the inner 95\%
 interval range.
 
-\medskip
+\clearpage
 
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseB.pdf}\\%
@@ -795,7 +796,7 @@ bottom panel. The possible values are almost symmetrically distributed
 around the long-run value, which is well within their inner 68\% quantile
 range, close to the median, $0.50\:\bit$, and the mean, $0.51\:\bit$.
 
-\medskip
+\clearpage
 
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseC.pdf}\\%
@@ -811,7 +812,7 @@ The histogram for the possible values of the mutual information from 20
 samples is shown in the bottom panel. The long-run mutual information is
 outside the inner 75\% quantile (not reported).
 
-\medskip
+\clearpage
 
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseD.pdf}\\%
@@ -831,12 +832,12 @@ frequencies from the sample: they must be multiples of $1/20$). The
 long-run mutual information is within the inner 68\% quantile.
 
 
-\medskip
+\clearpage
 
 
 
-What preliminary conclusions can we draw from the examples above?
-\begin{enumerate}[wide,label=\roman*.]
+What conclusions can we draw from the examples above?
+\begin{enumerate}[wide,label=(\roman*)]
 \item In some cases the sample mutual information may be quite close to the
   long-run one; in others, very far from it.
 \item The range and spread of the possible values of the sample mutual
@@ -855,7 +856,7 @@ What preliminary conclusions can we draw from the examples above?
 
 Thus it is not possible to say, in general, that the long-run and the
 sample mutual informations have values far apart or close. Note that even
-speaking or the \enquote{mean} of the sample mutual information is
+speaking of the \enquote{mean} of the sample mutual information is
 misleading: from a set of observations we only get \emph{one} value of the
 sample mutual information, not the mean. And we cannot know what the mean
 is, because we don't know what the long-run conditional frequencies are --
@@ -878,7 +879,9 @@ ones. And we don't -- this was indeed the problem we started from. Such
 \enquote{validations} are therefore logically circular and completely
 groundless.
 
-\medskip
+\section{What are the long-run frequencies?}
+\label{sec:longrun_freqs}
+
 
 One may say \enquote{OK, I don't know the long-run response frequency
   distributions, but I may check what's the relation between the long-run
@@ -886,8 +889,10 @@ One may say \enquote{OK, I don't know the long-run response frequency
   distributions}. The problem with this approach is that to calculate such
 \enquote{average} we must specify a distribution over all possible pairs of
 conditional frequency distributions -- let's call this a
-\defquote{super-distribution} to keep it distinct. And how should we choose
-such a superdistribution?
+\defquote{super-distribution} to keep it distinct from the
+conditional-frequency ones.
+
+How should we choose such a superdistribution?
 
 The answer \enquote{we choose a uniform one} has no meaning, because in a
 continuous space, as in the present case, there is no notion of
@@ -895,11 +900,11 @@ continuous space, as in the present case, there is no notion of
 space. And it isn't clear whether some parametrization is more natural than
 some other.
 
-For example, we could choose a superdistribution that gives equal weights
+We could, for example, choose a superdistribution that gives equal weights
 to equal intervals of conditional frequencies; that is, the same weight to
 each hypercube $\prod_{r,s}\clcl{f(r \|s), f(r \|s) + \Delta}$, for fixed
-$\Delta$, for all values of $f(r \|s)$. Such a superdistribution is proportional
-to $\prod_{rs}\di f(r \|s)$.
+$\Delta$, for all values of $f(r \|s)$. Such a superdistribution is
+proportional to $\prod_{rs}\di f(r \|s)$.
 
 But if we consider the possible \emph{sequences} of observable
 stimulus-response pairs, we could say that every such sequence should be
@@ -951,10 +956,43 @@ informations -- under the assumption of that specific superdistribution.
 The results are shown in \fig~\ref{fig:superdistributions} for the four
 kinds of superdistribution entertained in the discussion above.
 
+Note that this kind of plot can be used to guess the long-run mutual
+information given the one observed in a sample, under the assumption of the
+specific superdistribution related to the plot. An example is given in
+\fig~\ref{fig:backward}: if in an observation of 20 responses per stimulus
+we find a mutual information of $0.2\:\bit$, then the long-run mutual
+information is at 68\% between $0.15\:\bit$ and $0.30\:\bit$, with a median
+of $0.22\:\bit$. Such inference assumes the superdistribution underlying
+the bottom-right of \fig~\ref{fig:superdistributions},
+\begin{figure}[bt!]%{l}{0.75\linewidth} % with wrapfigure
+\centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/scatter_backward.png}%
+\\%
+\caption{Example of guess for long-run mutual information from the mutual
+  information observed in 20 samples per stimulus, under a specific
+  superdistribution. If the sample mutual info is $0.2\:\bit$ (horizontal,
+  yellow dashed line), then the long-run mutual info can in this case
+  inferred to be at 95\% between $(0.097, 0.39)\:\bit$ and at 68\% between
+  $(0.15, 0.30)\:\bit$ (vertical, yellow dashed lines), with a median of
+  $0.22\:\bit$}\label{fig:backward}
+\end{figure}% finite_sampling_bullshit.R
+% 50\%: 0.21573429
+% 68\%: 0.15244061 0.29950121
+% 95\%: 0.09731645 0.38798742
 
-% 0.21573429 0.15244061 0.29950121 0.09731645 0.38798742
+The examples of \fig~\ref{fig:superdistributions} show that the joint
+distribution of long-run \amp\ sample mutual informations can be wildly
+different, depending on the assumed superdistribution. Consequently, any
+inferences of the former from the latter and any quantifications of
+\enquote{bias} heavily depend on the assumed superdistribution.
 
-For the superdistribution uniform over frequencies (top left),
+\medskip
+
+We obviously can't say \enquote{let's just take the average over all
+  possible superdistributions}, because that would just lead to the
+analogous problem of choosing a super-superdistribution, and so on.
+
+Choosing a \enquote{standard} superdistribution, to be universally used
+\citep[\cf][]{nemenmanetal2004}, is not a sensible option either.
 
 
 
