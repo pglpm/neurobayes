@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-07-12T20:11:18+0200
+%% Last-Updated: 2020-07-13T08:45:57+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -768,9 +768,9 @@ Let's explore some possibilities.
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseA.pdf}\\%
 \includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseA.pdf}\\
-\caption{Case A}\label{fig:resp_caseA}
+\caption{Example A}\label{fig:resp_caseA}
 \end{figure}% finite_sampling_bullshit.R
-\textbf{Case A}. Suppose the long-run frequencies of responses conditional
+\textbf{Example A}. Suppose the long-run frequencies of responses conditional
 on each kind of stimulus are as given\citep[as the example
 in][]{panzerietal2007} in the top panel of \fig~\ref{fig:resp_caseA}. The
 light-grey histogram is for the responses to the first kind of stimulus;
@@ -794,9 +794,9 @@ this case. The long-run one is even outside the inner 95\% interval range.
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseB.pdf}\\%
 \includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseB.pdf}\\
-\caption{Case B}\label{fig:resp_caseB}
+\caption{Example B}\label{fig:resp_caseB}
 \end{figure}% finite_sampling_bullshit.R
-\textbf{Case B}. The long-run frequencies of responses are given in the top
+\textbf{Example B}. The long-run frequencies of responses are given in the top
 panel of \fig~\ref{fig:resp_caseB}. The responses do not occur equally
 often in the long run, and the frequencies of some of them are different
 for the two kinds of stimulus. The long-run mutual information is
@@ -813,9 +813,9 @@ distributed around the long-run value, which is well within their inner
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseC.pdf}\\%
 \includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseC.pdf}\\
-\caption{Case C}\label{fig:resp_caseC}
+\caption{Example C}\label{fig:resp_caseC}
 \end{figure}% finite_sampling_bullshit.R
-\textbf{Case C}. The long-run frequencies of responses are given in the top
+\textbf{Example C}. The long-run frequencies of responses are given in the top
 panel of \fig~\ref{fig:resp_caseC}. There is some difference in the
 long-run conditional frequency distributions of the responses . The
 long-run mutual information is $0.38\:\bit$.
@@ -829,9 +829,9 @@ outside the inner 75\% quantile (not reported).
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/resp_caseD.pdf}\\%
 \includegraphics[width=\linewidth]{scripts-finite_sampling_bullshit/histo_caseD.pdf}\\
-\caption{Case D}\label{fig:resp_caseD}
+\caption{Example D}\label{fig:resp_caseD}
 \end{figure}% finite_sampling_bullshit.R
-\textbf{Case D}. The long-run frequencies are shown in the top panel of
+\textbf{Example D}. The long-run frequencies are shown in the top panel of
 \fig~\ref{fig:resp_caseD}. The conditional frequency distributions of the
 responses have almost no overlap. The long-run mutual information is
 $0.92\:\bit$.
@@ -857,8 +857,8 @@ What conclusions can we draw from the examples above?
 \item In some cases the spread (say, the inner 95\% interval) of the
   possible values is over a short range, compared with the maximal possible
   range of the long-run mutual information, $\clcl{0, 1}\:\bit$; for
-  example 18\% for Case D. In other cases the spread is over a very broad
-  range compared to the maximal possible one, for example 53\% for Case C.
+  example 18\% for Example D. In other cases the spread is over a very broad
+  range compared to the maximal possible one, for example 53\% for Example C.
 \item The distribution of these possible values is in some cases very
   skewed.
 \end{enumerate}
