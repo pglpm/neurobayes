@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-08-04T11:01:26+0200
+%% Last-Updated: 2020-08-04T11:04:08+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -960,8 +960,9 @@ pair of long-run response-frequency distributions. From this pair calculate
 the long-run mutual information. Then sample 20+20 responses from the pair,
 and calculate the sample mutual information obtained from such sample. This
 way we obtain a density or scatter plot that tells us how often we should
-observe every given pair of long-run \amp\ sample mutual informations --
-under the assumption of that specific superdistribution.
+observe every pair of
+\[(\text{\small long-run mutual info}, \text{\small sample mutual info})\]
+under the assumption of the given superdistribution.
 
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=0.49\linewidth]{scripts-finite_sampling_bullshit/scatter_unif10.png}%
