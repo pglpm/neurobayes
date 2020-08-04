@@ -1,7 +1,7 @@
 \pdfoutput=1
 %% Author: PGL  Porta Mana
 %% Created: 2015-05-01T20:53:34+0200
-%% Last-Updated: 2020-08-04T10:18:16+0200
+%% Last-Updated: 2020-08-04T11:01:26+0200
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newif\ifarxiv
 \arxivfalse
@@ -955,13 +955,13 @@ be not be a sensible assumption.
 
 We can see the importance of the choice of superdistribution over pairs of
 long-run conditional frequency distributions by examining some examples.
-Let's proceed as follows. Given a superdistribution, we choose from it two
-long-run response-frequency distributions. From these we calculate the
-long-run mutual information; then we sample 20 responses from each, and
-calculate the sample mutual information obtained from such sample of
-responses. This way we obtain a density or scatter plot that tells us how
-often we should observe every given pair of long-run \amp\ sample mutual
-informations -- under the assumption of that specific superdistribution.
+Let's proceed as follows. A superdistribution is given. Sample from it a
+pair of long-run response-frequency distributions. From this pair calculate
+the long-run mutual information. Then sample 20+20 responses from the pair,
+and calculate the sample mutual information obtained from such sample. This
+way we obtain a density or scatter plot that tells us how often we should
+observe every given pair of long-run \amp\ sample mutual informations --
+under the assumption of that specific superdistribution.
 
 \begin{figure}[p]%{l}{0.5\linewidth} % with wrapfigure
 \centering\includegraphics[width=0.49\linewidth]{scripts-finite_sampling_bullshit/scatter_unif10.png}%
